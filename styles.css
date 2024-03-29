@@ -1,8 +1,3 @@
-/*!
- * Responsive Tournament Bracket
- * Copyright 2016 Jakub Hájek
- * Licensed under MIT (https://opensource.org/licenses/MIT)
- */
 @font-face {
   font-family: 'Work Sans';
   font-style: normal;
@@ -318,11 +313,11 @@ h2 {
   order: 0;
   text-align: right;
 }
-@media (min-width: 38em) and (max-width: 52em) {
+/* @media (min-width: 38em) and (max-width: 52em) {
   .tournament-bracket__content .tournament-bracket__team:first-child {
     align-items: flex-end;
   }
-}
+} */
 .tournament-bracket__content .tournament-bracket__team:first-child .tournament-bracket__country {
   order: 2;
   justify-content: flex-end;
@@ -332,12 +327,12 @@ h2 {
     order: 0;
   }
 }
-@media (min-width: 38em) and (max-width: 52em) {
+/* @media (min-width: 38em) and (max-width: 52em) {
   .tournament-bracket__content .tournament-bracket__team:first-child .tournament-bracket__country {
     flex-direction: column-reverse;
     align-items: flex-end;
   }
-}
+} */
 .tournament-bracket__content .tournament-bracket__team:first-child .tournament-bracket__score {
   order: 0;
 }
@@ -351,21 +346,21 @@ h2 {
   order: 2;
   text-align: left;
 }
-@media (min-width: 38em) and (max-width: 52em) {
+/* @media (min-width: 38em) and (max-width: 52em) {
   .tournament-bracket__content .tournament-bracket__team:last-child {
     align-items: flex-start;
   }
-}
+} */
 @media (min-width: 38em) {
   .tournament-bracket__content .tournament-bracket__team:last-child .tournament-bracket__country {
     justify-content: flex-start;
   }
 }
-@media (min-width: 38em) and (max-width: 52em) {
+/* @media (min-width: 38em) and (max-width: 52em) {
   .tournament-bracket__content .tournament-bracket__team:last-child .tournament-bracket__country {
     align-items: flex-start;
   }
-}
+} */
 .tournament-bracket__content .tournament-bracket__team:last-child .tournament-bracket__code {
   order: 1;
 }
@@ -383,11 +378,11 @@ h2 {
   flex-direction: row-reverse;
   justify-content: space-between;
 }
-@media (min-width: 24em) {
+/* @media (min-width: 24em) {
   .tournament-bracket__team {
     flex-direction: column-reverse;
   }
-}
+} */
 @media (min-width: 38em) {
   .tournament-bracket__team {
     flex-direction: column-reverse;
@@ -404,7 +399,7 @@ h2 {
     margin-top: 0;
   }
 }
-@media (min-width: 38em) and (max-width: 52em) {
+/* @media (min-width: 38em) and (max-width: 52em) {
   .tournament-bracket__country {
     display: flex;
     flex-direction: column;
@@ -412,7 +407,7 @@ h2 {
   .tournament-bracket__country .tournament-bracket__code {
     margin-top: 0.2em;
   }
-}
+} */
 .tournament-bracket__code {
   padding: 0 0.5em;
   color: #212121;
@@ -428,11 +423,11 @@ h2 {
     padding: 0 0.25em;
   }
 }
-@media (min-width: 38em) and (max-width: 52em) {
+/* @media (min-width: 38em) and (max-width: 52em) {
   .tournament-bracket__code {
     padding: 0;
   }
-}
+} */
 .tournament-bracket__score {
   display: flex;
   align-items: center;
@@ -452,10 +447,14 @@ h2 {
   background-color: #F5F5F5;
   border-color: #dddddd;
 }
-.tournament-bracket__team--winner .tournament-bracket__number {
+.--winner {
   background-color: #FFF176;
   border-color: #fad674;
 }
+/* .tournament-bracket__team--winner .tournament-bracket__number {
+  background-color: #FFF176;
+  border-color: #fad674;
+} */
 .tournament-bracket__medal {
   padding: 0 0.5em;
 }
