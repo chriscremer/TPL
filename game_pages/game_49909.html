@@ -5,11 +5,55 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>TPL</title>
-<link rel="icon" type="image/png" href="frisbee.png">
+<link rel="icon" type="image/png" href="../frisbee.png">
+
+<!-- DataTables CSS -->
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.6/css/jquery.dataTables.min.css">
+
+<!-- jQuery -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<!-- DataTables JS -->
+<script type="text/javascript" src="https://cdn.datatables.net/1.11.6/js/jquery.dataTables.min.js"></script>
 
 </head>
 
 <body>
 Benny's Gonna Break Break Break Lexy's Gonna Fake Fake Fake vs Dear John Look what you made Lysh do
+<br>
+<br>
+<table id="sortable-table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Age</th>
+      <th>Country</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>John</td>
+      <td>30</td>
+      <td>USA</td>
+    </tr>
+    <tr>
+      <td>Alice</td>
+      <td>25</td>
+      <td>Canada</td>
+    </tr>
+    <!-- Add more rows as needed -->
+  </tbody>
+
+
+</table>
+<br>
+
 </body>
+
+<script>
+$(document).ready(function() {
+    $('#sortable-table').DataTable();
+});
+</script>
+
 </html>

@@ -9,7 +9,26 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
 
 <style>
-
+  /* .glow{ */
+        /* font-family: Sans-serif; */
+        /* font-size: 3rem; */
+        /* background: black; */
+        /* color: white; */
+        /* padding: 80px; */
+        /* text-shadow: */
+                    /* 1px 1px 0px gold, */
+                    /* -3px -0 25px red, */
+                    /* 3px 0px 3px white, */
+                    /* 0px 0px 15px white, */
+                    /* 15px 10px 10px black, */
+                    /* 0 0 40px orangered; */
+                    /* 0 0 40px orangered, */
+                    /* 0 0 60px orangered, */
+                    /* 0 0 80px orangered; */
+                    /* 0 0 80px orangered, */
+                    /* 0 0 100px orangered, */
+                    /* 0 0 150px orangered; */
+        /* } */
 </style>
 
 
@@ -22,10 +41,10 @@
 <body>
 
 <div class="container">
-  <h1>PLAYOFFS</h1>
-  <h2>TPL Jan-Apr 2024</h2>
+  <h1 class="glow">PLAYOFFS</h1>
+  <!-- <h2>TPL Jan-Apr 2024</h2> -->
 
-  <!-- <a href="index.html" style="position: absolute; top: 10px; left: 10px;"><i class="fa fa-arrow-left"></i> Back</a>  -->
+  <a href="index.html" style="position: absolute; top: 10px; left: 10px;"><i class="fa fa-arrow-left"></i>Season</a> 
 
 
 
@@ -43,42 +62,29 @@
         <li class="tournament-bracket__item">
           <div class="tournament-bracket__match" tabindex="0" onclick="redirectToWebsite('game_pages/game1.html')">
             <table class="tournament-bracket__table">
-<!--               <caption class="tournament-bracket__caption">
-                <time datetime="1998-02-18">18 February 1998</time>
-              </caption> -->
+
               <caption class="tournament-bracket__caption">
                 (1) vs (8)
               </caption>
-              <!-- <thead class="sr-only">
-                <tr>
-                  <th>Country</th>
-                  <th>Score</th>
-                </tr>
-              </thead>   -->
+
               <tbody class="tournament-bracket__content">
                 
                 <tr class="tournament-bracket__team">
-                    <!-- <tr class="tournament-bracket__team tournament-bracket__team--winner"> -->
                   <td class="tournament-bracket__country">
                     <abbr class="tournament-bracket__code">Dear John, Look what you made Lysh do</abbr>
-                    <!-- <span class="tournament-bracket__flag flag-icon flag-icon-ca" aria-label="Flag"></span> -->
+                    <span class="tournament-bracket__number">-</span>
                   </td>
-                  <!-- SCORE -->
-                  <td class="tournament-bracket__score"><span class="tournament-bracket__number">-</span></td>
                 </tr>
                 
                 <tr class="tournament-bracket__team">
                   <td class="tournament-bracket__country">
                     <abbr class="tournament-bracket__code">Tam Mattgazine's Person of the Year 2023</abbr>
-                    <!-- <span class="tournament-bracket__flag flag-icon flag-icon-kz" aria-label="Flag"></span> -->
+                    <span class="tournament-bracket__number">-</span>
                   </td>
-                  <!-- SCORE -->
-                  <td class="tournament-bracket__score"><span class="tournament-bracket__number">-</span></td>
                 </tr>
 
               </tbody>
             </table>
-            <!-- <div id="output"></div> -->
           </div>
         </li>
 
