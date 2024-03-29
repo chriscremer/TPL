@@ -8,7 +8,12 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/2.3.1/css/flag-icon.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
 
+<!-- for btn-primary -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+
 <style>
+
 
 </style>
 
@@ -26,10 +31,13 @@
   <h2>Feb-Apr 2024 (Taylor Swift)</h2> -->
   <div class="tournament-bracket tournament-bracket--rounded">       
     
+    <!-- Button in top left corner -->
+    <a href="../index.html" class="btn btn-primary" style="position: absolute; top: 10px; left: 10px;"><i class="fa fa-arrow-left"></i> Back</a> 
     
-
-    <a href="../index.html">Back</a>
-
+    <!-- Load data from data.json and display in table -->
+    <div id="bracket"></div>
+    
+    
   </div>
 
 </body>
