@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TPL Playoffs</title>
+<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/2.3.1/css/flag-icon.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+<style>
+  .team-roster {
+    display: none;
+  }
+  .tournament-bracket__score {
+    width: 100px; /* Adjust width as needed */
+  }
+  .tournament-bracket__match {
+    width: 300px; /* Initial width */
+    transition: width 0.3s ease; /* Smooth transition */
+    cursor: pointer; /* Change cursor to pointer */
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>TPL Season X</h1>
+  <h2>Ice hockey at the 1998 Winter Olympics – Men's tournament</h2>
+  <div class="tournament-bracket tournament-bracket--rounded">                                                     
+    <div class="tournament-bracket__round tournament-bracket__round--quarterfinals">
+      <h3 class="tournament-bracket__round-title">Quarterfinals</h3>
+      <ul class="tournament-bracket__list">
+        <li class="tournament-bracket__item">
+          <div class="tournament-bracket__match" tabindex="0" onclick="redirectToWebsite('https://example.com')">
+            <table class="tournament-bracket__table">
+              <caption class="tournament-bracket__caption">
+                18 February 1998
+              </caption>
+              <tbody class="tournament-bracket__content">
+                <tr class="tournament-bracket__team tournament-bracket__team--winner">
+                  <td class="tournament-bracket__country">
+                    <span class="tournament-bracket__code">CAN</span>
+                  </td>
+                  <td class="tournament-bracket__score">
+                    <span class="tournament-bracket__number">4</span>
+                  </td>
+                </tr>
+                <tr class="tournament-bracket__team">
+                  <td class="tournament-bracket__country">
+                    <span class="tournament-bracket__code">KAZ</span>
+                  </td>
+                  <td class="tournament-bracket__score">
+                    <span class="tournament-bracket__number">1</span>
+                  </td>
+                </tr>
+                <tr class="team-roster">
+                  <td colspan="2">
+                    <p>Canada Roster</p>
+                    <ul>
+                      <li>Player 1</li>
+                      <li>Player 2</li>
+                      <!-- Add more players as needed -->
+                    </ul>
+                  </td>
+                </tr>
+                <tr class="team-roster">
+                  <td colspan="2">
+                    <p>Kazakhstan Roster</p>
+                    <ul>
+                      <li>Player A</li>
+                      <li>Player B</li>
+                      <!-- Add more players as needed -->
+                    </ul>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </li>
+        <!-- Repeat the same structure for other games -->
+      </ul>
+    </div>
+  </div>
+</div>
+
+<script>
+  function redirectToWebsite(url) {
+    window.location.href = url; // Redirect to the specified website
+  }
+</script>
+
+</body>
+</html>
