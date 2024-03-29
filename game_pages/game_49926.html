@@ -10,6 +10,10 @@
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
 
+<script
+src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
+</script>
+
 
 <style>
     .table-container {
@@ -30,11 +34,6 @@
         width: 100%; /* Tables will take the full width of their parent */
         box-sizing: border-box;
         border: 1px solid #ccc; /* Add border for clarity */
-    }
-
-    /* Add a bottom border to table rows */
-    tr {
-        border-bottom: 1px solid #ccc;
     }
 
     /* If you want to add some space between tables */
@@ -390,6 +389,58 @@
     
 </div>
 
+<center>
+    <canvas id="myChart" style="width:100%;max-width:800px"></canvas>
+</center>
+
+<br>
+<br>
+<br>
+
 </body>
+
+
+
+
+
+<script>
+  const dataPoints = [{'x': 2.17, 'y': 1}, {'x': 2.62, 'y': 0}, {'x': 3.43, 'y': 1}, {'x': 4.17, 'y': 2}, {'x': 4.95, 'y': 3}, {'x': 5.33, 'y': 2}, {'x': 8.48, 'y': 3}, {'x': 11.18, 'y': 4}, {'x': 14.45, 'y': 3}, {'x': 14.77, 'y': 4}, {'x': 15.17, 'y': 5}, {'x': 15.48, 'y': 4}, {'x': 15.9, 'y': 5}, {'x': 16.75, 'y': 6}, {'x': 18.02, 'y': 7}, {'x': 18.93, 'y': 8}, {'x': 19.6, 'y': 7}, {'x': 20.13, 'y': 6}, {'x': 25.0, 'y': 7}, {'x': 25.48, 'y': 6}, {'x': 28.95, 'y': 5}, {'x': 30.4, 'y': 4}, {'x': 30.65, 'y': 5}, {'x': 31.27, 'y': 4}, {'x': 32.08, 'y': 3}, {'x': 32.53, 'y': 2}, {'x': 34.78, 'y': 3}, {'x': 36.47, 'y': 4}, {'x': 38.37, 'y': 3}, {'x': 39.23, 'y': 4}, {'x': 39.87, 'y': 5}, {'x': 41.03, 'y': 4}, {'x': 41.5, 'y': 5}, {'x': 42.02, 'y': 6}, {'x': 43.03, 'y': 7}, {'x': 43.38, 'y': 6}, {'x': 43.78, 'y': 5}, {'x': 45.67, 'y': 6}];
+  
+  new Chart("myChart", {
+    type: "line",
+    data: {
+      datasets: [{
+        data: dataPoints,
+        tension: 0.1,
+      }]
+    },
+    options: {
+      legend: {display: false},
+      title: {
+        display: true,
+        text: ""
+      },
+      scales: {
+        yAxes: [{
+          scaleLabel: {
+            display: true,
+            labelString: 'Score Difference'
+          }
+        }],
+        xAxes: [{
+          type: 'linear', // this will ensure that the x-axis is based on numeric scale
+          scaleLabel: {
+            display: true,
+            labelString: 'Gametime'
+          }
+        }]
+      }
+    }
+  });
+  
+  </script>
+
+
+
 
 </html>

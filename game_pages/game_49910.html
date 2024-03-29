@@ -10,6 +10,10 @@
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
 
+<script
+src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
+</script>
+
 
 <style>
     .table-container {
@@ -30,11 +34,6 @@
         width: 100%; /* Tables will take the full width of their parent */
         box-sizing: border-box;
         border: 1px solid #ccc; /* Add border for clarity */
-    }
-
-    /* Add a bottom border to table rows */
-    tr {
-        border-bottom: 1px solid #ccc;
     }
 
     /* If you want to add some space between tables */
@@ -410,6 +409,58 @@
     
 </div>
 
+<center>
+    <canvas id="myChart" style="width:100%;max-width:800px"></canvas>
+</center>
+
+<br>
+<br>
+<br>
+
 </body>
+
+
+
+
+
+<script>
+  const dataPoints = [{'x': 1.25, 'y': 1}, {'x': 1.7, 'y': 2}, {'x': 2.12, 'y': 3}, {'x': 3.62, 'y': 4}, {'x': 4.95, 'y': 5}, {'x': 7.87, 'y': 4}, {'x': 9.5, 'y': 3}, {'x': 10.08, 'y': 4}, {'x': 11.12, 'y': 5}, {'x': 11.42, 'y': 4}, {'x': 11.95, 'y': 5}, {'x': 12.72, 'y': 4}, {'x': 13.22, 'y': 5}, {'x': 13.75, 'y': 6}, {'x': 13.97, 'y': 7}, {'x': 18.45, 'y': 6}, {'x': 19.23, 'y': 7}, {'x': 28.37, 'y': 6}, {'x': 29.22, 'y': 7}, {'x': 29.65, 'y': 6}, {'x': 32.0, 'y': 7}, {'x': 34.38, 'y': 8}, {'x': 35.03, 'y': 9}, {'x': 35.95, 'y': 8}, {'x': 37.18, 'y': 7}, {'x': 38.45, 'y': 8}, {'x': 40.63, 'y': 7}, {'x': 41.02, 'y': 6}];
+  
+  new Chart("myChart", {
+    type: "line",
+    data: {
+      datasets: [{
+        data: dataPoints,
+        tension: 0.1,
+      }]
+    },
+    options: {
+      legend: {display: false},
+      title: {
+        display: true,
+        text: ""
+      },
+      scales: {
+        yAxes: [{
+          scaleLabel: {
+            display: true,
+            labelString: 'Score Difference'
+          }
+        }],
+        xAxes: [{
+          type: 'linear', // this will ensure that the x-axis is based on numeric scale
+          scaleLabel: {
+            display: true,
+            labelString: 'Gametime'
+          }
+        }]
+      }
+    }
+  });
+  
+  </script>
+
+
+
 
 </html>

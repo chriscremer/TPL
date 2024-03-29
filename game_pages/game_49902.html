@@ -10,6 +10,10 @@
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
 
+<script
+src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
+</script>
+
 
 <style>
     .table-container {
@@ -30,11 +34,6 @@
         width: 100%; /* Tables will take the full width of their parent */
         box-sizing: border-box;
         border: 1px solid #ccc; /* Add border for clarity */
-    }
-
-    /* Add a bottom border to table rows */
-    tr {
-        border-bottom: 1px solid #ccc;
     }
 
     /* If you want to add some space between tables */
@@ -400,6 +399,58 @@
     
 </div>
 
+<center>
+    <canvas id="myChart" style="width:100%;max-width:800px"></canvas>
+</center>
+
+<br>
+<br>
+<br>
+
 </body>
+
+
+
+
+
+<script>
+  const dataPoints = [{'x': 1.28, 'y': -1}, {'x': 3.4, 'y': 0}, {'x': 5.73, 'y': 1}, {'x': 6.13, 'y': 0}, {'x': 6.78, 'y': -1}, {'x': 7.07, 'y': 0}, {'x': 10.23, 'y': -1}, {'x': 10.85, 'y': -2}, {'x': 12.28, 'y': -1}, {'x': 13.93, 'y': -2}, {'x': 15.77, 'y': -1}, {'x': 17.35, 'y': 0}, {'x': 23.5, 'y': 1}, {'x': 29.05, 'y': 0}, {'x': 29.73, 'y': 1}, {'x': 31.47, 'y': 2}, {'x': 32.97, 'y': 1}, {'x': 33.85, 'y': 2}, {'x': 35.12, 'y': 1}, {'x': 35.78, 'y': 2}, {'x': 36.85, 'y': 3}, {'x': 37.85, 'y': 2}, {'x': 40.0, 'y': 3}, {'x': 40.92, 'y': 4}, {'x': 42.37, 'y': 3}, {'x': 44.53, 'y': 4}, {'x': 45.0, 'y': 3}];
+  
+  new Chart("myChart", {
+    type: "line",
+    data: {
+      datasets: [{
+        data: dataPoints,
+        tension: 0.1,
+      }]
+    },
+    options: {
+      legend: {display: false},
+      title: {
+        display: true,
+        text: ""
+      },
+      scales: {
+        yAxes: [{
+          scaleLabel: {
+            display: true,
+            labelString: 'Score Difference'
+          }
+        }],
+        xAxes: [{
+          type: 'linear', // this will ensure that the x-axis is based on numeric scale
+          scaleLabel: {
+            display: true,
+            labelString: 'Gametime'
+          }
+        }]
+      }
+    }
+  });
+  
+  </script>
+
+
+
 
 </html>

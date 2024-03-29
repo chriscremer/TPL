@@ -10,6 +10,10 @@
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
 
+<script
+src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
+</script>
+
 
 <style>
     .table-container {
@@ -30,11 +34,6 @@
         width: 100%; /* Tables will take the full width of their parent */
         box-sizing: border-box;
         border: 1px solid #ccc; /* Add border for clarity */
-    }
-
-    /* Add a bottom border to table rows */
-    tr {
-        border-bottom: 1px solid #ccc;
     }
 
     /* If you want to add some space between tables */
@@ -400,6 +399,58 @@
     
 </div>
 
+<center>
+    <canvas id="myChart" style="width:100%;max-width:800px"></canvas>
+</center>
+
+<br>
+<br>
+<br>
+
 </body>
+
+
+
+
+
+<script>
+  const dataPoints = [{'x': 5.75, 'y': -1}, {'x': 6.78, 'y': 0}, {'x': 7.98, 'y': -1}, {'x': 8.27, 'y': 0}, {'x': 9.45, 'y': -1}, {'x': 9.9, 'y': 0}, {'x': 12.47, 'y': 1}, {'x': 13.37, 'y': 2}, {'x': 13.7, 'y': 1}, {'x': 14.17, 'y': 2}, {'x': 16.92, 'y': 1}, {'x': 18.08, 'y': 2}, {'x': 19.72, 'y': 3}, {'x': 20.17, 'y': 4}, {'x': 22.03, 'y': 3}, {'x': 25.55, 'y': 4}, {'x': 26.88, 'y': 3}, {'x': 27.65, 'y': 4}, {'x': 28.67, 'y': 3}, {'x': 29.17, 'y': 4}, {'x': 29.77, 'y': 3}, {'x': 35.4, 'y': 4}, {'x': 35.93, 'y': 3}, {'x': 37.38, 'y': 4}, {'x': 39.68, 'y': 5}, {'x': 40.63, 'y': 6}, {'x': 41.05, 'y': 7}, {'x': 41.98, 'y': 6}, {'x': 42.58, 'y': 5}, {'x': 43.02, 'y': 6}, {'x': 43.83, 'y': 5}, {'x': 44.95, 'y': 6}];
+  
+  new Chart("myChart", {
+    type: "line",
+    data: {
+      datasets: [{
+        data: dataPoints,
+        tension: 0.1,
+      }]
+    },
+    options: {
+      legend: {display: false},
+      title: {
+        display: true,
+        text: ""
+      },
+      scales: {
+        yAxes: [{
+          scaleLabel: {
+            display: true,
+            labelString: 'Score Difference'
+          }
+        }],
+        xAxes: [{
+          type: 'linear', // this will ensure that the x-axis is based on numeric scale
+          scaleLabel: {
+            display: true,
+            labelString: 'Gametime'
+          }
+        }]
+      }
+    }
+  });
+  
+  </script>
+
+
+
 
 </html>

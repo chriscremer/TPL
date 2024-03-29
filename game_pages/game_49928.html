@@ -10,6 +10,10 @@
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
 
+<script
+src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
+</script>
+
 
 <style>
     .table-container {
@@ -30,11 +34,6 @@
         width: 100%; /* Tables will take the full width of their parent */
         box-sizing: border-box;
         border: 1px solid #ccc; /* Add border for clarity */
-    }
-
-    /* Add a bottom border to table rows */
-    tr {
-        border-bottom: 1px solid #ccc;
     }
 
     /* If you want to add some space between tables */
@@ -400,6 +399,58 @@
     
 </div>
 
+<center>
+    <canvas id="myChart" style="width:100%;max-width:800px"></canvas>
+</center>
+
+<br>
+<br>
+<br>
+
 </body>
+
+
+
+
+
+<script>
+  const dataPoints = [{'x': 2.18, 'y': 1}, {'x': 4.02, 'y': 0}, {'x': 4.58, 'y': 1}, {'x': 5.05, 'y': 2}, {'x': 5.75, 'y': 3}, {'x': 6.98, 'y': 2}, {'x': 8.27, 'y': 1}, {'x': 10.9, 'y': 0}, {'x': 11.75, 'y': -1}, {'x': 14.13, 'y': 0}, {'x': 14.5, 'y': -1}, {'x': 15.17, 'y': 0}, {'x': 15.6, 'y': -1}, {'x': 16.53, 'y': 0}, {'x': 16.92, 'y': 1}, {'x': 17.98, 'y': 2}, {'x': 18.88, 'y': 1}, {'x': 24.5, 'y': 2}, {'x': 27.48, 'y': 1}, {'x': 28.03, 'y': 2}, {'x': 29.22, 'y': 3}, {'x': 30.1, 'y': 4}, {'x': 31.17, 'y': 3}, {'x': 31.82, 'y': 4}, {'x': 32.38, 'y': 5}, {'x': 32.75, 'y': 6}, {'x': 33.48, 'y': 5}, {'x': 34.67, 'y': 4}, {'x': 35.23, 'y': 5}, {'x': 38.2, 'y': 4}, {'x': 39.4, 'y': 3}, {'x': 41.25, 'y': 4}];
+  
+  new Chart("myChart", {
+    type: "line",
+    data: {
+      datasets: [{
+        data: dataPoints,
+        tension: 0.1,
+      }]
+    },
+    options: {
+      legend: {display: false},
+      title: {
+        display: true,
+        text: ""
+      },
+      scales: {
+        yAxes: [{
+          scaleLabel: {
+            display: true,
+            labelString: 'Score Difference'
+          }
+        }],
+        xAxes: [{
+          type: 'linear', // this will ensure that the x-axis is based on numeric scale
+          scaleLabel: {
+            display: true,
+            labelString: 'Gametime'
+          }
+        }]
+      }
+    }
+  });
+  
+  </script>
+
+
+
 
 </html>

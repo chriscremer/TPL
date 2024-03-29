@@ -10,6 +10,10 @@
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
 
+<script
+src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
+</script>
+
 
 <style>
     .table-container {
@@ -30,11 +34,6 @@
         width: 100%; /* Tables will take the full width of their parent */
         box-sizing: border-box;
         border: 1px solid #ccc; /* Add border for clarity */
-    }
-
-    /* Add a bottom border to table rows */
-    tr {
-        border-bottom: 1px solid #ccc;
     }
 
     /* If you want to add some space between tables */
@@ -380,6 +379,58 @@
     
 </div>
 
+<center>
+    <canvas id="myChart" style="width:100%;max-width:800px"></canvas>
+</center>
+
+<br>
+<br>
+<br>
+
 </body>
+
+
+
+
+
+<script>
+  const dataPoints = [{'x': 0.5, 'y': 1}, {'x': 1.08, 'y': 2}, {'x': 2.0, 'y': 3}, {'x': 2.5, 'y': 2}, {'x': 4.07, 'y': 3}, {'x': 4.72, 'y': 2}, {'x': 5.42, 'y': 3}, {'x': 5.98, 'y': 4}, {'x': 6.4, 'y': 3}, {'x': 6.78, 'y': 4}, {'x': 7.73, 'y': 5}, {'x': 9.77, 'y': 4}, {'x': 10.3, 'y': 5}, {'x': 14.7, 'y': 6}, {'x': 18.78, 'y': 5}, {'x': 20.45, 'y': 6}, {'x': 27.73, 'y': 5}, {'x': 30.4, 'y': 6}, {'x': 31.72, 'y': 5}, {'x': 32.87, 'y': 6}, {'x': 34.77, 'y': 7}, {'x': 35.45, 'y': 6}, {'x': 37.12, 'y': 5}, {'x': 37.42, 'y': 4}, {'x': 37.83, 'y': 3}, {'x': 40.35, 'y': 4}, {'x': 40.8, 'y': 5}, {'x': 41.2, 'y': 4}, {'x': 41.68, 'y': 3}, {'x': 42.38, 'y': 2}, {'x': 44.65, 'y': 1}];
+  
+  new Chart("myChart", {
+    type: "line",
+    data: {
+      datasets: [{
+        data: dataPoints,
+        tension: 0.1,
+      }]
+    },
+    options: {
+      legend: {display: false},
+      title: {
+        display: true,
+        text: ""
+      },
+      scales: {
+        yAxes: [{
+          scaleLabel: {
+            display: true,
+            labelString: 'Score Difference'
+          }
+        }],
+        xAxes: [{
+          type: 'linear', // this will ensure that the x-axis is based on numeric scale
+          scaleLabel: {
+            display: true,
+            labelString: 'Gametime'
+          }
+        }]
+      }
+    }
+  });
+  
+  </script>
+
+
+
 
 </html>
