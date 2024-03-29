@@ -30,7 +30,6 @@ src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
     }
 
     .table1, .table2 {
-        min-width: 50%; /* Set a minimum width */
         width: 100%; /* Tables will take the full width of their parent */
         box-sizing: border-box;
         border: 1px solid #ccc; /* Add border for clarity */
@@ -39,6 +38,17 @@ src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
     /* If you want to add some space between tables */
     .table1 {
         margin-right: 10px;
+    }
+
+    @media screen and (max-width: 600px) {
+        .table-container {
+            flex-direction: column;
+        }
+
+        iframe {
+            width: 90%; /* or any other percentage less than 100% */
+            margin: auto; /* to center the iframe */
+        }
     }
 
 </style>
@@ -52,8 +62,9 @@ src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
 <body>
 
 <a href="../index.html" style="position: absolute; top: 10px; left: 10px;"><i class="fa fa-arrow-left"></i>Season</a> 
+<br>
 
-<center>
+<center style="margin: 10px;">
  <iframe width="560" height="315" src="https://www.youtube.com/embed/shG_WhLMMrU?si=5wmHyY7Z4pG74Re4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </center>
 
