@@ -7,53 +7,399 @@
 <title>TPL</title>
 <link rel="icon" type="image/png" href="../frisbee.png">
 
-<!-- DataTables CSS -->
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.6/css/jquery.dataTables.min.css">
 
-<!-- jQuery -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
 
-<!-- DataTables JS -->
-<script type="text/javascript" src="https://cdn.datatables.net/1.11.6/js/jquery.dataTables.min.js"></script>
+
+<style>
+    .table-container {
+        display: flex;
+        flex-direction: row;
+        margin: 20px;
+        justify-content: center;
+    }
+
+    .table-container2 {
+        display: flex;
+        flex-direction: column;
+        margin: 20px;
+    }
+
+    .table1, .table2 {
+        min-width: 50%; /* Set a minimum width */
+        width: 100%; /* Tables will take the full width of their parent */
+        box-sizing: border-box;
+        border: 1px solid #ccc; /* Add border for clarity */
+    }
+
+    /* Add a bottom border to table rows */
+    tr {
+        border-bottom: 1px solid #ccc;
+    }
+
+    /* If you want to add some space between tables */
+    .table1 {
+        margin-right: 10px;
+    }
+
+</style>
 
 </head>
 
+
+
+
+
 <body>
-I was cRyan on the staircase Meagging you "Please don't throw" vs Sam's Cheer Captain And Chris' On The Bleachers
-<br>
-<br>
-<table id="sortable-table">
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Age</th>
-      <th>Country</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>John</td>
-      <td>30</td>
-      <td>USA</td>
-    </tr>
-    <tr>
-      <td>Alice</td>
-      <td>25</td>
-      <td>Canada</td>
-    </tr>
-    <!-- Add more rows as needed -->
-  </tbody>
+
+<a href="../index.html" style="position: absolute; top: 10px; left: 10px;"><i class="fa fa-arrow-left"></i>Season</a> 
 
 
-</table>
-<br>
+<div class="table-container">
+
+    <div class="table-container2">
+        <h4>I was cRyan on the staircase Meagging you "Please don't throw" (23)</h4>
+        <table class="table1">
+            
+    <tr>
+        <th style="text-align: left;">Player</th>
+        <th style="text-align: left;">Goal</th>
+        <th style="text-align: left;">Assist</th>
+        <th style="text-align: left;">2A</th>
+        <th style="text-align: left;">Points</th>
+        <th style="text-align: left;">Pass</th>
+        <th style="text-align: left;">D</th>
+        <th style="text-align: left;">TA</th>
+        <th style="text-align: left;">Drop</th>
+    </tr>
+
+            <tr>
+                <td>Ryan Sherriff</td>
+                <td>3</td>
+                <td>5</td>
+                <td>2</td>
+                <td>10</td>
+                <td>24</td>
+                <td>2</td>
+                <td>1</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Neil Griffith</td>
+                <td>4</td>
+                <td>3</td>
+                <td>1</td>
+                <td>8</td>
+                <td>16</td>
+                <td>0</td>
+                <td>2</td>
+                <td>0</td>
+            </tr><tr>
+                <td>William Beveridge</td>
+                <td>4</td>
+                <td>2</td>
+                <td>1</td>
+                <td>7</td>
+                <td>16</td>
+                <td>0</td>
+                <td>5</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Jamie Hoo-fatt</td>
+                <td>1</td>
+                <td>3</td>
+                <td>2</td>
+                <td>6</td>
+                <td>18</td>
+                <td>1</td>
+                <td>1</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Meagan Newman</td>
+                <td>3</td>
+                <td>0</td>
+                <td>2</td>
+                <td>5</td>
+                <td>15</td>
+                <td>1</td>
+                <td>3</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Helen O'Sullivan</td>
+                <td>2</td>
+                <td>2</td>
+                <td>1</td>
+                <td>5</td>
+                <td>10</td>
+                <td>1</td>
+                <td>1</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Lauren Cappell</td>
+                <td>1</td>
+                <td>2</td>
+                <td>2</td>
+                <td>5</td>
+                <td>5</td>
+                <td>0</td>
+                <td>1</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Vincent Poon</td>
+                <td>1</td>
+                <td>2</td>
+                <td>1</td>
+                <td>4</td>
+                <td>18</td>
+                <td>2</td>
+                <td>1</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Robert Stalker</td>
+                <td>1</td>
+                <td>2</td>
+                <td>1</td>
+                <td>4</td>
+                <td>13</td>
+                <td>2</td>
+                <td>0</td>
+                <td>1</td>
+            </tr><tr>
+                <td>Robert Botman</td>
+                <td>0</td>
+                <td>1</td>
+                <td>3</td>
+                <td>4</td>
+                <td>11</td>
+                <td>1</td>
+                <td>0</td>
+                <td>0</td>
+            </tr><tr>
+                <td>R.t. Lechow</td>
+                <td>2</td>
+                <td>0</td>
+                <td>0</td>
+                <td>2</td>
+                <td>13</td>
+                <td>0</td>
+                <td>0</td>
+                <td>1</td>
+            </tr><tr>
+                <td>Christina Hua</td>
+                <td>0</td>
+                <td>0</td>
+                <td>2</td>
+                <td>2</td>
+                <td>5</td>
+                <td>0</td>
+                <td>1</td>
+                <td>1</td>
+            </tr><tr>
+                <td>Laura Stanley</td>
+                <td>1</td>
+                <td>1</td>
+                <td>0</td>
+                <td>2</td>
+                <td>3</td>
+                <td>0</td>
+                <td>1</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Caterina Cazzetta</td>
+                <td>0</td>
+                <td>0</td>
+                <td>1</td>
+                <td>1</td>
+                <td>8</td>
+                <td>0</td>
+                <td>2</td>
+                <td>1</td>
+            </tr><tr>
+                <td><b>Total</b></td>
+                <td><b>23</b></td>
+                <td><b>23</b></td>
+                <td><b>19</b></td>
+                <td><b>65</b></td>
+                <td><b>175</b></td>
+                <td><b>10</b></td>
+                <td><b>19</b></td>
+                <td><b>4</b></td>
+            </tr>
+        </table>
+    </div>
+    
+
+    <div class="table-container2">
+        <h4>Sam's Cheer Captain And Chris' On The Bleachers (24)</h4>
+        <table class="table2">
+            
+    <tr>
+        <th style="text-align: left;">Player</th>
+        <th style="text-align: left;">Goal</th>
+        <th style="text-align: left;">Assist</th>
+        <th style="text-align: left;">2A</th>
+        <th style="text-align: left;">Points</th>
+        <th style="text-align: left;">Pass</th>
+        <th style="text-align: left;">D</th>
+        <th style="text-align: left;">TA</th>
+        <th style="text-align: left;">Drop</th>
+    </tr>
+
+            <tr>
+                <td>Chris Cremer</td>
+                <td>2</td>
+                <td>3</td>
+                <td>4</td>
+                <td>9</td>
+                <td>25</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Hayden Andrews</td>
+                <td>5</td>
+                <td>3</td>
+                <td>1</td>
+                <td>9</td>
+                <td>21</td>
+                <td>3</td>
+                <td>2</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Eddie Khalatian</td>
+                <td>0</td>
+                <td>5</td>
+                <td>3</td>
+                <td>8</td>
+                <td>32</td>
+                <td>2</td>
+                <td>2</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Sabrina Paez-Parent</td>
+                <td>5</td>
+                <td>1</td>
+                <td>1</td>
+                <td>7</td>
+                <td>6</td>
+                <td>0</td>
+                <td>0</td>
+                <td>1</td>
+            </tr><tr>
+                <td>Cat Pelletier</td>
+                <td>1</td>
+                <td>3</td>
+                <td>2</td>
+                <td>6</td>
+                <td>18</td>
+                <td>0</td>
+                <td>3</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Michael Pham-Hung</td>
+                <td>2</td>
+                <td>1</td>
+                <td>2</td>
+                <td>5</td>
+                <td>15</td>
+                <td>2</td>
+                <td>0</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Allison Brown</td>
+                <td>3</td>
+                <td>1</td>
+                <td>0</td>
+                <td>4</td>
+                <td>10</td>
+                <td>1</td>
+                <td>1</td>
+                <td>1</td>
+            </tr><tr>
+                <td>Sam Esteves</td>
+                <td>1</td>
+                <td>2</td>
+                <td>1</td>
+                <td>4</td>
+                <td>9</td>
+                <td>0</td>
+                <td>2</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Grace Uy</td>
+                <td>1</td>
+                <td>2</td>
+                <td>1</td>
+                <td>4</td>
+                <td>5</td>
+                <td>0</td>
+                <td>2</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Adrian Muresan</td>
+                <td>1</td>
+                <td>2</td>
+                <td>1</td>
+                <td>4</td>
+                <td>5</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Nadia Ho</td>
+                <td>0</td>
+                <td>0</td>
+                <td>3</td>
+                <td>3</td>
+                <td>9</td>
+                <td>1</td>
+                <td>1</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Kevin Christensen</td>
+                <td>2</td>
+                <td>1</td>
+                <td>0</td>
+                <td>3</td>
+                <td>7</td>
+                <td>2</td>
+                <td>0</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Rebecca Minielly</td>
+                <td>1</td>
+                <td>0</td>
+                <td>1</td>
+                <td>2</td>
+                <td>10</td>
+                <td>0</td>
+                <td>2</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Mitchell Hughes</td>
+                <td>0</td>
+                <td>0</td>
+                <td>1</td>
+                <td>1</td>
+                <td>2</td>
+                <td>1</td>
+                <td>0</td>
+                <td>3</td>
+            </tr><tr>
+                <td><b>Total</b></td>
+                <td><b>24</b></td>
+                <td><b>24</b></td>
+                <td><b>21</b></td>
+                <td><b>69</b></td>
+                <td><b>174</b></td>
+                <td><b>12</b></td>
+                <td><b>15</b></td>
+                <td><b>5</b></td>
+            </tr>
+        </table>
+    </div>
+    
+</div>
 
 </body>
-
-<script>
-$(document).ready(function() {
-    $('#sortable-table').DataTable();
-});
-</script>
 
 </html>

@@ -7,53 +7,399 @@
 <title>TPL</title>
 <link rel="icon" type="image/png" href="../frisbee.png">
 
-<!-- DataTables CSS -->
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.6/css/jquery.dataTables.min.css">
 
-<!-- jQuery -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
 
-<!-- DataTables JS -->
-<script type="text/javascript" src="https://cdn.datatables.net/1.11.6/js/jquery.dataTables.min.js"></script>
+
+<style>
+    .table-container {
+        display: flex;
+        flex-direction: row;
+        margin: 20px;
+        justify-content: center;
+    }
+
+    .table-container2 {
+        display: flex;
+        flex-direction: column;
+        margin: 20px;
+    }
+
+    .table1, .table2 {
+        min-width: 50%; /* Set a minimum width */
+        width: 100%; /* Tables will take the full width of their parent */
+        box-sizing: border-box;
+        border: 1px solid #ccc; /* Add border for clarity */
+    }
+
+    /* Add a bottom border to table rows */
+    tr {
+        border-bottom: 1px solid #ccc;
+    }
+
+    /* If you want to add some space between tables */
+    .table1 {
+        margin-right: 10px;
+    }
+
+</style>
 
 </head>
 
+
+
+
+
 <body>
-You Belong Whist Me vs Dear John Look what you made Lysh do
-<br>
-<br>
-<table id="sortable-table">
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Age</th>
-      <th>Country</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>John</td>
-      <td>30</td>
-      <td>USA</td>
-    </tr>
-    <tr>
-      <td>Alice</td>
-      <td>25</td>
-      <td>Canada</td>
-    </tr>
-    <!-- Add more rows as needed -->
-  </tbody>
+
+<a href="../index.html" style="position: absolute; top: 10px; left: 10px;"><i class="fa fa-arrow-left"></i>Season</a> 
 
 
-</table>
-<br>
+<div class="table-container">
+
+    <div class="table-container2">
+        <h4>You Belong Whist Me (18)</h4>
+        <table class="table1">
+            
+    <tr>
+        <th style="text-align: left;">Player</th>
+        <th style="text-align: left;">Goal</th>
+        <th style="text-align: left;">Assist</th>
+        <th style="text-align: left;">2A</th>
+        <th style="text-align: left;">Points</th>
+        <th style="text-align: left;">Pass</th>
+        <th style="text-align: left;">D</th>
+        <th style="text-align: left;">TA</th>
+        <th style="text-align: left;">Drop</th>
+    </tr>
+
+            <tr>
+                <td>Maggie Chen</td>
+                <td>2</td>
+                <td>2</td>
+                <td>3</td>
+                <td>7</td>
+                <td>9</td>
+                <td>1</td>
+                <td>3</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Adam Lew</td>
+                <td>5</td>
+                <td>2</td>
+                <td>0</td>
+                <td>7</td>
+                <td>5</td>
+                <td>2</td>
+                <td>1</td>
+                <td>1</td>
+            </tr><tr>
+                <td>Ricky Liu</td>
+                <td>2</td>
+                <td>3</td>
+                <td>1</td>
+                <td>6</td>
+                <td>12</td>
+                <td>1</td>
+                <td>0</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Anders Whist</td>
+                <td>0</td>
+                <td>1</td>
+                <td>4</td>
+                <td>5</td>
+                <td>17</td>
+                <td>0</td>
+                <td>3</td>
+                <td>1</td>
+            </tr><tr>
+                <td>Alexa Skinner</td>
+                <td>3</td>
+                <td>1</td>
+                <td>1</td>
+                <td>5</td>
+                <td>9</td>
+                <td>0</td>
+                <td>2</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Matthew Colphon</td>
+                <td>0</td>
+                <td>2</td>
+                <td>2</td>
+                <td>4</td>
+                <td>19</td>
+                <td>0</td>
+                <td>2</td>
+                <td>1</td>
+            </tr><tr>
+                <td>Eddie Khalatian</td>
+                <td>1</td>
+                <td>2</td>
+                <td>1</td>
+                <td>4</td>
+                <td>16</td>
+                <td>1</td>
+                <td>1</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Ricky Truong</td>
+                <td>2</td>
+                <td>1</td>
+                <td>0</td>
+                <td>3</td>
+                <td>6</td>
+                <td>0</td>
+                <td>1</td>
+                <td>1</td>
+            </tr><tr>
+                <td>Dong-Ling Chen</td>
+                <td>1</td>
+                <td>2</td>
+                <td>0</td>
+                <td>3</td>
+                <td>4</td>
+                <td>0</td>
+                <td>0</td>
+                <td>1</td>
+            </tr><tr>
+                <td>Caterina Cazzetta</td>
+                <td>1</td>
+                <td>1</td>
+                <td>0</td>
+                <td>2</td>
+                <td>3</td>
+                <td>0</td>
+                <td>0</td>
+                <td>1</td>
+            </tr><tr>
+                <td>Thalia Huen</td>
+                <td>0</td>
+                <td>0</td>
+                <td>1</td>
+                <td>1</td>
+                <td>4</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Christina Hua</td>
+                <td>1</td>
+                <td>0</td>
+                <td>0</td>
+                <td>1</td>
+                <td>1</td>
+                <td>0</td>
+                <td>2</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Mitchell Hughes</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>4</td>
+                <td>0</td>
+                <td>2</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Tian Nie</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>1</td>
+                <td>0</td>
+                <td>0</td>
+                <td>2</td>
+            </tr><tr>
+                <td><b>Total</b></td>
+                <td><b>18</b></td>
+                <td><b>17</b></td>
+                <td><b>13</b></td>
+                <td><b>48</b></td>
+                <td><b>110</b></td>
+                <td><b>5</b></td>
+                <td><b>17</b></td>
+                <td><b>8</b></td>
+            </tr>
+        </table>
+    </div>
+    
+
+    <div class="table-container2">
+        <h4>Dear John Look what you made Lysh do (22)</h4>
+        <table class="table2">
+            
+    <tr>
+        <th style="text-align: left;">Player</th>
+        <th style="text-align: left;">Goal</th>
+        <th style="text-align: left;">Assist</th>
+        <th style="text-align: left;">2A</th>
+        <th style="text-align: left;">Points</th>
+        <th style="text-align: left;">Pass</th>
+        <th style="text-align: left;">D</th>
+        <th style="text-align: left;">TA</th>
+        <th style="text-align: left;">Drop</th>
+    </tr>
+
+            <tr>
+                <td>Jonathan Steinberg</td>
+                <td>4</td>
+                <td>6</td>
+                <td>0</td>
+                <td>10</td>
+                <td>18</td>
+                <td>0</td>
+                <td>2</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Adrian Muresan</td>
+                <td>2</td>
+                <td>4</td>
+                <td>0</td>
+                <td>6</td>
+                <td>10</td>
+                <td>0</td>
+                <td>1</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Meagan Newman</td>
+                <td>2</td>
+                <td>1</td>
+                <td>2</td>
+                <td>5</td>
+                <td>12</td>
+                <td>0</td>
+                <td>1</td>
+                <td>1</td>
+            </tr><tr>
+                <td>Lauren Yoshida</td>
+                <td>2</td>
+                <td>1</td>
+                <td>1</td>
+                <td>4</td>
+                <td>17</td>
+                <td>1</td>
+                <td>4</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Alysha Fontaine</td>
+                <td>2</td>
+                <td>0</td>
+                <td>2</td>
+                <td>4</td>
+                <td>14</td>
+                <td>2</td>
+                <td>0</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Hailey McInnis</td>
+                <td>0</td>
+                <td>2</td>
+                <td>2</td>
+                <td>4</td>
+                <td>10</td>
+                <td>2</td>
+                <td>1</td>
+                <td>1</td>
+            </tr><tr>
+                <td>Daivik Doshi</td>
+                <td>3</td>
+                <td>0</td>
+                <td>1</td>
+                <td>4</td>
+                <td>10</td>
+                <td>4</td>
+                <td>0</td>
+                <td>0</td>
+            </tr><tr>
+                <td>James Shimoda</td>
+                <td>2</td>
+                <td>1</td>
+                <td>1</td>
+                <td>4</td>
+                <td>9</td>
+                <td>1</td>
+                <td>0</td>
+                <td>0</td>
+            </tr><tr>
+                <td>David Ip</td>
+                <td>1</td>
+                <td>1</td>
+                <td>1</td>
+                <td>3</td>
+                <td>19</td>
+                <td>1</td>
+                <td>1</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Tyler Longo</td>
+                <td>0</td>
+                <td>3</td>
+                <td>0</td>
+                <td>3</td>
+                <td>11</td>
+                <td>0</td>
+                <td>2</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Michael Pham-Hung</td>
+                <td>2</td>
+                <td>1</td>
+                <td>0</td>
+                <td>3</td>
+                <td>6</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Kristel Lee</td>
+                <td>2</td>
+                <td>0</td>
+                <td>1</td>
+                <td>3</td>
+                <td>4</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Madeline Shimoda</td>
+                <td>0</td>
+                <td>1</td>
+                <td>1</td>
+                <td>2</td>
+                <td>16</td>
+                <td>0</td>
+                <td>3</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Rebecca Minielly</td>
+                <td>0</td>
+                <td>0</td>
+                <td>1</td>
+                <td>1</td>
+                <td>10</td>
+                <td>1</td>
+                <td>0</td>
+                <td>1</td>
+            </tr><tr>
+                <td><b>Total</b></td>
+                <td><b>22</b></td>
+                <td><b>21</b></td>
+                <td><b>13</b></td>
+                <td><b>56</b></td>
+                <td><b>166</b></td>
+                <td><b>12</b></td>
+                <td><b>15</b></td>
+                <td><b>3</b></td>
+            </tr>
+        </table>
+    </div>
+    
+</div>
 
 </body>
-
-<script>
-$(document).ready(function() {
-    $('#sortable-table').DataTable();
-});
-</script>
 
 </html>
