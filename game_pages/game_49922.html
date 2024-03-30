@@ -32,15 +32,16 @@ src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
     .table1, .table2 {
         width: 100%; /* Tables will take the full width of their parent */
         box-sizing: border-box;
-        border: 1px solid #ccc; /* Add border for clarity */
+        /* border: 1px solid #ccc;  Add border for clarity */
+        margin-right: 30px;
+        border-collapse: collapse; /* this allows row lines to be shown for some reason */
     }
 
-    /* If you want to add some space between tables */
-    .table1 {
-        margin-right: 10px;
+    .table1 tr, .table2 tr {
+        border-bottom: 1px solid #ccc; /* Add bottom border to table rows */
     }
 
-    @media screen and (max-width: 600px) {
+    @media screen and (max-width: 850px) {
         .table-container {
             flex-direction: column;
         }
@@ -48,6 +49,12 @@ src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
         iframe {
             width: 90%; /* or any other percentage less than 100% */
             margin: auto; /* to center the iframe */
+        }
+
+
+        /* change font color to blue */
+        body {
+            /* color: blue; */
         }
     }
 
