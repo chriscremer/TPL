@@ -436,17 +436,41 @@ src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
 
 
 <script>
-  const dataPoints = [{'x': 1.73, 'y': 1}, {'x': 2.97, 'y': 1}, {'x': 2.98, 'y': 2}, {'x': 5.56, 'y': 2}, {'x': 5.57, 'y': 3}, {'x': 6.36, 'y': 3}, {'x': 6.37, 'y': 4}, {'x': 7.36, 'y': 4}, {'x': 7.37, 'y': 5}, {'x': 8.04, 'y': 5}, {'x': 8.05, 'y': 6}, {'x': 11.81, 'y': 6}, {'x': 11.82, 'y': 7}, {'x': 18.92, 'y': 7}, {'x': 18.93, 'y': 6}, {'x': 19.71, 'y': 6}, {'x': 19.72, 'y': 7}, {'x': 24.77, 'y': 7}, {'x': 24.78, 'y': 6}, {'x': 25.49, 'y': 6}, {'x': 25.5, 'y': 7}, {'x': 26.84, 'y': 7}, {'x': 26.85, 'y': 6}, {'x': 27.51, 'y': 6}, {'x': 27.52, 'y': 7}, {'x': 28.16, 'y': 7}, {'x': 28.17, 'y': 6}, {'x': 28.74, 'y': 6}, {'x': 28.75, 'y': 7}, {'x': 29.74, 'y': 7}, {'x': 29.75, 'y': 8}, {'x': 30.34, 'y': 8}, {'x': 30.35, 'y': 7}, {'x': 31.56, 'y': 7}, {'x': 31.57, 'y': 6}, {'x': 32.89, 'y': 6}, {'x': 32.9, 'y': 5}, {'x': 35.41, 'y': 5}, {'x': 35.42, 'y': 4}, {'x': 36.57, 'y': 4}, {'x': 36.58, 'y': 5}, {'x': 37.17, 'y': 5}, {'x': 37.18, 'y': 4}, {'x': 38.32, 'y': 4}, {'x': 38.33, 'y': 5}, {'x': 39.24, 'y': 5}, {'x': 39.25, 'y': 4}, {'x': 40.09, 'y': 4}, {'x': 40.1, 'y': 3}, {'x': 40.54, 'y': 3}, {'x': 40.55, 'y': 4}, {'x': 40.84, 'y': 4}, {'x': 40.85, 'y': 3}, {'x': 41.32, 'y': 3}, {'x': 41.33, 'y': 4}, {'x': 41.89, 'y': 4}, {'x': 41.9, 'y': 5}, {'x': 42.41, 'y': 5}, {'x': 42.42, 'y': 4}, {'x': 42.84, 'y': 4}, {'x': 42.85, 'y': 3}, {'x': 43.49, 'y': 3}, {'x': 43.5, 'y': 2}, {'x': 44, 'y': 2}];
+  const dataPoints = [{'x': 1.73, 'y': 1, 'label': 'Up 1 for DANti-Hero'}, {'x': 2.97, 'y': 1, 'label': 'Up 1 for Dear John Look what you made Lysh do'}, {'x': 2.98, 'y': 2, 'label': 'Up 2 for DANti-Hero'}, {'x': 5.56, 'y': 2, 'label': 'Up 2 for Dear John Look what you made Lysh do'}, {'x': 5.57, 'y': 3, 'label': 'Up 3 for DANti-Hero'}, {'x': 6.36, 'y': 3, 'label': 'Up 3 for Dear John Look what you made Lysh do'}, {'x': 6.37, 'y': 4, 'label': 'Up 4 for DANti-Hero'}, {'x': 7.36, 'y': 4, 'label': 'Up 4 for Dear John Look what you made Lysh do'}, {'x': 7.37, 'y': 5, 'label': 'Up 5 for DANti-Hero'}, {'x': 8.04, 'y': 5, 'label': 'Up 5 for Dear John Look what you made Lysh do'}, {'x': 8.05, 'y': 6, 'label': 'Up 6 for DANti-Hero'}, {'x': 11.81, 'y': 6, 'label': 'Up 6 for Dear John Look what you made Lysh do'}, {'x': 11.82, 'y': 7, 'label': 'Up 7 for DANti-Hero'}, {'x': 18.92, 'y': 7, 'label': 'Up 7 for Dear John Look what you made Lysh do'}, {'x': 18.93, 'y': 6, 'label': 'Up 6 for DANti-Hero'}, {'x': 19.71, 'y': 6, 'label': 'Up 6 for Dear John Look what you made Lysh do'}, {'x': 19.72, 'y': 7, 'label': 'Up 7 for DANti-Hero'}, {'x': 24.77, 'y': 7, 'label': 'Up 7 for Dear John Look what you made Lysh do'}, {'x': 24.78, 'y': 6, 'label': 'Up 6 for DANti-Hero'}, {'x': 25.49, 'y': 6, 'label': 'Up 6 for Dear John Look what you made Lysh do'}, {'x': 25.5, 'y': 7, 'label': 'Up 7 for DANti-Hero'}, {'x': 26.84, 'y': 7, 'label': 'Up 7 for Dear John Look what you made Lysh do'}, {'x': 26.85, 'y': 6, 'label': 'Up 6 for DANti-Hero'}, {'x': 27.51, 'y': 6, 'label': 'Up 6 for Dear John Look what you made Lysh do'}, {'x': 27.52, 'y': 7, 'label': 'Up 7 for DANti-Hero'}, {'x': 28.16, 'y': 7, 'label': 'Up 7 for Dear John Look what you made Lysh do'}, {'x': 28.17, 'y': 6, 'label': 'Up 6 for DANti-Hero'}, {'x': 28.74, 'y': 6, 'label': 'Up 6 for Dear John Look what you made Lysh do'}, {'x': 28.75, 'y': 7, 'label': 'Up 7 for DANti-Hero'}, {'x': 29.74, 'y': 7, 'label': 'Up 7 for Dear John Look what you made Lysh do'}, {'x': 29.75, 'y': 8, 'label': 'Up 8 for DANti-Hero'}, {'x': 30.34, 'y': 8, 'label': 'Up 8 for Dear John Look what you made Lysh do'}, {'x': 30.35, 'y': 7, 'label': 'Up 7 for DANti-Hero'}, {'x': 31.56, 'y': 7, 'label': 'Up 7 for Dear John Look what you made Lysh do'}, {'x': 31.57, 'y': 6, 'label': 'Up 6 for DANti-Hero'}, {'x': 32.89, 'y': 6, 'label': 'Up 6 for Dear John Look what you made Lysh do'}, {'x': 32.9, 'y': 5, 'label': 'Up 5 for DANti-Hero'}, {'x': 35.41, 'y': 5, 'label': 'Up 5 for Dear John Look what you made Lysh do'}, {'x': 35.42, 'y': 4, 'label': 'Up 4 for DANti-Hero'}, {'x': 36.57, 'y': 4, 'label': 'Up 4 for Dear John Look what you made Lysh do'}, {'x': 36.58, 'y': 5, 'label': 'Up 5 for DANti-Hero'}, {'x': 37.17, 'y': 5, 'label': 'Up 5 for Dear John Look what you made Lysh do'}, {'x': 37.18, 'y': 4, 'label': 'Up 4 for DANti-Hero'}, {'x': 38.32, 'y': 4, 'label': 'Up 4 for Dear John Look what you made Lysh do'}, {'x': 38.33, 'y': 5, 'label': 'Up 5 for DANti-Hero'}, {'x': 39.24, 'y': 5, 'label': 'Up 5 for Dear John Look what you made Lysh do'}, {'x': 39.25, 'y': 4, 'label': 'Up 4 for DANti-Hero'}, {'x': 40.09, 'y': 4, 'label': 'Up 4 for Dear John Look what you made Lysh do'}, {'x': 40.1, 'y': 3, 'label': 'Up 3 for DANti-Hero'}, {'x': 40.54, 'y': 3, 'label': 'Up 3 for Dear John Look what you made Lysh do'}, {'x': 40.55, 'y': 4, 'label': 'Up 4 for DANti-Hero'}, {'x': 40.84, 'y': 4, 'label': 'Up 4 for Dear John Look what you made Lysh do'}, {'x': 40.85, 'y': 3, 'label': 'Up 3 for DANti-Hero'}, {'x': 41.32, 'y': 3, 'label': 'Up 3 for Dear John Look what you made Lysh do'}, {'x': 41.33, 'y': 4, 'label': 'Up 4 for DANti-Hero'}, {'x': 41.89, 'y': 4, 'label': 'Up 4 for Dear John Look what you made Lysh do'}, {'x': 41.9, 'y': 5, 'label': 'Up 5 for DANti-Hero'}, {'x': 42.41, 'y': 5, 'label': 'Up 5 for Dear John Look what you made Lysh do'}, {'x': 42.42, 'y': 4, 'label': 'Up 4 for DANti-Hero'}, {'x': 42.84, 'y': 4, 'label': 'Up 4 for Dear John Look what you made Lysh do'}, {'x': 42.85, 'y': 3, 'label': 'Up 3 for DANti-Hero'}, {'x': 43.49, 'y': 3, 'label': 'Up 3 for Dear John Look what you made Lysh do'}, {'x': 43.5, 'y': 2, 'label': 'Up 2 for DANti-Hero'}, {'x': 44, 'y': 2, 'label': 'Up 2 for DANti-Hero'}];
+    const xValues = [1.73, 2.97, 2.98, 5.56, 5.57, 6.36, 6.37, 7.36, 7.37, 8.04, 8.05, 11.81, 11.82, 18.92, 18.93, 19.71, 19.72, 24.77, 24.78, 25.49, 25.5, 26.84, 26.85, 27.51, 27.52, 28.16, 28.17, 28.74, 28.75, 29.74, 29.75, 30.34, 30.35, 31.56, 31.57, 32.89, 32.9, 35.41, 35.42, 36.57, 36.58, 37.17, 37.18, 38.32, 38.33, 39.24, 39.25, 40.09, 40.1, 40.54, 40.55, 40.84, 40.85, 41.32, 41.33, 41.89, 41.9, 42.41, 42.42, 42.84, 42.85, 43.49, 43.5, 44];
+    const yValues = [1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 6, 6, 7, 7, 6, 6, 7, 7, 6, 6, 7, 7, 6, 6, 7, 7, 8, 8, 7, 7, 6, 6, 5, 5, 4, 4, 5, 5, 4, 4, 5, 5, 4, 4, 3, 3, 4, 4, 3, 3, 4, 4, 5, 5, 4, 4, 3, 3, 2, 2];
+
   
   new Chart("myChart", {
     type: "line",
     data: {
-      datasets: [{
-        data: dataPoints,
-        tension: 0.1,
-      }]
+
+    labels: yValues,
+    datasets: [{
+      data: dataPoints,
+      // Add this line to include the labels in the data
+      pointHoverBackgroundColor: "red",
+      pointHoverBorderColor: "red",
+      pointHoverBorderWidth: 2,
+      pointHoverRadius: 5,
+      tension: 0.05,
+    }]
+
+
     },
     options: {
+
+    tooltips: {
+      callbacks: {
+        label: function(tooltipItem, data) {
+          var label = data.labels[tooltipItem.index];
+          var value = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
+          return value.label;
+
+        }
+      }
+    },
+
       legend: {display: false},
       title: {
         display: true,

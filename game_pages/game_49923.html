@@ -436,17 +436,41 @@ src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
 
 
 <script>
-  const dataPoints = [{'x': 0.7, 'y': -1}, {'x': 2.24, 'y': -1}, {'x': 2.25, 'y': -2}, {'x': 3.26, 'y': -2}, {'x': 3.27, 'y': -1}, {'x': 3.84, 'y': -1}, {'x': 3.85, 'y': 0}, {'x': 4.32, 'y': 0}, {'x': 4.33, 'y': -1}, {'x': 4.87, 'y': -1}, {'x': 4.88, 'y': 0}, {'x': 6.69, 'y': 0}, {'x': 6.7, 'y': 1}, {'x': 9.01, 'y': 1}, {'x': 9.02, 'y': 0}, {'x': 9.47, 'y': 0}, {'x': 9.48, 'y': 1}, {'x': 9.94, 'y': 1}, {'x': 9.95, 'y': 2}, {'x': 10.86, 'y': 2}, {'x': 10.87, 'y': 1}, {'x': 11.81, 'y': 1}, {'x': 11.82, 'y': 2}, {'x': 13.89, 'y': 2}, {'x': 13.9, 'y': 3}, {'x': 14.94, 'y': 3}, {'x': 14.95, 'y': 2}, {'x': 16.39, 'y': 2}, {'x': 16.4, 'y': 1}, {'x': 16.92, 'y': 1}, {'x': 16.93, 'y': 2}, {'x': 18.07, 'y': 2}, {'x': 18.08, 'y': 3}, {'x': 18.82, 'y': 3}, {'x': 18.83, 'y': 4}, {'x': 19.71, 'y': 4}, {'x': 19.72, 'y': 5}, {'x': 21.49, 'y': 5}, {'x': 21.5, 'y': 6}, {'x': 26.79, 'y': 6}, {'x': 26.8, 'y': 5}, {'x': 27.21, 'y': 5}, {'x': 27.22, 'y': 6}, {'x': 29.89, 'y': 6}, {'x': 29.9, 'y': 5}, {'x': 30.21, 'y': 5}, {'x': 30.22, 'y': 4}, {'x': 30.69, 'y': 4}, {'x': 30.7, 'y': 5}, {'x': 32.82, 'y': 5}, {'x': 32.83, 'y': 6}, {'x': 34.07, 'y': 6}, {'x': 34.08, 'y': 7}, {'x': 36.66, 'y': 7}, {'x': 36.67, 'y': 6}, {'x': 37.09, 'y': 6}, {'x': 37.1, 'y': 7}, {'x': 37.62, 'y': 7}, {'x': 37.63, 'y': 8}, {'x': 39.54, 'y': 8}, {'x': 39.55, 'y': 9}, {'x': 40.36, 'y': 9}, {'x': 40.37, 'y': 10}, {'x': 40.69, 'y': 10}, {'x': 40.7, 'y': 9}, {'x': 40.96, 'y': 9}, {'x': 40.97, 'y': 10}, {'x': 41.81, 'y': 10}, {'x': 41.82, 'y': 11}, {'x': 42.17, 'y': 11}, {'x': 42.18, 'y': 10}, {'x': 42.44, 'y': 10}, {'x': 42.45, 'y': 11}, {'x': 43.81, 'y': 11}, {'x': 43.82, 'y': 12}, {'x': 44, 'y': 12}];
+  const dataPoints = [{'x': 0.7, 'y': -1, 'label': 'Up 1 for DANti-Hero'}, {'x': 2.24, 'y': -1, 'label': 'Up 1 for I was cRyan on the staircase Meagging you "Please don\'t throw"'}, {'x': 2.25, 'y': -2, 'label': 'Up 2 for DANti-Hero'}, {'x': 3.26, 'y': -2, 'label': 'Up 2 for I was cRyan on the staircase Meagging you "Please don\'t throw"'}, {'x': 3.27, 'y': -1, 'label': 'Up 1 for DANti-Hero'}, {'x': 3.84, 'y': -1, 'label': 'Up 1 for I was cRyan on the staircase Meagging you "Please don\'t throw"'}, {'x': 3.85, 'y': 0, 'label': 'Tie'}, {'x': 4.32, 'y': 0, 'label': 'Tie'}, {'x': 4.33, 'y': -1, 'label': 'Up 1 for DANti-Hero'}, {'x': 4.87, 'y': -1, 'label': 'Up 1 for I was cRyan on the staircase Meagging you "Please don\'t throw"'}, {'x': 4.88, 'y': 0, 'label': 'Tie'}, {'x': 6.69, 'y': 0, 'label': 'Tie'}, {'x': 6.7, 'y': 1, 'label': 'Up 1 for I was cRyan on the staircase Meagging you "Please don\'t throw"'}, {'x': 9.01, 'y': 1, 'label': 'Up 1 for DANti-Hero'}, {'x': 9.02, 'y': 0, 'label': 'Tie'}, {'x': 9.47, 'y': 0, 'label': 'Tie'}, {'x': 9.48, 'y': 1, 'label': 'Up 1 for I was cRyan on the staircase Meagging you "Please don\'t throw"'}, {'x': 9.94, 'y': 1, 'label': 'Up 1 for DANti-Hero'}, {'x': 9.95, 'y': 2, 'label': 'Up 2 for I was cRyan on the staircase Meagging you "Please don\'t throw"'}, {'x': 10.86, 'y': 2, 'label': 'Up 2 for DANti-Hero'}, {'x': 10.87, 'y': 1, 'label': 'Up 1 for I was cRyan on the staircase Meagging you "Please don\'t throw"'}, {'x': 11.81, 'y': 1, 'label': 'Up 1 for DANti-Hero'}, {'x': 11.82, 'y': 2, 'label': 'Up 2 for I was cRyan on the staircase Meagging you "Please don\'t throw"'}, {'x': 13.89, 'y': 2, 'label': 'Up 2 for DANti-Hero'}, {'x': 13.9, 'y': 3, 'label': 'Up 3 for I was cRyan on the staircase Meagging you "Please don\'t throw"'}, {'x': 14.94, 'y': 3, 'label': 'Up 3 for DANti-Hero'}, {'x': 14.95, 'y': 2, 'label': 'Up 2 for I was cRyan on the staircase Meagging you "Please don\'t throw"'}, {'x': 16.39, 'y': 2, 'label': 'Up 2 for DANti-Hero'}, {'x': 16.4, 'y': 1, 'label': 'Up 1 for I was cRyan on the staircase Meagging you "Please don\'t throw"'}, {'x': 16.92, 'y': 1, 'label': 'Up 1 for DANti-Hero'}, {'x': 16.93, 'y': 2, 'label': 'Up 2 for I was cRyan on the staircase Meagging you "Please don\'t throw"'}, {'x': 18.07, 'y': 2, 'label': 'Up 2 for DANti-Hero'}, {'x': 18.08, 'y': 3, 'label': 'Up 3 for I was cRyan on the staircase Meagging you "Please don\'t throw"'}, {'x': 18.82, 'y': 3, 'label': 'Up 3 for DANti-Hero'}, {'x': 18.83, 'y': 4, 'label': 'Up 4 for I was cRyan on the staircase Meagging you "Please don\'t throw"'}, {'x': 19.71, 'y': 4, 'label': 'Up 4 for DANti-Hero'}, {'x': 19.72, 'y': 5, 'label': 'Up 5 for I was cRyan on the staircase Meagging you "Please don\'t throw"'}, {'x': 21.49, 'y': 5, 'label': 'Up 5 for DANti-Hero'}, {'x': 21.5, 'y': 6, 'label': 'Up 6 for I was cRyan on the staircase Meagging you "Please don\'t throw"'}, {'x': 26.79, 'y': 6, 'label': 'Up 6 for DANti-Hero'}, {'x': 26.8, 'y': 5, 'label': 'Up 5 for I was cRyan on the staircase Meagging you "Please don\'t throw"'}, {'x': 27.21, 'y': 5, 'label': 'Up 5 for DANti-Hero'}, {'x': 27.22, 'y': 6, 'label': 'Up 6 for I was cRyan on the staircase Meagging you "Please don\'t throw"'}, {'x': 29.89, 'y': 6, 'label': 'Up 6 for DANti-Hero'}, {'x': 29.9, 'y': 5, 'label': 'Up 5 for I was cRyan on the staircase Meagging you "Please don\'t throw"'}, {'x': 30.21, 'y': 5, 'label': 'Up 5 for DANti-Hero'}, {'x': 30.22, 'y': 4, 'label': 'Up 4 for I was cRyan on the staircase Meagging you "Please don\'t throw"'}, {'x': 30.69, 'y': 4, 'label': 'Up 4 for DANti-Hero'}, {'x': 30.7, 'y': 5, 'label': 'Up 5 for I was cRyan on the staircase Meagging you "Please don\'t throw"'}, {'x': 32.82, 'y': 5, 'label': 'Up 5 for DANti-Hero'}, {'x': 32.83, 'y': 6, 'label': 'Up 6 for I was cRyan on the staircase Meagging you "Please don\'t throw"'}, {'x': 34.07, 'y': 6, 'label': 'Up 6 for DANti-Hero'}, {'x': 34.08, 'y': 7, 'label': 'Up 7 for I was cRyan on the staircase Meagging you "Please don\'t throw"'}, {'x': 36.66, 'y': 7, 'label': 'Up 7 for DANti-Hero'}, {'x': 36.67, 'y': 6, 'label': 'Up 6 for I was cRyan on the staircase Meagging you "Please don\'t throw"'}, {'x': 37.09, 'y': 6, 'label': 'Up 6 for DANti-Hero'}, {'x': 37.1, 'y': 7, 'label': 'Up 7 for I was cRyan on the staircase Meagging you "Please don\'t throw"'}, {'x': 37.62, 'y': 7, 'label': 'Up 7 for DANti-Hero'}, {'x': 37.63, 'y': 8, 'label': 'Up 8 for I was cRyan on the staircase Meagging you "Please don\'t throw"'}, {'x': 39.54, 'y': 8, 'label': 'Up 8 for DANti-Hero'}, {'x': 39.55, 'y': 9, 'label': 'Up 9 for I was cRyan on the staircase Meagging you "Please don\'t throw"'}, {'x': 40.36, 'y': 9, 'label': 'Up 9 for DANti-Hero'}, {'x': 40.37, 'y': 10, 'label': 'Up 10 for I was cRyan on the staircase Meagging you "Please don\'t throw"'}, {'x': 40.69, 'y': 10, 'label': 'Up 10 for DANti-Hero'}, {'x': 40.7, 'y': 9, 'label': 'Up 9 for I was cRyan on the staircase Meagging you "Please don\'t throw"'}, {'x': 40.96, 'y': 9, 'label': 'Up 9 for DANti-Hero'}, {'x': 40.97, 'y': 10, 'label': 'Up 10 for I was cRyan on the staircase Meagging you "Please don\'t throw"'}, {'x': 41.81, 'y': 10, 'label': 'Up 10 for DANti-Hero'}, {'x': 41.82, 'y': 11, 'label': 'Up 11 for I was cRyan on the staircase Meagging you "Please don\'t throw"'}, {'x': 42.17, 'y': 11, 'label': 'Up 11 for DANti-Hero'}, {'x': 42.18, 'y': 10, 'label': 'Up 10 for I was cRyan on the staircase Meagging you "Please don\'t throw"'}, {'x': 42.44, 'y': 10, 'label': 'Up 10 for DANti-Hero'}, {'x': 42.45, 'y': 11, 'label': 'Up 11 for I was cRyan on the staircase Meagging you "Please don\'t throw"'}, {'x': 43.81, 'y': 11, 'label': 'Up 11 for DANti-Hero'}, {'x': 43.82, 'y': 12, 'label': 'Up 12 for I was cRyan on the staircase Meagging you "Please don\'t throw"'}, {'x': 44, 'y': 12, 'label': 'Up 12 for I was cRyan on the staircase Meagging you "Please don\'t throw"'}];
+    const xValues = [0.7, 2.24, 2.25, 3.26, 3.27, 3.84, 3.85, 4.32, 4.33, 4.87, 4.88, 6.69, 6.7, 9.01, 9.02, 9.47, 9.48, 9.94, 9.95, 10.86, 10.87, 11.81, 11.82, 13.89, 13.9, 14.94, 14.95, 16.39, 16.4, 16.92, 16.93, 18.07, 18.08, 18.82, 18.83, 19.71, 19.72, 21.49, 21.5, 26.79, 26.8, 27.21, 27.22, 29.89, 29.9, 30.21, 30.22, 30.69, 30.7, 32.82, 32.83, 34.07, 34.08, 36.66, 36.67, 37.09, 37.1, 37.62, 37.63, 39.54, 39.55, 40.36, 40.37, 40.69, 40.7, 40.96, 40.97, 41.81, 41.82, 42.17, 42.18, 42.44, 42.45, 43.81, 43.82, 44];
+    const yValues = [-1, -1, -2, -2, -1, -1, 0, 0, -1, -1, 0, 0, 1, 1, 0, 0, 1, 1, 2, 2, 1, 1, 2, 2, 3, 3, 2, 2, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 5, 5, 6, 6, 5, 5, 4, 4, 5, 5, 6, 6, 7, 7, 6, 6, 7, 7, 8, 8, 9, 9, 10, 10, 9, 9, 10, 10, 11, 11, 10, 10, 11, 11, 12, 12];
+
   
   new Chart("myChart", {
     type: "line",
     data: {
-      datasets: [{
-        data: dataPoints,
-        tension: 0.1,
-      }]
+
+    labels: yValues,
+    datasets: [{
+      data: dataPoints,
+      // Add this line to include the labels in the data
+      pointHoverBackgroundColor: "red",
+      pointHoverBorderColor: "red",
+      pointHoverBorderWidth: 2,
+      pointHoverRadius: 5,
+      tension: 0.05,
+    }]
+
+
     },
     options: {
+
+    tooltips: {
+      callbacks: {
+        label: function(tooltipItem, data) {
+          var label = data.labels[tooltipItem.index];
+          var value = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
+          return value.label;
+
+        }
+      }
+    },
+
       legend: {display: false},
       title: {
         display: true,

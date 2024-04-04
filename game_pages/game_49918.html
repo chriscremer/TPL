@@ -416,17 +416,41 @@ src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
 
 
 <script>
-  const dataPoints = [{'x': 0.5, 'y': 1}, {'x': 1.07, 'y': 1}, {'x': 1.08, 'y': 2}, {'x': 1.99, 'y': 2}, {'x': 2.0, 'y': 3}, {'x': 2.49, 'y': 3}, {'x': 2.5, 'y': 2}, {'x': 4.06, 'y': 2}, {'x': 4.07, 'y': 3}, {'x': 4.71, 'y': 3}, {'x': 4.72, 'y': 2}, {'x': 5.41, 'y': 2}, {'x': 5.42, 'y': 3}, {'x': 5.97, 'y': 3}, {'x': 5.98, 'y': 4}, {'x': 6.39, 'y': 4}, {'x': 6.4, 'y': 3}, {'x': 6.77, 'y': 3}, {'x': 6.78, 'y': 4}, {'x': 7.72, 'y': 4}, {'x': 7.73, 'y': 5}, {'x': 9.76, 'y': 5}, {'x': 9.77, 'y': 4}, {'x': 10.29, 'y': 4}, {'x': 10.3, 'y': 5}, {'x': 14.69, 'y': 5}, {'x': 14.7, 'y': 6}, {'x': 18.77, 'y': 6}, {'x': 18.78, 'y': 5}, {'x': 20.44, 'y': 5}, {'x': 20.45, 'y': 6}, {'x': 27.72, 'y': 6}, {'x': 27.73, 'y': 5}, {'x': 30.39, 'y': 5}, {'x': 30.4, 'y': 6}, {'x': 31.71, 'y': 6}, {'x': 31.72, 'y': 5}, {'x': 32.86, 'y': 5}, {'x': 32.87, 'y': 6}, {'x': 34.76, 'y': 6}, {'x': 34.77, 'y': 7}, {'x': 35.44, 'y': 7}, {'x': 35.45, 'y': 6}, {'x': 37.11, 'y': 6}, {'x': 37.12, 'y': 5}, {'x': 37.41, 'y': 5}, {'x': 37.42, 'y': 4}, {'x': 37.82, 'y': 4}, {'x': 37.83, 'y': 3}, {'x': 40.34, 'y': 3}, {'x': 40.35, 'y': 4}, {'x': 40.79, 'y': 4}, {'x': 40.8, 'y': 5}, {'x': 41.19, 'y': 5}, {'x': 41.2, 'y': 4}, {'x': 41.67, 'y': 4}, {'x': 41.68, 'y': 3}, {'x': 42.37, 'y': 3}, {'x': 42.38, 'y': 2}, {'x': 44.64, 'y': 2}, {'x': 44.65, 'y': 1}, {'x': 45, 'y': 1}];
+  const dataPoints = [{'x': 0.5, 'y': 1, 'label': 'Up 1 for DANti-Hero'}, {'x': 1.07, 'y': 1, 'label': 'Up 1 for Huck the PATriarchy'}, {'x': 1.08, 'y': 2, 'label': 'Up 2 for DANti-Hero'}, {'x': 1.99, 'y': 2, 'label': 'Up 2 for Huck the PATriarchy'}, {'x': 2.0, 'y': 3, 'label': 'Up 3 for DANti-Hero'}, {'x': 2.49, 'y': 3, 'label': 'Up 3 for Huck the PATriarchy'}, {'x': 2.5, 'y': 2, 'label': 'Up 2 for DANti-Hero'}, {'x': 4.06, 'y': 2, 'label': 'Up 2 for Huck the PATriarchy'}, {'x': 4.07, 'y': 3, 'label': 'Up 3 for DANti-Hero'}, {'x': 4.71, 'y': 3, 'label': 'Up 3 for Huck the PATriarchy'}, {'x': 4.72, 'y': 2, 'label': 'Up 2 for DANti-Hero'}, {'x': 5.41, 'y': 2, 'label': 'Up 2 for Huck the PATriarchy'}, {'x': 5.42, 'y': 3, 'label': 'Up 3 for DANti-Hero'}, {'x': 5.97, 'y': 3, 'label': 'Up 3 for Huck the PATriarchy'}, {'x': 5.98, 'y': 4, 'label': 'Up 4 for DANti-Hero'}, {'x': 6.39, 'y': 4, 'label': 'Up 4 for Huck the PATriarchy'}, {'x': 6.4, 'y': 3, 'label': 'Up 3 for DANti-Hero'}, {'x': 6.77, 'y': 3, 'label': 'Up 3 for Huck the PATriarchy'}, {'x': 6.78, 'y': 4, 'label': 'Up 4 for DANti-Hero'}, {'x': 7.72, 'y': 4, 'label': 'Up 4 for Huck the PATriarchy'}, {'x': 7.73, 'y': 5, 'label': 'Up 5 for DANti-Hero'}, {'x': 9.76, 'y': 5, 'label': 'Up 5 for Huck the PATriarchy'}, {'x': 9.77, 'y': 4, 'label': 'Up 4 for DANti-Hero'}, {'x': 10.29, 'y': 4, 'label': 'Up 4 for Huck the PATriarchy'}, {'x': 10.3, 'y': 5, 'label': 'Up 5 for DANti-Hero'}, {'x': 14.69, 'y': 5, 'label': 'Up 5 for Huck the PATriarchy'}, {'x': 14.7, 'y': 6, 'label': 'Up 6 for DANti-Hero'}, {'x': 18.77, 'y': 6, 'label': 'Up 6 for Huck the PATriarchy'}, {'x': 18.78, 'y': 5, 'label': 'Up 5 for DANti-Hero'}, {'x': 20.44, 'y': 5, 'label': 'Up 5 for Huck the PATriarchy'}, {'x': 20.45, 'y': 6, 'label': 'Up 6 for DANti-Hero'}, {'x': 27.72, 'y': 6, 'label': 'Up 6 for Huck the PATriarchy'}, {'x': 27.73, 'y': 5, 'label': 'Up 5 for DANti-Hero'}, {'x': 30.39, 'y': 5, 'label': 'Up 5 for Huck the PATriarchy'}, {'x': 30.4, 'y': 6, 'label': 'Up 6 for DANti-Hero'}, {'x': 31.71, 'y': 6, 'label': 'Up 6 for Huck the PATriarchy'}, {'x': 31.72, 'y': 5, 'label': 'Up 5 for DANti-Hero'}, {'x': 32.86, 'y': 5, 'label': 'Up 5 for Huck the PATriarchy'}, {'x': 32.87, 'y': 6, 'label': 'Up 6 for DANti-Hero'}, {'x': 34.76, 'y': 6, 'label': 'Up 6 for Huck the PATriarchy'}, {'x': 34.77, 'y': 7, 'label': 'Up 7 for DANti-Hero'}, {'x': 35.44, 'y': 7, 'label': 'Up 7 for Huck the PATriarchy'}, {'x': 35.45, 'y': 6, 'label': 'Up 6 for DANti-Hero'}, {'x': 37.11, 'y': 6, 'label': 'Up 6 for Huck the PATriarchy'}, {'x': 37.12, 'y': 5, 'label': 'Up 5 for DANti-Hero'}, {'x': 37.41, 'y': 5, 'label': 'Up 5 for Huck the PATriarchy'}, {'x': 37.42, 'y': 4, 'label': 'Up 4 for DANti-Hero'}, {'x': 37.82, 'y': 4, 'label': 'Up 4 for Huck the PATriarchy'}, {'x': 37.83, 'y': 3, 'label': 'Up 3 for DANti-Hero'}, {'x': 40.34, 'y': 3, 'label': 'Up 3 for Huck the PATriarchy'}, {'x': 40.35, 'y': 4, 'label': 'Up 4 for DANti-Hero'}, {'x': 40.79, 'y': 4, 'label': 'Up 4 for Huck the PATriarchy'}, {'x': 40.8, 'y': 5, 'label': 'Up 5 for DANti-Hero'}, {'x': 41.19, 'y': 5, 'label': 'Up 5 for Huck the PATriarchy'}, {'x': 41.2, 'y': 4, 'label': 'Up 4 for DANti-Hero'}, {'x': 41.67, 'y': 4, 'label': 'Up 4 for Huck the PATriarchy'}, {'x': 41.68, 'y': 3, 'label': 'Up 3 for DANti-Hero'}, {'x': 42.37, 'y': 3, 'label': 'Up 3 for Huck the PATriarchy'}, {'x': 42.38, 'y': 2, 'label': 'Up 2 for DANti-Hero'}, {'x': 44.64, 'y': 2, 'label': 'Up 2 for Huck the PATriarchy'}, {'x': 44.65, 'y': 1, 'label': 'Up 1 for DANti-Hero'}, {'x': 45, 'y': 1, 'label': 'Up 1 for DANti-Hero'}];
+    const xValues = [0.5, 1.07, 1.08, 1.99, 2.0, 2.49, 2.5, 4.06, 4.07, 4.71, 4.72, 5.41, 5.42, 5.97, 5.98, 6.39, 6.4, 6.77, 6.78, 7.72, 7.73, 9.76, 9.77, 10.29, 10.3, 14.69, 14.7, 18.77, 18.78, 20.44, 20.45, 27.72, 27.73, 30.39, 30.4, 31.71, 31.72, 32.86, 32.87, 34.76, 34.77, 35.44, 35.45, 37.11, 37.12, 37.41, 37.42, 37.82, 37.83, 40.34, 40.35, 40.79, 40.8, 41.19, 41.2, 41.67, 41.68, 42.37, 42.38, 44.64, 44.65, 45];
+    const yValues = [1, 1, 2, 2, 3, 3, 2, 2, 3, 3, 2, 2, 3, 3, 4, 4, 3, 3, 4, 4, 5, 5, 4, 4, 5, 5, 6, 6, 5, 5, 6, 6, 5, 5, 6, 6, 5, 5, 6, 6, 7, 7, 6, 6, 5, 5, 4, 4, 3, 3, 4, 4, 5, 5, 4, 4, 3, 3, 2, 2, 1, 1];
+
   
   new Chart("myChart", {
     type: "line",
     data: {
-      datasets: [{
-        data: dataPoints,
-        tension: 0.1,
-      }]
+
+    labels: yValues,
+    datasets: [{
+      data: dataPoints,
+      // Add this line to include the labels in the data
+      pointHoverBackgroundColor: "red",
+      pointHoverBorderColor: "red",
+      pointHoverBorderWidth: 2,
+      pointHoverRadius: 5,
+      tension: 0.05,
+    }]
+
+
     },
     options: {
+
+    tooltips: {
+      callbacks: {
+        label: function(tooltipItem, data) {
+          var label = data.labels[tooltipItem.index];
+          var value = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
+          return value.label;
+
+        }
+      }
+    },
+
       legend: {display: false},
       title: {
         display: true,

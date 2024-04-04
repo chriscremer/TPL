@@ -436,17 +436,41 @@ src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
 
 
 <script>
-  const dataPoints = [{'x': 0.8, 'y': 1}, {'x': 5.24, 'y': 1}, {'x': 5.25, 'y': 2}, {'x': 6.02, 'y': 2}, {'x': 6.03, 'y': 3}, {'x': 6.74, 'y': 3}, {'x': 6.75, 'y': 4}, {'x': 7.37, 'y': 4}, {'x': 7.38, 'y': 3}, {'x': 8.04, 'y': 3}, {'x': 8.05, 'y': 2}, {'x': 9.32, 'y': 2}, {'x': 9.33, 'y': 3}, {'x': 9.84, 'y': 3}, {'x': 9.85, 'y': 2}, {'x': 10.32, 'y': 2}, {'x': 10.33, 'y': 3}, {'x': 11.94, 'y': 3}, {'x': 11.95, 'y': 4}, {'x': 12.49, 'y': 4}, {'x': 12.5, 'y': 3}, {'x': 14.49, 'y': 3}, {'x': 14.5, 'y': 2}, {'x': 15.26, 'y': 2}, {'x': 15.27, 'y': 3}, {'x': 15.89, 'y': 3}, {'x': 15.9, 'y': 2}, {'x': 16.27, 'y': 2}, {'x': 16.28, 'y': 1}, {'x': 16.94, 'y': 1}, {'x': 16.95, 'y': 2}, {'x': 20.11, 'y': 2}, {'x': 20.12, 'y': 3}, {'x': 20.66, 'y': 3}, {'x': 20.67, 'y': 4}, {'x': 24.94, 'y': 4}, {'x': 24.95, 'y': 3}, {'x': 25.37, 'y': 3}, {'x': 25.38, 'y': 2}, {'x': 27.47, 'y': 2}, {'x': 27.48, 'y': 3}, {'x': 28.61, 'y': 3}, {'x': 28.62, 'y': 4}, {'x': 29.77, 'y': 4}, {'x': 29.78, 'y': 3}, {'x': 30.82, 'y': 3}, {'x': 30.83, 'y': 4}, {'x': 31.37, 'y': 4}, {'x': 31.38, 'y': 5}, {'x': 32.81, 'y': 5}, {'x': 32.82, 'y': 6}, {'x': 33.26, 'y': 6}, {'x': 33.27, 'y': 5}, {'x': 33.42, 'y': 5}, {'x': 33.43, 'y': 6}, {'x': 34.32, 'y': 6}, {'x': 34.33, 'y': 7}, {'x': 35.29, 'y': 7}, {'x': 35.3, 'y': 8}, {'x': 36.16, 'y': 8}, {'x': 36.17, 'y': 7}, {'x': 36.89, 'y': 7}, {'x': 36.9, 'y': 8}, {'x': 37.77, 'y': 8}, {'x': 37.78, 'y': 9}, {'x': 38.54, 'y': 9}, {'x': 38.55, 'y': 10}, {'x': 43.36, 'y': 10}, {'x': 43.37, 'y': 9}, {'x': 44.26, 'y': 9}, {'x': 44.27, 'y': 8}, {'x': 45.02, 'y': 8}, {'x': 45.03, 'y': 9}, {'x': 46, 'y': 9}];
+  const dataPoints = [{'x': 0.8, 'y': 1, 'label': 'Up 1 for Dear John Look what you made Lysh do'}, {'x': 5.24, 'y': 1, 'label': "Up 1 for kyraless nam's careful daughter"}, {'x': 5.25, 'y': 2, 'label': 'Up 2 for Dear John Look what you made Lysh do'}, {'x': 6.02, 'y': 2, 'label': "Up 2 for kyraless nam's careful daughter"}, {'x': 6.03, 'y': 3, 'label': 'Up 3 for Dear John Look what you made Lysh do'}, {'x': 6.74, 'y': 3, 'label': "Up 3 for kyraless nam's careful daughter"}, {'x': 6.75, 'y': 4, 'label': 'Up 4 for Dear John Look what you made Lysh do'}, {'x': 7.37, 'y': 4, 'label': "Up 4 for kyraless nam's careful daughter"}, {'x': 7.38, 'y': 3, 'label': 'Up 3 for Dear John Look what you made Lysh do'}, {'x': 8.04, 'y': 3, 'label': "Up 3 for kyraless nam's careful daughter"}, {'x': 8.05, 'y': 2, 'label': 'Up 2 for Dear John Look what you made Lysh do'}, {'x': 9.32, 'y': 2, 'label': "Up 2 for kyraless nam's careful daughter"}, {'x': 9.33, 'y': 3, 'label': 'Up 3 for Dear John Look what you made Lysh do'}, {'x': 9.84, 'y': 3, 'label': "Up 3 for kyraless nam's careful daughter"}, {'x': 9.85, 'y': 2, 'label': 'Up 2 for Dear John Look what you made Lysh do'}, {'x': 10.32, 'y': 2, 'label': "Up 2 for kyraless nam's careful daughter"}, {'x': 10.33, 'y': 3, 'label': 'Up 3 for Dear John Look what you made Lysh do'}, {'x': 11.94, 'y': 3, 'label': "Up 3 for kyraless nam's careful daughter"}, {'x': 11.95, 'y': 4, 'label': 'Up 4 for Dear John Look what you made Lysh do'}, {'x': 12.49, 'y': 4, 'label': "Up 4 for kyraless nam's careful daughter"}, {'x': 12.5, 'y': 3, 'label': 'Up 3 for Dear John Look what you made Lysh do'}, {'x': 14.49, 'y': 3, 'label': "Up 3 for kyraless nam's careful daughter"}, {'x': 14.5, 'y': 2, 'label': 'Up 2 for Dear John Look what you made Lysh do'}, {'x': 15.26, 'y': 2, 'label': "Up 2 for kyraless nam's careful daughter"}, {'x': 15.27, 'y': 3, 'label': 'Up 3 for Dear John Look what you made Lysh do'}, {'x': 15.89, 'y': 3, 'label': "Up 3 for kyraless nam's careful daughter"}, {'x': 15.9, 'y': 2, 'label': 'Up 2 for Dear John Look what you made Lysh do'}, {'x': 16.27, 'y': 2, 'label': "Up 2 for kyraless nam's careful daughter"}, {'x': 16.28, 'y': 1, 'label': 'Up 1 for Dear John Look what you made Lysh do'}, {'x': 16.94, 'y': 1, 'label': "Up 1 for kyraless nam's careful daughter"}, {'x': 16.95, 'y': 2, 'label': 'Up 2 for Dear John Look what you made Lysh do'}, {'x': 20.11, 'y': 2, 'label': "Up 2 for kyraless nam's careful daughter"}, {'x': 20.12, 'y': 3, 'label': 'Up 3 for Dear John Look what you made Lysh do'}, {'x': 20.66, 'y': 3, 'label': "Up 3 for kyraless nam's careful daughter"}, {'x': 20.67, 'y': 4, 'label': 'Up 4 for Dear John Look what you made Lysh do'}, {'x': 24.94, 'y': 4, 'label': "Up 4 for kyraless nam's careful daughter"}, {'x': 24.95, 'y': 3, 'label': 'Up 3 for Dear John Look what you made Lysh do'}, {'x': 25.37, 'y': 3, 'label': "Up 3 for kyraless nam's careful daughter"}, {'x': 25.38, 'y': 2, 'label': 'Up 2 for Dear John Look what you made Lysh do'}, {'x': 27.47, 'y': 2, 'label': "Up 2 for kyraless nam's careful daughter"}, {'x': 27.48, 'y': 3, 'label': 'Up 3 for Dear John Look what you made Lysh do'}, {'x': 28.61, 'y': 3, 'label': "Up 3 for kyraless nam's careful daughter"}, {'x': 28.62, 'y': 4, 'label': 'Up 4 for Dear John Look what you made Lysh do'}, {'x': 29.77, 'y': 4, 'label': "Up 4 for kyraless nam's careful daughter"}, {'x': 29.78, 'y': 3, 'label': 'Up 3 for Dear John Look what you made Lysh do'}, {'x': 30.82, 'y': 3, 'label': "Up 3 for kyraless nam's careful daughter"}, {'x': 30.83, 'y': 4, 'label': 'Up 4 for Dear John Look what you made Lysh do'}, {'x': 31.37, 'y': 4, 'label': "Up 4 for kyraless nam's careful daughter"}, {'x': 31.38, 'y': 5, 'label': 'Up 5 for Dear John Look what you made Lysh do'}, {'x': 32.81, 'y': 5, 'label': "Up 5 for kyraless nam's careful daughter"}, {'x': 32.82, 'y': 6, 'label': 'Up 6 for Dear John Look what you made Lysh do'}, {'x': 33.26, 'y': 6, 'label': "Up 6 for kyraless nam's careful daughter"}, {'x': 33.27, 'y': 5, 'label': 'Up 5 for Dear John Look what you made Lysh do'}, {'x': 33.42, 'y': 5, 'label': "Up 5 for kyraless nam's careful daughter"}, {'x': 33.43, 'y': 6, 'label': 'Up 6 for Dear John Look what you made Lysh do'}, {'x': 34.32, 'y': 6, 'label': "Up 6 for kyraless nam's careful daughter"}, {'x': 34.33, 'y': 7, 'label': 'Up 7 for Dear John Look what you made Lysh do'}, {'x': 35.29, 'y': 7, 'label': "Up 7 for kyraless nam's careful daughter"}, {'x': 35.3, 'y': 8, 'label': 'Up 8 for Dear John Look what you made Lysh do'}, {'x': 36.16, 'y': 8, 'label': "Up 8 for kyraless nam's careful daughter"}, {'x': 36.17, 'y': 7, 'label': 'Up 7 for Dear John Look what you made Lysh do'}, {'x': 36.89, 'y': 7, 'label': "Up 7 for kyraless nam's careful daughter"}, {'x': 36.9, 'y': 8, 'label': 'Up 8 for Dear John Look what you made Lysh do'}, {'x': 37.77, 'y': 8, 'label': "Up 8 for kyraless nam's careful daughter"}, {'x': 37.78, 'y': 9, 'label': 'Up 9 for Dear John Look what you made Lysh do'}, {'x': 38.54, 'y': 9, 'label': "Up 9 for kyraless nam's careful daughter"}, {'x': 38.55, 'y': 10, 'label': 'Up 10 for Dear John Look what you made Lysh do'}, {'x': 43.36, 'y': 10, 'label': "Up 10 for kyraless nam's careful daughter"}, {'x': 43.37, 'y': 9, 'label': 'Up 9 for Dear John Look what you made Lysh do'}, {'x': 44.26, 'y': 9, 'label': "Up 9 for kyraless nam's careful daughter"}, {'x': 44.27, 'y': 8, 'label': 'Up 8 for Dear John Look what you made Lysh do'}, {'x': 45.02, 'y': 8, 'label': "Up 8 for kyraless nam's careful daughter"}, {'x': 45.03, 'y': 9, 'label': 'Up 9 for Dear John Look what you made Lysh do'}, {'x': 46, 'y': 9, 'label': 'Up 9 for Dear John Look what you made Lysh do'}];
+    const xValues = [0.8, 5.24, 5.25, 6.02, 6.03, 6.74, 6.75, 7.37, 7.38, 8.04, 8.05, 9.32, 9.33, 9.84, 9.85, 10.32, 10.33, 11.94, 11.95, 12.49, 12.5, 14.49, 14.5, 15.26, 15.27, 15.89, 15.9, 16.27, 16.28, 16.94, 16.95, 20.11, 20.12, 20.66, 20.67, 24.94, 24.95, 25.37, 25.38, 27.47, 27.48, 28.61, 28.62, 29.77, 29.78, 30.82, 30.83, 31.37, 31.38, 32.81, 32.82, 33.26, 33.27, 33.42, 33.43, 34.32, 34.33, 35.29, 35.3, 36.16, 36.17, 36.89, 36.9, 37.77, 37.78, 38.54, 38.55, 43.36, 43.37, 44.26, 44.27, 45.02, 45.03, 46];
+    const yValues = [1, 1, 2, 2, 3, 3, 4, 4, 3, 3, 2, 2, 3, 3, 2, 2, 3, 3, 4, 4, 3, 3, 2, 2, 3, 3, 2, 2, 1, 1, 2, 2, 3, 3, 4, 4, 3, 3, 2, 2, 3, 3, 4, 4, 3, 3, 4, 4, 5, 5, 6, 6, 5, 5, 6, 6, 7, 7, 8, 8, 7, 7, 8, 8, 9, 9, 10, 10, 9, 9, 8, 8, 9, 9];
+
   
   new Chart("myChart", {
     type: "line",
     data: {
-      datasets: [{
-        data: dataPoints,
-        tension: 0.1,
-      }]
+
+    labels: yValues,
+    datasets: [{
+      data: dataPoints,
+      // Add this line to include the labels in the data
+      pointHoverBackgroundColor: "red",
+      pointHoverBorderColor: "red",
+      pointHoverBorderWidth: 2,
+      pointHoverRadius: 5,
+      tension: 0.05,
+    }]
+
+
     },
     options: {
+
+    tooltips: {
+      callbacks: {
+        label: function(tooltipItem, data) {
+          var label = data.labels[tooltipItem.index];
+          var value = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
+          return value.label;
+
+        }
+      }
+    },
+
       legend: {display: false},
       title: {
         display: true,

@@ -436,17 +436,41 @@ src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
 
 
 <script>
-  const dataPoints = [{'x': 4.0, 'y': 1}, {'x': 4.76, 'y': 1}, {'x': 4.77, 'y': 0}, {'x': 6.52, 'y': 0}, {'x': 6.53, 'y': 1}, {'x': 7.51, 'y': 1}, {'x': 7.52, 'y': 2}, {'x': 9.57, 'y': 2}, {'x': 9.58, 'y': 1}, {'x': 10.19, 'y': 1}, {'x': 10.2, 'y': 2}, {'x': 10.77, 'y': 2}, {'x': 10.78, 'y': 3}, {'x': 13.09, 'y': 3}, {'x': 13.1, 'y': 4}, {'x': 13.62, 'y': 4}, {'x': 13.63, 'y': 3}, {'x': 14.61, 'y': 3}, {'x': 14.62, 'y': 2}, {'x': 17.42, 'y': 2}, {'x': 17.43, 'y': 1}, {'x': 18.79, 'y': 1}, {'x': 18.8, 'y': 0}, {'x': 19.59, 'y': 0}, {'x': 19.6, 'y': 1}, {'x': 20.17, 'y': 1}, {'x': 20.18, 'y': 0}, {'x': 21.01, 'y': 0}, {'x': 21.02, 'y': 1}, {'x': 22.66, 'y': 1}, {'x': 22.67, 'y': 0}, {'x': 27.11, 'y': 0}, {'x': 27.12, 'y': -1}, {'x': 27.97, 'y': -1}, {'x': 27.98, 'y': 0}, {'x': 28.42, 'y': 0}, {'x': 28.43, 'y': 1}, {'x': 29.56, 'y': 1}, {'x': 29.57, 'y': 0}, {'x': 29.77, 'y': 0}, {'x': 29.78, 'y': 1}, {'x': 31.79, 'y': 1}, {'x': 31.8, 'y': 2}, {'x': 34.51, 'y': 2}, {'x': 34.52, 'y': 1}, {'x': 35.37, 'y': 1}, {'x': 35.38, 'y': 0}, {'x': 35.71, 'y': 0}, {'x': 35.72, 'y': 1}, {'x': 36.99, 'y': 1}, {'x': 37.0, 'y': 2}, {'x': 37.31, 'y': 2}, {'x': 37.32, 'y': 1}, {'x': 37.87, 'y': 1}, {'x': 37.88, 'y': 2}, {'x': 38.21, 'y': 2}, {'x': 38.22, 'y': 3}, {'x': 38.79, 'y': 3}, {'x': 38.8, 'y': 4}, {'x': 39.47, 'y': 4}, {'x': 39.48, 'y': 3}, {'x': 42.79, 'y': 3}, {'x': 42.8, 'y': 4}, {'x': 43.46, 'y': 4}, {'x': 43.47, 'y': 3}, {'x': 44.21, 'y': 3}, {'x': 44.22, 'y': 4}, {'x': 45.62, 'y': 4}, {'x': 45.63, 'y': 3}, {'x': 46, 'y': 3}];
+  const dataPoints = [{'x': 4.0, 'y': 1, 'label': 'Up 1 for FaulklHore (Revenge of the Swift Version)'}, {'x': 4.76, 'y': 1, 'label': "Up 1 for Sam's Cheer Captain And Chris' On The Bleachers"}, {'x': 4.77, 'y': 0, 'label': 'Tie'}, {'x': 6.52, 'y': 0, 'label': 'Tie'}, {'x': 6.53, 'y': 1, 'label': 'Up 1 for FaulklHore (Revenge of the Swift Version)'}, {'x': 7.51, 'y': 1, 'label': "Up 1 for Sam's Cheer Captain And Chris' On The Bleachers"}, {'x': 7.52, 'y': 2, 'label': 'Up 2 for FaulklHore (Revenge of the Swift Version)'}, {'x': 9.57, 'y': 2, 'label': "Up 2 for Sam's Cheer Captain And Chris' On The Bleachers"}, {'x': 9.58, 'y': 1, 'label': 'Up 1 for FaulklHore (Revenge of the Swift Version)'}, {'x': 10.19, 'y': 1, 'label': "Up 1 for Sam's Cheer Captain And Chris' On The Bleachers"}, {'x': 10.2, 'y': 2, 'label': 'Up 2 for FaulklHore (Revenge of the Swift Version)'}, {'x': 10.77, 'y': 2, 'label': "Up 2 for Sam's Cheer Captain And Chris' On The Bleachers"}, {'x': 10.78, 'y': 3, 'label': 'Up 3 for FaulklHore (Revenge of the Swift Version)'}, {'x': 13.09, 'y': 3, 'label': "Up 3 for Sam's Cheer Captain And Chris' On The Bleachers"}, {'x': 13.1, 'y': 4, 'label': 'Up 4 for FaulklHore (Revenge of the Swift Version)'}, {'x': 13.62, 'y': 4, 'label': "Up 4 for Sam's Cheer Captain And Chris' On The Bleachers"}, {'x': 13.63, 'y': 3, 'label': 'Up 3 for FaulklHore (Revenge of the Swift Version)'}, {'x': 14.61, 'y': 3, 'label': "Up 3 for Sam's Cheer Captain And Chris' On The Bleachers"}, {'x': 14.62, 'y': 2, 'label': 'Up 2 for FaulklHore (Revenge of the Swift Version)'}, {'x': 17.42, 'y': 2, 'label': "Up 2 for Sam's Cheer Captain And Chris' On The Bleachers"}, {'x': 17.43, 'y': 1, 'label': 'Up 1 for FaulklHore (Revenge of the Swift Version)'}, {'x': 18.79, 'y': 1, 'label': "Up 1 for Sam's Cheer Captain And Chris' On The Bleachers"}, {'x': 18.8, 'y': 0, 'label': 'Tie'}, {'x': 19.59, 'y': 0, 'label': 'Tie'}, {'x': 19.6, 'y': 1, 'label': 'Up 1 for FaulklHore (Revenge of the Swift Version)'}, {'x': 20.17, 'y': 1, 'label': "Up 1 for Sam's Cheer Captain And Chris' On The Bleachers"}, {'x': 20.18, 'y': 0, 'label': 'Tie'}, {'x': 21.01, 'y': 0, 'label': 'Tie'}, {'x': 21.02, 'y': 1, 'label': 'Up 1 for FaulklHore (Revenge of the Swift Version)'}, {'x': 22.66, 'y': 1, 'label': "Up 1 for Sam's Cheer Captain And Chris' On The Bleachers"}, {'x': 22.67, 'y': 0, 'label': 'Tie'}, {'x': 27.11, 'y': 0, 'label': 'Tie'}, {'x': 27.12, 'y': -1, 'label': "Up 1 for Sam's Cheer Captain And Chris' On The Bleachers"}, {'x': 27.97, 'y': -1, 'label': 'Up 1 for FaulklHore (Revenge of the Swift Version)'}, {'x': 27.98, 'y': 0, 'label': 'Tie'}, {'x': 28.42, 'y': 0, 'label': 'Tie'}, {'x': 28.43, 'y': 1, 'label': 'Up 1 for FaulklHore (Revenge of the Swift Version)'}, {'x': 29.56, 'y': 1, 'label': "Up 1 for Sam's Cheer Captain And Chris' On The Bleachers"}, {'x': 29.57, 'y': 0, 'label': 'Tie'}, {'x': 29.77, 'y': 0, 'label': 'Tie'}, {'x': 29.78, 'y': 1, 'label': 'Up 1 for FaulklHore (Revenge of the Swift Version)'}, {'x': 31.79, 'y': 1, 'label': "Up 1 for Sam's Cheer Captain And Chris' On The Bleachers"}, {'x': 31.8, 'y': 2, 'label': 'Up 2 for FaulklHore (Revenge of the Swift Version)'}, {'x': 34.51, 'y': 2, 'label': "Up 2 for Sam's Cheer Captain And Chris' On The Bleachers"}, {'x': 34.52, 'y': 1, 'label': 'Up 1 for FaulklHore (Revenge of the Swift Version)'}, {'x': 35.37, 'y': 1, 'label': "Up 1 for Sam's Cheer Captain And Chris' On The Bleachers"}, {'x': 35.38, 'y': 0, 'label': 'Tie'}, {'x': 35.71, 'y': 0, 'label': 'Tie'}, {'x': 35.72, 'y': 1, 'label': 'Up 1 for FaulklHore (Revenge of the Swift Version)'}, {'x': 36.99, 'y': 1, 'label': "Up 1 for Sam's Cheer Captain And Chris' On The Bleachers"}, {'x': 37.0, 'y': 2, 'label': 'Up 2 for FaulklHore (Revenge of the Swift Version)'}, {'x': 37.31, 'y': 2, 'label': "Up 2 for Sam's Cheer Captain And Chris' On The Bleachers"}, {'x': 37.32, 'y': 1, 'label': 'Up 1 for FaulklHore (Revenge of the Swift Version)'}, {'x': 37.87, 'y': 1, 'label': "Up 1 for Sam's Cheer Captain And Chris' On The Bleachers"}, {'x': 37.88, 'y': 2, 'label': 'Up 2 for FaulklHore (Revenge of the Swift Version)'}, {'x': 38.21, 'y': 2, 'label': "Up 2 for Sam's Cheer Captain And Chris' On The Bleachers"}, {'x': 38.22, 'y': 3, 'label': 'Up 3 for FaulklHore (Revenge of the Swift Version)'}, {'x': 38.79, 'y': 3, 'label': "Up 3 for Sam's Cheer Captain And Chris' On The Bleachers"}, {'x': 38.8, 'y': 4, 'label': 'Up 4 for FaulklHore (Revenge of the Swift Version)'}, {'x': 39.47, 'y': 4, 'label': "Up 4 for Sam's Cheer Captain And Chris' On The Bleachers"}, {'x': 39.48, 'y': 3, 'label': 'Up 3 for FaulklHore (Revenge of the Swift Version)'}, {'x': 42.79, 'y': 3, 'label': "Up 3 for Sam's Cheer Captain And Chris' On The Bleachers"}, {'x': 42.8, 'y': 4, 'label': 'Up 4 for FaulklHore (Revenge of the Swift Version)'}, {'x': 43.46, 'y': 4, 'label': "Up 4 for Sam's Cheer Captain And Chris' On The Bleachers"}, {'x': 43.47, 'y': 3, 'label': 'Up 3 for FaulklHore (Revenge of the Swift Version)'}, {'x': 44.21, 'y': 3, 'label': "Up 3 for Sam's Cheer Captain And Chris' On The Bleachers"}, {'x': 44.22, 'y': 4, 'label': 'Up 4 for FaulklHore (Revenge of the Swift Version)'}, {'x': 45.62, 'y': 4, 'label': "Up 4 for Sam's Cheer Captain And Chris' On The Bleachers"}, {'x': 45.63, 'y': 3, 'label': 'Up 3 for FaulklHore (Revenge of the Swift Version)'}, {'x': 46, 'y': 3, 'label': 'Up 3 for FaulklHore (Revenge of the Swift Version)'}];
+    const xValues = [4.0, 4.76, 4.77, 6.52, 6.53, 7.51, 7.52, 9.57, 9.58, 10.19, 10.2, 10.77, 10.78, 13.09, 13.1, 13.62, 13.63, 14.61, 14.62, 17.42, 17.43, 18.79, 18.8, 19.59, 19.6, 20.17, 20.18, 21.01, 21.02, 22.66, 22.67, 27.11, 27.12, 27.97, 27.98, 28.42, 28.43, 29.56, 29.57, 29.77, 29.78, 31.79, 31.8, 34.51, 34.52, 35.37, 35.38, 35.71, 35.72, 36.99, 37.0, 37.31, 37.32, 37.87, 37.88, 38.21, 38.22, 38.79, 38.8, 39.47, 39.48, 42.79, 42.8, 43.46, 43.47, 44.21, 44.22, 45.62, 45.63, 46];
+    const yValues = [1, 1, 0, 0, 1, 1, 2, 2, 1, 1, 2, 2, 3, 3, 4, 4, 3, 3, 2, 2, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, -1, -1, 0, 0, 1, 1, 0, 0, 1, 1, 2, 2, 1, 1, 0, 0, 1, 1, 2, 2, 1, 1, 2, 2, 3, 3, 4, 4, 3, 3, 4, 4, 3, 3, 4, 4, 3, 3];
+
   
   new Chart("myChart", {
     type: "line",
     data: {
-      datasets: [{
-        data: dataPoints,
-        tension: 0.1,
-      }]
+
+    labels: yValues,
+    datasets: [{
+      data: dataPoints,
+      // Add this line to include the labels in the data
+      pointHoverBackgroundColor: "red",
+      pointHoverBorderColor: "red",
+      pointHoverBorderWidth: 2,
+      pointHoverRadius: 5,
+      tension: 0.05,
+    }]
+
+
     },
     options: {
+
+    tooltips: {
+      callbacks: {
+        label: function(tooltipItem, data) {
+          var label = data.labels[tooltipItem.index];
+          var value = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
+          return value.label;
+
+        }
+      }
+    },
+
       legend: {display: false},
       title: {
         display: true,

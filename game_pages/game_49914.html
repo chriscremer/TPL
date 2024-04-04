@@ -436,17 +436,41 @@ src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
 
 
 <script>
-  const dataPoints = [{'x': 2.07, 'y': -1}, {'x': 2.66, 'y': -1}, {'x': 2.67, 'y': -2}, {'x': 3.34, 'y': -2}, {'x': 3.35, 'y': -1}, {'x': 4.86, 'y': -1}, {'x': 4.87, 'y': -2}, {'x': 6.02, 'y': -2}, {'x': 6.03, 'y': -1}, {'x': 6.72, 'y': -1}, {'x': 6.73, 'y': 0}, {'x': 8.22, 'y': 0}, {'x': 8.23, 'y': 1}, {'x': 10.06, 'y': 1}, {'x': 10.07, 'y': 2}, {'x': 10.91, 'y': 2}, {'x': 10.92, 'y': 1}, {'x': 11.96, 'y': 1}, {'x': 11.97, 'y': 0}, {'x': 13.81, 'y': 0}, {'x': 13.82, 'y': 1}, {'x': 14.37, 'y': 1}, {'x': 14.38, 'y': 0}, {'x': 14.87, 'y': 0}, {'x': 14.88, 'y': 1}, {'x': 17.44, 'y': 1}, {'x': 17.45, 'y': 0}, {'x': 17.76, 'y': 0}, {'x': 17.77, 'y': 1}, {'x': 18.36, 'y': 1}, {'x': 18.37, 'y': 2}, {'x': 18.97, 'y': 2}, {'x': 18.98, 'y': 3}, {'x': 24.41, 'y': 3}, {'x': 24.42, 'y': 4}, {'x': 24.74, 'y': 4}, {'x': 24.75, 'y': 3}, {'x': 25.22, 'y': 3}, {'x': 25.23, 'y': 2}, {'x': 26.32, 'y': 2}, {'x': 26.33, 'y': 1}, {'x': 27.44, 'y': 1}, {'x': 27.45, 'y': 0}, {'x': 28.91, 'y': 0}, {'x': 28.92, 'y': 1}, {'x': 30.16, 'y': 1}, {'x': 30.17, 'y': 2}, {'x': 31.57, 'y': 2}, {'x': 31.58, 'y': 1}, {'x': 32.57, 'y': 1}, {'x': 32.58, 'y': 0}, {'x': 33.04, 'y': 0}, {'x': 33.05, 'y': -1}, {'x': 37.91, 'y': -1}, {'x': 37.92, 'y': 0}, {'x': 38.37, 'y': 0}, {'x': 38.38, 'y': -1}, {'x': 40.56, 'y': -1}, {'x': 40.57, 'y': 0}, {'x': 41.51, 'y': 0}, {'x': 41.52, 'y': 1}, {'x': 42, 'y': 1}];
+  const dataPoints = [{'x': 2.07, 'y': -1, 'label': "Up 1 for Tam Mattgazine's Person of the Year"}, {'x': 2.66, 'y': -1, 'label': "Up 1 for Tam Mattgazine's Person of the Year"}, {'x': 2.67, 'y': -2, 'label': "Up 2 for Tam Mattgazine's Person of the Year"}, {'x': 3.34, 'y': -2, 'label': "Up 2 for Tam Mattgazine's Person of the Year"}, {'x': 3.35, 'y': -1, 'label': "Up 1 for Tam Mattgazine's Person of the Year"}, {'x': 4.86, 'y': -1, 'label': "Up 1 for Tam Mattgazine's Person of the Year"}, {'x': 4.87, 'y': -2, 'label': "Up 2 for Tam Mattgazine's Person of the Year"}, {'x': 6.02, 'y': -2, 'label': "Up 2 for Tam Mattgazine's Person of the Year"}, {'x': 6.03, 'y': -1, 'label': "Up 1 for Tam Mattgazine's Person of the Year"}, {'x': 6.72, 'y': -1, 'label': "Up 1 for Tam Mattgazine's Person of the Year"}, {'x': 6.73, 'y': 0, 'label': 'Tie'}, {'x': 8.22, 'y': 0, 'label': 'Tie'}, {'x': 8.23, 'y': 1, 'label': 'Up 1 for Dear John Look what you made Lysh do'}, {'x': 10.06, 'y': 1, 'label': 'Up 1 for Dear John Look what you made Lysh do'}, {'x': 10.07, 'y': 2, 'label': 'Up 2 for Dear John Look what you made Lysh do'}, {'x': 10.91, 'y': 2, 'label': 'Up 2 for Dear John Look what you made Lysh do'}, {'x': 10.92, 'y': 1, 'label': 'Up 1 for Dear John Look what you made Lysh do'}, {'x': 11.96, 'y': 1, 'label': 'Up 1 for Dear John Look what you made Lysh do'}, {'x': 11.97, 'y': 0, 'label': 'Tie'}, {'x': 13.81, 'y': 0, 'label': 'Tie'}, {'x': 13.82, 'y': 1, 'label': 'Up 1 for Dear John Look what you made Lysh do'}, {'x': 14.37, 'y': 1, 'label': 'Up 1 for Dear John Look what you made Lysh do'}, {'x': 14.38, 'y': 0, 'label': 'Tie'}, {'x': 14.87, 'y': 0, 'label': 'Tie'}, {'x': 14.88, 'y': 1, 'label': 'Up 1 for Dear John Look what you made Lysh do'}, {'x': 17.44, 'y': 1, 'label': 'Up 1 for Dear John Look what you made Lysh do'}, {'x': 17.45, 'y': 0, 'label': 'Tie'}, {'x': 17.76, 'y': 0, 'label': 'Tie'}, {'x': 17.77, 'y': 1, 'label': 'Up 1 for Dear John Look what you made Lysh do'}, {'x': 18.36, 'y': 1, 'label': 'Up 1 for Dear John Look what you made Lysh do'}, {'x': 18.37, 'y': 2, 'label': 'Up 2 for Dear John Look what you made Lysh do'}, {'x': 18.97, 'y': 2, 'label': 'Up 2 for Dear John Look what you made Lysh do'}, {'x': 18.98, 'y': 3, 'label': 'Up 3 for Dear John Look what you made Lysh do'}, {'x': 24.41, 'y': 3, 'label': 'Up 3 for Dear John Look what you made Lysh do'}, {'x': 24.42, 'y': 4, 'label': 'Up 4 for Dear John Look what you made Lysh do'}, {'x': 24.74, 'y': 4, 'label': 'Up 4 for Dear John Look what you made Lysh do'}, {'x': 24.75, 'y': 3, 'label': 'Up 3 for Dear John Look what you made Lysh do'}, {'x': 25.22, 'y': 3, 'label': 'Up 3 for Dear John Look what you made Lysh do'}, {'x': 25.23, 'y': 2, 'label': 'Up 2 for Dear John Look what you made Lysh do'}, {'x': 26.32, 'y': 2, 'label': 'Up 2 for Dear John Look what you made Lysh do'}, {'x': 26.33, 'y': 1, 'label': 'Up 1 for Dear John Look what you made Lysh do'}, {'x': 27.44, 'y': 1, 'label': 'Up 1 for Dear John Look what you made Lysh do'}, {'x': 27.45, 'y': 0, 'label': 'Tie'}, {'x': 28.91, 'y': 0, 'label': 'Tie'}, {'x': 28.92, 'y': 1, 'label': 'Up 1 for Dear John Look what you made Lysh do'}, {'x': 30.16, 'y': 1, 'label': 'Up 1 for Dear John Look what you made Lysh do'}, {'x': 30.17, 'y': 2, 'label': 'Up 2 for Dear John Look what you made Lysh do'}, {'x': 31.57, 'y': 2, 'label': 'Up 2 for Dear John Look what you made Lysh do'}, {'x': 31.58, 'y': 1, 'label': 'Up 1 for Dear John Look what you made Lysh do'}, {'x': 32.57, 'y': 1, 'label': 'Up 1 for Dear John Look what you made Lysh do'}, {'x': 32.58, 'y': 0, 'label': 'Tie'}, {'x': 33.04, 'y': 0, 'label': 'Tie'}, {'x': 33.05, 'y': -1, 'label': "Up 1 for Tam Mattgazine's Person of the Year"}, {'x': 37.91, 'y': -1, 'label': "Up 1 for Tam Mattgazine's Person of the Year"}, {'x': 37.92, 'y': 0, 'label': 'Tie'}, {'x': 38.37, 'y': 0, 'label': 'Tie'}, {'x': 38.38, 'y': -1, 'label': "Up 1 for Tam Mattgazine's Person of the Year"}, {'x': 40.56, 'y': -1, 'label': "Up 1 for Tam Mattgazine's Person of the Year"}, {'x': 40.57, 'y': 0, 'label': 'Tie'}, {'x': 41.51, 'y': 0, 'label': 'Tie'}, {'x': 41.52, 'y': 1, 'label': 'Up 1 for Dear John Look what you made Lysh do'}, {'x': 42, 'y': 1, 'label': 'Up 1 for Dear John Look what you made Lysh do'}];
+    const xValues = [2.07, 2.66, 2.67, 3.34, 3.35, 4.86, 4.87, 6.02, 6.03, 6.72, 6.73, 8.22, 8.23, 10.06, 10.07, 10.91, 10.92, 11.96, 11.97, 13.81, 13.82, 14.37, 14.38, 14.87, 14.88, 17.44, 17.45, 17.76, 17.77, 18.36, 18.37, 18.97, 18.98, 24.41, 24.42, 24.74, 24.75, 25.22, 25.23, 26.32, 26.33, 27.44, 27.45, 28.91, 28.92, 30.16, 30.17, 31.57, 31.58, 32.57, 32.58, 33.04, 33.05, 37.91, 37.92, 38.37, 38.38, 40.56, 40.57, 41.51, 41.52, 42];
+    const yValues = [-1, -1, -2, -2, -1, -1, -2, -2, -1, -1, 0, 0, 1, 1, 2, 2, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 3, 3, 2, 2, 1, 1, 0, 0, 1, 1, 2, 2, 1, 1, 0, 0, -1, -1, 0, 0, -1, -1, 0, 0, 1, 1];
+
   
   new Chart("myChart", {
     type: "line",
     data: {
-      datasets: [{
-        data: dataPoints,
-        tension: 0.1,
-      }]
+
+    labels: yValues,
+    datasets: [{
+      data: dataPoints,
+      // Add this line to include the labels in the data
+      pointHoverBackgroundColor: "red",
+      pointHoverBorderColor: "red",
+      pointHoverBorderWidth: 2,
+      pointHoverRadius: 5,
+      tension: 0.05,
+    }]
+
+
     },
     options: {
+
+    tooltips: {
+      callbacks: {
+        label: function(tooltipItem, data) {
+          var label = data.labels[tooltipItem.index];
+          var value = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
+          return value.label;
+
+        }
+      }
+    },
+
       legend: {display: false},
       title: {
         display: true,

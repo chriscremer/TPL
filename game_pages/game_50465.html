@@ -436,17 +436,41 @@ src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
 
 
 <script>
-  const dataPoints = [{'x': 3.08, 'y': -1}, {'x': 3.57, 'y': -1}, {'x': 3.58, 'y': 0}, {'x': 4.09, 'y': 0}, {'x': 4.1, 'y': -1}, {'x': 4.56, 'y': -1}, {'x': 4.57, 'y': 0}, {'x': 5.34, 'y': 0}, {'x': 5.35, 'y': -1}, {'x': 6.41, 'y': -1}, {'x': 6.42, 'y': 0}, {'x': 7.61, 'y': 0}, {'x': 7.62, 'y': -1}, {'x': 8.12, 'y': -1}, {'x': 8.13, 'y': -2}, {'x': 9.92, 'y': -2}, {'x': 9.93, 'y': -1}, {'x': 14.36, 'y': -1}, {'x': 14.37, 'y': -2}, {'x': 15.06, 'y': -2}, {'x': 15.07, 'y': -3}, {'x': 15.39, 'y': -3}, {'x': 15.4, 'y': -2}, {'x': 16.36, 'y': -2}, {'x': 16.37, 'y': -1}, {'x': 18.11, 'y': -1}, {'x': 18.12, 'y': 0}, {'x': 18.76, 'y': 0}, {'x': 18.77, 'y': -1}, {'x': 19.51, 'y': -1}, {'x': 19.52, 'y': 0}, {'x': 20.42, 'y': 0}, {'x': 20.43, 'y': 1}, {'x': 25.37, 'y': 1}, {'x': 25.38, 'y': 0}, {'x': 25.77, 'y': 0}, {'x': 25.78, 'y': 1}, {'x': 26.27, 'y': 1}, {'x': 26.28, 'y': 2}, {'x': 27.42, 'y': 2}, {'x': 27.43, 'y': 3}, {'x': 28.54, 'y': 3}, {'x': 28.55, 'y': 2}, {'x': 30.26, 'y': 2}, {'x': 30.27, 'y': 3}, {'x': 32.49, 'y': 3}, {'x': 32.5, 'y': 2}, {'x': 32.89, 'y': 2}, {'x': 32.9, 'y': 3}, {'x': 33.67, 'y': 3}, {'x': 33.68, 'y': 2}, {'x': 34.34, 'y': 2}, {'x': 34.35, 'y': 3}, {'x': 35.66, 'y': 3}, {'x': 35.67, 'y': 2}, {'x': 36.56, 'y': 2}, {'x': 36.57, 'y': 1}, {'x': 37.51, 'y': 1}, {'x': 37.52, 'y': 0}, {'x': 38.04, 'y': 0}, {'x': 38.05, 'y': -1}, {'x': 40.96, 'y': -1}, {'x': 40.97, 'y': 0}, {'x': 41.56, 'y': 0}, {'x': 41.57, 'y': 1}, {'x': 42.47, 'y': 1}, {'x': 42.48, 'y': 2}, {'x': 43.01, 'y': 2}, {'x': 43.02, 'y': 1}, {'x': 43.31, 'y': 1}, {'x': 43.32, 'y': 2}, {'x': 43.64, 'y': 2}, {'x': 43.65, 'y': 1}, {'x': 44.36, 'y': 1}, {'x': 44.37, 'y': 0}, {'x': 45, 'y': 0}];
+  const dataPoints = [{'x': 3.08, 'y': -1, 'label': 'Up 1 for You Belong Whist Me'}, {'x': 3.57, 'y': -1, 'label': 'Up 1 for You Belong Whist Me'}, {'x': 3.58, 'y': 0, 'label': 'Tie'}, {'x': 4.09, 'y': 0, 'label': 'Tie'}, {'x': 4.1, 'y': -1, 'label': 'Up 1 for You Belong Whist Me'}, {'x': 4.56, 'y': -1, 'label': 'Up 1 for You Belong Whist Me'}, {'x': 4.57, 'y': 0, 'label': 'Tie'}, {'x': 5.34, 'y': 0, 'label': 'Tie'}, {'x': 5.35, 'y': -1, 'label': 'Up 1 for You Belong Whist Me'}, {'x': 6.41, 'y': -1, 'label': 'Up 1 for You Belong Whist Me'}, {'x': 6.42, 'y': 0, 'label': 'Tie'}, {'x': 7.61, 'y': 0, 'label': 'Tie'}, {'x': 7.62, 'y': -1, 'label': 'Up 1 for You Belong Whist Me'}, {'x': 8.12, 'y': -1, 'label': 'Up 1 for You Belong Whist Me'}, {'x': 8.13, 'y': -2, 'label': 'Up 2 for You Belong Whist Me'}, {'x': 9.92, 'y': -2, 'label': 'Up 2 for You Belong Whist Me'}, {'x': 9.93, 'y': -1, 'label': 'Up 1 for You Belong Whist Me'}, {'x': 14.36, 'y': -1, 'label': 'Up 1 for You Belong Whist Me'}, {'x': 14.37, 'y': -2, 'label': 'Up 2 for You Belong Whist Me'}, {'x': 15.06, 'y': -2, 'label': 'Up 2 for You Belong Whist Me'}, {'x': 15.07, 'y': -3, 'label': 'Up 3 for You Belong Whist Me'}, {'x': 15.39, 'y': -3, 'label': 'Up 3 for You Belong Whist Me'}, {'x': 15.4, 'y': -2, 'label': 'Up 2 for You Belong Whist Me'}, {'x': 16.36, 'y': -2, 'label': 'Up 2 for You Belong Whist Me'}, {'x': 16.37, 'y': -1, 'label': 'Up 1 for You Belong Whist Me'}, {'x': 18.11, 'y': -1, 'label': 'Up 1 for You Belong Whist Me'}, {'x': 18.12, 'y': 0, 'label': 'Tie'}, {'x': 18.76, 'y': 0, 'label': 'Tie'}, {'x': 18.77, 'y': -1, 'label': 'Up 1 for You Belong Whist Me'}, {'x': 19.51, 'y': -1, 'label': 'Up 1 for You Belong Whist Me'}, {'x': 19.52, 'y': 0, 'label': 'Tie'}, {'x': 20.42, 'y': 0, 'label': 'Tie'}, {'x': 20.43, 'y': 1, 'label': "Up 1 for Sam's Cheer Captain And Chris' On The Bleachers"}, {'x': 25.37, 'y': 1, 'label': "Up 1 for Sam's Cheer Captain And Chris' On The Bleachers"}, {'x': 25.38, 'y': 0, 'label': 'Tie'}, {'x': 25.77, 'y': 0, 'label': 'Tie'}, {'x': 25.78, 'y': 1, 'label': "Up 1 for Sam's Cheer Captain And Chris' On The Bleachers"}, {'x': 26.27, 'y': 1, 'label': "Up 1 for Sam's Cheer Captain And Chris' On The Bleachers"}, {'x': 26.28, 'y': 2, 'label': "Up 2 for Sam's Cheer Captain And Chris' On The Bleachers"}, {'x': 27.42, 'y': 2, 'label': "Up 2 for Sam's Cheer Captain And Chris' On The Bleachers"}, {'x': 27.43, 'y': 3, 'label': "Up 3 for Sam's Cheer Captain And Chris' On The Bleachers"}, {'x': 28.54, 'y': 3, 'label': "Up 3 for Sam's Cheer Captain And Chris' On The Bleachers"}, {'x': 28.55, 'y': 2, 'label': "Up 2 for Sam's Cheer Captain And Chris' On The Bleachers"}, {'x': 30.26, 'y': 2, 'label': "Up 2 for Sam's Cheer Captain And Chris' On The Bleachers"}, {'x': 30.27, 'y': 3, 'label': "Up 3 for Sam's Cheer Captain And Chris' On The Bleachers"}, {'x': 32.49, 'y': 3, 'label': "Up 3 for Sam's Cheer Captain And Chris' On The Bleachers"}, {'x': 32.5, 'y': 2, 'label': "Up 2 for Sam's Cheer Captain And Chris' On The Bleachers"}, {'x': 32.89, 'y': 2, 'label': "Up 2 for Sam's Cheer Captain And Chris' On The Bleachers"}, {'x': 32.9, 'y': 3, 'label': "Up 3 for Sam's Cheer Captain And Chris' On The Bleachers"}, {'x': 33.67, 'y': 3, 'label': "Up 3 for Sam's Cheer Captain And Chris' On The Bleachers"}, {'x': 33.68, 'y': 2, 'label': "Up 2 for Sam's Cheer Captain And Chris' On The Bleachers"}, {'x': 34.34, 'y': 2, 'label': "Up 2 for Sam's Cheer Captain And Chris' On The Bleachers"}, {'x': 34.35, 'y': 3, 'label': "Up 3 for Sam's Cheer Captain And Chris' On The Bleachers"}, {'x': 35.66, 'y': 3, 'label': "Up 3 for Sam's Cheer Captain And Chris' On The Bleachers"}, {'x': 35.67, 'y': 2, 'label': "Up 2 for Sam's Cheer Captain And Chris' On The Bleachers"}, {'x': 36.56, 'y': 2, 'label': "Up 2 for Sam's Cheer Captain And Chris' On The Bleachers"}, {'x': 36.57, 'y': 1, 'label': "Up 1 for Sam's Cheer Captain And Chris' On The Bleachers"}, {'x': 37.51, 'y': 1, 'label': "Up 1 for Sam's Cheer Captain And Chris' On The Bleachers"}, {'x': 37.52, 'y': 0, 'label': 'Tie'}, {'x': 38.04, 'y': 0, 'label': 'Tie'}, {'x': 38.05, 'y': -1, 'label': 'Up 1 for You Belong Whist Me'}, {'x': 40.96, 'y': -1, 'label': 'Up 1 for You Belong Whist Me'}, {'x': 40.97, 'y': 0, 'label': 'Tie'}, {'x': 41.56, 'y': 0, 'label': 'Tie'}, {'x': 41.57, 'y': 1, 'label': "Up 1 for Sam's Cheer Captain And Chris' On The Bleachers"}, {'x': 42.47, 'y': 1, 'label': "Up 1 for Sam's Cheer Captain And Chris' On The Bleachers"}, {'x': 42.48, 'y': 2, 'label': "Up 2 for Sam's Cheer Captain And Chris' On The Bleachers"}, {'x': 43.01, 'y': 2, 'label': "Up 2 for Sam's Cheer Captain And Chris' On The Bleachers"}, {'x': 43.02, 'y': 1, 'label': "Up 1 for Sam's Cheer Captain And Chris' On The Bleachers"}, {'x': 43.31, 'y': 1, 'label': "Up 1 for Sam's Cheer Captain And Chris' On The Bleachers"}, {'x': 43.32, 'y': 2, 'label': "Up 2 for Sam's Cheer Captain And Chris' On The Bleachers"}, {'x': 43.64, 'y': 2, 'label': "Up 2 for Sam's Cheer Captain And Chris' On The Bleachers"}, {'x': 43.65, 'y': 1, 'label': "Up 1 for Sam's Cheer Captain And Chris' On The Bleachers"}, {'x': 44.36, 'y': 1, 'label': "Up 1 for Sam's Cheer Captain And Chris' On The Bleachers"}, {'x': 44.37, 'y': 0, 'label': 'Tie'}, {'x': 45, 'y': 0, 'label': 'Tie'}];
+    const xValues = [3.08, 3.57, 3.58, 4.09, 4.1, 4.56, 4.57, 5.34, 5.35, 6.41, 6.42, 7.61, 7.62, 8.12, 8.13, 9.92, 9.93, 14.36, 14.37, 15.06, 15.07, 15.39, 15.4, 16.36, 16.37, 18.11, 18.12, 18.76, 18.77, 19.51, 19.52, 20.42, 20.43, 25.37, 25.38, 25.77, 25.78, 26.27, 26.28, 27.42, 27.43, 28.54, 28.55, 30.26, 30.27, 32.49, 32.5, 32.89, 32.9, 33.67, 33.68, 34.34, 34.35, 35.66, 35.67, 36.56, 36.57, 37.51, 37.52, 38.04, 38.05, 40.96, 40.97, 41.56, 41.57, 42.47, 42.48, 43.01, 43.02, 43.31, 43.32, 43.64, 43.65, 44.36, 44.37, 45];
+    const yValues = [-1, -1, 0, 0, -1, -1, 0, 0, -1, -1, 0, 0, -1, -1, -2, -2, -1, -1, -2, -2, -3, -3, -2, -2, -1, -1, 0, 0, -1, -1, 0, 0, 1, 1, 0, 0, 1, 1, 2, 2, 3, 3, 2, 2, 3, 3, 2, 2, 3, 3, 2, 2, 3, 3, 2, 2, 1, 1, 0, 0, -1, -1, 0, 0, 1, 1, 2, 2, 1, 1, 2, 2, 1, 1, 0, 0];
+
   
   new Chart("myChart", {
     type: "line",
     data: {
-      datasets: [{
-        data: dataPoints,
-        tension: 0.1,
-      }]
+
+    labels: yValues,
+    datasets: [{
+      data: dataPoints,
+      // Add this line to include the labels in the data
+      pointHoverBackgroundColor: "red",
+      pointHoverBorderColor: "red",
+      pointHoverBorderWidth: 2,
+      pointHoverRadius: 5,
+      tension: 0.05,
+    }]
+
+
     },
     options: {
+
+    tooltips: {
+      callbacks: {
+        label: function(tooltipItem, data) {
+          var label = data.labels[tooltipItem.index];
+          var value = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
+          return value.label;
+
+        }
+      }
+    },
+
       legend: {display: false},
       title: {
         display: true,

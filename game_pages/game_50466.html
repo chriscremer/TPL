@@ -436,17 +436,41 @@ src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
 
 
 <script>
-  const dataPoints = [{'x': 0.65, 'y': -1}, {'x': 3.17, 'y': -1}, {'x': 3.18, 'y': 0}, {'x': 3.69, 'y': 0}, {'x': 3.7, 'y': -1}, {'x': 4.89, 'y': -1}, {'x': 4.9, 'y': 0}, {'x': 6.46, 'y': 0}, {'x': 6.47, 'y': -1}, {'x': 6.99, 'y': -1}, {'x': 7.0, 'y': 0}, {'x': 7.84, 'y': 0}, {'x': 7.85, 'y': 1}, {'x': 8.57, 'y': 1}, {'x': 8.58, 'y': 2}, {'x': 11.09, 'y': 2}, {'x': 11.1, 'y': 1}, {'x': 13.21, 'y': 1}, {'x': 13.22, 'y': 2}, {'x': 13.87, 'y': 2}, {'x': 13.88, 'y': 1}, {'x': 14.84, 'y': 1}, {'x': 14.85, 'y': 0}, {'x': 15.27, 'y': 0}, {'x': 15.28, 'y': -1}, {'x': 17.74, 'y': -1}, {'x': 17.75, 'y': -2}, {'x': 19.29, 'y': -2}, {'x': 19.3, 'y': -1}, {'x': 21.52, 'y': -1}, {'x': 21.53, 'y': -2}, {'x': 26.94, 'y': -2}, {'x': 26.95, 'y': -1}, {'x': 29.66, 'y': -1}, {'x': 29.67, 'y': -2}, {'x': 30.21, 'y': -2}, {'x': 30.22, 'y': -1}, {'x': 31.96, 'y': -1}, {'x': 31.97, 'y': 0}, {'x': 35.17, 'y': 0}, {'x': 35.18, 'y': 1}, {'x': 37.59, 'y': 1}, {'x': 37.6, 'y': 2}, {'x': 38.19, 'y': 2}, {'x': 38.2, 'y': 3}, {'x': 39.07, 'y': 3}, {'x': 39.08, 'y': 4}, {'x': 39.59, 'y': 4}, {'x': 39.6, 'y': 3}, {'x': 42.34, 'y': 3}, {'x': 42.35, 'y': 4}, {'x': 43.27, 'y': 4}, {'x': 43.28, 'y': 5}, {'x': 44.51, 'y': 5}, {'x': 44.52, 'y': 6}, {'x': 45.31, 'y': 6}, {'x': 45.32, 'y': 5}, {'x': 45.52, 'y': 5}, {'x': 45.53, 'y': 6}, {'x': 46, 'y': 6}];
+  const dataPoints = [{'x': 0.65, 'y': -1, 'label': "Up 1 for Tam Mattgazine's Person of the Year"}, {'x': 3.17, 'y': -1, 'label': "Up 1 for Benny's Gonna Break Break Break Lexy's Gonna Fake Fake Fake"}, {'x': 3.18, 'y': 0, 'label': 'Tie'}, {'x': 3.69, 'y': 0, 'label': 'Tie'}, {'x': 3.7, 'y': -1, 'label': "Up 1 for Tam Mattgazine's Person of the Year"}, {'x': 4.89, 'y': -1, 'label': "Up 1 for Benny's Gonna Break Break Break Lexy's Gonna Fake Fake Fake"}, {'x': 4.9, 'y': 0, 'label': 'Tie'}, {'x': 6.46, 'y': 0, 'label': 'Tie'}, {'x': 6.47, 'y': -1, 'label': "Up 1 for Tam Mattgazine's Person of the Year"}, {'x': 6.99, 'y': -1, 'label': "Up 1 for Benny's Gonna Break Break Break Lexy's Gonna Fake Fake Fake"}, {'x': 7.0, 'y': 0, 'label': 'Tie'}, {'x': 7.84, 'y': 0, 'label': 'Tie'}, {'x': 7.85, 'y': 1, 'label': "Up 1 for Benny's Gonna Break Break Break Lexy's Gonna Fake Fake Fake"}, {'x': 8.57, 'y': 1, 'label': "Up 1 for Tam Mattgazine's Person of the Year"}, {'x': 8.58, 'y': 2, 'label': "Up 2 for Benny's Gonna Break Break Break Lexy's Gonna Fake Fake Fake"}, {'x': 11.09, 'y': 2, 'label': "Up 2 for Tam Mattgazine's Person of the Year"}, {'x': 11.1, 'y': 1, 'label': "Up 1 for Benny's Gonna Break Break Break Lexy's Gonna Fake Fake Fake"}, {'x': 13.21, 'y': 1, 'label': "Up 1 for Tam Mattgazine's Person of the Year"}, {'x': 13.22, 'y': 2, 'label': "Up 2 for Benny's Gonna Break Break Break Lexy's Gonna Fake Fake Fake"}, {'x': 13.87, 'y': 2, 'label': "Up 2 for Tam Mattgazine's Person of the Year"}, {'x': 13.88, 'y': 1, 'label': "Up 1 for Benny's Gonna Break Break Break Lexy's Gonna Fake Fake Fake"}, {'x': 14.84, 'y': 1, 'label': "Up 1 for Tam Mattgazine's Person of the Year"}, {'x': 14.85, 'y': 0, 'label': 'Tie'}, {'x': 15.27, 'y': 0, 'label': 'Tie'}, {'x': 15.28, 'y': -1, 'label': "Up 1 for Tam Mattgazine's Person of the Year"}, {'x': 17.74, 'y': -1, 'label': "Up 1 for Benny's Gonna Break Break Break Lexy's Gonna Fake Fake Fake"}, {'x': 17.75, 'y': -2, 'label': "Up 2 for Tam Mattgazine's Person of the Year"}, {'x': 19.29, 'y': -2, 'label': "Up 2 for Benny's Gonna Break Break Break Lexy's Gonna Fake Fake Fake"}, {'x': 19.3, 'y': -1, 'label': "Up 1 for Tam Mattgazine's Person of the Year"}, {'x': 21.52, 'y': -1, 'label': "Up 1 for Benny's Gonna Break Break Break Lexy's Gonna Fake Fake Fake"}, {'x': 21.53, 'y': -2, 'label': "Up 2 for Tam Mattgazine's Person of the Year"}, {'x': 26.94, 'y': -2, 'label': "Up 2 for Benny's Gonna Break Break Break Lexy's Gonna Fake Fake Fake"}, {'x': 26.95, 'y': -1, 'label': "Up 1 for Tam Mattgazine's Person of the Year"}, {'x': 29.66, 'y': -1, 'label': "Up 1 for Benny's Gonna Break Break Break Lexy's Gonna Fake Fake Fake"}, {'x': 29.67, 'y': -2, 'label': "Up 2 for Tam Mattgazine's Person of the Year"}, {'x': 30.21, 'y': -2, 'label': "Up 2 for Benny's Gonna Break Break Break Lexy's Gonna Fake Fake Fake"}, {'x': 30.22, 'y': -1, 'label': "Up 1 for Tam Mattgazine's Person of the Year"}, {'x': 31.96, 'y': -1, 'label': "Up 1 for Benny's Gonna Break Break Break Lexy's Gonna Fake Fake Fake"}, {'x': 31.97, 'y': 0, 'label': 'Tie'}, {'x': 35.17, 'y': 0, 'label': 'Tie'}, {'x': 35.18, 'y': 1, 'label': "Up 1 for Benny's Gonna Break Break Break Lexy's Gonna Fake Fake Fake"}, {'x': 37.59, 'y': 1, 'label': "Up 1 for Tam Mattgazine's Person of the Year"}, {'x': 37.6, 'y': 2, 'label': "Up 2 for Benny's Gonna Break Break Break Lexy's Gonna Fake Fake Fake"}, {'x': 38.19, 'y': 2, 'label': "Up 2 for Tam Mattgazine's Person of the Year"}, {'x': 38.2, 'y': 3, 'label': "Up 3 for Benny's Gonna Break Break Break Lexy's Gonna Fake Fake Fake"}, {'x': 39.07, 'y': 3, 'label': "Up 3 for Tam Mattgazine's Person of the Year"}, {'x': 39.08, 'y': 4, 'label': "Up 4 for Benny's Gonna Break Break Break Lexy's Gonna Fake Fake Fake"}, {'x': 39.59, 'y': 4, 'label': "Up 4 for Tam Mattgazine's Person of the Year"}, {'x': 39.6, 'y': 3, 'label': "Up 3 for Benny's Gonna Break Break Break Lexy's Gonna Fake Fake Fake"}, {'x': 42.34, 'y': 3, 'label': "Up 3 for Tam Mattgazine's Person of the Year"}, {'x': 42.35, 'y': 4, 'label': "Up 4 for Benny's Gonna Break Break Break Lexy's Gonna Fake Fake Fake"}, {'x': 43.27, 'y': 4, 'label': "Up 4 for Tam Mattgazine's Person of the Year"}, {'x': 43.28, 'y': 5, 'label': "Up 5 for Benny's Gonna Break Break Break Lexy's Gonna Fake Fake Fake"}, {'x': 44.51, 'y': 5, 'label': "Up 5 for Tam Mattgazine's Person of the Year"}, {'x': 44.52, 'y': 6, 'label': "Up 6 for Benny's Gonna Break Break Break Lexy's Gonna Fake Fake Fake"}, {'x': 45.31, 'y': 6, 'label': "Up 6 for Tam Mattgazine's Person of the Year"}, {'x': 45.32, 'y': 5, 'label': "Up 5 for Benny's Gonna Break Break Break Lexy's Gonna Fake Fake Fake"}, {'x': 45.52, 'y': 5, 'label': "Up 5 for Tam Mattgazine's Person of the Year"}, {'x': 45.53, 'y': 6, 'label': "Up 6 for Benny's Gonna Break Break Break Lexy's Gonna Fake Fake Fake"}, {'x': 46, 'y': 6, 'label': "Up 6 for Benny's Gonna Break Break Break Lexy's Gonna Fake Fake Fake"}];
+    const xValues = [0.65, 3.17, 3.18, 3.69, 3.7, 4.89, 4.9, 6.46, 6.47, 6.99, 7.0, 7.84, 7.85, 8.57, 8.58, 11.09, 11.1, 13.21, 13.22, 13.87, 13.88, 14.84, 14.85, 15.27, 15.28, 17.74, 17.75, 19.29, 19.3, 21.52, 21.53, 26.94, 26.95, 29.66, 29.67, 30.21, 30.22, 31.96, 31.97, 35.17, 35.18, 37.59, 37.6, 38.19, 38.2, 39.07, 39.08, 39.59, 39.6, 42.34, 42.35, 43.27, 43.28, 44.51, 44.52, 45.31, 45.32, 45.52, 45.53, 46];
+    const yValues = [-1, -1, 0, 0, -1, -1, 0, 0, -1, -1, 0, 0, 1, 1, 2, 2, 1, 1, 2, 2, 1, 1, 0, 0, -1, -1, -2, -2, -1, -1, -2, -2, -1, -1, -2, -2, -1, -1, 0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 3, 3, 4, 4, 5, 5, 6, 6, 5, 5, 6, 6];
+
   
   new Chart("myChart", {
     type: "line",
     data: {
-      datasets: [{
-        data: dataPoints,
-        tension: 0.1,
-      }]
+
+    labels: yValues,
+    datasets: [{
+      data: dataPoints,
+      // Add this line to include the labels in the data
+      pointHoverBackgroundColor: "red",
+      pointHoverBorderColor: "red",
+      pointHoverBorderWidth: 2,
+      pointHoverRadius: 5,
+      tension: 0.05,
+    }]
+
+
     },
     options: {
+
+    tooltips: {
+      callbacks: {
+        label: function(tooltipItem, data) {
+          var label = data.labels[tooltipItem.index];
+          var value = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
+          return value.label;
+
+        }
+      }
+    },
+
       legend: {display: false},
       title: {
         display: true,

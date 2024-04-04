@@ -436,17 +436,41 @@ src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
 
 
 <script>
-  const dataPoints = [{'x': 2.18, 'y': 1}, {'x': 4.01, 'y': 1}, {'x': 4.02, 'y': 0}, {'x': 4.57, 'y': 0}, {'x': 4.58, 'y': 1}, {'x': 5.04, 'y': 1}, {'x': 5.05, 'y': 2}, {'x': 5.74, 'y': 2}, {'x': 5.75, 'y': 3}, {'x': 6.97, 'y': 3}, {'x': 6.98, 'y': 2}, {'x': 8.26, 'y': 2}, {'x': 8.27, 'y': 1}, {'x': 10.89, 'y': 1}, {'x': 10.9, 'y': 0}, {'x': 11.74, 'y': 0}, {'x': 11.75, 'y': -1}, {'x': 14.12, 'y': -1}, {'x': 14.13, 'y': 0}, {'x': 14.49, 'y': 0}, {'x': 14.5, 'y': -1}, {'x': 15.16, 'y': -1}, {'x': 15.17, 'y': 0}, {'x': 15.59, 'y': 0}, {'x': 15.6, 'y': -1}, {'x': 16.52, 'y': -1}, {'x': 16.53, 'y': 0}, {'x': 16.91, 'y': 0}, {'x': 16.92, 'y': 1}, {'x': 17.97, 'y': 1}, {'x': 17.98, 'y': 2}, {'x': 18.87, 'y': 2}, {'x': 18.88, 'y': 1}, {'x': 24.49, 'y': 1}, {'x': 24.5, 'y': 2}, {'x': 27.47, 'y': 2}, {'x': 27.48, 'y': 1}, {'x': 28.02, 'y': 1}, {'x': 28.03, 'y': 2}, {'x': 29.21, 'y': 2}, {'x': 29.22, 'y': 3}, {'x': 30.09, 'y': 3}, {'x': 30.1, 'y': 4}, {'x': 31.16, 'y': 4}, {'x': 31.17, 'y': 3}, {'x': 31.81, 'y': 3}, {'x': 31.82, 'y': 4}, {'x': 32.37, 'y': 4}, {'x': 32.38, 'y': 5}, {'x': 32.74, 'y': 5}, {'x': 32.75, 'y': 6}, {'x': 33.47, 'y': 6}, {'x': 33.48, 'y': 5}, {'x': 34.66, 'y': 5}, {'x': 34.67, 'y': 4}, {'x': 35.22, 'y': 4}, {'x': 35.23, 'y': 5}, {'x': 38.19, 'y': 5}, {'x': 38.2, 'y': 4}, {'x': 39.39, 'y': 4}, {'x': 39.4, 'y': 3}, {'x': 41.24, 'y': 3}, {'x': 41.25, 'y': 4}, {'x': 42, 'y': 4}];
+  const dataPoints = [{'x': 2.18, 'y': 1, 'label': 'Up 1 for You Belong Whist Me'}, {'x': 4.01, 'y': 1, 'label': 'Up 1 for I was cRyan on the staircase Meagging you "Please don\'t throw"'}, {'x': 4.02, 'y': 0, 'label': 'Tie'}, {'x': 4.57, 'y': 0, 'label': 'Tie'}, {'x': 4.58, 'y': 1, 'label': 'Up 1 for You Belong Whist Me'}, {'x': 5.04, 'y': 1, 'label': 'Up 1 for I was cRyan on the staircase Meagging you "Please don\'t throw"'}, {'x': 5.05, 'y': 2, 'label': 'Up 2 for You Belong Whist Me'}, {'x': 5.74, 'y': 2, 'label': 'Up 2 for I was cRyan on the staircase Meagging you "Please don\'t throw"'}, {'x': 5.75, 'y': 3, 'label': 'Up 3 for You Belong Whist Me'}, {'x': 6.97, 'y': 3, 'label': 'Up 3 for I was cRyan on the staircase Meagging you "Please don\'t throw"'}, {'x': 6.98, 'y': 2, 'label': 'Up 2 for You Belong Whist Me'}, {'x': 8.26, 'y': 2, 'label': 'Up 2 for I was cRyan on the staircase Meagging you "Please don\'t throw"'}, {'x': 8.27, 'y': 1, 'label': 'Up 1 for You Belong Whist Me'}, {'x': 10.89, 'y': 1, 'label': 'Up 1 for I was cRyan on the staircase Meagging you "Please don\'t throw"'}, {'x': 10.9, 'y': 0, 'label': 'Tie'}, {'x': 11.74, 'y': 0, 'label': 'Tie'}, {'x': 11.75, 'y': -1, 'label': 'Up 1 for I was cRyan on the staircase Meagging you "Please don\'t throw"'}, {'x': 14.12, 'y': -1, 'label': 'Up 1 for You Belong Whist Me'}, {'x': 14.13, 'y': 0, 'label': 'Tie'}, {'x': 14.49, 'y': 0, 'label': 'Tie'}, {'x': 14.5, 'y': -1, 'label': 'Up 1 for I was cRyan on the staircase Meagging you "Please don\'t throw"'}, {'x': 15.16, 'y': -1, 'label': 'Up 1 for You Belong Whist Me'}, {'x': 15.17, 'y': 0, 'label': 'Tie'}, {'x': 15.59, 'y': 0, 'label': 'Tie'}, {'x': 15.6, 'y': -1, 'label': 'Up 1 for I was cRyan on the staircase Meagging you "Please don\'t throw"'}, {'x': 16.52, 'y': -1, 'label': 'Up 1 for You Belong Whist Me'}, {'x': 16.53, 'y': 0, 'label': 'Tie'}, {'x': 16.91, 'y': 0, 'label': 'Tie'}, {'x': 16.92, 'y': 1, 'label': 'Up 1 for You Belong Whist Me'}, {'x': 17.97, 'y': 1, 'label': 'Up 1 for I was cRyan on the staircase Meagging you "Please don\'t throw"'}, {'x': 17.98, 'y': 2, 'label': 'Up 2 for You Belong Whist Me'}, {'x': 18.87, 'y': 2, 'label': 'Up 2 for I was cRyan on the staircase Meagging you "Please don\'t throw"'}, {'x': 18.88, 'y': 1, 'label': 'Up 1 for You Belong Whist Me'}, {'x': 24.49, 'y': 1, 'label': 'Up 1 for I was cRyan on the staircase Meagging you "Please don\'t throw"'}, {'x': 24.5, 'y': 2, 'label': 'Up 2 for You Belong Whist Me'}, {'x': 27.47, 'y': 2, 'label': 'Up 2 for I was cRyan on the staircase Meagging you "Please don\'t throw"'}, {'x': 27.48, 'y': 1, 'label': 'Up 1 for You Belong Whist Me'}, {'x': 28.02, 'y': 1, 'label': 'Up 1 for I was cRyan on the staircase Meagging you "Please don\'t throw"'}, {'x': 28.03, 'y': 2, 'label': 'Up 2 for You Belong Whist Me'}, {'x': 29.21, 'y': 2, 'label': 'Up 2 for I was cRyan on the staircase Meagging you "Please don\'t throw"'}, {'x': 29.22, 'y': 3, 'label': 'Up 3 for You Belong Whist Me'}, {'x': 30.09, 'y': 3, 'label': 'Up 3 for I was cRyan on the staircase Meagging you "Please don\'t throw"'}, {'x': 30.1, 'y': 4, 'label': 'Up 4 for You Belong Whist Me'}, {'x': 31.16, 'y': 4, 'label': 'Up 4 for I was cRyan on the staircase Meagging you "Please don\'t throw"'}, {'x': 31.17, 'y': 3, 'label': 'Up 3 for You Belong Whist Me'}, {'x': 31.81, 'y': 3, 'label': 'Up 3 for I was cRyan on the staircase Meagging you "Please don\'t throw"'}, {'x': 31.82, 'y': 4, 'label': 'Up 4 for You Belong Whist Me'}, {'x': 32.37, 'y': 4, 'label': 'Up 4 for I was cRyan on the staircase Meagging you "Please don\'t throw"'}, {'x': 32.38, 'y': 5, 'label': 'Up 5 for You Belong Whist Me'}, {'x': 32.74, 'y': 5, 'label': 'Up 5 for I was cRyan on the staircase Meagging you "Please don\'t throw"'}, {'x': 32.75, 'y': 6, 'label': 'Up 6 for You Belong Whist Me'}, {'x': 33.47, 'y': 6, 'label': 'Up 6 for I was cRyan on the staircase Meagging you "Please don\'t throw"'}, {'x': 33.48, 'y': 5, 'label': 'Up 5 for You Belong Whist Me'}, {'x': 34.66, 'y': 5, 'label': 'Up 5 for I was cRyan on the staircase Meagging you "Please don\'t throw"'}, {'x': 34.67, 'y': 4, 'label': 'Up 4 for You Belong Whist Me'}, {'x': 35.22, 'y': 4, 'label': 'Up 4 for I was cRyan on the staircase Meagging you "Please don\'t throw"'}, {'x': 35.23, 'y': 5, 'label': 'Up 5 for You Belong Whist Me'}, {'x': 38.19, 'y': 5, 'label': 'Up 5 for I was cRyan on the staircase Meagging you "Please don\'t throw"'}, {'x': 38.2, 'y': 4, 'label': 'Up 4 for You Belong Whist Me'}, {'x': 39.39, 'y': 4, 'label': 'Up 4 for I was cRyan on the staircase Meagging you "Please don\'t throw"'}, {'x': 39.4, 'y': 3, 'label': 'Up 3 for You Belong Whist Me'}, {'x': 41.24, 'y': 3, 'label': 'Up 3 for I was cRyan on the staircase Meagging you "Please don\'t throw"'}, {'x': 41.25, 'y': 4, 'label': 'Up 4 for You Belong Whist Me'}, {'x': 42, 'y': 4, 'label': 'Up 4 for You Belong Whist Me'}];
+    const xValues = [2.18, 4.01, 4.02, 4.57, 4.58, 5.04, 5.05, 5.74, 5.75, 6.97, 6.98, 8.26, 8.27, 10.89, 10.9, 11.74, 11.75, 14.12, 14.13, 14.49, 14.5, 15.16, 15.17, 15.59, 15.6, 16.52, 16.53, 16.91, 16.92, 17.97, 17.98, 18.87, 18.88, 24.49, 24.5, 27.47, 27.48, 28.02, 28.03, 29.21, 29.22, 30.09, 30.1, 31.16, 31.17, 31.81, 31.82, 32.37, 32.38, 32.74, 32.75, 33.47, 33.48, 34.66, 34.67, 35.22, 35.23, 38.19, 38.2, 39.39, 39.4, 41.24, 41.25, 42];
+    const yValues = [1, 1, 0, 0, 1, 1, 2, 2, 3, 3, 2, 2, 1, 1, 0, 0, -1, -1, 0, 0, -1, -1, 0, 0, -1, -1, 0, 0, 1, 1, 2, 2, 1, 1, 2, 2, 1, 1, 2, 2, 3, 3, 4, 4, 3, 3, 4, 4, 5, 5, 6, 6, 5, 5, 4, 4, 5, 5, 4, 4, 3, 3, 4, 4];
+
   
   new Chart("myChart", {
     type: "line",
     data: {
-      datasets: [{
-        data: dataPoints,
-        tension: 0.1,
-      }]
+
+    labels: yValues,
+    datasets: [{
+      data: dataPoints,
+      // Add this line to include the labels in the data
+      pointHoverBackgroundColor: "red",
+      pointHoverBorderColor: "red",
+      pointHoverBorderWidth: 2,
+      pointHoverRadius: 5,
+      tension: 0.05,
+    }]
+
+
     },
     options: {
+
+    tooltips: {
+      callbacks: {
+        label: function(tooltipItem, data) {
+          var label = data.labels[tooltipItem.index];
+          var value = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
+          return value.label;
+
+        }
+      }
+    },
+
       legend: {display: false},
       title: {
         display: true,

@@ -436,17 +436,41 @@ src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
 
 
 <script>
-  const dataPoints = [{'x': 1.02, 'y': 1}, {'x': 1.67, 'y': 1}, {'x': 1.68, 'y': 0}, {'x': 2.42, 'y': 0}, {'x': 2.43, 'y': -1}, {'x': 3.16, 'y': -1}, {'x': 3.17, 'y': -2}, {'x': 3.74, 'y': -2}, {'x': 3.75, 'y': -3}, {'x': 4.71, 'y': -3}, {'x': 4.72, 'y': -2}, {'x': 7.61, 'y': -2}, {'x': 7.62, 'y': -1}, {'x': 8.29, 'y': -1}, {'x': 8.3, 'y': 0}, {'x': 9.24, 'y': 0}, {'x': 9.25, 'y': 1}, {'x': 10.19, 'y': 1}, {'x': 10.2, 'y': 0}, {'x': 10.82, 'y': 0}, {'x': 10.83, 'y': 1}, {'x': 12.67, 'y': 1}, {'x': 12.68, 'y': 0}, {'x': 13.31, 'y': 0}, {'x': 13.32, 'y': 1}, {'x': 14.47, 'y': 1}, {'x': 14.48, 'y': 2}, {'x': 19.37, 'y': 2}, {'x': 19.38, 'y': 3}, {'x': 21.69, 'y': 3}, {'x': 21.7, 'y': 2}, {'x': 23.31, 'y': 2}, {'x': 23.32, 'y': 3}, {'x': 28.94, 'y': 3}, {'x': 28.95, 'y': 4}, {'x': 30.57, 'y': 4}, {'x': 30.58, 'y': 3}, {'x': 31.57, 'y': 3}, {'x': 31.58, 'y': 2}, {'x': 31.97, 'y': 2}, {'x': 31.98, 'y': 3}, {'x': 32.34, 'y': 3}, {'x': 32.35, 'y': 4}, {'x': 32.74, 'y': 4}, {'x': 32.75, 'y': 3}, {'x': 32.96, 'y': 3}, {'x': 32.97, 'y': 4}, {'x': 34.31, 'y': 4}, {'x': 34.32, 'y': 3}, {'x': 35.27, 'y': 3}, {'x': 35.28, 'y': 4}, {'x': 36.24, 'y': 4}, {'x': 36.25, 'y': 3}, {'x': 40.34, 'y': 3}, {'x': 40.35, 'y': 4}, {'x': 41.74, 'y': 4}, {'x': 41.75, 'y': 5}, {'x': 42.29, 'y': 5}, {'x': 42.3, 'y': 4}, {'x': 43.31, 'y': 4}, {'x': 43.32, 'y': 3}, {'x': 44.16, 'y': 3}, {'x': 44.17, 'y': 2}, {'x': 44.67, 'y': 2}, {'x': 44.68, 'y': 3}, {'x': 45.12, 'y': 3}, {'x': 45.13, 'y': 2}, {'x': 45.94, 'y': 2}, {'x': 45.95, 'y': 1}, {'x': 46, 'y': 1}];
+  const dataPoints = [{'x': 1.02, 'y': 1, 'label': 'Up 1 for I was cRyan on the staircase Meagging you "Please don\'t throw"'}, {'x': 1.67, 'y': 1, 'label': 'Up 1 for Dear John Look what you made Lysh do'}, {'x': 1.68, 'y': 0, 'label': 'Tie'}, {'x': 2.42, 'y': 0, 'label': 'Tie'}, {'x': 2.43, 'y': -1, 'label': 'Up 1 for Dear John Look what you made Lysh do'}, {'x': 3.16, 'y': -1, 'label': 'Up 1 for I was cRyan on the staircase Meagging you "Please don\'t throw"'}, {'x': 3.17, 'y': -2, 'label': 'Up 2 for Dear John Look what you made Lysh do'}, {'x': 3.74, 'y': -2, 'label': 'Up 2 for I was cRyan on the staircase Meagging you "Please don\'t throw"'}, {'x': 3.75, 'y': -3, 'label': 'Up 3 for Dear John Look what you made Lysh do'}, {'x': 4.71, 'y': -3, 'label': 'Up 3 for I was cRyan on the staircase Meagging you "Please don\'t throw"'}, {'x': 4.72, 'y': -2, 'label': 'Up 2 for Dear John Look what you made Lysh do'}, {'x': 7.61, 'y': -2, 'label': 'Up 2 for I was cRyan on the staircase Meagging you "Please don\'t throw"'}, {'x': 7.62, 'y': -1, 'label': 'Up 1 for Dear John Look what you made Lysh do'}, {'x': 8.29, 'y': -1, 'label': 'Up 1 for I was cRyan on the staircase Meagging you "Please don\'t throw"'}, {'x': 8.3, 'y': 0, 'label': 'Tie'}, {'x': 9.24, 'y': 0, 'label': 'Tie'}, {'x': 9.25, 'y': 1, 'label': 'Up 1 for I was cRyan on the staircase Meagging you "Please don\'t throw"'}, {'x': 10.19, 'y': 1, 'label': 'Up 1 for Dear John Look what you made Lysh do'}, {'x': 10.2, 'y': 0, 'label': 'Tie'}, {'x': 10.82, 'y': 0, 'label': 'Tie'}, {'x': 10.83, 'y': 1, 'label': 'Up 1 for I was cRyan on the staircase Meagging you "Please don\'t throw"'}, {'x': 12.67, 'y': 1, 'label': 'Up 1 for Dear John Look what you made Lysh do'}, {'x': 12.68, 'y': 0, 'label': 'Tie'}, {'x': 13.31, 'y': 0, 'label': 'Tie'}, {'x': 13.32, 'y': 1, 'label': 'Up 1 for I was cRyan on the staircase Meagging you "Please don\'t throw"'}, {'x': 14.47, 'y': 1, 'label': 'Up 1 for Dear John Look what you made Lysh do'}, {'x': 14.48, 'y': 2, 'label': 'Up 2 for I was cRyan on the staircase Meagging you "Please don\'t throw"'}, {'x': 19.37, 'y': 2, 'label': 'Up 2 for Dear John Look what you made Lysh do'}, {'x': 19.38, 'y': 3, 'label': 'Up 3 for I was cRyan on the staircase Meagging you "Please don\'t throw"'}, {'x': 21.69, 'y': 3, 'label': 'Up 3 for Dear John Look what you made Lysh do'}, {'x': 21.7, 'y': 2, 'label': 'Up 2 for I was cRyan on the staircase Meagging you "Please don\'t throw"'}, {'x': 23.31, 'y': 2, 'label': 'Up 2 for Dear John Look what you made Lysh do'}, {'x': 23.32, 'y': 3, 'label': 'Up 3 for I was cRyan on the staircase Meagging you "Please don\'t throw"'}, {'x': 28.94, 'y': 3, 'label': 'Up 3 for Dear John Look what you made Lysh do'}, {'x': 28.95, 'y': 4, 'label': 'Up 4 for I was cRyan on the staircase Meagging you "Please don\'t throw"'}, {'x': 30.57, 'y': 4, 'label': 'Up 4 for Dear John Look what you made Lysh do'}, {'x': 30.58, 'y': 3, 'label': 'Up 3 for I was cRyan on the staircase Meagging you "Please don\'t throw"'}, {'x': 31.57, 'y': 3, 'label': 'Up 3 for Dear John Look what you made Lysh do'}, {'x': 31.58, 'y': 2, 'label': 'Up 2 for I was cRyan on the staircase Meagging you "Please don\'t throw"'}, {'x': 31.97, 'y': 2, 'label': 'Up 2 for Dear John Look what you made Lysh do'}, {'x': 31.98, 'y': 3, 'label': 'Up 3 for I was cRyan on the staircase Meagging you "Please don\'t throw"'}, {'x': 32.34, 'y': 3, 'label': 'Up 3 for Dear John Look what you made Lysh do'}, {'x': 32.35, 'y': 4, 'label': 'Up 4 for I was cRyan on the staircase Meagging you "Please don\'t throw"'}, {'x': 32.74, 'y': 4, 'label': 'Up 4 for Dear John Look what you made Lysh do'}, {'x': 32.75, 'y': 3, 'label': 'Up 3 for I was cRyan on the staircase Meagging you "Please don\'t throw"'}, {'x': 32.96, 'y': 3, 'label': 'Up 3 for Dear John Look what you made Lysh do'}, {'x': 32.97, 'y': 4, 'label': 'Up 4 for I was cRyan on the staircase Meagging you "Please don\'t throw"'}, {'x': 34.31, 'y': 4, 'label': 'Up 4 for Dear John Look what you made Lysh do'}, {'x': 34.32, 'y': 3, 'label': 'Up 3 for I was cRyan on the staircase Meagging you "Please don\'t throw"'}, {'x': 35.27, 'y': 3, 'label': 'Up 3 for Dear John Look what you made Lysh do'}, {'x': 35.28, 'y': 4, 'label': 'Up 4 for I was cRyan on the staircase Meagging you "Please don\'t throw"'}, {'x': 36.24, 'y': 4, 'label': 'Up 4 for Dear John Look what you made Lysh do'}, {'x': 36.25, 'y': 3, 'label': 'Up 3 for I was cRyan on the staircase Meagging you "Please don\'t throw"'}, {'x': 40.34, 'y': 3, 'label': 'Up 3 for Dear John Look what you made Lysh do'}, {'x': 40.35, 'y': 4, 'label': 'Up 4 for I was cRyan on the staircase Meagging you "Please don\'t throw"'}, {'x': 41.74, 'y': 4, 'label': 'Up 4 for Dear John Look what you made Lysh do'}, {'x': 41.75, 'y': 5, 'label': 'Up 5 for I was cRyan on the staircase Meagging you "Please don\'t throw"'}, {'x': 42.29, 'y': 5, 'label': 'Up 5 for Dear John Look what you made Lysh do'}, {'x': 42.3, 'y': 4, 'label': 'Up 4 for I was cRyan on the staircase Meagging you "Please don\'t throw"'}, {'x': 43.31, 'y': 4, 'label': 'Up 4 for Dear John Look what you made Lysh do'}, {'x': 43.32, 'y': 3, 'label': 'Up 3 for I was cRyan on the staircase Meagging you "Please don\'t throw"'}, {'x': 44.16, 'y': 3, 'label': 'Up 3 for Dear John Look what you made Lysh do'}, {'x': 44.17, 'y': 2, 'label': 'Up 2 for I was cRyan on the staircase Meagging you "Please don\'t throw"'}, {'x': 44.67, 'y': 2, 'label': 'Up 2 for Dear John Look what you made Lysh do'}, {'x': 44.68, 'y': 3, 'label': 'Up 3 for I was cRyan on the staircase Meagging you "Please don\'t throw"'}, {'x': 45.12, 'y': 3, 'label': 'Up 3 for Dear John Look what you made Lysh do'}, {'x': 45.13, 'y': 2, 'label': 'Up 2 for I was cRyan on the staircase Meagging you "Please don\'t throw"'}, {'x': 45.94, 'y': 2, 'label': 'Up 2 for Dear John Look what you made Lysh do'}, {'x': 45.95, 'y': 1, 'label': 'Up 1 for I was cRyan on the staircase Meagging you "Please don\'t throw"'}, {'x': 46, 'y': 1, 'label': 'Up 1 for I was cRyan on the staircase Meagging you "Please don\'t throw"'}];
+    const xValues = [1.02, 1.67, 1.68, 2.42, 2.43, 3.16, 3.17, 3.74, 3.75, 4.71, 4.72, 7.61, 7.62, 8.29, 8.3, 9.24, 9.25, 10.19, 10.2, 10.82, 10.83, 12.67, 12.68, 13.31, 13.32, 14.47, 14.48, 19.37, 19.38, 21.69, 21.7, 23.31, 23.32, 28.94, 28.95, 30.57, 30.58, 31.57, 31.58, 31.97, 31.98, 32.34, 32.35, 32.74, 32.75, 32.96, 32.97, 34.31, 34.32, 35.27, 35.28, 36.24, 36.25, 40.34, 40.35, 41.74, 41.75, 42.29, 42.3, 43.31, 43.32, 44.16, 44.17, 44.67, 44.68, 45.12, 45.13, 45.94, 45.95, 46];
+    const yValues = [1, 1, 0, 0, -1, -1, -2, -2, -3, -3, -2, -2, -1, -1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 2, 2, 3, 3, 2, 2, 3, 3, 4, 4, 3, 3, 2, 2, 3, 3, 4, 4, 3, 3, 4, 4, 3, 3, 4, 4, 3, 3, 4, 4, 5, 5, 4, 4, 3, 3, 2, 2, 3, 3, 2, 2, 1, 1];
+
   
   new Chart("myChart", {
     type: "line",
     data: {
-      datasets: [{
-        data: dataPoints,
-        tension: 0.1,
-      }]
+
+    labels: yValues,
+    datasets: [{
+      data: dataPoints,
+      // Add this line to include the labels in the data
+      pointHoverBackgroundColor: "red",
+      pointHoverBorderColor: "red",
+      pointHoverBorderWidth: 2,
+      pointHoverRadius: 5,
+      tension: 0.05,
+    }]
+
+
     },
     options: {
+
+    tooltips: {
+      callbacks: {
+        label: function(tooltipItem, data) {
+          var label = data.labels[tooltipItem.index];
+          var value = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
+          return value.label;
+
+        }
+      }
+    },
+
       legend: {display: false},
       title: {
         display: true,

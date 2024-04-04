@@ -436,17 +436,41 @@ src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
 
 
 <script>
-  const dataPoints = [{'x': 0.6, 'y': -1}, {'x': 2.86, 'y': -1}, {'x': 2.87, 'y': 0}, {'x': 3.94, 'y': 0}, {'x': 3.95, 'y': 1}, {'x': 4.79, 'y': 1}, {'x': 4.8, 'y': 0}, {'x': 5.34, 'y': 0}, {'x': 5.35, 'y': 1}, {'x': 5.91, 'y': 1}, {'x': 5.92, 'y': 0}, {'x': 6.12, 'y': 0}, {'x': 6.13, 'y': 1}, {'x': 6.51, 'y': 1}, {'x': 6.52, 'y': 0}, {'x': 7.62, 'y': 0}, {'x': 7.63, 'y': 1}, {'x': 8.66, 'y': 1}, {'x': 8.67, 'y': 0}, {'x': 9.34, 'y': 0}, {'x': 9.35, 'y': 1}, {'x': 10.22, 'y': 1}, {'x': 10.23, 'y': 2}, {'x': 12.19, 'y': 2}, {'x': 12.2, 'y': 3}, {'x': 14.42, 'y': 3}, {'x': 14.43, 'y': 4}, {'x': 17.81, 'y': 4}, {'x': 17.82, 'y': 5}, {'x': 18.29, 'y': 5}, {'x': 18.3, 'y': 4}, {'x': 24.31, 'y': 4}, {'x': 24.32, 'y': 5}, {'x': 26.49, 'y': 5}, {'x': 26.5, 'y': 4}, {'x': 27.42, 'y': 4}, {'x': 27.43, 'y': 5}, {'x': 30.22, 'y': 5}, {'x': 30.23, 'y': 4}, {'x': 30.67, 'y': 4}, {'x': 30.68, 'y': 5}, {'x': 32.99, 'y': 5}, {'x': 33.0, 'y': 6}, {'x': 33.27, 'y': 6}, {'x': 33.28, 'y': 5}, {'x': 34.06, 'y': 5}, {'x': 34.07, 'y': 4}, {'x': 34.41, 'y': 4}, {'x': 34.42, 'y': 5}, {'x': 35.02, 'y': 5}, {'x': 35.03, 'y': 6}, {'x': 36.11, 'y': 6}, {'x': 36.12, 'y': 7}, {'x': 37.17, 'y': 7}, {'x': 37.18, 'y': 6}, {'x': 40.41, 'y': 6}, {'x': 40.42, 'y': 5}, {'x': 41.97, 'y': 5}, {'x': 41.98, 'y': 6}, {'x': 42, 'y': 6}];
+  const dataPoints = [{'x': 0.6, 'y': -1, 'label': "Up 1 for kyraless nam's careful daughter"}, {'x': 2.86, 'y': -1, 'label': 'Up 1 for DANti-Hero'}, {'x': 2.87, 'y': 0, 'label': 'Tie'}, {'x': 3.94, 'y': 0, 'label': 'Tie'}, {'x': 3.95, 'y': 1, 'label': 'Up 1 for DANti-Hero'}, {'x': 4.79, 'y': 1, 'label': "Up 1 for kyraless nam's careful daughter"}, {'x': 4.8, 'y': 0, 'label': 'Tie'}, {'x': 5.34, 'y': 0, 'label': 'Tie'}, {'x': 5.35, 'y': 1, 'label': 'Up 1 for DANti-Hero'}, {'x': 5.91, 'y': 1, 'label': "Up 1 for kyraless nam's careful daughter"}, {'x': 5.92, 'y': 0, 'label': 'Tie'}, {'x': 6.12, 'y': 0, 'label': 'Tie'}, {'x': 6.13, 'y': 1, 'label': 'Up 1 for DANti-Hero'}, {'x': 6.51, 'y': 1, 'label': "Up 1 for kyraless nam's careful daughter"}, {'x': 6.52, 'y': 0, 'label': 'Tie'}, {'x': 7.62, 'y': 0, 'label': 'Tie'}, {'x': 7.63, 'y': 1, 'label': 'Up 1 for DANti-Hero'}, {'x': 8.66, 'y': 1, 'label': "Up 1 for kyraless nam's careful daughter"}, {'x': 8.67, 'y': 0, 'label': 'Tie'}, {'x': 9.34, 'y': 0, 'label': 'Tie'}, {'x': 9.35, 'y': 1, 'label': 'Up 1 for DANti-Hero'}, {'x': 10.22, 'y': 1, 'label': "Up 1 for kyraless nam's careful daughter"}, {'x': 10.23, 'y': 2, 'label': 'Up 2 for DANti-Hero'}, {'x': 12.19, 'y': 2, 'label': "Up 2 for kyraless nam's careful daughter"}, {'x': 12.2, 'y': 3, 'label': 'Up 3 for DANti-Hero'}, {'x': 14.42, 'y': 3, 'label': "Up 3 for kyraless nam's careful daughter"}, {'x': 14.43, 'y': 4, 'label': 'Up 4 for DANti-Hero'}, {'x': 17.81, 'y': 4, 'label': "Up 4 for kyraless nam's careful daughter"}, {'x': 17.82, 'y': 5, 'label': 'Up 5 for DANti-Hero'}, {'x': 18.29, 'y': 5, 'label': "Up 5 for kyraless nam's careful daughter"}, {'x': 18.3, 'y': 4, 'label': 'Up 4 for DANti-Hero'}, {'x': 24.31, 'y': 4, 'label': "Up 4 for kyraless nam's careful daughter"}, {'x': 24.32, 'y': 5, 'label': 'Up 5 for DANti-Hero'}, {'x': 26.49, 'y': 5, 'label': "Up 5 for kyraless nam's careful daughter"}, {'x': 26.5, 'y': 4, 'label': 'Up 4 for DANti-Hero'}, {'x': 27.42, 'y': 4, 'label': "Up 4 for kyraless nam's careful daughter"}, {'x': 27.43, 'y': 5, 'label': 'Up 5 for DANti-Hero'}, {'x': 30.22, 'y': 5, 'label': "Up 5 for kyraless nam's careful daughter"}, {'x': 30.23, 'y': 4, 'label': 'Up 4 for DANti-Hero'}, {'x': 30.67, 'y': 4, 'label': "Up 4 for kyraless nam's careful daughter"}, {'x': 30.68, 'y': 5, 'label': 'Up 5 for DANti-Hero'}, {'x': 32.99, 'y': 5, 'label': "Up 5 for kyraless nam's careful daughter"}, {'x': 33.0, 'y': 6, 'label': 'Up 6 for DANti-Hero'}, {'x': 33.27, 'y': 6, 'label': "Up 6 for kyraless nam's careful daughter"}, {'x': 33.28, 'y': 5, 'label': 'Up 5 for DANti-Hero'}, {'x': 34.06, 'y': 5, 'label': "Up 5 for kyraless nam's careful daughter"}, {'x': 34.07, 'y': 4, 'label': 'Up 4 for DANti-Hero'}, {'x': 34.41, 'y': 4, 'label': "Up 4 for kyraless nam's careful daughter"}, {'x': 34.42, 'y': 5, 'label': 'Up 5 for DANti-Hero'}, {'x': 35.02, 'y': 5, 'label': "Up 5 for kyraless nam's careful daughter"}, {'x': 35.03, 'y': 6, 'label': 'Up 6 for DANti-Hero'}, {'x': 36.11, 'y': 6, 'label': "Up 6 for kyraless nam's careful daughter"}, {'x': 36.12, 'y': 7, 'label': 'Up 7 for DANti-Hero'}, {'x': 37.17, 'y': 7, 'label': "Up 7 for kyraless nam's careful daughter"}, {'x': 37.18, 'y': 6, 'label': 'Up 6 for DANti-Hero'}, {'x': 40.41, 'y': 6, 'label': "Up 6 for kyraless nam's careful daughter"}, {'x': 40.42, 'y': 5, 'label': 'Up 5 for DANti-Hero'}, {'x': 41.97, 'y': 5, 'label': "Up 5 for kyraless nam's careful daughter"}, {'x': 41.98, 'y': 6, 'label': 'Up 6 for DANti-Hero'}, {'x': 42, 'y': 6, 'label': 'Up 6 for DANti-Hero'}];
+    const xValues = [0.6, 2.86, 2.87, 3.94, 3.95, 4.79, 4.8, 5.34, 5.35, 5.91, 5.92, 6.12, 6.13, 6.51, 6.52, 7.62, 7.63, 8.66, 8.67, 9.34, 9.35, 10.22, 10.23, 12.19, 12.2, 14.42, 14.43, 17.81, 17.82, 18.29, 18.3, 24.31, 24.32, 26.49, 26.5, 27.42, 27.43, 30.22, 30.23, 30.67, 30.68, 32.99, 33.0, 33.27, 33.28, 34.06, 34.07, 34.41, 34.42, 35.02, 35.03, 36.11, 36.12, 37.17, 37.18, 40.41, 40.42, 41.97, 41.98, 42];
+    const yValues = [-1, -1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 4, 4, 5, 5, 4, 4, 5, 5, 4, 4, 5, 5, 6, 6, 5, 5, 4, 4, 5, 5, 6, 6, 7, 7, 6, 6, 5, 5, 6, 6];
+
   
   new Chart("myChart", {
     type: "line",
     data: {
-      datasets: [{
-        data: dataPoints,
-        tension: 0.1,
-      }]
+
+    labels: yValues,
+    datasets: [{
+      data: dataPoints,
+      // Add this line to include the labels in the data
+      pointHoverBackgroundColor: "red",
+      pointHoverBorderColor: "red",
+      pointHoverBorderWidth: 2,
+      pointHoverRadius: 5,
+      tension: 0.05,
+    }]
+
+
     },
     options: {
+
+    tooltips: {
+      callbacks: {
+        label: function(tooltipItem, data) {
+          var label = data.labels[tooltipItem.index];
+          var value = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
+          return value.label;
+
+        }
+      }
+    },
+
       legend: {display: false},
       title: {
         display: true,

@@ -436,17 +436,41 @@ src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
 
 
 <script>
-  const dataPoints = [{'x': 5.75, 'y': -1}, {'x': 6.77, 'y': -1}, {'x': 6.78, 'y': 0}, {'x': 7.97, 'y': 0}, {'x': 7.98, 'y': -1}, {'x': 8.26, 'y': -1}, {'x': 8.27, 'y': 0}, {'x': 9.44, 'y': 0}, {'x': 9.45, 'y': -1}, {'x': 9.89, 'y': -1}, {'x': 9.9, 'y': 0}, {'x': 12.46, 'y': 0}, {'x': 12.47, 'y': 1}, {'x': 13.36, 'y': 1}, {'x': 13.37, 'y': 2}, {'x': 13.69, 'y': 2}, {'x': 13.7, 'y': 1}, {'x': 14.16, 'y': 1}, {'x': 14.17, 'y': 2}, {'x': 16.91, 'y': 2}, {'x': 16.92, 'y': 1}, {'x': 18.07, 'y': 1}, {'x': 18.08, 'y': 2}, {'x': 19.71, 'y': 2}, {'x': 19.72, 'y': 3}, {'x': 20.16, 'y': 3}, {'x': 20.17, 'y': 4}, {'x': 22.02, 'y': 4}, {'x': 22.03, 'y': 3}, {'x': 25.54, 'y': 3}, {'x': 25.55, 'y': 4}, {'x': 26.87, 'y': 4}, {'x': 26.88, 'y': 3}, {'x': 27.64, 'y': 3}, {'x': 27.65, 'y': 4}, {'x': 28.66, 'y': 4}, {'x': 28.67, 'y': 3}, {'x': 29.16, 'y': 3}, {'x': 29.17, 'y': 4}, {'x': 29.76, 'y': 4}, {'x': 29.77, 'y': 3}, {'x': 35.39, 'y': 3}, {'x': 35.4, 'y': 4}, {'x': 35.92, 'y': 4}, {'x': 35.93, 'y': 3}, {'x': 37.37, 'y': 3}, {'x': 37.38, 'y': 4}, {'x': 39.67, 'y': 4}, {'x': 39.68, 'y': 5}, {'x': 40.62, 'y': 5}, {'x': 40.63, 'y': 6}, {'x': 41.04, 'y': 6}, {'x': 41.05, 'y': 7}, {'x': 41.97, 'y': 7}, {'x': 41.98, 'y': 6}, {'x': 42.57, 'y': 6}, {'x': 42.58, 'y': 5}, {'x': 43.01, 'y': 5}, {'x': 43.02, 'y': 6}, {'x': 43.82, 'y': 6}, {'x': 43.83, 'y': 5}, {'x': 44.94, 'y': 5}, {'x': 44.95, 'y': 6}, {'x': 45, 'y': 6}];
+  const dataPoints = [{'x': 5.75, 'y': -1, 'label': 'Up 1 for FaulklHore (Revenge of the Swift Version)'}, {'x': 6.77, 'y': -1, 'label': "Up 1 for kyraless nam's careful daughter"}, {'x': 6.78, 'y': 0, 'label': 'Tie'}, {'x': 7.97, 'y': 0, 'label': 'Tie'}, {'x': 7.98, 'y': -1, 'label': 'Up 1 for FaulklHore (Revenge of the Swift Version)'}, {'x': 8.26, 'y': -1, 'label': "Up 1 for kyraless nam's careful daughter"}, {'x': 8.27, 'y': 0, 'label': 'Tie'}, {'x': 9.44, 'y': 0, 'label': 'Tie'}, {'x': 9.45, 'y': -1, 'label': 'Up 1 for FaulklHore (Revenge of the Swift Version)'}, {'x': 9.89, 'y': -1, 'label': "Up 1 for kyraless nam's careful daughter"}, {'x': 9.9, 'y': 0, 'label': 'Tie'}, {'x': 12.46, 'y': 0, 'label': 'Tie'}, {'x': 12.47, 'y': 1, 'label': "Up 1 for kyraless nam's careful daughter"}, {'x': 13.36, 'y': 1, 'label': 'Up 1 for FaulklHore (Revenge of the Swift Version)'}, {'x': 13.37, 'y': 2, 'label': "Up 2 for kyraless nam's careful daughter"}, {'x': 13.69, 'y': 2, 'label': 'Up 2 for FaulklHore (Revenge of the Swift Version)'}, {'x': 13.7, 'y': 1, 'label': "Up 1 for kyraless nam's careful daughter"}, {'x': 14.16, 'y': 1, 'label': 'Up 1 for FaulklHore (Revenge of the Swift Version)'}, {'x': 14.17, 'y': 2, 'label': "Up 2 for kyraless nam's careful daughter"}, {'x': 16.91, 'y': 2, 'label': 'Up 2 for FaulklHore (Revenge of the Swift Version)'}, {'x': 16.92, 'y': 1, 'label': "Up 1 for kyraless nam's careful daughter"}, {'x': 18.07, 'y': 1, 'label': 'Up 1 for FaulklHore (Revenge of the Swift Version)'}, {'x': 18.08, 'y': 2, 'label': "Up 2 for kyraless nam's careful daughter"}, {'x': 19.71, 'y': 2, 'label': 'Up 2 for FaulklHore (Revenge of the Swift Version)'}, {'x': 19.72, 'y': 3, 'label': "Up 3 for kyraless nam's careful daughter"}, {'x': 20.16, 'y': 3, 'label': 'Up 3 for FaulklHore (Revenge of the Swift Version)'}, {'x': 20.17, 'y': 4, 'label': "Up 4 for kyraless nam's careful daughter"}, {'x': 22.02, 'y': 4, 'label': 'Up 4 for FaulklHore (Revenge of the Swift Version)'}, {'x': 22.03, 'y': 3, 'label': "Up 3 for kyraless nam's careful daughter"}, {'x': 25.54, 'y': 3, 'label': 'Up 3 for FaulklHore (Revenge of the Swift Version)'}, {'x': 25.55, 'y': 4, 'label': "Up 4 for kyraless nam's careful daughter"}, {'x': 26.87, 'y': 4, 'label': 'Up 4 for FaulklHore (Revenge of the Swift Version)'}, {'x': 26.88, 'y': 3, 'label': "Up 3 for kyraless nam's careful daughter"}, {'x': 27.64, 'y': 3, 'label': 'Up 3 for FaulklHore (Revenge of the Swift Version)'}, {'x': 27.65, 'y': 4, 'label': "Up 4 for kyraless nam's careful daughter"}, {'x': 28.66, 'y': 4, 'label': 'Up 4 for FaulklHore (Revenge of the Swift Version)'}, {'x': 28.67, 'y': 3, 'label': "Up 3 for kyraless nam's careful daughter"}, {'x': 29.16, 'y': 3, 'label': 'Up 3 for FaulklHore (Revenge of the Swift Version)'}, {'x': 29.17, 'y': 4, 'label': "Up 4 for kyraless nam's careful daughter"}, {'x': 29.76, 'y': 4, 'label': 'Up 4 for FaulklHore (Revenge of the Swift Version)'}, {'x': 29.77, 'y': 3, 'label': "Up 3 for kyraless nam's careful daughter"}, {'x': 35.39, 'y': 3, 'label': 'Up 3 for FaulklHore (Revenge of the Swift Version)'}, {'x': 35.4, 'y': 4, 'label': "Up 4 for kyraless nam's careful daughter"}, {'x': 35.92, 'y': 4, 'label': 'Up 4 for FaulklHore (Revenge of the Swift Version)'}, {'x': 35.93, 'y': 3, 'label': "Up 3 for kyraless nam's careful daughter"}, {'x': 37.37, 'y': 3, 'label': 'Up 3 for FaulklHore (Revenge of the Swift Version)'}, {'x': 37.38, 'y': 4, 'label': "Up 4 for kyraless nam's careful daughter"}, {'x': 39.67, 'y': 4, 'label': 'Up 4 for FaulklHore (Revenge of the Swift Version)'}, {'x': 39.68, 'y': 5, 'label': "Up 5 for kyraless nam's careful daughter"}, {'x': 40.62, 'y': 5, 'label': 'Up 5 for FaulklHore (Revenge of the Swift Version)'}, {'x': 40.63, 'y': 6, 'label': "Up 6 for kyraless nam's careful daughter"}, {'x': 41.04, 'y': 6, 'label': 'Up 6 for FaulklHore (Revenge of the Swift Version)'}, {'x': 41.05, 'y': 7, 'label': "Up 7 for kyraless nam's careful daughter"}, {'x': 41.97, 'y': 7, 'label': 'Up 7 for FaulklHore (Revenge of the Swift Version)'}, {'x': 41.98, 'y': 6, 'label': "Up 6 for kyraless nam's careful daughter"}, {'x': 42.57, 'y': 6, 'label': 'Up 6 for FaulklHore (Revenge of the Swift Version)'}, {'x': 42.58, 'y': 5, 'label': "Up 5 for kyraless nam's careful daughter"}, {'x': 43.01, 'y': 5, 'label': 'Up 5 for FaulklHore (Revenge of the Swift Version)'}, {'x': 43.02, 'y': 6, 'label': "Up 6 for kyraless nam's careful daughter"}, {'x': 43.82, 'y': 6, 'label': 'Up 6 for FaulklHore (Revenge of the Swift Version)'}, {'x': 43.83, 'y': 5, 'label': "Up 5 for kyraless nam's careful daughter"}, {'x': 44.94, 'y': 5, 'label': 'Up 5 for FaulklHore (Revenge of the Swift Version)'}, {'x': 44.95, 'y': 6, 'label': "Up 6 for kyraless nam's careful daughter"}, {'x': 45, 'y': 6, 'label': "Up 6 for kyraless nam's careful daughter"}];
+    const xValues = [5.75, 6.77, 6.78, 7.97, 7.98, 8.26, 8.27, 9.44, 9.45, 9.89, 9.9, 12.46, 12.47, 13.36, 13.37, 13.69, 13.7, 14.16, 14.17, 16.91, 16.92, 18.07, 18.08, 19.71, 19.72, 20.16, 20.17, 22.02, 22.03, 25.54, 25.55, 26.87, 26.88, 27.64, 27.65, 28.66, 28.67, 29.16, 29.17, 29.76, 29.77, 35.39, 35.4, 35.92, 35.93, 37.37, 37.38, 39.67, 39.68, 40.62, 40.63, 41.04, 41.05, 41.97, 41.98, 42.57, 42.58, 43.01, 43.02, 43.82, 43.83, 44.94, 44.95, 45];
+    const yValues = [-1, -1, 0, 0, -1, -1, 0, 0, -1, -1, 0, 0, 1, 1, 2, 2, 1, 1, 2, 2, 1, 1, 2, 2, 3, 3, 4, 4, 3, 3, 4, 4, 3, 3, 4, 4, 3, 3, 4, 4, 3, 3, 4, 4, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 6, 6, 5, 5, 6, 6, 5, 5, 6, 6];
+
   
   new Chart("myChart", {
     type: "line",
     data: {
-      datasets: [{
-        data: dataPoints,
-        tension: 0.1,
-      }]
+
+    labels: yValues,
+    datasets: [{
+      data: dataPoints,
+      // Add this line to include the labels in the data
+      pointHoverBackgroundColor: "red",
+      pointHoverBorderColor: "red",
+      pointHoverBorderWidth: 2,
+      pointHoverRadius: 5,
+      tension: 0.05,
+    }]
+
+
     },
     options: {
+
+    tooltips: {
+      callbacks: {
+        label: function(tooltipItem, data) {
+          var label = data.labels[tooltipItem.index];
+          var value = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
+          return value.label;
+
+        }
+      }
+    },
+
       legend: {display: false},
       title: {
         display: true,

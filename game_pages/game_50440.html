@@ -436,17 +436,41 @@ src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
 
 
 <script>
-  const dataPoints = [{'x': 0.2, 'y': 1}, {'x': 1.32, 'y': 1}, {'x': 1.33, 'y': 2}, {'x': 2.39, 'y': 2}, {'x': 2.4, 'y': 3}, {'x': 2.87, 'y': 3}, {'x': 2.88, 'y': 4}, {'x': 3.81, 'y': 4}, {'x': 3.82, 'y': 5}, {'x': 6.19, 'y': 5}, {'x': 6.2, 'y': 6}, {'x': 6.74, 'y': 6}, {'x': 6.75, 'y': 5}, {'x': 7.29, 'y': 5}, {'x': 7.3, 'y': 6}, {'x': 9.46, 'y': 6}, {'x': 9.47, 'y': 7}, {'x': 12.49, 'y': 7}, {'x': 12.5, 'y': 6}, {'x': 13.04, 'y': 6}, {'x': 13.05, 'y': 7}, {'x': 13.94, 'y': 7}, {'x': 13.95, 'y': 6}, {'x': 14.89, 'y': 6}, {'x': 14.9, 'y': 7}, {'x': 15.21, 'y': 7}, {'x': 15.22, 'y': 8}, {'x': 17.17, 'y': 8}, {'x': 17.18, 'y': 7}, {'x': 18.26, 'y': 7}, {'x': 18.27, 'y': 8}, {'x': 19.99, 'y': 8}, {'x': 20.0, 'y': 9}, {'x': 26.17, 'y': 9}, {'x': 26.18, 'y': 10}, {'x': 29.57, 'y': 10}, {'x': 29.58, 'y': 11}, {'x': 32.82, 'y': 11}, {'x': 32.83, 'y': 10}, {'x': 33.94, 'y': 10}, {'x': 33.95, 'y': 9}, {'x': 34.54, 'y': 9}, {'x': 34.55, 'y': 10}, {'x': 37.41, 'y': 10}, {'x': 37.42, 'y': 11}, {'x': 38.01, 'y': 11}, {'x': 38.02, 'y': 12}, {'x': 39.12, 'y': 12}, {'x': 39.13, 'y': 13}, {'x': 39.82, 'y': 13}, {'x': 39.83, 'y': 12}, {'x': 39.97, 'y': 12}, {'x': 39.98, 'y': 13}, {'x': 40, 'y': 13}];
+  const dataPoints = [{'x': 0.2, 'y': 1, 'label': 'Up 1 for You Belong Whist Me'}, {'x': 1.32, 'y': 1, 'label': "Up 1 for Benny's Gonna Break Break Break Lexy's Gonna Fake Fake Fake"}, {'x': 1.33, 'y': 2, 'label': 'Up 2 for You Belong Whist Me'}, {'x': 2.39, 'y': 2, 'label': "Up 2 for Benny's Gonna Break Break Break Lexy's Gonna Fake Fake Fake"}, {'x': 2.4, 'y': 3, 'label': 'Up 3 for You Belong Whist Me'}, {'x': 2.87, 'y': 3, 'label': "Up 3 for Benny's Gonna Break Break Break Lexy's Gonna Fake Fake Fake"}, {'x': 2.88, 'y': 4, 'label': 'Up 4 for You Belong Whist Me'}, {'x': 3.81, 'y': 4, 'label': "Up 4 for Benny's Gonna Break Break Break Lexy's Gonna Fake Fake Fake"}, {'x': 3.82, 'y': 5, 'label': 'Up 5 for You Belong Whist Me'}, {'x': 6.19, 'y': 5, 'label': "Up 5 for Benny's Gonna Break Break Break Lexy's Gonna Fake Fake Fake"}, {'x': 6.2, 'y': 6, 'label': 'Up 6 for You Belong Whist Me'}, {'x': 6.74, 'y': 6, 'label': "Up 6 for Benny's Gonna Break Break Break Lexy's Gonna Fake Fake Fake"}, {'x': 6.75, 'y': 5, 'label': 'Up 5 for You Belong Whist Me'}, {'x': 7.29, 'y': 5, 'label': "Up 5 for Benny's Gonna Break Break Break Lexy's Gonna Fake Fake Fake"}, {'x': 7.3, 'y': 6, 'label': 'Up 6 for You Belong Whist Me'}, {'x': 9.46, 'y': 6, 'label': "Up 6 for Benny's Gonna Break Break Break Lexy's Gonna Fake Fake Fake"}, {'x': 9.47, 'y': 7, 'label': 'Up 7 for You Belong Whist Me'}, {'x': 12.49, 'y': 7, 'label': "Up 7 for Benny's Gonna Break Break Break Lexy's Gonna Fake Fake Fake"}, {'x': 12.5, 'y': 6, 'label': 'Up 6 for You Belong Whist Me'}, {'x': 13.04, 'y': 6, 'label': "Up 6 for Benny's Gonna Break Break Break Lexy's Gonna Fake Fake Fake"}, {'x': 13.05, 'y': 7, 'label': 'Up 7 for You Belong Whist Me'}, {'x': 13.94, 'y': 7, 'label': "Up 7 for Benny's Gonna Break Break Break Lexy's Gonna Fake Fake Fake"}, {'x': 13.95, 'y': 6, 'label': 'Up 6 for You Belong Whist Me'}, {'x': 14.89, 'y': 6, 'label': "Up 6 for Benny's Gonna Break Break Break Lexy's Gonna Fake Fake Fake"}, {'x': 14.9, 'y': 7, 'label': 'Up 7 for You Belong Whist Me'}, {'x': 15.21, 'y': 7, 'label': "Up 7 for Benny's Gonna Break Break Break Lexy's Gonna Fake Fake Fake"}, {'x': 15.22, 'y': 8, 'label': 'Up 8 for You Belong Whist Me'}, {'x': 17.17, 'y': 8, 'label': "Up 8 for Benny's Gonna Break Break Break Lexy's Gonna Fake Fake Fake"}, {'x': 17.18, 'y': 7, 'label': 'Up 7 for You Belong Whist Me'}, {'x': 18.26, 'y': 7, 'label': "Up 7 for Benny's Gonna Break Break Break Lexy's Gonna Fake Fake Fake"}, {'x': 18.27, 'y': 8, 'label': 'Up 8 for You Belong Whist Me'}, {'x': 19.99, 'y': 8, 'label': "Up 8 for Benny's Gonna Break Break Break Lexy's Gonna Fake Fake Fake"}, {'x': 20.0, 'y': 9, 'label': 'Up 9 for You Belong Whist Me'}, {'x': 26.17, 'y': 9, 'label': "Up 9 for Benny's Gonna Break Break Break Lexy's Gonna Fake Fake Fake"}, {'x': 26.18, 'y': 10, 'label': 'Up 10 for You Belong Whist Me'}, {'x': 29.57, 'y': 10, 'label': "Up 10 for Benny's Gonna Break Break Break Lexy's Gonna Fake Fake Fake"}, {'x': 29.58, 'y': 11, 'label': 'Up 11 for You Belong Whist Me'}, {'x': 32.82, 'y': 11, 'label': "Up 11 for Benny's Gonna Break Break Break Lexy's Gonna Fake Fake Fake"}, {'x': 32.83, 'y': 10, 'label': 'Up 10 for You Belong Whist Me'}, {'x': 33.94, 'y': 10, 'label': "Up 10 for Benny's Gonna Break Break Break Lexy's Gonna Fake Fake Fake"}, {'x': 33.95, 'y': 9, 'label': 'Up 9 for You Belong Whist Me'}, {'x': 34.54, 'y': 9, 'label': "Up 9 for Benny's Gonna Break Break Break Lexy's Gonna Fake Fake Fake"}, {'x': 34.55, 'y': 10, 'label': 'Up 10 for You Belong Whist Me'}, {'x': 37.41, 'y': 10, 'label': "Up 10 for Benny's Gonna Break Break Break Lexy's Gonna Fake Fake Fake"}, {'x': 37.42, 'y': 11, 'label': 'Up 11 for You Belong Whist Me'}, {'x': 38.01, 'y': 11, 'label': "Up 11 for Benny's Gonna Break Break Break Lexy's Gonna Fake Fake Fake"}, {'x': 38.02, 'y': 12, 'label': 'Up 12 for You Belong Whist Me'}, {'x': 39.12, 'y': 12, 'label': "Up 12 for Benny's Gonna Break Break Break Lexy's Gonna Fake Fake Fake"}, {'x': 39.13, 'y': 13, 'label': 'Up 13 for You Belong Whist Me'}, {'x': 39.82, 'y': 13, 'label': "Up 13 for Benny's Gonna Break Break Break Lexy's Gonna Fake Fake Fake"}, {'x': 39.83, 'y': 12, 'label': 'Up 12 for You Belong Whist Me'}, {'x': 39.97, 'y': 12, 'label': "Up 12 for Benny's Gonna Break Break Break Lexy's Gonna Fake Fake Fake"}, {'x': 39.98, 'y': 13, 'label': 'Up 13 for You Belong Whist Me'}, {'x': 40, 'y': 13, 'label': 'Up 13 for You Belong Whist Me'}];
+    const xValues = [0.2, 1.32, 1.33, 2.39, 2.4, 2.87, 2.88, 3.81, 3.82, 6.19, 6.2, 6.74, 6.75, 7.29, 7.3, 9.46, 9.47, 12.49, 12.5, 13.04, 13.05, 13.94, 13.95, 14.89, 14.9, 15.21, 15.22, 17.17, 17.18, 18.26, 18.27, 19.99, 20.0, 26.17, 26.18, 29.57, 29.58, 32.82, 32.83, 33.94, 33.95, 34.54, 34.55, 37.41, 37.42, 38.01, 38.02, 39.12, 39.13, 39.82, 39.83, 39.97, 39.98, 40];
+    const yValues = [1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 5, 5, 6, 6, 7, 7, 6, 6, 7, 7, 6, 6, 7, 7, 8, 8, 7, 7, 8, 8, 9, 9, 10, 10, 11, 11, 10, 10, 9, 9, 10, 10, 11, 11, 12, 12, 13, 13, 12, 12, 13, 13];
+
   
   new Chart("myChart", {
     type: "line",
     data: {
-      datasets: [{
-        data: dataPoints,
-        tension: 0.1,
-      }]
+
+    labels: yValues,
+    datasets: [{
+      data: dataPoints,
+      // Add this line to include the labels in the data
+      pointHoverBackgroundColor: "red",
+      pointHoverBorderColor: "red",
+      pointHoverBorderWidth: 2,
+      pointHoverRadius: 5,
+      tension: 0.05,
+    }]
+
+
     },
     options: {
+
+    tooltips: {
+      callbacks: {
+        label: function(tooltipItem, data) {
+          var label = data.labels[tooltipItem.index];
+          var value = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
+          return value.label;
+
+        }
+      }
+    },
+
       legend: {display: false},
       title: {
         display: true,

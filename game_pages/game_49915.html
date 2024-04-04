@@ -436,17 +436,41 @@ src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
 
 
 <script>
-  const dataPoints = [{'x': 1.12, 'y': 1}, {'x': 4.27, 'y': 1}, {'x': 4.28, 'y': 0}, {'x': 5.04, 'y': 0}, {'x': 5.05, 'y': 1}, {'x': 5.29, 'y': 1}, {'x': 5.3, 'y': 2}, {'x': 6.36, 'y': 2}, {'x': 6.37, 'y': 3}, {'x': 7.06, 'y': 3}, {'x': 7.07, 'y': 2}, {'x': 7.34, 'y': 2}, {'x': 7.35, 'y': 1}, {'x': 7.64, 'y': 1}, {'x': 7.65, 'y': 2}, {'x': 11.76, 'y': 2}, {'x': 11.77, 'y': 1}, {'x': 12.36, 'y': 1}, {'x': 12.37, 'y': 2}, {'x': 15.94, 'y': 2}, {'x': 15.95, 'y': 1}, {'x': 18.42, 'y': 1}, {'x': 18.43, 'y': 2}, {'x': 20.12, 'y': 2}, {'x': 20.13, 'y': 3}, {'x': 20.84, 'y': 3}, {'x': 20.85, 'y': 2}, {'x': 21.32, 'y': 2}, {'x': 21.33, 'y': 3}, {'x': 25.89, 'y': 3}, {'x': 25.9, 'y': 2}, {'x': 31.59, 'y': 2}, {'x': 31.6, 'y': 3}, {'x': 32.06, 'y': 3}, {'x': 32.07, 'y': 2}, {'x': 33.54, 'y': 2}, {'x': 33.55, 'y': 1}, {'x': 34.36, 'y': 1}, {'x': 34.37, 'y': 2}, {'x': 34.84, 'y': 2}, {'x': 34.85, 'y': 1}, {'x': 35.41, 'y': 1}, {'x': 35.42, 'y': 0}, {'x': 36.02, 'y': 0}, {'x': 36.03, 'y': -1}, {'x': 38.31, 'y': -1}, {'x': 38.32, 'y': 0}, {'x': 39.07, 'y': 0}, {'x': 39.08, 'y': 1}, {'x': 39.56, 'y': 1}, {'x': 39.57, 'y': 0}, {'x': 40.09, 'y': 0}, {'x': 40.1, 'y': 1}, {'x': 41.02, 'y': 1}, {'x': 41.03, 'y': 2}, {'x': 43.92, 'y': 2}, {'x': 43.93, 'y': 3}, {'x': 44.26, 'y': 3}, {'x': 44.27, 'y': 2}, {'x': 44.74, 'y': 2}, {'x': 44.75, 'y': 3}, {'x': 45.16, 'y': 3}, {'x': 45.17, 'y': 2}, {'x': 45.44, 'y': 2}, {'x': 45.45, 'y': 3}, {'x': 46, 'y': 3}];
+  const dataPoints = [{'x': 1.12, 'y': 1, 'label': "Up 1 for Sam's Cheer Captain And Chris' On The Bleachers"}, {'x': 4.27, 'y': 1, 'label': "Up 1 for Sam's Cheer Captain And Chris' On The Bleachers"}, {'x': 4.28, 'y': 0, 'label': 'Tie'}, {'x': 5.04, 'y': 0, 'label': 'Tie'}, {'x': 5.05, 'y': 1, 'label': "Up 1 for Sam's Cheer Captain And Chris' On The Bleachers"}, {'x': 5.29, 'y': 1, 'label': "Up 1 for Sam's Cheer Captain And Chris' On The Bleachers"}, {'x': 5.3, 'y': 2, 'label': "Up 2 for Sam's Cheer Captain And Chris' On The Bleachers"}, {'x': 6.36, 'y': 2, 'label': "Up 2 for Sam's Cheer Captain And Chris' On The Bleachers"}, {'x': 6.37, 'y': 3, 'label': "Up 3 for Sam's Cheer Captain And Chris' On The Bleachers"}, {'x': 7.06, 'y': 3, 'label': "Up 3 for Sam's Cheer Captain And Chris' On The Bleachers"}, {'x': 7.07, 'y': 2, 'label': "Up 2 for Sam's Cheer Captain And Chris' On The Bleachers"}, {'x': 7.34, 'y': 2, 'label': "Up 2 for Sam's Cheer Captain And Chris' On The Bleachers"}, {'x': 7.35, 'y': 1, 'label': "Up 1 for Sam's Cheer Captain And Chris' On The Bleachers"}, {'x': 7.64, 'y': 1, 'label': "Up 1 for Sam's Cheer Captain And Chris' On The Bleachers"}, {'x': 7.65, 'y': 2, 'label': "Up 2 for Sam's Cheer Captain And Chris' On The Bleachers"}, {'x': 11.76, 'y': 2, 'label': "Up 2 for Sam's Cheer Captain And Chris' On The Bleachers"}, {'x': 11.77, 'y': 1, 'label': "Up 1 for Sam's Cheer Captain And Chris' On The Bleachers"}, {'x': 12.36, 'y': 1, 'label': "Up 1 for Sam's Cheer Captain And Chris' On The Bleachers"}, {'x': 12.37, 'y': 2, 'label': "Up 2 for Sam's Cheer Captain And Chris' On The Bleachers"}, {'x': 15.94, 'y': 2, 'label': "Up 2 for Sam's Cheer Captain And Chris' On The Bleachers"}, {'x': 15.95, 'y': 1, 'label': "Up 1 for Sam's Cheer Captain And Chris' On The Bleachers"}, {'x': 18.42, 'y': 1, 'label': "Up 1 for Sam's Cheer Captain And Chris' On The Bleachers"}, {'x': 18.43, 'y': 2, 'label': "Up 2 for Sam's Cheer Captain And Chris' On The Bleachers"}, {'x': 20.12, 'y': 2, 'label': "Up 2 for Sam's Cheer Captain And Chris' On The Bleachers"}, {'x': 20.13, 'y': 3, 'label': "Up 3 for Sam's Cheer Captain And Chris' On The Bleachers"}, {'x': 20.84, 'y': 3, 'label': "Up 3 for Sam's Cheer Captain And Chris' On The Bleachers"}, {'x': 20.85, 'y': 2, 'label': "Up 2 for Sam's Cheer Captain And Chris' On The Bleachers"}, {'x': 21.32, 'y': 2, 'label': "Up 2 for Sam's Cheer Captain And Chris' On The Bleachers"}, {'x': 21.33, 'y': 3, 'label': "Up 3 for Sam's Cheer Captain And Chris' On The Bleachers"}, {'x': 25.89, 'y': 3, 'label': "Up 3 for Sam's Cheer Captain And Chris' On The Bleachers"}, {'x': 25.9, 'y': 2, 'label': "Up 2 for Sam's Cheer Captain And Chris' On The Bleachers"}, {'x': 31.59, 'y': 2, 'label': "Up 2 for Sam's Cheer Captain And Chris' On The Bleachers"}, {'x': 31.6, 'y': 3, 'label': "Up 3 for Sam's Cheer Captain And Chris' On The Bleachers"}, {'x': 32.06, 'y': 3, 'label': "Up 3 for Sam's Cheer Captain And Chris' On The Bleachers"}, {'x': 32.07, 'y': 2, 'label': "Up 2 for Sam's Cheer Captain And Chris' On The Bleachers"}, {'x': 33.54, 'y': 2, 'label': "Up 2 for Sam's Cheer Captain And Chris' On The Bleachers"}, {'x': 33.55, 'y': 1, 'label': "Up 1 for Sam's Cheer Captain And Chris' On The Bleachers"}, {'x': 34.36, 'y': 1, 'label': "Up 1 for Sam's Cheer Captain And Chris' On The Bleachers"}, {'x': 34.37, 'y': 2, 'label': "Up 2 for Sam's Cheer Captain And Chris' On The Bleachers"}, {'x': 34.84, 'y': 2, 'label': "Up 2 for Sam's Cheer Captain And Chris' On The Bleachers"}, {'x': 34.85, 'y': 1, 'label': "Up 1 for Sam's Cheer Captain And Chris' On The Bleachers"}, {'x': 35.41, 'y': 1, 'label': "Up 1 for Sam's Cheer Captain And Chris' On The Bleachers"}, {'x': 35.42, 'y': 0, 'label': 'Tie'}, {'x': 36.02, 'y': 0, 'label': 'Tie'}, {'x': 36.03, 'y': -1, 'label': "Up 1 for Benny's Gonna Break Break Break Lexy's Gonna Fake Fake Fake"}, {'x': 38.31, 'y': -1, 'label': "Up 1 for Benny's Gonna Break Break Break Lexy's Gonna Fake Fake Fake"}, {'x': 38.32, 'y': 0, 'label': 'Tie'}, {'x': 39.07, 'y': 0, 'label': 'Tie'}, {'x': 39.08, 'y': 1, 'label': "Up 1 for Sam's Cheer Captain And Chris' On The Bleachers"}, {'x': 39.56, 'y': 1, 'label': "Up 1 for Sam's Cheer Captain And Chris' On The Bleachers"}, {'x': 39.57, 'y': 0, 'label': 'Tie'}, {'x': 40.09, 'y': 0, 'label': 'Tie'}, {'x': 40.1, 'y': 1, 'label': "Up 1 for Sam's Cheer Captain And Chris' On The Bleachers"}, {'x': 41.02, 'y': 1, 'label': "Up 1 for Sam's Cheer Captain And Chris' On The Bleachers"}, {'x': 41.03, 'y': 2, 'label': "Up 2 for Sam's Cheer Captain And Chris' On The Bleachers"}, {'x': 43.92, 'y': 2, 'label': "Up 2 for Sam's Cheer Captain And Chris' On The Bleachers"}, {'x': 43.93, 'y': 3, 'label': "Up 3 for Sam's Cheer Captain And Chris' On The Bleachers"}, {'x': 44.26, 'y': 3, 'label': "Up 3 for Sam's Cheer Captain And Chris' On The Bleachers"}, {'x': 44.27, 'y': 2, 'label': "Up 2 for Sam's Cheer Captain And Chris' On The Bleachers"}, {'x': 44.74, 'y': 2, 'label': "Up 2 for Sam's Cheer Captain And Chris' On The Bleachers"}, {'x': 44.75, 'y': 3, 'label': "Up 3 for Sam's Cheer Captain And Chris' On The Bleachers"}, {'x': 45.16, 'y': 3, 'label': "Up 3 for Sam's Cheer Captain And Chris' On The Bleachers"}, {'x': 45.17, 'y': 2, 'label': "Up 2 for Sam's Cheer Captain And Chris' On The Bleachers"}, {'x': 45.44, 'y': 2, 'label': "Up 2 for Sam's Cheer Captain And Chris' On The Bleachers"}, {'x': 45.45, 'y': 3, 'label': "Up 3 for Sam's Cheer Captain And Chris' On The Bleachers"}, {'x': 46, 'y': 3, 'label': "Up 3 for Sam's Cheer Captain And Chris' On The Bleachers"}];
+    const xValues = [1.12, 4.27, 4.28, 5.04, 5.05, 5.29, 5.3, 6.36, 6.37, 7.06, 7.07, 7.34, 7.35, 7.64, 7.65, 11.76, 11.77, 12.36, 12.37, 15.94, 15.95, 18.42, 18.43, 20.12, 20.13, 20.84, 20.85, 21.32, 21.33, 25.89, 25.9, 31.59, 31.6, 32.06, 32.07, 33.54, 33.55, 34.36, 34.37, 34.84, 34.85, 35.41, 35.42, 36.02, 36.03, 38.31, 38.32, 39.07, 39.08, 39.56, 39.57, 40.09, 40.1, 41.02, 41.03, 43.92, 43.93, 44.26, 44.27, 44.74, 44.75, 45.16, 45.17, 45.44, 45.45, 46];
+    const yValues = [1, 1, 0, 0, 1, 1, 2, 2, 3, 3, 2, 2, 1, 1, 2, 2, 1, 1, 2, 2, 1, 1, 2, 2, 3, 3, 2, 2, 3, 3, 2, 2, 3, 3, 2, 2, 1, 1, 2, 2, 1, 1, 0, 0, -1, -1, 0, 0, 1, 1, 0, 0, 1, 1, 2, 2, 3, 3, 2, 2, 3, 3, 2, 2, 3, 3];
+
   
   new Chart("myChart", {
     type: "line",
     data: {
-      datasets: [{
-        data: dataPoints,
-        tension: 0.1,
-      }]
+
+    labels: yValues,
+    datasets: [{
+      data: dataPoints,
+      // Add this line to include the labels in the data
+      pointHoverBackgroundColor: "red",
+      pointHoverBorderColor: "red",
+      pointHoverBorderWidth: 2,
+      pointHoverRadius: 5,
+      tension: 0.05,
+    }]
+
+
     },
     options: {
+
+    tooltips: {
+      callbacks: {
+        label: function(tooltipItem, data) {
+          var label = data.labels[tooltipItem.index];
+          var value = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
+          return value.label;
+
+        }
+      }
+    },
+
       legend: {display: false},
       title: {
         display: true,
