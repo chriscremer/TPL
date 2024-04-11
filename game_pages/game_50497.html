@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>TPL</title>
+<link rel="icon" type="image/png" href="../frisbee.png">
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+
+<script
+src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
+</script>
+
+
+<style>
+    .table-container {
+        display: flex;
+        flex-direction: row;
+        margin: 20px;
+        justify-content: center;
+    }
+
+    .table-container2 {
+        display: flex;
+        flex-direction: column;
+        margin: 20px;
+    }
+
+    .table1, .table2 {
+        width: 100%; /* Tables will take the full width of their parent */
+        box-sizing: border-box;
+        /* border: 1px solid #ccc;  Add border for clarity */
+        margin-right: 30px;
+        border-collapse: collapse; /* this allows row lines to be shown for some reason */
+    }
+
+    .table1 tr, .table2 tr {
+        border-bottom: 1px solid #ccc; /* Add bottom border to table rows */
+    }
+
+    @media screen and (max-width: 850px) {
+        .table-container {
+            flex-direction: column;
+        }
+
+        iframe {
+            width: 90%; /* or any other percentage less than 100% */
+            margin: auto; /* to center the iframe */
+        }
+
+
+        /* change font color to blue */
+        body {
+            /* color: blue; */
+        }
+    }
+
+</style>
+
+</head>
+
+
+
+
+
+<body>
+
+<a href="../index.html" style="position: absolute; top: 10px; left: 10px;"><i class="fa fa-arrow-left"></i>Season</a> 
+<br>
+
+<center style="margin: 10px;">
+ 
+</center>
+
+
+<div class="table-container">
+
+    <div class="table-container2">
+        <h4>kyraless nam's careful daughter (10)</h4>
+        <table class="table1">
+            
+    <tr>
+        <th style="text-align: left;">Player</th>
+        <th style="text-align: left;">Goal</th>
+        <th style="text-align: left;">Assist</th>
+        <th style="text-align: left;">2A</th>
+        <th style="text-align: left;">Points</th>
+        <th style="text-align: left;">D</th>
+        <th style="text-align: left;">Pass</th>
+        <th style="text-align: left;">TA</th>
+        <th style="text-align: left;">Drop</th>
+    </tr>
+
+            <tr>
+                <td>Eric Zhou</td>
+                <td>2</td>
+                <td>0</td>
+                <td>3</td>
+                <td>5</td>
+                <td>1</td>
+                <td>24</td>
+                <td>3</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Neil Griffith</td>
+                <td>2</td>
+                <td>2</td>
+                <td>0</td>
+                <td>4</td>
+                <td>0</td>
+                <td>20</td>
+                <td>7</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Vincent Poon</td>
+                <td>0</td>
+                <td>3</td>
+                <td>0</td>
+                <td>3</td>
+                <td>3</td>
+                <td>16</td>
+                <td>0</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Robert Stalker</td>
+                <td>0</td>
+                <td>1</td>
+                <td>2</td>
+                <td>3</td>
+                <td>0</td>
+                <td>13</td>
+                <td>1</td>
+                <td>1</td>
+            </tr><tr>
+                <td>Kyra Healey</td>
+                <td>2</td>
+                <td>1</td>
+                <td>0</td>
+                <td>3</td>
+                <td>0</td>
+                <td>8</td>
+                <td>1</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Max van der Weerd</td>
+                <td>1</td>
+                <td>1</td>
+                <td>0</td>
+                <td>2</td>
+                <td>0</td>
+                <td>11</td>
+                <td>2</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Naomi Lew</td>
+                <td>1</td>
+                <td>0</td>
+                <td>1</td>
+                <td>2</td>
+                <td>0</td>
+                <td>5</td>
+                <td>1</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Lauren Cappell</td>
+                <td>1</td>
+                <td>0</td>
+                <td>1</td>
+                <td>2</td>
+                <td>0</td>
+                <td>2</td>
+                <td>2</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Shauna Yang</td>
+                <td>0</td>
+                <td>1</td>
+                <td>0</td>
+                <td>1</td>
+                <td>0</td>
+                <td>10</td>
+                <td>3</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Anna Wang</td>
+                <td>1</td>
+                <td>0</td>
+                <td>0</td>
+                <td>1</td>
+                <td>0</td>
+                <td>5</td>
+                <td>1</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Vera Hoang</td>
+                <td>0</td>
+                <td>0</td>
+                <td>1</td>
+                <td>1</td>
+                <td>1</td>
+                <td>3</td>
+                <td>0</td>
+                <td>1</td>
+            </tr><tr>
+                <td>Dong-Ling Chen</td>
+                <td>0</td>
+                <td>1</td>
+                <td>0</td>
+                <td>1</td>
+                <td>0</td>
+                <td>3</td>
+                <td>1</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Alex Popovic</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>4</td>
+                <td>1</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Jason Ng</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>2</td>
+                <td>3</td>
+                <td>0</td>
+                <td>1</td>
+            </tr><tr>
+                <td><b>Total</b></td>
+                <td><b>10</b></td>
+                <td><b>10</b></td>
+                <td><b>8</b></td>
+                <td><b>28</b></td>
+                <td><b>7</b></td>
+                <td><b>127</b></td>
+                <td><b>23</b></td>
+                <td><b>3</b></td>
+            </tr>
+        </table>
+    </div>
+    
+
+    <div class="table-container2">
+        <h4>FaulklHore (Revenge of the Swift Version) (18)</h4>
+        <table class="table2">
+            
+    <tr>
+        <th style="text-align: left;">Player</th>
+        <th style="text-align: left;">Goal</th>
+        <th style="text-align: left;">Assist</th>
+        <th style="text-align: left;">2A</th>
+        <th style="text-align: left;">Points</th>
+        <th style="text-align: left;">D</th>
+        <th style="text-align: left;">Pass</th>
+        <th style="text-align: left;">TA</th>
+        <th style="text-align: left;">Drop</th>
+    </tr>
+
+            <tr>
+                <td>Yubai Liu</td>
+                <td>6</td>
+                <td>5</td>
+                <td>0</td>
+                <td>11</td>
+                <td>1</td>
+                <td>19</td>
+                <td>1</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Matthew Denton</td>
+                <td>0</td>
+                <td>6</td>
+                <td>1</td>
+                <td>7</td>
+                <td>2</td>
+                <td>21</td>
+                <td>2</td>
+                <td>1</td>
+            </tr><tr>
+                <td>James Ho</td>
+                <td>1</td>
+                <td>3</td>
+                <td>2</td>
+                <td>6</td>
+                <td>0</td>
+                <td>15</td>
+                <td>0</td>
+                <td>1</td>
+            </tr><tr>
+                <td>Mikush Malimban</td>
+                <td>4</td>
+                <td>0</td>
+                <td>1</td>
+                <td>5</td>
+                <td>1</td>
+                <td>16</td>
+                <td>2</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Allison Brown</td>
+                <td>1</td>
+                <td>1</td>
+                <td>2</td>
+                <td>4</td>
+                <td>1</td>
+                <td>10</td>
+                <td>0</td>
+                <td>1</td>
+            </tr><tr>
+                <td>Hailey McInnis</td>
+                <td>3</td>
+                <td>0</td>
+                <td>1</td>
+                <td>4</td>
+                <td>3</td>
+                <td>9</td>
+                <td>2</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Jamie Hoo-fatt</td>
+                <td>0</td>
+                <td>1</td>
+                <td>2</td>
+                <td>3</td>
+                <td>0</td>
+                <td>15</td>
+                <td>2</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Cj Jackson</td>
+                <td>2</td>
+                <td>0</td>
+                <td>1</td>
+                <td>3</td>
+                <td>1</td>
+                <td>4</td>
+                <td>0</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Stephanie Cole</td>
+                <td>0</td>
+                <td>1</td>
+                <td>1</td>
+                <td>2</td>
+                <td>0</td>
+                <td>13</td>
+                <td>1</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Chris Faulkner</td>
+                <td>0</td>
+                <td>1</td>
+                <td>1</td>
+                <td>2</td>
+                <td>0</td>
+                <td>8</td>
+                <td>0</td>
+                <td>1</td>
+            </tr><tr>
+                <td>Brendan Howarth</td>
+                <td>0</td>
+                <td>0</td>
+                <td>1</td>
+                <td>1</td>
+                <td>0</td>
+                <td>5</td>
+                <td>1</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Wendy Li</td>
+                <td>1</td>
+                <td>0</td>
+                <td>0</td>
+                <td>1</td>
+                <td>0</td>
+                <td>3</td>
+                <td>0</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Mika Young</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>5</td>
+                <td>1</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Darren Vuong</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>1</td>
+                <td>4</td>
+                <td>2</td>
+                <td>0</td>
+            </tr><tr>
+                <td><b>Total</b></td>
+                <td><b>18</b></td>
+                <td><b>18</b></td>
+                <td><b>13</b></td>
+                <td><b>49</b></td>
+                <td><b>10</b></td>
+                <td><b>147</b></td>
+                <td><b>14</b></td>
+                <td><b>4</b></td>
+            </tr>
+        </table>
+    </div>
+    
+</div>
+
+<center>
+    <canvas id="myChart" style="width:100%;max-width:800px"></canvas>
+</center>
+
+<br>
+<br>
+<br>
+
+</body>
+
+
+
+
+
+<script>
+  const dataPoints = [{'x': 2.3, 'y': 1, 'label': 'Up 1 for FaulklHore (Revenge of the Swift Version)'}, {'x': 3.24, 'y': 1, 'label': "Up 1 for kyraless nam's careful daughter"}, {'x': 3.25, 'y': 2, 'label': 'Up 2 for FaulklHore (Revenge of the Swift Version)'}, {'x': 5.29, 'y': 2, 'label': "Up 2 for kyraless nam's careful daughter"}, {'x': 5.3, 'y': 3, 'label': 'Up 3 for FaulklHore (Revenge of the Swift Version)'}, {'x': 6.39, 'y': 3, 'label': "Up 3 for kyraless nam's careful daughter"}, {'x': 6.4, 'y': 2, 'label': 'Up 2 for FaulklHore (Revenge of the Swift Version)'}, {'x': 8.17, 'y': 2, 'label': "Up 2 for kyraless nam's careful daughter"}, {'x': 8.18, 'y': 1, 'label': 'Up 1 for FaulklHore (Revenge of the Swift Version)'}, {'x': 9.69, 'y': 1, 'label': "Up 1 for kyraless nam's careful daughter"}, {'x': 9.7, 'y': 0, 'label': 'Tie'}, {'x': 11.94, 'y': 0, 'label': 'Tie'}, {'x': 11.95, 'y': 1, 'label': 'Up 1 for FaulklHore (Revenge of the Swift Version)'}, {'x': 13.82, 'y': 1, 'label': "Up 1 for kyraless nam's careful daughter"}, {'x': 13.83, 'y': 2, 'label': 'Up 2 for FaulklHore (Revenge of the Swift Version)'}, {'x': 15.27, 'y': 2, 'label': "Up 2 for kyraless nam's careful daughter"}, {'x': 15.28, 'y': 3, 'label': 'Up 3 for FaulklHore (Revenge of the Swift Version)'}, {'x': 15.69, 'y': 3, 'label': "Up 3 for kyraless nam's careful daughter"}, {'x': 15.7, 'y': 2, 'label': 'Up 2 for FaulklHore (Revenge of the Swift Version)'}, {'x': 16.02, 'y': 2, 'label': "Up 2 for kyraless nam's careful daughter"}, {'x': 16.03, 'y': 3, 'label': 'Up 3 for FaulklHore (Revenge of the Swift Version)'}, {'x': 17.99, 'y': 3, 'label': "Up 3 for kyraless nam's careful daughter"}, {'x': 18.0, 'y': 2, 'label': 'Up 2 for FaulklHore (Revenge of the Swift Version)'}, {'x': 20.12, 'y': 2, 'label': "Up 2 for kyraless nam's careful daughter"}, {'x': 20.13, 'y': 1, 'label': 'Up 1 for FaulklHore (Revenge of the Swift Version)'}, {'x': 25.49, 'y': 1, 'label': "Up 1 for kyraless nam's careful daughter"}, {'x': 25.5, 'y': 2, 'label': 'Up 2 for FaulklHore (Revenge of the Swift Version)'}, {'x': 26.82, 'y': 2, 'label': "Up 2 for kyraless nam's careful daughter"}, {'x': 26.83, 'y': 3, 'label': 'Up 3 for FaulklHore (Revenge of the Swift Version)'}, {'x': 27.34, 'y': 3, 'label': "Up 3 for kyraless nam's careful daughter"}, {'x': 27.35, 'y': 4, 'label': 'Up 4 for FaulklHore (Revenge of the Swift Version)'}, {'x': 28.09, 'y': 4, 'label': "Up 4 for kyraless nam's careful daughter"}, {'x': 28.1, 'y': 5, 'label': 'Up 5 for FaulklHore (Revenge of the Swift Version)'}, {'x': 31.31, 'y': 5, 'label': "Up 5 for kyraless nam's careful daughter"}, {'x': 31.32, 'y': 6, 'label': 'Up 6 for FaulklHore (Revenge of the Swift Version)'}, {'x': 33.21, 'y': 6, 'label': "Up 6 for kyraless nam's careful daughter"}, {'x': 33.22, 'y': 7, 'label': 'Up 7 for FaulklHore (Revenge of the Swift Version)'}, {'x': 36.32, 'y': 7, 'label': "Up 7 for kyraless nam's careful daughter"}, {'x': 36.33, 'y': 6, 'label': 'Up 6 for FaulklHore (Revenge of the Swift Version)'}, {'x': 36.87, 'y': 6, 'label': "Up 6 for kyraless nam's careful daughter"}, {'x': 36.88, 'y': 7, 'label': 'Up 7 for FaulklHore (Revenge of the Swift Version)'}, {'x': 37.41, 'y': 7, 'label': "Up 7 for kyraless nam's careful daughter"}, {'x': 37.42, 'y': 6, 'label': 'Up 6 for FaulklHore (Revenge of the Swift Version)'}, {'x': 37.69, 'y': 6, 'label': "Up 6 for kyraless nam's careful daughter"}, {'x': 37.7, 'y': 7, 'label': 'Up 7 for FaulklHore (Revenge of the Swift Version)'}, {'x': 39.57, 'y': 7, 'label': "Up 7 for kyraless nam's careful daughter"}, {'x': 39.58, 'y': 6, 'label': 'Up 6 for FaulklHore (Revenge of the Swift Version)'}, {'x': 40.99, 'y': 6, 'label': "Up 6 for kyraless nam's careful daughter"}, {'x': 41.0, 'y': 7, 'label': 'Up 7 for FaulklHore (Revenge of the Swift Version)'}, {'x': 41.47, 'y': 7, 'label': "Up 7 for kyraless nam's careful daughter"}, {'x': 41.48, 'y': 6, 'label': 'Up 6 for FaulklHore (Revenge of the Swift Version)'}, {'x': 42.77, 'y': 6, 'label': "Up 6 for kyraless nam's careful daughter"}, {'x': 42.78, 'y': 7, 'label': 'Up 7 for FaulklHore (Revenge of the Swift Version)'}, {'x': 43.29, 'y': 7, 'label': "Up 7 for kyraless nam's careful daughter"}, {'x': 43.3, 'y': 8, 'label': 'Up 8 for FaulklHore (Revenge of the Swift Version)'}, {'x': 44, 'y': 8, 'label': 'Up 8 for FaulklHore (Revenge of the Swift Version)'}];
+    const xValues = [2.3, 3.24, 3.25, 5.29, 5.3, 6.39, 6.4, 8.17, 8.18, 9.69, 9.7, 11.94, 11.95, 13.82, 13.83, 15.27, 15.28, 15.69, 15.7, 16.02, 16.03, 17.99, 18.0, 20.12, 20.13, 25.49, 25.5, 26.82, 26.83, 27.34, 27.35, 28.09, 28.1, 31.31, 31.32, 33.21, 33.22, 36.32, 36.33, 36.87, 36.88, 37.41, 37.42, 37.69, 37.7, 39.57, 39.58, 40.99, 41.0, 41.47, 41.48, 42.77, 42.78, 43.29, 43.3, 44];
+    const yValues = [1, 1, 2, 2, 3, 3, 2, 2, 1, 1, 0, 0, 1, 1, 2, 2, 3, 3, 2, 2, 3, 3, 2, 2, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 6, 6, 7, 7, 6, 6, 7, 7, 6, 6, 7, 7, 6, 6, 7, 7, 8, 8];
+
+  
+  new Chart("myChart", {
+    type: "line",
+    data: {
+
+    labels: yValues,
+    datasets: [{
+      data: dataPoints,
+      // Add this line to include the labels in the data
+      pointHoverBackgroundColor: "red",
+      pointHoverBorderColor: "red",
+      pointHoverBorderWidth: 2,
+      pointHoverRadius: 5,
+      tension: 0.05,
+    }]
+
+
+    },
+    options: {
+
+    tooltips: {
+      callbacks: {
+        label: function(tooltipItem, data) {
+          var label = data.labels[tooltipItem.index];
+          var value = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
+          return value.label;
+
+        }
+      }
+    },
+
+      legend: {display: false},
+      title: {
+        display: true,
+        text: ""
+      },
+      scales: {
+        yAxes: [{
+          scaleLabel: {
+            display: true,
+            labelString: 'Score Difference'
+          }
+        }],
+        xAxes: [{
+          type: 'linear', // this will ensure that the x-axis is based on numeric scale
+          scaleLabel: {
+            display: true,
+            labelString: 'Gametime'
+          }
+        }]
+      }
+    }
+  });
+  
+  </script>
+
+
+
+
+</html>
