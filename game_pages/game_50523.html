@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>TPL</title>
+<link rel="icon" type="image/png" href="../frisbee.png">
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+
+<script
+src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
+</script>
+
+
+<style>
+    .table-container {
+        display: flex;
+        flex-direction: row;
+        margin: 20px;
+        justify-content: center;
+    }
+
+    .table-container2 {
+        display: flex;
+        flex-direction: column;
+        margin: 20px;
+    }
+
+    .table1, .table2 {
+        width: 100%; /* Tables will take the full width of their parent */
+        box-sizing: border-box;
+        /* border: 1px solid #ccc;  Add border for clarity */
+        margin-right: 30px;
+        border-collapse: collapse; /* this allows row lines to be shown for some reason */
+    }
+
+    .table1 tr, .table2 tr {
+        border-bottom: 1px solid #ccc; /* Add bottom border to table rows */
+    }
+
+    @media screen and (max-width: 850px) {
+        .table-container {
+            flex-direction: column;
+        }
+
+        iframe {
+            width: 90%; /* or any other percentage less than 100% */
+            margin: auto; /* to center the iframe */
+        }
+
+
+        /* change font color to blue */
+        body {
+            /* color: blue; */
+        }
+    }
+
+</style>
+
+</head>
+
+
+
+
+
+<body>
+
+<a href="../index.html" style="position: absolute; top: 10px; left: 10px;"><i class="fa fa-arrow-left"></i>Season</a> 
+<br>
+
+<center style="margin: 10px;">
+ <iframe width="560" height="315" src="https://www.youtube.com/embed/PmzMJSORh8M?si=wur4yevIkhEFxMO7" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+</center>
+
+
+<div class="table-container">
+
+    <div class="table-container2">
+        <h4>Sam's Cheer Captain And Chris' On The Bleachers (15)</h4>
+        <table class="table1">
+            
+    <tr>
+        <th style="text-align: left;">Player</th>
+        <th style="text-align: left;">Goal</th>
+        <th style="text-align: left;">Assist</th>
+        <th style="text-align: left;">2A</th>
+        <th style="text-align: left;">Points</th>
+        <th style="text-align: left;">D</th>
+        <th style="text-align: left;">Pass</th>
+        <th style="text-align: left;">TA</th>
+        <th style="text-align: left;">Drop</th>
+    </tr>
+
+            <tr>
+                <td>Marco Ly</td>
+                <td>0</td>
+                <td>6</td>
+                <td>0</td>
+                <td>6</td>
+                <td>1</td>
+                <td>21</td>
+                <td>1</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Mycroft Guo</td>
+                <td>3</td>
+                <td>2</td>
+                <td>1</td>
+                <td>6</td>
+                <td>0</td>
+                <td>19</td>
+                <td>3</td>
+                <td>1</td>
+            </tr><tr>
+                <td>Eddie Khalatian</td>
+                <td>3</td>
+                <td>3</td>
+                <td>0</td>
+                <td>6</td>
+                <td>2</td>
+                <td>17</td>
+                <td>6</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Chris Cremer</td>
+                <td>0</td>
+                <td>2</td>
+                <td>2</td>
+                <td>4</td>
+                <td>0</td>
+                <td>25</td>
+                <td>2</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Rebecca Minielly</td>
+                <td>3</td>
+                <td>0</td>
+                <td>1</td>
+                <td>4</td>
+                <td>0</td>
+                <td>13</td>
+                <td>2</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Kyra Healey</td>
+                <td>2</td>
+                <td>1</td>
+                <td>0</td>
+                <td>3</td>
+                <td>4</td>
+                <td>11</td>
+                <td>3</td>
+                <td>1</td>
+            </tr><tr>
+                <td>Larry Macdonald</td>
+                <td>0</td>
+                <td>0</td>
+                <td>3</td>
+                <td>3</td>
+                <td>3</td>
+                <td>10</td>
+                <td>1</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Kevin Christensen</td>
+                <td>1</td>
+                <td>1</td>
+                <td>1</td>
+                <td>3</td>
+                <td>0</td>
+                <td>9</td>
+                <td>2</td>
+                <td>1</td>
+            </tr><tr>
+                <td>Wendy Chong</td>
+                <td>1</td>
+                <td>0</td>
+                <td>0</td>
+                <td>1</td>
+                <td>2</td>
+                <td>17</td>
+                <td>4</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Diane Pendlebury</td>
+                <td>0</td>
+                <td>0</td>
+                <td>1</td>
+                <td>1</td>
+                <td>0</td>
+                <td>11</td>
+                <td>1</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Brittany Heath</td>
+                <td>1</td>
+                <td>0</td>
+                <td>0</td>
+                <td>1</td>
+                <td>0</td>
+                <td>7</td>
+                <td>0</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Sam Esteves</td>
+                <td>1</td>
+                <td>0</td>
+                <td>0</td>
+                <td>1</td>
+                <td>1</td>
+                <td>6</td>
+                <td>2</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Alex Popovic</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>4</td>
+                <td>0</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Adrian Muresan</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>3</td>
+                <td>1</td>
+                <td>1</td>
+            </tr><tr>
+                <td>Nadia Ho</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>3</td>
+                <td>1</td>
+                <td>0</td>
+            </tr><tr>
+                <td><b>Total</b></td>
+                <td><b>15</b></td>
+                <td><b>15</b></td>
+                <td><b>9</b></td>
+                <td><b>39</b></td>
+                <td><b>13</b></td>
+                <td><b>176</b></td>
+                <td><b>29</b></td>
+                <td><b>4</b></td>
+            </tr>
+        </table>
+    </div>
+    
+
+    <div class="table-container2">
+        <h4>I was cRyan on the staircase Meagging you "Please don't throw" (19)</h4>
+        <table class="table2">
+            
+    <tr>
+        <th style="text-align: left;">Player</th>
+        <th style="text-align: left;">Goal</th>
+        <th style="text-align: left;">Assist</th>
+        <th style="text-align: left;">2A</th>
+        <th style="text-align: left;">Points</th>
+        <th style="text-align: left;">D</th>
+        <th style="text-align: left;">Pass</th>
+        <th style="text-align: left;">TA</th>
+        <th style="text-align: left;">Drop</th>
+    </tr>
+
+            <tr>
+                <td>William Beveridge</td>
+                <td>5</td>
+                <td>3</td>
+                <td>0</td>
+                <td>8</td>
+                <td>0</td>
+                <td>13</td>
+                <td>3</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Matthew Colphon</td>
+                <td>1</td>
+                <td>4</td>
+                <td>2</td>
+                <td>7</td>
+                <td>2</td>
+                <td>13</td>
+                <td>3</td>
+                <td>1</td>
+            </tr><tr>
+                <td>Ryan Sherriff</td>
+                <td>0</td>
+                <td>5</td>
+                <td>1</td>
+                <td>6</td>
+                <td>4</td>
+                <td>26</td>
+                <td>3</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Nam Hoang</td>
+                <td>3</td>
+                <td>2</td>
+                <td>0</td>
+                <td>5</td>
+                <td>0</td>
+                <td>8</td>
+                <td>3</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Cielle Garbe</td>
+                <td>4</td>
+                <td>1</td>
+                <td>0</td>
+                <td>5</td>
+                <td>0</td>
+                <td>7</td>
+                <td>0</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Vanessa Mensink</td>
+                <td>1</td>
+                <td>1</td>
+                <td>2</td>
+                <td>4</td>
+                <td>0</td>
+                <td>20</td>
+                <td>4</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Shauna Yang</td>
+                <td>1</td>
+                <td>1</td>
+                <td>2</td>
+                <td>4</td>
+                <td>0</td>
+                <td>8</td>
+                <td>4</td>
+                <td>1</td>
+            </tr><tr>
+                <td>Robert Botman</td>
+                <td>0</td>
+                <td>1</td>
+                <td>2</td>
+                <td>3</td>
+                <td>0</td>
+                <td>11</td>
+                <td>1</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Meagan Newman</td>
+                <td>1</td>
+                <td>0</td>
+                <td>2</td>
+                <td>3</td>
+                <td>1</td>
+                <td>7</td>
+                <td>1</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Alec Zhao</td>
+                <td>2</td>
+                <td>0</td>
+                <td>1</td>
+                <td>3</td>
+                <td>2</td>
+                <td>7</td>
+                <td>1</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Ricky Truong</td>
+                <td>0</td>
+                <td>1</td>
+                <td>1</td>
+                <td>2</td>
+                <td>1</td>
+                <td>23</td>
+                <td>0</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Caterina Cazzetta</td>
+                <td>1</td>
+                <td>0</td>
+                <td>1</td>
+                <td>2</td>
+                <td>0</td>
+                <td>8</td>
+                <td>2</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Vikki Shimoda</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>10</td>
+                <td>1</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Nancy Warren</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>5</td>
+                <td>1</td>
+                <td>0</td>
+            </tr><tr>
+                <td><b>Total</b></td>
+                <td><b>19</b></td>
+                <td><b>19</b></td>
+                <td><b>14</b></td>
+                <td><b>52</b></td>
+                <td><b>10</b></td>
+                <td><b>166</b></td>
+                <td><b>27</b></td>
+                <td><b>2</b></td>
+            </tr>
+        </table>
+    </div>
+    
+</div>
+
+<center>
+    <canvas id="myChart" style="width:100%;max-width:800px"></canvas>
+</center>
+
+<br>
+<br>
+<br>
+
+</body>
+
+
+
+
+
+<script>
+  const dataPoints = [{'x': 0.63, 'y': -1, 'label': "Up 1 for Sam's Cheer Captain And Chris' On The Bleachers"}, {'x': 0.81, 'y': -1, 'label': 'Up 1 for I was cRyan on the staircase Meagging you "Please don\'t throw"'}, {'x': 0.82, 'y': 0, 'label': 'Tie'}, {'x': 2.24, 'y': 0, 'label': 'Tie'}, {'x': 2.25, 'y': -1, 'label': "Up 1 for Sam's Cheer Captain And Chris' On The Bleachers"}, {'x': 2.79, 'y': -1, 'label': 'Up 1 for I was cRyan on the staircase Meagging you "Please don\'t throw"'}, {'x': 2.8, 'y': 0, 'label': 'Tie'}, {'x': 3.64, 'y': 0, 'label': 'Tie'}, {'x': 3.65, 'y': -1, 'label': "Up 1 for Sam's Cheer Captain And Chris' On The Bleachers"}, {'x': 4.21, 'y': -1, 'label': 'Up 1 for I was cRyan on the staircase Meagging you "Please don\'t throw"'}, {'x': 4.22, 'y': 0, 'label': 'Tie'}, {'x': 5.06, 'y': 0, 'label': 'Tie'}, {'x': 5.07, 'y': -1, 'label': "Up 1 for Sam's Cheer Captain And Chris' On The Bleachers"}, {'x': 5.37, 'y': -1, 'label': 'Up 1 for I was cRyan on the staircase Meagging you "Please don\'t throw"'}, {'x': 5.38, 'y': 0, 'label': 'Tie'}, {'x': 6.89, 'y': 0, 'label': 'Tie'}, {'x': 6.9, 'y': 1, 'label': 'Up 1 for I was cRyan on the staircase Meagging you "Please don\'t throw"'}, {'x': 8.91, 'y': 1, 'label': "Up 1 for Sam's Cheer Captain And Chris' On The Bleachers"}, {'x': 8.92, 'y': 0, 'label': 'Tie'}, {'x': 13.31, 'y': 0, 'label': 'Tie'}, {'x': 13.32, 'y': 1, 'label': 'Up 1 for I was cRyan on the staircase Meagging you "Please don\'t throw"'}, {'x': 14.01, 'y': 1, 'label': "Up 1 for Sam's Cheer Captain And Chris' On The Bleachers"}, {'x': 14.02, 'y': 2, 'label': 'Up 2 for I was cRyan on the staircase Meagging you "Please don\'t throw"'}, {'x': 15.87, 'y': 2, 'label': "Up 2 for Sam's Cheer Captain And Chris' On The Bleachers"}, {'x': 15.88, 'y': 3, 'label': 'Up 3 for I was cRyan on the staircase Meagging you "Please don\'t throw"'}, {'x': 17.41, 'y': 3, 'label': "Up 3 for Sam's Cheer Captain And Chris' On The Bleachers"}, {'x': 17.42, 'y': 2, 'label': 'Up 2 for I was cRyan on the staircase Meagging you "Please don\'t throw"'}, {'x': 18.06, 'y': 2, 'label': "Up 2 for Sam's Cheer Captain And Chris' On The Bleachers"}, {'x': 18.07, 'y': 3, 'label': 'Up 3 for I was cRyan on the staircase Meagging you "Please don\'t throw"'}, {'x': 18.94, 'y': 3, 'label': "Up 3 for Sam's Cheer Captain And Chris' On The Bleachers"}, {'x': 18.95, 'y': 4, 'label': 'Up 4 for I was cRyan on the staircase Meagging you "Please don\'t throw"'}, {'x': 19.19, 'y': 4, 'label': "Up 4 for Sam's Cheer Captain And Chris' On The Bleachers"}, {'x': 19.2, 'y': 3, 'label': 'Up 3 for I was cRyan on the staircase Meagging you "Please don\'t throw"'}, {'x': 19.74, 'y': 3, 'label': "Up 3 for Sam's Cheer Captain And Chris' On The Bleachers"}, {'x': 19.75, 'y': 2, 'label': 'Up 2 for I was cRyan on the staircase Meagging you "Please don\'t throw"'}, {'x': 23.27, 'y': 2, 'label': "Up 2 for Sam's Cheer Captain And Chris' On The Bleachers"}, {'x': 23.28, 'y': 1, 'label': 'Up 1 for I was cRyan on the staircase Meagging you "Please don\'t throw"'}, {'x': 27.66, 'y': 1, 'label': "Up 1 for Sam's Cheer Captain And Chris' On The Bleachers"}, {'x': 27.67, 'y': 2, 'label': 'Up 2 for I was cRyan on the staircase Meagging you "Please don\'t throw"'}, {'x': 32.07, 'y': 2, 'label': "Up 2 for Sam's Cheer Captain And Chris' On The Bleachers"}, {'x': 32.08, 'y': 3, 'label': 'Up 3 for I was cRyan on the staircase Meagging you "Please don\'t throw"'}, {'x': 33.44, 'y': 3, 'label': "Up 3 for Sam's Cheer Captain And Chris' On The Bleachers"}, {'x': 33.45, 'y': 2, 'label': 'Up 2 for I was cRyan on the staircase Meagging you "Please don\'t throw"'}, {'x': 34.01, 'y': 2, 'label': "Up 2 for Sam's Cheer Captain And Chris' On The Bleachers"}, {'x': 34.02, 'y': 3, 'label': 'Up 3 for I was cRyan on the staircase Meagging you "Please don\'t throw"'}, {'x': 35.09, 'y': 3, 'label': "Up 3 for Sam's Cheer Captain And Chris' On The Bleachers"}, {'x': 35.1, 'y': 2, 'label': 'Up 2 for I was cRyan on the staircase Meagging you "Please don\'t throw"'}, {'x': 36.72, 'y': 2, 'label': "Up 2 for Sam's Cheer Captain And Chris' On The Bleachers"}, {'x': 36.73, 'y': 3, 'label': 'Up 3 for I was cRyan on the staircase Meagging you "Please don\'t throw"'}, {'x': 37.26, 'y': 3, 'label': "Up 3 for Sam's Cheer Captain And Chris' On The Bleachers"}, {'x': 37.27, 'y': 2, 'label': 'Up 2 for I was cRyan on the staircase Meagging you "Please don\'t throw"'}, {'x': 37.69, 'y': 2, 'label': "Up 2 for Sam's Cheer Captain And Chris' On The Bleachers"}, {'x': 37.7, 'y': 1, 'label': 'Up 1 for I was cRyan on the staircase Meagging you "Please don\'t throw"'}, {'x': 38.39, 'y': 1, 'label': "Up 1 for Sam's Cheer Captain And Chris' On The Bleachers"}, {'x': 38.4, 'y': 0, 'label': 'Tie'}, {'x': 39.21, 'y': 0, 'label': 'Tie'}, {'x': 39.22, 'y': 1, 'label': 'Up 1 for I was cRyan on the staircase Meagging you "Please don\'t throw"'}, {'x': 40.56, 'y': 1, 'label': "Up 1 for Sam's Cheer Captain And Chris' On The Bleachers"}, {'x': 40.57, 'y': 2, 'label': 'Up 2 for I was cRyan on the staircase Meagging you "Please don\'t throw"'}, {'x': 41.42, 'y': 2, 'label': "Up 2 for Sam's Cheer Captain And Chris' On The Bleachers"}, {'x': 41.43, 'y': 1, 'label': 'Up 1 for I was cRyan on the staircase Meagging you "Please don\'t throw"'}, {'x': 41.74, 'y': 1, 'label': "Up 1 for Sam's Cheer Captain And Chris' On The Bleachers"}, {'x': 41.75, 'y': 2, 'label': 'Up 2 for I was cRyan on the staircase Meagging you "Please don\'t throw"'}, {'x': 44.34, 'y': 2, 'label': "Up 2 for Sam's Cheer Captain And Chris' On The Bleachers"}, {'x': 44.35, 'y': 3, 'label': 'Up 3 for I was cRyan on the staircase Meagging you "Please don\'t throw"'}, {'x': 45.34, 'y': 3, 'label': "Up 3 for Sam's Cheer Captain And Chris' On The Bleachers"}, {'x': 45.35, 'y': 4, 'label': 'Up 4 for I was cRyan on the staircase Meagging you "Please don\'t throw"'}, {'x': 46, 'y': 4, 'label': 'Up 4 for I was cRyan on the staircase Meagging you "Please don\'t throw"'}];
+    const xValues = [0.63, 0.81, 0.82, 2.24, 2.25, 2.79, 2.8, 3.64, 3.65, 4.21, 4.22, 5.06, 5.07, 5.37, 5.38, 6.89, 6.9, 8.91, 8.92, 13.31, 13.32, 14.01, 14.02, 15.87, 15.88, 17.41, 17.42, 18.06, 18.07, 18.94, 18.95, 19.19, 19.2, 19.74, 19.75, 23.27, 23.28, 27.66, 27.67, 32.07, 32.08, 33.44, 33.45, 34.01, 34.02, 35.09, 35.1, 36.72, 36.73, 37.26, 37.27, 37.69, 37.7, 38.39, 38.4, 39.21, 39.22, 40.56, 40.57, 41.42, 41.43, 41.74, 41.75, 44.34, 44.35, 45.34, 45.35, 46];
+    const yValues = [-1, -1, 0, 0, -1, -1, 0, 0, -1, -1, 0, 0, -1, -1, 0, 0, 1, 1, 0, 0, 1, 1, 2, 2, 3, 3, 2, 2, 3, 3, 4, 4, 3, 3, 2, 2, 1, 1, 2, 2, 3, 3, 2, 2, 3, 3, 2, 2, 3, 3, 2, 2, 1, 1, 0, 0, 1, 1, 2, 2, 1, 1, 2, 2, 3, 3, 4, 4];
+
+  
+  new Chart("myChart", {
+    type: "line",
+    data: {
+
+    labels: yValues,
+    datasets: [{
+      data: dataPoints,
+      // Add this line to include the labels in the data
+      pointHoverBackgroundColor: "red",
+      pointHoverBorderColor: "red",
+      pointHoverBorderWidth: 2,
+      pointHoverRadius: 5,
+      tension: 0.05,
+    }]
+
+
+    },
+    options: {
+
+    tooltips: {
+      callbacks: {
+        label: function(tooltipItem, data) {
+          var label = data.labels[tooltipItem.index];
+          var value = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
+          return value.label;
+
+        }
+      }
+    },
+
+      legend: {display: false},
+      title: {
+        display: true,
+        text: ""
+      },
+      scales: {
+        yAxes: [{
+          scaleLabel: {
+            display: true,
+            labelString: 'Score Difference'
+          }
+        }],
+        xAxes: [{
+          type: 'linear', // this will ensure that the x-axis is based on numeric scale
+          scaleLabel: {
+            display: true,
+            labelString: 'Gametime'
+          }
+        }]
+      }
+    }
+  });
+  
+  </script>
+
+
+
+
+</html>
