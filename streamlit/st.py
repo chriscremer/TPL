@@ -208,45 +208,45 @@ for i, team_name in enumerate(team_names):
 
 
 
-st.markdown('<br><br>', unsafe_allow_html=True)
-st.markdown('<br><br>', unsafe_allow_html=True)
-st.markdown('<br><br>', unsafe_allow_html=True)
-st.markdown('<br><br>', unsafe_allow_html=True)
+# st.markdown('<br><br>', unsafe_allow_html=True)
+# st.markdown('<br><br>', unsafe_allow_html=True)
+# st.markdown('<br><br>', unsafe_allow_html=True)
+# st.markdown('<br><br>', unsafe_allow_html=True)
 
-# st.markdown("<h1 style='text-align: center;'>Teams</h1>", unsafe_allow_html=True)
-st.markdown("<h1 style='text-align: left;'>Teams</h1>", unsafe_allow_html=True)
-for team in team_names:
-    st.markdown(f'[{team}](#team-{team.lower()})', unsafe_allow_html=True)
-    # center
-    # st.markdown(f"<center><a href='#team-{team.lower()}'>{team}</a></center>", unsafe_allow_html=True)
-st.markdown('<br><br>', unsafe_allow_html=True)
-# st.markdown('<span name="pookie">hey</span>', unsafe_allow_html=True)
+# # st.markdown("<h1 style='text-align: center;'>Teams</h1>", unsafe_allow_html=True)
+# st.markdown("<h1 style='text-align: left;'>Teams</h1>", unsafe_allow_html=True)
+# for team in team_names:
+#     st.markdown(f'[{team}](#team-{team.lower()})', unsafe_allow_html=True)
+#     # center
+#     # st.markdown(f"<center><a href='#team-{team.lower()}'>{team}</a></center>", unsafe_allow_html=True)
+# st.markdown('<br><br>', unsafe_allow_html=True)
+# # st.markdown('<span name="pookie">hey</span>', unsafe_allow_html=True)
 
-st.markdown("<h1 style='text-align: left;'>Player Salaries</h1>", unsafe_allow_html=True)
+# st.markdown("<h1 style='text-align: left;'>Player Salaries</h1>", unsafe_allow_html=True)
 
-# cols = [st.columns(2) for i in range(n_teams)]
-for i, team in enumerate(team_names):
-    roster = rosters[team]
-    # sort by salary
-    roster = sorted(roster, key=lambda player: player_salaries[player], reverse=True)
-    st.markdown (f"## Team: {team}", unsafe_allow_html=True)
-    # cols = st.columns([1, 1, 1])
-    containder_list = [st.container() for _ in range(len(roster))]
-    cols_list = [st.columns([1, 1, 1, 1]) for _ in range(len(roster))]
-    for j, player in enumerate(roster):
-        with containder_list[j]:
-            with cols_list[j][0]:
-                st.markdown(f"Player: {player}<br>Current Salary: ${player_salaries[player]}", unsafe_allow_html=True)
-            with cols_list[j][2]:
-                if player < 4: # GMs
-                    your_bid = st.slider (f"Player {player}", 0, max_salary, player_salaries[player], label_visibility="hidden", disabled=True)
-                else:
-                    your_bid = st.slider (f"Player {player}", 0, max_salary, player_salaries[player], label_visibility="hidden")
-            with cols_list[j][1]:
-                # st.markdown (f"Your Bid: ${your_bid}")
-                # if bid > current salary then add an up arrow
-                if your_bid > player_salaries[player]:
-                    st.markdown (f'<br><span style="color: green">↑</span>Your Bid: {your_bid} (+ {your_bid - player_salaries[player]})', unsafe_allow_html=True)
-                elif your_bid < player_salaries[player]:
-                    st.markdown (f'<br><span style="color: red">↓</span>Your Bid: {your_bid} (- {player_salaries[player] - your_bid})', unsafe_allow_html=True)
-    st.markdown ('---')
+# # cols = [st.columns(2) for i in range(n_teams)]
+# for i, team in enumerate(team_names):
+#     roster = rosters[team]
+#     # sort by salary
+#     roster = sorted(roster, key=lambda player: player_salaries[player], reverse=True)
+#     st.markdown (f"## Team: {team}", unsafe_allow_html=True)
+#     # cols = st.columns([1, 1, 1])
+#     containder_list = [st.container() for _ in range(len(roster))]
+#     cols_list = [st.columns([1, 1, 1, 1]) for _ in range(len(roster))]
+#     for j, player in enumerate(roster):
+#         with containder_list[j]:
+#             with cols_list[j][0]:
+#                 st.markdown(f"Player: {player}<br>Current Salary: ${player_salaries[player]}", unsafe_allow_html=True)
+#             with cols_list[j][2]:
+#                 if player < 4: # GMs
+#                     your_bid = st.slider (f"Player {player}", 0, max_salary, player_salaries[player], label_visibility="hidden", disabled=True)
+#                 else:
+#                     your_bid = st.slider (f"Player {player}", 0, max_salary, player_salaries[player], label_visibility="hidden")
+#             with cols_list[j][1]:
+#                 # st.markdown (f"Your Bid: ${your_bid}")
+#                 # if bid > current salary then add an up arrow
+#                 if your_bid > player_salaries[player]:
+#                     st.markdown (f'<br><span style="color: green">↑</span>Your Bid: {your_bid} (+ {your_bid - player_salaries[player]})', unsafe_allow_html=True)
+#                 elif your_bid < player_salaries[player]:
+#                     st.markdown (f'<br><span style="color: red">↓</span>Your Bid: {your_bid} (- {player_salaries[player] - your_bid})', unsafe_allow_html=True)
+#     st.markdown ('---')
