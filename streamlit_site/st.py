@@ -9,15 +9,16 @@ import pandas as pd
 import numpy as np
 import random
 
-# to deal with ModuleNotFoundError
-import os, sys
-sys.path.append(os.getcwd())
-from streamlit_site.my_pages.league import leage_page
+# # to deal with ModuleNotFoundError
+# import os, sys
+# sys.path.append(os.getcwd())
+# from streamlit_site.my_pages.league import leage_page
+
+from my_pages.league import leage_page
 
 
 
 
-# make it wide
 st.set_page_config(page_title="TPL", layout="wide", page_icon="🎯")
 st.markdown("<h1 style='text-align: center;'>TPL</h1>", unsafe_allow_html=True)
 
@@ -32,7 +33,6 @@ if 'login_status' not in stss or stss['login_status'] == False:
     if submitted:
         stss['login_status'] = True
         stss['team_name'] = team_name
-        print (f"2 stss['login_status']: {stss['login_status']}")
         st.rerun()
 
 else:
