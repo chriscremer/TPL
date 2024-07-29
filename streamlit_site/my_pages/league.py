@@ -2,6 +2,8 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import random
+from gspread_dataframe import set_with_dataframe, get_as_dataframe
+from utils import get_connection
 
 
 def compute_player_salaries(rosters, player_bids, team_names):
@@ -68,42 +70,149 @@ def display_team(team_name, rosters, player_salaries, max_salary):
     st.markdown('<br><br>', unsafe_allow_html=True)
 
 
+def display_team2(team_name, rosters, player_salaries, max_salary, df_players):
+
+    # convert rosters to dataframe
+    roster = rosters[team_name]
+    team_df = pd.DataFrame(roster, columns=['Player'])
+    team_df['Salary'] = [player_salaries[player] for player in roster]
+
+    # merge with gender from df_players
+    # print (df_players.columns)
+    team_df = team_df.merge(df_players, left_on='Player', right_on='Full Name', how='left')
 
 
-def leage_page():
+    team_df = team_df.sort_values(by=['Salary'], ascending=False)
+    team_df = team_df.reset_index(drop=True)
 
-    random.seed(0)
+    # print (team_df.columns)
 
-    n_teams = 10
-    n_players = n_teams * 14
-    max_salary = 500
-    your_team = 'Team C'
+    # display team
+    for i, row in team_df.iterrows():
+        player_name = row['Player']
+        salary = row['Salary']
+        gender = row['Gender']
+        cols = st.columns([1, 2, 1, 2, 1])
 
-    # convert number to letter
-    def number_to_letter(n):
-        return chr(n + 65)
-    team_names = [f"Team {number_to_letter(i)}" for i in range(n_teams)]
+        with cols[1]:
+            # st.markdown(f"Player: {player_name}<br>Salary: ${salary}", unsafe_allow_html=True)
+            # color = '#ADD8E6' if player_name % 2 == 1 else '#FF69B4'
+            color = '#ADD8E6' if gender == 'Male' else '#FF69B4'
+            st.markdown(f"<span style='color:{color}'>{player_name}<br>Salary: ${salary}</span>", unsafe_allow_html=True)
+        with cols[3]:
+            if 'Chris' in player_name or 'WILD' in player_name:
+                #disable slider
+                my_bid = st.slider("Your Bid", 0, max_salary, salary, key=f"{team_name}-{player_name}", label_visibility='collapsed', disabled=True)
+            else:
+                my_bid = st.slider("Your Bid", 0, max_salary, salary, key=f"{team_name}-{player_name}", label_visibility='collapsed')
 
-    # randomly assign bids to players
-    player_names = list(range(1, n_players+1))
-    player_bids = {player: {} for player in player_names}
-    for player, bids in player_bids.items():
-        for team in team_names:
-            bids[team] = random.randint(1, max_salary)
+        with cols[2]:
+            if my_bid > salary:
+                st.markdown(f'<br><span style="color: green">↑</span> {my_bid - salary}', unsafe_allow_html=True)
+            elif my_bid < salary:
+                st.markdown(f'<br><span style="color: red">↓</span> {salary - my_bid}', unsafe_allow_html=True)
 
-    # randomly assign players to teams
-    rosters = {team: [] for team in team_names}
-    for player in player_names:
-        # find all teams with the minimum number of players
-        min_players = min([len(rosters[team]) for team in team_names])
-        min_teams = [team for team in team_names if len(rosters[team]) == min_players]
-        # randomly assign player to one of the teams
-        team = random.choice(min_teams)
-        rosters[team].append(player)
+    st.markdown('<br><br>', unsafe_allow_html=True)
 
 
-    player_salaries = compute_player_salaries(rosters, player_bids, team_names)
-    team_costs = get_team_costs(rosters, player_salaries, team_names)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+def league_page():
+
+    
+    random_data = 0
+    if random_data:
+
+        random.seed(0)
+        n_teams = 10
+        n_players = n_teams * 14
+        max_salary = 500
+        your_team = 'Team C'
+
+        # convert number to letter
+        def number_to_letter(n):
+            return chr(n + 65)
+        team_names = [f"Team {number_to_letter(i)}" for i in range(n_teams)]
+
+        # randomly assign bids to players
+        player_names = list(range(1, n_players+1))
+        player_bids = {player: {} for player in player_names}
+        for player, bids in player_bids.items():
+            for team in team_names:
+                bids[team] = random.randint(1, max_salary)
+
+        # randomly assign players to teams
+        rosters = {team: [] for team in team_names}
+        for player in player_names:
+            # find all teams with the minimum number of players
+            min_players = min([len(rosters[team]) for team in team_names])
+            min_teams = [team for team in team_names if len(rosters[team]) == min_players]
+            # randomly assign player to one of the teams
+            team = random.choice(min_teams)
+            rosters[team].append(player)
+
+
+        player_salaries = compute_player_salaries(rosters, player_bids, team_names)
+        # team_costs = get_team_costs(rosters, player_salaries, team_names)
+
+
+    else:
+        if 'conn' not in st.session_state:
+            conn = get_connection()
+            st.session_state['conn'] = conn
+
+        conn = st.session_state['conn']
+        worksheets = conn.worksheets()
+        players_sheet = [worksheet for worksheet in worksheets if worksheet.title == 'Players'][0]
+        df_players = get_as_dataframe(players_sheet)
+        team_names = list(df_players['Team'].unique())
+
+        max_cap = df_players['Cap Impact'].max()
+        max_salary = 500
+        scale = max_salary / max_cap
+        your_team = team_names[0]
+
+        player_names = df_players['Full Name'].tolist()
+        player_bids = {player: {} for player in player_names}
+        for player, bids in player_bids.items():
+            for team in team_names:
+                cap_impact = df_players.loc[df_players['Full Name'] == player]['Cap Impact'].values[0]
+                scaled_salary = int(cap_impact * scale)
+                bids[team] = scaled_salary
+        
+        rosters = {team: [] for team in team_names}
+        for i, row in df_players.iterrows():
+            team = row['Team']
+            name = row['Full Name']
+            rosters[team].append(name)
+
+        player_salaries = compute_player_salaries(rosters, player_bids, team_names)
+
+
+    # Add save button
+    changes = False
+    if changes:
+        save = st.button('Save Changes')
+    else:
+        save = st.button('No Changes', disabled=True)
+    if save:
+        print ('Save')
 
     n_teams = len(team_names)
     teams_per_row = 3
@@ -111,11 +220,10 @@ def leage_page():
     container_list = [st.container() for _ in range(n_rows*2)]
     cols_list = [st.columns(teams_per_row) for _ in range(n_rows*2)]
 
-    # put your team first
+    # Put your team first
     team_names.remove(your_team)
     team_names = [your_team] + team_names
-
-
+    # Display all teams
     for i, team_name in enumerate(team_names):
 
         # Center your team
@@ -133,7 +241,9 @@ def leage_page():
 
         with container_list[row + 1]:
             with cols_list[row + 1][col]:
-                display_team(team_name, rosters, player_salaries, max_salary)
+                display_team2(team_name, rosters, player_salaries, max_salary, df_players)
 
+
+    # print (list(st.session_state.keys()))
 
 
