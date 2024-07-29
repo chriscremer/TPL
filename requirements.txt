@@ -26,7 +26,6 @@ jsonpatch==1.33
 jsonpointer==2.1
 jsonschema==4.23.0
 jsonschema-specifications==2023.12.1
-libmambapy==1.5.8
 markdown-it-py==3.0.0
 MarkupSafe==2.1.5
 mdurl==0.1.2
