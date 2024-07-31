@@ -52,6 +52,8 @@ if ('login_status' not in stss or stss['login_status'] == False) and not stay_lo
             password_correct = login_df[login_df['Username'] == team_name]['Password'].values[0] == password
             if password_correct:
                 stss['login_status'] = True
+                if team_name == 'a':
+                    team_name = "FaulklHore (Revenge of the Swift Version)"
                 stss['team_name'] = team_name
                 st.rerun()
             else:
@@ -75,21 +77,15 @@ else:
         logout = st.button('Logout')
         if logout:
             stss['login_status'] = False
+            print (f"Logging out {stss['team_name']}")
+            # erase session state
+            for key in list(stss.keys()):
+                del stss[key]
             st.rerun()
 
     # with tabs[tabs_list.index('Algo')]:
     #     algo_tabs_list = ['Run Algo', 'Team A', 'Team B', 'Team C']
     #     teams_tabs = st.tabs(algo_tabs_list)
-
-
-
-
-
-# print ('iii')
-# print (list(st.session_state.keys()))
-# print (len(list(st.session_state.keys())))
-# print (stss['Team C-95'])
-# print ('iIii')
 
 
 
