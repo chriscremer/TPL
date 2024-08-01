@@ -23,13 +23,17 @@ If you're busy once week, dont need to do anything ..
 - no complicated team cap rules based on wins and point dif. 
 
 
-## How would this work?
+## What does a GM need to do?
 - login once a week and adjust your bids for the players that you want to acquire/trade away
-- once bids are in, we run the algorithm to balance the teams while taking into account the GM preferences
+- organize your team (find subs if necessary)
+
+Once bids are in, we run the algorithm to balance the teams while taking into account the GM preferences. 
+So the job of the GMs is to accurately access the value of players in the league, along with organizing and finding subs for their games.
 
 
 ## How are salaries determined?
 A player's salary is the average of the bids across all the GMs.
+
 
 ## How does the trading algorithm work?
 The goal of the algorithm is to balance the teams while taking into account the preferences of the GMs.
@@ -41,11 +45,16 @@ Here's the current implementation for selecting a trade:
 3. for each of those teams, consider trading that player with players on the offering team (excluding the top n players on the offering team which they value most relative to league)
 4. pick the trade that minimizes the standard deviation of the teams salaries
 
+Another way to interpret this algorithm:
+- Make a list of all possible trades
+- Remove from the list trades that don't fit the GMs preferences
+- Pick the trade that best balances the teams
+- Repeat until teams are balanced or we've hit a limit on number of trades
 
 
-<br>
-<br>
-<br>
+## What effects would this have?
+- If the demand for a player increases, their salary will increase. So if a GM wants to hold on to a in-demand player, they'll have to pay for them. 
+
 <br>
 <br>
 <br>
