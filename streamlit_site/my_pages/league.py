@@ -146,6 +146,7 @@ def league_page():
         df_players = get_as_dataframe(players_sheet)
         stss['worksheets'] = worksheets
         stss['df_players'] = df_players
+        stss['player_names'] = df_players['Full Name'].tolist()
 
     conn = stss['conn']
     worksheets = stss['worksheets']
@@ -239,7 +240,8 @@ def league_page():
         end_row_idx = len(player_bids) + 1
         col_letter = chr(team_names.index(col_name) + 65 + 1) # +1 for the index column
         values = []
-        for player_name in player_bids.keys():
+        # for player_name in player_bids.keys():
+        for player_name in stss['player_names']:
             player_team = df_players.loc[df_players['Full Name'] == player_name]['Team'].values[0]
             bid = st.session_state[f"{player_team}-{player_name}"]
             values.append([bid])
