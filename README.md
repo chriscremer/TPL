@@ -11,9 +11,8 @@ Currently, the system for determining a player's salary is based on their stats 
 Allowing GMs to determine the salaries of players instead of a stats-based system results in more accurate player salaries, leading to better league parity.
 
 ### Trading
-The current process of trading players involves proposing numerous trades to other GMs, which often get rejected. It's a tedious process. 
-less work for GMs, hopefully more enjoyable and less time consuming. your job becomes accurately accessing players 
-If you're busy once week, dont need to do anything .. 
+The current process of trading players involves proposing numerous trades to other GMs, which often get rejected. It's a time consuming (and sometimes frustrating) process. 
+Automatically determinig the trades results in less work for GMs, which hopefully makes it more enjoyable and less time consuming. A GM's job becomes accurately accessing players instead of negotiating trades.
 
 ### Summary of Benefits
 - more accurate salaries + better league parity
