@@ -55,7 +55,17 @@ Another way to interpret this algorithm:
 ## What effects would this have?
 - If the demand for a player increases, their salary will increase. So if a GM wants to hold on to a in-demand player, they'll have to pay for them. 
 
-<br>
+## FAQ
+
+### What if I don't know the value of a player?
+- Just leave it as the default value, which is the average bid of all GMs from the previous week.
+
+### What if I'm too busy one week to update my bid on players?
+- No problem, the algorithm will still balance your team. Your bids will be set to the average bid of all GMs from the previous week.
+
+### Are there ways to exploit the algorithm?
+- Possibly, but we can adjust it throughout the season to address any issues we encounter. In general, the optimal strategy will be to bid what each player is worth.
+
 <br>
 <br>
 
