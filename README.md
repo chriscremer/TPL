@@ -50,9 +50,10 @@ Another way to interpret this algorithm:
 - Pick the trade that best balances the teams
 - Repeat until teams are balanced or we've hit a limit on number of trades
 
+## What effects would this algorithm have?
+- If the demand for a player increases, their salary will increase. So if a GM wants to hold on to a in-demand player, they'll have to pay more for them. 
 
-## What effects would this have?
-- If the demand for a player increases, their salary will increase. So if a GM wants to hold on to a in-demand player, they'll have to pay for them. 
+
 
 ## FAQ
 
@@ -64,6 +65,14 @@ Another way to interpret this algorithm:
 
 ### Are there ways to exploit the algorithm?
 - Possibly, but we can adjust it throughout the season to address any issues we encounter. In general, the optimal strategy will be to bid what each player is worth.
+
+### How can we add special trade rules each week?
+- We could add special bidding rules each week, for example:
+  - Bid the same amount for three of the players on your team.
+  - Bid the max value for five players in the league.
+  - Have half your team be above some value, and the other half below that value. 
+
+
 
 <br>
 <br>
