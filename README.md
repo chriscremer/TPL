@@ -39,22 +39,13 @@ We run an algorithm which automatically determines the trades by balancing the t
 ## How does the trading algorithm work?
 The goal of the algorithm is to balance the teams while taking into account the preferences of the GMs.
 
-
-Here's the current implementation for selecting a trade:
-1. for each team, take the top n players with the highest difference in salary and owner bid (players you value the least)
-2. for each of those players, consider the top m teams with the highest offers
-3. for each of those teams, consider trading that player with players on the offering team (excluding the top n players on the offering team which they value most relative to league)
-4. pick the trade that minimizes the standard deviation of the teams salaries
-
-Another way to interpret this algorithm:
-- Make a list of all possible trades
-- Remove from the list trades that don't fit the GMs preferences
-- Pick the trade that best balances the teams
-- Repeat until teams are balanced or we've hit a limit on number of trades
-
-This algorithm may need some tweaking throughout the season if the GMs find ways of exploting it.
+Here's the [current implementation](https://github.com/chriscremer/TPL/blob/main/streamlit_site/algo3.py) for selecting a trade:
+1. Make a list of all possible trades (exclude team captains, wildcards, etc.)
+2. Pick the trade that best balances the teams (with a preference towards trades that make both teams happy)
+3. Repeat until teams are balanced or we've hit a limit on number of trades
 
 Once bids are in each week, we run the algorithm to balance the teams. So the job of a GM is to accurately access the value of the players in the league (no more negotiating trades). 
+The algorithm may need some tweaking throughout the season if the GMs find that their preferences aren't being reflected in the trades.
 
 ### What effects would this algorithm have?
 - If the demand for a player increases, their salary will increase. So if a GM wants to hold on to a in-demand player, they'll have to pay more for them. So it becomes harder for GMs to hog players.
