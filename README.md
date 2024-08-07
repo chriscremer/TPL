@@ -83,10 +83,13 @@ Once bids are in each week, we run the algorithm to balance the teams. So the jo
   - Bid the max value for five players in the league.
   - Have half your team be above some value, and the other half below that value. 
 
+### How will GM salaries be determined, since GMs cant be bidded on?
+- We'll use a simple linear regression model to predict salary given stats.
+
 ### If we adopt this system, what does a GM need to do?
 - login once a week and adjust their bids for the players that they want to acquire/trade away
 - organize their team (find subs if necessary)
-  
+
 
 
 
