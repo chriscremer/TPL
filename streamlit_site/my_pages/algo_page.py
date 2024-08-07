@@ -82,10 +82,7 @@ def algo_page():
     salary_col_name = f"Week {latest_week} - Salary"
     bids_sheet_name = f'Week {latest_week} - Bids'
 
-    if 'all_player_bids' not in stss:
-        all_player_bids = get_all_bids_from_sheet(conn, stss, bids_sheet_name, worksheets, player_salaries)
-    else:
-        all_player_bids = stss['all_player_bids']
+
 
 
     team_names_tabs = [team_name[:13] for team_name in team_names]
@@ -97,6 +94,11 @@ def algo_page():
 
         run_algo_button = st.button('Run Algo')
         if run_algo_button:
+
+            # if 'all_player_bids' not in stss:
+            all_player_bids = get_all_bids_from_sheet(conn, stss, bids_sheet_name, worksheets, player_salaries)
+            # else:
+                # all_player_bids = stss['all_player_bids']
 
             rosters_team_list = {}
             for team_name in team_names:
@@ -125,7 +127,6 @@ def algo_page():
                     player_bids[player_name][team_name] = row[team_name]
             # print (player_bids)
 
-            # TODO
 
 
             # show table of starting team costs
@@ -181,6 +182,9 @@ def algo_page():
                 text += f"{trade['team_2']}: <b>{trade['player_2']}</b> ({player2_salary})"
                 text += f"<br>Salary Diff: {salary_diff}"
                 text += f"<br>Standard Deviation: {trade['team_costs_std']:.2f}"
+                text += f"<br>Team 1 Happiness Change: {trade['team1_happiness_change']}"
+                text += f"<br>Team 2 Happiness Change: {trade['team2_happiness_change']}"
+                text += f"<br>Total Happiness Change: {trade['happiness_change']}"
                 text += f"</p>"
                 st.markdown(text, unsafe_allow_html=True)
                 st.markdown('<hr>', unsafe_allow_html=True)

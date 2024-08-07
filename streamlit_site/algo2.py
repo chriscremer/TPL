@@ -89,7 +89,7 @@ def run_algo(team_costs, rosters, player_salaries, player_bids, player_genders):
         
     n_players_to_consider = 7 # the players you value the least on your team
     n_offering_teams_to_consider = 4 # the teams with the highest offers
-    n_offering_players_to_protect = 3 # the players you value the most on your team
+    n_offering_players_to_protect = 2 # the players you value the most on your team
     max_trades = 3
 
     team_names = list(team_costs.keys())
@@ -97,6 +97,7 @@ def run_algo(team_costs, rosters, player_salaries, player_bids, player_genders):
     count_team_trades = {team: 0 for team in team_names}
     prev_team_costs_std = np.std(list(team_costs.values()))
     trades = []
+    traded_players = []
     for trade_i in range(n_teams * max_trades // 2):
 
         possible_trades = []
@@ -110,13 +111,23 @@ def run_algo(team_costs, rosters, player_salaries, player_bids, player_genders):
             players = rosters[team_1]
             # remove players that have 'WILD' in their name
             players = [player for player in players if 'WILD' not in player]
+            # remove players that have already been traded
+            players = [player for player in players if player not in traded_players]
 
             # sort players on team by difference in offer and owner salary
             player_diffs = {player: player_salaries[player] - player_bids[player][team_1] for player in players}
             player_diffs = {k: v for k, v in sorted(player_diffs.items(), key=lambda item: item[1], reverse=True)}
 
+            team_1_players_to_trade = list(player_diffs.keys())[:n_players_to_consider]
+
+            # if 'Faulk' in team_1:
+            #     for player, diff in player_diffs.items():
+            #         print (f"{player}: {diff}")
+            #     print (team_1_players_to_trade)
+            
+
             # take bot n players with the highest difference in salary and owner bid
-            for player_1 in list(player_diffs.keys())[:n_players_to_consider]:
+            for player_1 in team_1_players_to_trade:
 
                 player_1_gender = player_genders[player_1]
 
@@ -128,24 +139,39 @@ def run_algo(team_costs, rosters, player_salaries, player_bids, player_genders):
                 offers = {k: v for k, v in offers.items() if count_team_trades[k] < max_trades}
                 if len(offers) == 0:
                     continue
-
+                
+                
                 # consider top m offering teams
-                for offering_team in list(offers.keys())[:n_offering_teams_to_consider]:
+                teams_to_consider_trading_to = list(offers.keys())[:n_offering_teams_to_consider]
+                for offering_team in teams_to_consider_trading_to:
 
                     offering_team_roster = rosters[offering_team]
+                    # remove players that have 'WILD' in their name
+                    offering_team_roster = [player for player in offering_team_roster if 'WILD' not in player]
+                    # only keep players of the same gender
+                    offering_team_roster = [player for player in offering_team_roster if player_1_gender == player_genders[player]]
+                    # remove players that have already been traded
+                    offering_team_roster = [player for player in offering_team_roster if player not in traded_players]
+
                     # exclude the top n players on the offering team which they value most relative to league
-                    offering_team_player_diffs = {player: player_salaries[player] - player_bids[player][offering_team] for player in offering_team_roster}
+                    # offering_team_player_diffs = {player: player_salaries[player] - player_bids[player][offering_team] for player in offering_team_roster}
+                    offering_team_player_diffs = {player: player_bids[player][offering_team] - player_salaries[player]  for player in offering_team_roster}
                     offering_team_player_diffs = {k: v for k, v in sorted(offering_team_player_diffs.items(), key=lambda item: item[1], reverse=True)}
                     available_offering_team_players = list(offering_team_player_diffs.keys())[n_offering_players_to_protect:]
 
+                    # if 'Faulk' in offering_team and trade_i == 2:
+                    #     print (offering_team_player_diffs)
+                    #     print (available_offering_team_players)
+                    #     print ()
+
                     # consider trading this player with players on the offering team
                     for player_2 in available_offering_team_players:
-                        # check gender of players
-                        if player_1_gender != player_genders[player_2]:
-                            continue
-                        # check if player_2 is a 'WILD' player
-                        if 'WILD' in player_2:
-                            continue
+                        # # check gender of players
+                        # if player_1_gender != player_genders[player_2]:
+                        #     continue
+                        # # check if player_2 is a 'WILD' player
+                        # if 'WILD' in player_2:
+                        #     continue
 
                         # trade player 1 from team 1 to team 2 for player 2
                         rosters_before = rosters.copy()
@@ -164,6 +190,9 @@ def run_algo(team_costs, rosters, player_salaries, player_bids, player_genders):
             
         # sort by team costs std
         possible_trades = sorted(possible_trades, key=lambda x: x[4])
+        print (f"total possible trades: {len(possible_trades)}")
+
+        # pick the trade that minimizes the standard deviation of team costs
         team_1, player_1, team_2, player_2, team_costs_std = possible_trades[0]
         team_costs_std_diff = prev_team_costs_std - team_costs_std
         prev_team_costs_std = team_costs_std
@@ -198,6 +227,8 @@ def run_algo(team_costs, rosters, player_salaries, player_bids, player_genders):
             'team1_happiness_change': team1_happiness_change,
             'team2_happiness_change': team2_happiness_change,
         })
+        traded_players.append(player_1)
+        traded_players.append(player_2)
         # print (f"Team costs std: {team_costs_std:.2f} (dif: {team_costs_std_diff:.2f})")
         # print (f"Total team self value change: {happiness_change:.1f}, {team_1[:13]}: {team1_happiness_change:.1f}, {team_2[:13]}: {team2_happiness_change:.1f}")
         # print ('-----------------\n')

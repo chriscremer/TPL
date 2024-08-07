@@ -205,7 +205,7 @@ def league_page():
                 # original_bid = stss["original_bids"][player]
                 # if player_salaries[player] != stss[f"{team}-{player}"]:
                 if current_bid != original_bid:
-                    print (f"{team}-{player} has changed")
+                    # print (f"{team}-{player} has changed")
                     changes = True
                     break
             if changes:
