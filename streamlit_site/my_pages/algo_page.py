@@ -269,5 +269,21 @@ def algo_page():
             
             st.markdown(f'Average Team Salary: {avg_team_cost}', unsafe_allow_html=True)
 
+            # Total happiness change
+            total_happiness_change = 0
+            for trade in trades:
+                total_happiness_change += trade['happiness_change']
+            # st.markdown(f'Total Happiness Change: {total_happiness_change}', unsafe_allow_html=True)
+            # if its positive, make it green
+            if total_happiness_change > 0:
+                st.markdown(f'Total Happiness Change: <span style="color:green">{total_happiness_change}</span>', unsafe_allow_html=True)
+            # if its negative, make it red
+            elif total_happiness_change < 0:
+                st.markdown(f'Total Happiness Change: <span style="color:red">{total_happiness_change}</span>', unsafe_allow_html=True)
+            else:
+                st.markdown(f'Total Happiness Change: {total_happiness_change}', unsafe_allow_html=True)
+
+
+
 
 

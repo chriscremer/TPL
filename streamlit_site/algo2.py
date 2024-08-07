@@ -93,6 +93,7 @@ def run_algo(team_costs, rosters, player_salaries, player_bids, player_genders):
     n_offering_teams_to_consider = 4 # the teams with the highest offers
     n_offering_players_to_protect = 2 # the players you value the most on your team
     max_trades = 3
+    min_std_diff = 0.25
 
     team_names = list(team_costs.keys())
     n_teams = len(team_names)
@@ -192,25 +193,74 @@ def run_algo(team_costs, rosters, player_salaries, player_bids, player_genders):
                         if team1_happiness_change <= 0 and team2_happiness_change <= 0:
                             continue
 
-                        # Add trade to possible trades
+                        # Calculate the standard deviation of team costs
                         team_costs = get_team_costs(temp_rosters, player_salaries)
                         team_costs_std = np.std(list(team_costs.values()))
-                        possible_trades.append((team_1, player_1, offering_team, player_2, team_costs_std))
-            
+
+                        # Make sure the standard deviation of team costs is decreasing
+                        team_costs_std_diff = prev_team_costs_std - team_costs_std
+                        if team_costs_std_diff < min_std_diff:
+                            continue
+
+                        # Add trade to possible trades
+                        # possible_trades.append((team_1, player_1, offering_team, player_2, team_costs_std))
+                        possible_trades.append(
+                            {"team_1": team_1, 
+                             "player_1": player_1, 
+                             "team_2": offering_team, 
+                             "player_2": player_2, 
+                             "team_costs_std": team_costs_std,
+                            "team_costs_std_diff": team_costs_std_diff,
+                            "team1_happiness_change": team1_happiness_change,
+                            "team2_happiness_change": team2_happiness_change,
+                            }
+                            
+                        )
+        
+
+        # find all trades where both teams are better off
+        happy_trades = []
+        for trade1 in possible_trades:
+            if trade1["team1_happiness_change"] > 0 and trade1["team2_happiness_change"] > 0:
+                happy_trades.append(trade1)
+
+        if len(happy_trades) > 0:
+            possible_trades = happy_trades
+            print (f"{trade_i} total happy trades: {len(possible_trades)}")
+        else:
+            print (f"{trade_i} total possible trades: {len(possible_trades)}")
+
+
         # sort by team costs std
-        possible_trades = sorted(possible_trades, key=lambda x: x[4])
-        print (f"total possible trades: {len(possible_trades)}")
+        possible_trades = sorted(possible_trades, key=lambda x: x["team_costs_std"])
+        
+
+        # stop if no possible trades
+        if len(possible_trades) == 0:
+            break
 
         # pick the trade that minimizes the standard deviation of team costs
-        team_1, player_1, team_2, player_2, team_costs_std = possible_trades[0]
-        team_costs_std_diff = prev_team_costs_std - team_costs_std
+        # team_1, player_1, team_2, player_2, team_costs_std = possible_trades[0]
+        trade1 = possible_trades[0]
+        team_1 = trade1["team_1"]
+        player_1 = trade1["player_1"]
+        team_2 = trade1["team_2"]
+        player_2 = trade1["player_2"]
+        team_costs_std = trade1["team_costs_std"]
+        team_costs_std_diff = trade1["team_costs_std_diff"]
+        team1_happiness_change = trade1["team1_happiness_change"]
+        team2_happiness_change = trade1["team2_happiness_change"]
+
+
+        # team_costs_std_diff = prev_team_costs_std - team_costs_std
         prev_team_costs_std = team_costs_std
 
         # stop if std is not changing much
-        if trade_i > 0 and team_costs_std_diff < 0.2:
+        if trade_i > 0 and team_costs_std_diff < min_std_diff:
             break    
         
-        salary_diff = player_salaries[player_2] - player_salaries[player_1]
+        # salary_diff = player_salaries[player_2] - player_salaries[player_1]
+
         # print (blue(f"Trade {trade_i}: {team_1[:13]} trades {player_1} (${player_salaries[player_1]}) to {team_2[:13]} for {player_2} (${player_salaries[player_2]}): {salary_diff}"))
         rosters_before = rosters.copy()
         rosters = trade(rosters, team_1, player_1, team_2, player_2, team_names)
