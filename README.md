@@ -96,4 +96,10 @@ Once bids are in each week, we run the algorithm to balance the teams. So the jo
 <br>
 <br>
 
+## TODOs
+
+- [ ] Ability to upload/download the salaries/bids for the whole league, so GMs can write their bids in a excel sheet then upload instead of using all the sliders
+- [ ] Add all player stats to the site
+- [ ] Show change in player salary over time
+
 
