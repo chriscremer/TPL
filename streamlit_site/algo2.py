@@ -9,17 +9,17 @@ import random
 from utils import blue, cyan, red, magenta, green, yellow, underline, bold, strikethrough, strike
 
 
-def compute_player_salaries(rosters, player_bids):
-    player_salaries = {}
-    for team, roster in rosters.items():
-        for player in roster:
-            bids = player_bids[player]
-            # salary = max([bids[t] for t in team_names if t != team])
-            # salary = np.mean([bids[t] for t in team_names if t != team])
-            salary = np.mean([bids[t] for t in team_names])
-            salary = int(salary)
-            player_salaries[player] = salary
-    return player_salaries
+# def compute_player_salaries(rosters, player_bids, team_names):
+#     player_salaries = {}
+#     for team, roster in rosters.items():
+#         for player in roster:
+#             bids = player_bids[player]
+#             # salary = max([bids[t] for t in team_names if t != team])
+#             # salary = np.mean([bids[t] for t in team_names if t != team])
+#             salary = np.mean([bids[t] for t in team_names])
+#             salary = int(salary)
+#             player_salaries[player] = salary
+#     return player_salaries
 
 
 def get_team_costs(rosters, player_salaries):
@@ -86,6 +86,8 @@ def run_algo(team_costs, rosters, player_salaries, player_bids, player_genders):
     team_costs: dict of team-name: team-cost
     rosters: dict of team-name: list of players
     """
+
+    random.seed(0)
         
     n_players_to_consider = 7 # the players you value the least on your team
     n_offering_teams_to_consider = 4 # the teams with the highest offers
@@ -113,6 +115,10 @@ def run_algo(team_costs, rosters, player_salaries, player_bids, player_genders):
             players = [player for player in players if 'WILD' not in player]
             # remove players that have already been traded
             players = [player for player in players if player not in traded_players]
+
+            # shuffle players in case of ties
+            random.shuffle(players)
+
 
             # sort players on team by difference in offer and owner salary
             player_diffs = {player: player_salaries[player] - player_bids[player][team_1] for player in players}
@@ -152,6 +158,9 @@ def run_algo(team_costs, rosters, player_salaries, player_bids, player_genders):
                     offering_team_roster = [player for player in offering_team_roster if player_1_gender == player_genders[player]]
                     # remove players that have already been traded
                     offering_team_roster = [player for player in offering_team_roster if player not in traded_players]
+
+                    # shuffle players in case of ties
+                    random.shuffle(offering_team_roster)
 
                     # exclude the top n players on the offering team which they value most relative to league
                     # offering_team_player_diffs = {player: player_salaries[player] - player_bids[player][offering_team] for player in offering_team_roster}
@@ -262,86 +271,74 @@ def run_algo(team_costs, rosters, player_salaries, player_bids, player_genders):
 
 
 
-if __name__ == '__main__':
-    # python -m streamlit_site.algo2
+# if __name__ == '__main__':
+    # # python -m streamlit_site.algo2
 
 
-    # from SVA.Z_other_code.colours import blue, red, underline, magenta, cyan, bold, green, yellow
-    from streamlit_site.utils import blue, cyan, red, magenta, green, yellow, underline, bold, strikethrough, strike    
+    # # from SVA.Z_other_code.colours import blue, red, underline, magenta, cyan, bold, green, yellow
+    # from streamlit_site.utils import blue, cyan, red, magenta, green, yellow, underline, bold, strikethrough, strike    
 
-    # afds
-    random.seed(0)
+    # # afds
+    # random.seed(0)
 
-    n_teams = 10
-    n_players = 200
-    max_salary = 500
+    # n_teams = 10
+    # n_players = 200
+    # max_salary = 500
 
-    # convert number to letter
-    def number_to_letter(n):
-        return chr(n + 65)
-    team_names = [number_to_letter(i) for i in range(n_teams)]
-
-
-    player_names = list(range(1, n_players+1))
-    player_bids = {player: {} for player in player_names}
-    for player, bids in player_bids.items():
-        for team in team_names:
-            bids[team] = random.randint(1, max_salary)
-
-    # make some special teams
-    # team A: all 100 bids
-    # team B: all avg bids
-    # team C: all 1 bids
-    for player, bids in player_bids.items():
-        bids['A'] = max_salary
-        bids['C'] = 1
-        bids['D'] = 2
-
-        # Make high value players and low value players
-        if player < 20:
-            for team in bids.keys():
-                bids[team] = max_salary
-        if player > 20 and player < 40:
-            for team in bids.keys():
-                bids[team] = 1
-
-        bids['B'] = np.mean(list(bids.values()))
+    # # convert number to letter
+    # def number_to_letter(n):
+    #     return chr(n + 65)
+    # team_names = [number_to_letter(i) for i in range(n_teams)]
 
 
-    # randomly assign players to teams
-    rosters = {team: [] for team in team_names}
-    for player in player_names:
-        # find all teams with the minimum number of players
-        min_players = min([len(rosters[team]) for team in team_names])
-        min_teams = [team for team in team_names if len(rosters[team]) == min_players]
-        # randomly assign player to one of the teams
-        team = random.choice(min_teams)
-        rosters[team].append(player)
+    # player_names = list(range(1, n_players+1))
+    # player_bids = {player: {} for player in player_names}
+    # for player, bids in player_bids.items():
+    #     for team in team_names:
+    #         bids[team] = random.randint(1, max_salary)
+
+    # # make some special teams
+    # # team A: all 100 bids
+    # # team B: all avg bids
+    # # team C: all 1 bids
+    # for player, bids in player_bids.items():
+    #     bids['A'] = max_salary
+    #     bids['C'] = 1
+    #     bids['D'] = 2
+
+    #     # Make high value players and low value players
+    #     if player < 20:
+    #         for team in bids.keys():
+    #             bids[team] = max_salary
+    #     if player > 20 and player < 40:
+    #         for team in bids.keys():
+    #             bids[team] = 1
+
+    #     bids['B'] = np.mean(list(bids.values()))
 
 
-
-
-    player_salaries = compute_player_salaries(rosters, player_bids)
-    team_costs = get_team_costs(rosters, player_salaries)
-
-    print ('\nTeam Costs')
-    for team, cost in team_costs.items():
-        print (f"{team}: {cost}")
-    print ()
-
-    initial_team_values = get_team_self_values(rosters, player_bids)
+    # # randomly assign players to teams
+    # rosters = {team: [] for team in team_names}
+    # for player in player_names:
+    #     # find all teams with the minimum number of players
+    #     min_players = min([len(rosters[team]) for team in team_names])
+    #     min_teams = [team for team in team_names if len(rosters[team]) == min_players]
+    #     # randomly assign player to one of the teams
+    #     team = random.choice(min_teams)
+    #     rosters[team].append(player)
 
 
 
 
+    # player_salaries = compute_player_salaries(rosters, player_bids)
+    # team_costs = get_team_costs(rosters, player_salaries)
 
+    # print ('\nTeam Costs')
+    # for team, cost in team_costs.items():
+    #     print (f"{team}: {cost}")
+    # print ()
 
-
-    print ('\n###########################')
-    print ('Trading algorithm 3')
-    print ('###########################\n')
-
-    rosters, count_team_trades, trades = run_algo(team_costs, rosters, player_salaries, player_bids)
+    # initial_team_values = get_team_self_values(rosters, player_bids)
 
 
 
@@ -349,47 +346,59 @@ if __name__ == '__main__':
 
 
 
-    print ('\n######################################')
-    print ('Team trades:')
-    for team, count in count_team_trades.items():
-        print (f"{team}: {count}")
+    # print ('\n###########################')
+    # print ('Trading algorithm 3')
+    # print ('###########################\n')
 
-    # Avg player salary
-    avg_player_salary = np.mean(list(player_salaries.values()))
-    print (f"\nAvg player salary: {avg_player_salary}")
+    # rosters, count_team_trades, trades = run_algo(team_costs, rosters, player_salaries, player_bids)
 
 
-    # Make the avg salary of the league be max_salary / 2, so scale all salaries by this factor
-    scale = max_salary / 2 / avg_player_salary
-    print (f"Scaling salaries by {scale:.2f}\n")
-    # round to nearest integer
-    player_salaries = {k: round(v * scale) for k, v in player_salaries.items()}
-
-    # Cap salaries at max_salary
-    player_salaries = {k: min(v, max_salary) for k, v in player_salaries.items()}
-
-    team_costs = get_team_costs(rosters, player_salaries)
-    for team, cost in team_costs.items():
-        print (f"{team}: {cost}")
-
-    avg_player_salary = np.mean(list(player_salaries.values()))
-    max_salary = max(list(player_salaries.values()))
-    min_salary = min(list(player_salaries.values()))
-
-    print (f"\nMax salary: {max_salary}")
-    print (f"Min salary: {min_salary}")
-    print (f"Avg player salary: {avg_player_salary}")
 
 
-    # Calculate how much each team thinks its own team is worth
-    final_team_values = get_team_self_values(rosters, player_bids)
-    print ('\nTeam self values difference')
-    for team, value in final_team_values.items():
-        print (f"{team}: {value - initial_team_values[team]:.1f}")
-    # Avg happiness improvement
-    happiness_improvement = np.sum([value - initial_team_values[team] for team, value in final_team_values.items()])
-    print (f"Team self value improvement: {happiness_improvement:.1f}")
-    print ('######################################\n')
+
+
+
+    # print ('\n######################################')
+    # print ('Team trades:')
+    # for team, count in count_team_trades.items():
+    #     print (f"{team}: {count}")
+
+    # # Avg player salary
+    # avg_player_salary = np.mean(list(player_salaries.values()))
+    # print (f"\nAvg player salary: {avg_player_salary}")
+
+
+    # # Make the avg salary of the league be max_salary / 2, so scale all salaries by this factor
+    # scale = max_salary / 2 / avg_player_salary
+    # print (f"Scaling salaries by {scale:.2f}\n")
+    # # round to nearest integer
+    # player_salaries = {k: round(v * scale) for k, v in player_salaries.items()}
+
+    # # Cap salaries at max_salary
+    # player_salaries = {k: min(v, max_salary) for k, v in player_salaries.items()}
+
+    # team_costs = get_team_costs(rosters, player_salaries)
+    # for team, cost in team_costs.items():
+    #     print (f"{team}: {cost}")
+
+    # avg_player_salary = np.mean(list(player_salaries.values()))
+    # max_salary = max(list(player_salaries.values()))
+    # min_salary = min(list(player_salaries.values()))
+
+    # print (f"\nMax salary: {max_salary}")
+    # print (f"Min salary: {min_salary}")
+    # print (f"Avg player salary: {avg_player_salary}")
+
+
+    # # Calculate how much each team thinks its own team is worth
+    # final_team_values = get_team_self_values(rosters, player_bids)
+    # print ('\nTeam self values difference')
+    # for team, value in final_team_values.items():
+    #     print (f"{team}: {value - initial_team_values[team]:.1f}")
+    # # Avg happiness improvement
+    # happiness_improvement = np.sum([value - initial_team_values[team] for team, value in final_team_values.items()])
+    # print (f"Team self value improvement: {happiness_improvement:.1f}")
+    # print ('######################################\n')
 
 
 

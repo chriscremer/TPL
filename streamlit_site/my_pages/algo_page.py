@@ -127,6 +127,12 @@ def algo_page():
                     player_bids[player_name][team_name] = row[team_name]
             # print (player_bids)
 
+            # make dict of player_name: gender
+            player_genders = {}
+            for player_name in player_names:
+                gender = df_players[df_players['Full Name'] == player_name]['Gender'].values[0]
+                player_genders[player_name] = gender
+
 
 
             # show table of starting team costs
@@ -137,17 +143,18 @@ def algo_page():
             # sort by salary
             team_costs_df = team_costs_df.sort_values(by='Salary', ascending=False)
 
+            # show avg team cost
+            avg_team_cost = int(sum(team_costs.values()) / len(team_costs))
+            st.markdown(f'Average Team Salary: {avg_team_cost}', unsafe_allow_html=True)
+
+            # add column of dif from avg
+            team_costs_df['Diff from Avg'] = team_costs_df['Salary'] - avg_team_cost
+
             cols_0 = st.columns(2)
             with cols_0[0]:
                 st.table(team_costs_df)
 
 
-
-            # make dict of player_name: gender
-            player_genders = {}
-            for player_name in player_names:
-                gender = df_players[df_players['Full Name'] == player_name]['Gender'].values[0]
-                player_genders[player_name] = gender
 
 
             rosters, count_team_trades, trades = run_algo(team_costs, rosters_team_list, player_salaries, player_bids, player_genders)
@@ -184,7 +191,16 @@ def algo_page():
                 text += f"<br>Standard Deviation: {trade['team_costs_std']:.2f}"
                 text += f"<br>Team 1 Happiness Change: {trade['team1_happiness_change']}"
                 text += f"<br>Team 2 Happiness Change: {trade['team2_happiness_change']}"
-                text += f"<br>Total Happiness Change: {trade['happiness_change']}"
+                # text += f"<br>Total Happiness Change: {trade['happiness_change']}"
+                # if its positive, make it green
+                if trade['happiness_change'] > 0:
+                    text += f"<br>Total Happiness Change: <span style='color:green'>{trade['happiness_change']}</span>"
+                # if its negative, make it red
+                elif trade['happiness_change'] < 0:
+                    text += f"<br>Total Happiness Change: <span style='color:red'>{trade['happiness_change']}</span>"
+                else:
+                    text += f"<br>Total Happiness Change: {trade['happiness_change']}"
+
                 text += f"</p>"
                 st.markdown(text, unsafe_allow_html=True)
                 st.markdown('<hr>', unsafe_allow_html=True)
@@ -239,9 +255,19 @@ def algo_page():
             # sort by salary
             team_costs_df = team_costs_df.sort_values(by='Salary', ascending=False)
 
+            # add column of dif from avg
+            avg_team_cost = int(sum(team_costs.values()) / len(team_costs))
+            team_costs_df['Diff from Avg'] = team_costs_df['Salary'] - avg_team_cost
+
+            # reorder columns, salary, diff from avg, trade count
+            team_costs_df = team_costs_df[['Salary', 'Diff from Avg', 'Trade Count']]
+
+
             cols = st.columns(2)
             with cols[0]:
                 st.table(team_costs_df)
+            
+            st.markdown(f'Average Team Salary: {avg_team_cost}', unsafe_allow_html=True)
 
 
 
