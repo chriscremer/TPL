@@ -88,7 +88,7 @@ def run_algo(team_costs, rosters, player_salaries, player_bids, player_genders, 
     rosters: dict of team-name: list of players
     """
 
-    debug = 1
+    debug = 0
 
     random.seed(0)
         
