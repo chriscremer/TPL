@@ -10,8 +10,10 @@ import numpy as np
 import random
 
 from my_pages.league import league_page
+from my_pages.algo_page import algo_page
+from my_pages.settings import settings_page
 
-from gspread_dataframe import set_with_dataframe, get_as_dataframe
+from gspread_dataframe import get_as_dataframe
 from utils import get_connection
 
 
@@ -39,7 +41,23 @@ if ('login_status' not in stss or stss['login_status'] == False) and not stay_lo
     stss['login_status'] = False
     # Make a form to get the team name and password
     form = st.form(key='my_form')
-    team_name = form.text_input('Team Name')
+
+    # team_name = form.text_input('Team Name')
+    team_name = form.radio(
+        "Team Name",
+        ["FaulklHore (Revenge of the Swift Version)",
+         "You Belong Whist Me",
+            'I was cRyan on the staircase Meagging you "Please don\'t throw"',
+            "Huck the PATriarchy",
+            "DANti-Hero",
+            "Sam's Cheer Captain And Chris' On The Bleachers",
+            "Tam Mattgazine's Person of the Year",
+            "Dear John Look what you made Lysh do",
+            "Benny's Gonna Break Break Break Lexy's Gonna Fake Fake Fake",
+            "kyraless nam's careful daughter",
+        ],
+    )
+
     password = form.text_input('Password', type='password')
     submitted = form.form_submit_button('Submit')
     if submitted:
@@ -66,26 +84,17 @@ if ('login_status' not in stss or stss['login_status'] == False) and not stay_lo
         
 
 else:
-    tabs_list = ['League', 'Settings'] #, 'Algo']
+    tabs_list = ['League', 'Settings', 'Algo']
     tabs = st.tabs(tabs_list)
 
     with tabs[tabs_list.index('League')]:
         league_page()
 
     with tabs[tabs_list.index('Settings')]:
-        st.write(f'Team: {stss["team_name"]}')
-        logout = st.button('Logout')
-        if logout:
-            stss['login_status'] = False
-            print (f"Logging out {stss['team_name']}")
-            # erase session state
-            for key in list(stss.keys()):
-                del stss[key]
-            st.rerun()
+        settings_page()
 
-    # with tabs[tabs_list.index('Algo')]:
-    #     algo_tabs_list = ['Run Algo', 'Team A', 'Team B', 'Team C']
-    #     teams_tabs = st.tabs(algo_tabs_list)
+    with tabs[tabs_list.index('Algo')]:
+        algo_page()
 
 
 
