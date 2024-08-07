@@ -21,10 +21,10 @@ st.set_page_config(page_title="TPL", layout="wide", page_icon="🥏")
 st.markdown("<h1 style='text-align: center;'>TPL</h1>", unsafe_allow_html=True)
 
 stss = st.session_state
-stay_logged_in = 0
-if stay_logged_in:
-    stss['login_status'] = True
-    stss['team_name'] = 'Team A'
+# stay_logged_in = 0
+# if stay_logged_in:
+#     stss['login_status'] = True
+#     stss['team_name'] = 'Team A'
 
 if 'conn' not in st.session_state:
     conn = get_connection()
@@ -37,7 +37,7 @@ if 'conn' not in st.session_state:
     st.session_state['login_df'] = login_df
 
 
-if ('login_status' not in stss or stss['login_status'] == False) and not stay_logged_in:
+if ('login_status' not in stss or stss['login_status'] == False): # and not stay_logged_in:
     stss['login_status'] = False
     # Make a form to get the team name and password
     form = st.form(key='my_form')
@@ -55,6 +55,7 @@ if ('login_status' not in stss or stss['login_status'] == False) and not stay_lo
             "Dear John Look what you made Lysh do",
             "Benny's Gonna Break Break Break Lexy's Gonna Fake Fake Fake",
             "kyraless nam's careful daughter",
+            "Convenor",
         ],
     )
 
@@ -84,18 +85,20 @@ if ('login_status' not in stss or stss['login_status'] == False) and not stay_lo
         
 
 else:
-    tabs_list = ['League', 'Settings', 'Algo']
-    tabs = st.tabs(tabs_list)
+    if stss['team_name'] == "Convenor":
+        tabs_list = ['Algo', 'Settings']
+        tabs = st.tabs(tabs_list)
+        with tabs[tabs_list.index('Algo')]:
+            algo_page()
 
-    with tabs[tabs_list.index('League')]:
-        league_page()
+    else:
+        tabs_list = ['League', 'Settings']
+        tabs = st.tabs(tabs_list)
+        with tabs[tabs_list.index('League')]:
+            league_page()
 
     with tabs[tabs_list.index('Settings')]:
         settings_page()
-
-    with tabs[tabs_list.index('Algo')]:
-        algo_page()
-
 
 
 
