@@ -141,7 +141,22 @@ def algo_page():
                 st.table(team_costs_df)
 
 
-            rosters, count_team_trades, trades = run_algo(team_costs, rosters_team_list, player_salaries, player_bids)
+
+            # make dict of player_name: gender
+            player_genders = {}
+            for player_name in player_names:
+                gender = df_players[df_players['Full Name'] == player_name]['Gender'].values[0]
+                player_genders[player_name] = gender
+
+
+            rosters, count_team_trades, trades = run_algo(team_costs, rosters_team_list, player_salaries, player_bids, player_genders)
+
+
+
+
+
+
+
 
             for i, trade in enumerate(trades):
                 # st.write(trade)

@@ -81,7 +81,7 @@ def trade(rosters, team_1, player_1, team_2, player_2, team_names):
 
 
 
-def run_algo(team_costs, rosters, player_salaries, player_bids):
+def run_algo(team_costs, rosters, player_salaries, player_bids, player_genders):
     """
     team_costs: dict of team-name: team-cost
     rosters: dict of team-name: list of players
@@ -118,6 +118,8 @@ def run_algo(team_costs, rosters, player_salaries, player_bids):
             # take bot n players with the highest difference in salary and owner bid
             for player_1 in list(player_diffs.keys())[:n_players_to_consider]:
 
+                player_1_gender = player_genders[player_1]
+
                 # Offers from other teams
                 offers = {team: player_bids[player_1][team] for team in team_names if team != team_1}
                 offers = {k: v for k, v in sorted(offers.items(), key=lambda item: item[1], reverse=True)}
@@ -138,6 +140,13 @@ def run_algo(team_costs, rosters, player_salaries, player_bids):
 
                     # consider trading this player with players on the offering team
                     for player_2 in available_offering_team_players:
+                        # check gender of players
+                        if player_1_gender != player_genders[player_2]:
+                            continue
+                        # check if player_2 is a 'WILD' player
+                        if 'WILD' in player_2:
+                            continue
+
                         # trade player 1 from team 1 to team 2 for player 2
                         rosters_before = rosters.copy()
                         temp_rosters = trade(rosters, team_1, player_1, offering_team, player_2, team_names)
@@ -160,7 +169,7 @@ def run_algo(team_costs, rosters, player_salaries, player_bids):
         prev_team_costs_std = team_costs_std
 
         # stop if std is not changing much
-        if trade_i > 0 and team_costs_std_diff < 0.1:
+        if trade_i > 0 and team_costs_std_diff < 0.2:
             break    
         
         salary_diff = player_salaries[player_2] - player_salaries[player_1]
