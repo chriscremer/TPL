@@ -9,6 +9,7 @@ import random
 from utils import blue, cyan, red, magenta, green, yellow, underline, bold, strikethrough, strike
 
 
+
 # def compute_player_salaries(rosters, player_bids, team_names):
 #     player_salaries = {}
 #     for team, roster in rosters.items():
@@ -81,11 +82,13 @@ def trade(rosters, team_1, player_1, team_2, player_2, team_names):
 
 
 
-def run_algo(team_costs, rosters, player_salaries, player_bids, player_genders):
+def run_algo(team_costs, rosters, player_salaries, player_bids, player_genders, captains):
     """
     team_costs: dict of team-name: team-cost
     rosters: dict of team-name: list of players
     """
+
+    debug = 1
 
     random.seed(0)
         
@@ -116,6 +119,8 @@ def run_algo(team_costs, rosters, player_salaries, player_bids, player_genders):
             players = [player for player in players if 'WILD' not in player]
             # remove players that have already been traded
             players = [player for player in players if player not in traded_players]
+            # remove captains
+            players = [player for player in players if player not in captains]
 
             # shuffle players in case of ties
             random.shuffle(players)
@@ -159,6 +164,8 @@ def run_algo(team_costs, rosters, player_salaries, player_bids, player_genders):
                     offering_team_roster = [player for player in offering_team_roster if player_1_gender == player_genders[player]]
                     # remove players that have already been traded
                     offering_team_roster = [player for player in offering_team_roster if player not in traded_players]
+                    # remove captains
+                    offering_team_roster = [player for player in offering_team_roster if player not in captains]
 
                     # shuffle players in case of ties
                     random.shuffle(offering_team_roster)
@@ -226,9 +233,11 @@ def run_algo(team_costs, rosters, player_salaries, player_bids, player_genders):
 
         if len(happy_trades) > 0:
             possible_trades = happy_trades
-            print (f"{trade_i} total happy trades: {len(possible_trades)}")
+            if debug:
+                print (f"{trade_i+1} total happy trades: {len(possible_trades)}")
         else:
-            print (f"{trade_i} total possible trades: {len(possible_trades)}")
+            if debug:
+                print (f"{trade_i+1} total possible trades: {len(possible_trades)}")
 
 
         # sort by team costs std

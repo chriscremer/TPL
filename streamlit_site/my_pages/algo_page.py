@@ -156,8 +156,8 @@ def algo_page():
 
 
 
-
-            rosters, count_team_trades, trades = run_algo(team_costs, rosters_team_list, player_salaries, player_bids, player_genders)
+            captains = stss['captains']
+            rosters, count_team_trades, trades = run_algo(team_costs, rosters_team_list, player_salaries, player_bids, player_genders, captains)
 
 
 

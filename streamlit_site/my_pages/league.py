@@ -43,7 +43,7 @@ def display_team2(team_name, rosters, player_salaries, max_salary, df_players, p
             color = '#ADD8E6' if gender == 'Male' else '#FF69B4'
             st.markdown(f"<span style='color:{color}'>{player_name}<br>Salary: ${salary}</span>", unsafe_allow_html=True)
         with cols[3]:
-            if 'Chris' in player_name or 'WILD' in player_name:
+            if player_name in st.session_state['captains']  or 'WILD' in player_name:
                 #disable slider
                 my_bid = st.slider("Your Bid", 0, max_salary, init_bid, key=f"{team_name}-{player_name}", label_visibility='collapsed', disabled=True)
             else:
@@ -147,6 +147,12 @@ def league_page():
         stss['worksheets'] = worksheets
         stss['df_players'] = df_players
         stss['player_names'] = df_players['Full Name'].tolist()
+
+        captains_sheet = [worksheet for worksheet in worksheets if worksheet.title == 'Captains'][0]
+        df_captains = get_as_dataframe(captains_sheet)
+        # convert to list
+        stss['captains'] = df_captains['Captain'].tolist()
+
 
     conn = stss['conn']
     worksheets = stss['worksheets']
