@@ -130,6 +130,7 @@ If there are no happy trades available, the algorithm will pick the somewhat hap
 ### What if there are no happy or somewhat happy trades available?
 
 If there are no happy or somewhat happy trades available, the algorithm will pick the trade that reduces the standard deviation of the team salaries the most.
+In other words, the algorithm will simply try to balance the teams (increase parity) regardless of what the GMs bid.
 
 
 
