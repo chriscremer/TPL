@@ -110,4 +110,14 @@ Currently, GM preferences come into the algorithm in two ways:
 1. protecting your most valued players
 2. prioritizing happy trades 
 
+### What are "your most valued players"?
+
+
+
+
+
+
+
+
+
 
