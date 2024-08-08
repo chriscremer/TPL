@@ -195,12 +195,11 @@ If there are no happy or somewhat happy trades available, the algorithm will pic
   - If all of those are equal (very rare), then the algorithm will randomly pick one of the trades.
 
 
-
 ### Is this dynamic pricing or ebay pricing? If someone is traded away during a trading session could I change my bid to try and get them back?
 
 - This is ebay pricing / blind bidding. You can adjust your preferences during some time period, then once the time is up the algorithm will run and determine the trades. So you can't adjust your bids based on what other GMs are doing. Ideally, you should bid what you think each player is worth so that you acquire players that you think are undervalued and trade away players that you think are overvalued.
 
-### This system leaves me open to having injured or absent players traded to my team. 
+### Does this system leave me open to having injured or absent players traded to my team?
 
 - Yes this is possible, but you can reduce the likelihood of this happening by bidding low on players you don't want to acquire. 
 
