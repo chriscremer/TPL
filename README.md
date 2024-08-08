@@ -106,13 +106,14 @@ Not necessarily. To protect a player, you need to bid higher on them than the av
 
 A happy trade is a trade where both GMs think they're receiving a player that is worth more than the player they're giving up. 
 
-For example, I have John Smith on my team and you have Zack Brown. I think John Smith is worth 40 and Zack Brown is worth 50, whereas you think John Smith is worth 60 and Zack Brown is worth 30. If we trade John Smith for Zack Brown, I receive a player that I think is worth 10 more than the player I'm giving up, and you receive a player that you think is worth 30 more than the player you're giving up. So this is a happy trade because we both think we're receiving a player that is worth more than the player we're giving up.
-
 <p align="center">
   <b>
   Happiness = (my bid for the player I'm receiving) - (my bid for the player I'm giving up)
   </b>
 </p>
+
+For example, I have John Smith on my team and you have Zack Brown. I think John Smith is worth 40 and Zack Brown is worth 50, whereas you think John Smith is worth 60 and Zack Brown is worth 30. If we trade John Smith for Zack Brown, I receive a player that I think is worth 10 more than the player I'm giving up, and you receive a player that you think is worth 30 more than the player you're giving up. So this is a happy trade because we both think we're receiving a player that is worth more than the player we're giving up.
+
 
 ### How does the algorithm prioritize "happy trades"?
 
