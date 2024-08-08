@@ -88,7 +88,7 @@ Currently, GM preferences come into the algorithm in two ways:
 
 We'll define the value of a player to a GM as: **GM bid - Average bid**, for that player.
 
-So if the average bid for a player 5, and I bid 20 for that player, the value of that player to me is 15.
+So if the average bid for a player is 5, and I bid 20 for that player, the value of that player to me is 15.
 Your most valued players are the players with the highest value to you.
 
 ### How are most valued players protected?
