@@ -77,12 +77,13 @@ def run_algo(team_costs, rosters, player_salaries, player_bids, player_genders, 
 
     team_names = list(team_costs.keys())
     n_teams = len(team_names)
-    count_team_trades = {team: 0 for team in team_names}
+    count_team_trades = {team: 0 for team in team_names} # keep track of number of trades per team
     prev_team_costs_std = np.std(list(team_costs.values()))
-    trades = []
-    traded_players = []
+    trades = [] # list of trades
+    traded_players = [] # avoid trading the same player twice
     for trade_i in range(n_teams * max_trades // 2):
 
+        already_considered_trades = [] # to avoid considering the same trade twice
         possible_trades = []
         for team_1 in team_names:
 
@@ -150,6 +151,11 @@ def run_algo(team_costs, rosters, player_salaries, player_bids, player_genders, 
                         if team_costs_std_diff < min_std_diff:
                             continue
 
+                        # check if this trade has already been considered
+                        if sorted([player_1, player_2]) in already_considered_trades:
+                            continue
+                        already_considered_trades.append(sorted([player_1, player_2]))
+
                         # Add trade to possible trades
                         possible_trades.append(
                             {"team_1": team_1, 
@@ -186,7 +192,7 @@ def run_algo(team_costs, rosters, player_salaries, player_bids, player_genders, 
             trade_type = "all"
 
         if debug:
-            print (f"{trade_i+1} total {trade_type} trades: {len(trades_to_consider)}")
+            print (f"{trade_i+1} - {trade_type} trades: {len(trades_to_consider)}")
 
         # sort by team costs std
         trades_to_consider = sorted(trades_to_consider, key=lambda x: x["team_costs_std"])
