@@ -173,7 +173,7 @@ In other words, the algorithm will simply try to balance the teams (increase par
 ### What effects would this algorithm have?
 - If the demand for a player increases, their salary will increase. So if a GM wants to hold on to a in-demand player, they'll have to pay more for them. So it becomes harder for GMs to hog players.
 - If the demand for a player is low, their salary will decrease, which should increase the demand for them. The result is players being accurately valued.
-- If a player has a good, bad or misses a game, it doesn't necessarily affect what GMs think of them, so their salary doesn't necessary change. Additionaly, there's no incentive to sandbag.
+- If a player has a good, bad or misses a game, it doesn't necessarily affect what GMs think of them, so their salary doesn't necessarily change. Additionaly, there's no incentive to sandbag.
 
 
 
