@@ -55,7 +55,7 @@ def run_algo(team_costs, rosters, player_salaries, player_bids, player_genders, 
     rosters: dict of team-name: list of players
     """
 
-    debug = 1
+    debug = 0
     random.seed(0)
 
     # for each team, find the top n players that they value most relative to the league
@@ -165,26 +165,49 @@ def run_algo(team_costs, rosters, player_salaries, player_bids, player_genders, 
                         )
         
 
+        
+        # stop if no possible trades
+        if len(possible_trades) == 0:
+            if debug:
+                print ("No trades left")
+            break
+
         # find all trades where both teams are happier
         happy_trades = []
         for trade1 in possible_trades:
             if trade1["team1_happiness_change"] > 0 and trade1["team2_happiness_change"] > 0:
                 happy_trades.append(trade1)
 
+        # find trades where sum of happiness is positive
+        somewhat_happy_trades = []
+        for trade1 in possible_trades:
+            if trade1["team1_happiness_change"] + trade1["team2_happiness_change"] > 0:
+                somewhat_happy_trades.append(trade1)
+
+        # find trades where sum is zero
+        neutral_trades = []
+        for trade1 in possible_trades:
+            if trade1["team1_happiness_change"] + trade1["team2_happiness_change"] == 0:
+                neutral_trades.append(trade1)
+
         if len(happy_trades) > 0:
             possible_trades = happy_trades
             if debug:
                 print (f"{trade_i+1} total happy trades: {len(possible_trades)}")
+        elif len(somewhat_happy_trades) > 0:
+            possible_trades = somewhat_happy_trades
+            if debug:
+                print (f"{trade_i+1} total somewhat happy trades: {len(possible_trades)}")
+        elif len(neutral_trades) > 0:
+            possible_trades = neutral_trades
+            if debug:
+                print (f"{trade_i+1} total neutral trades: {len(possible_trades)}")
         else:
             if debug:
                 print (f"{trade_i+1} total possible trades: {len(possible_trades)}")
 
         # sort by team costs std
         possible_trades = sorted(possible_trades, key=lambda x: x["team_costs_std"])
-        
-        # stop if no possible trades
-        if len(possible_trades) == 0:
-            break
 
         # pick the trade that minimizes the standard deviation of team costs
         trade1 = possible_trades[0]
@@ -202,8 +225,11 @@ def run_algo(team_costs, rosters, player_salaries, player_bids, player_genders, 
 
         # stop if std is not changing much
         if trade_i > 0 and team_costs_std_diff < min_std_diff:
+            if debug:
+                print (f"std diff is less than {min_std_diff}")
             break    
         
+        # trade player 1 from team 1 to team 2 for player 2
         rosters_before = rosters.copy()
         rosters = trade(rosters, team_1, player_1, team_2, player_2, team_names)
         happiness_change_dict, happiness_change = get_happiness_change(rosters_before, rosters, player_bids, team_names)
