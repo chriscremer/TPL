@@ -93,4 +93,21 @@ The algorithm may need some tweaking throughout the season if the GMs find that 
 - [ ] Add all player stats to the site
 - [ ] Show change in player salary over time
 
+<br>
+<br>
+<br>
+<br>
+
+
+## Tell Me More
+
+In case you want to know exactly how the algorithm works, [here](https://github.com/chriscremer/TPL/blob/main/streamlit_site/algo3.py) is the location of the code. 
+
+The main thing the algo is doing is making a list of all possible trades, then picking the one that reduces the standard deviation of the team salaries (bring all team salaries closer to the average).
+The question is: how do we take into consideration the preferences/bids of the GMs?
+
+Currently, GM preferences come into the algorithm in two ways:
+1. protecting your most valued players
+2. prioritizing happy trades 
+
 
