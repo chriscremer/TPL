@@ -331,10 +331,27 @@ def normalize(player_bids, player_salaries, rosters):
     # Cap salaries at max_salary
     new_player_salaries = {k: min(v, max_salary) for k, v in player_salaries.items()}
     print (f"new avg player salary: {np.mean(list(new_player_salaries.values()))}\n")
+    # Cap bids at max_salary
+    player_bids = {k: {team: min(v, max_salary) for team, v in bids.items()} for k, bids in player_bids.items()}
     original_team_costs = calc_teams_salaries(rosters, new_player_salaries)
     return player_bids, new_player_salaries, original_team_costs
 
 
+
+
+def show_player_salaries(player_salaries):
+    salarylist = list(player_salaries.values())
+    max_salary = np.max(salarylist)
+    min_salary = np.min(salarylist)
+    avg_salary = np.mean(salarylist)
+    st.markdown(f"Max Salary: {max_salary}<br>Avg Salary: {int(avg_salary)}<br>Min Salary: {min_salary}", unsafe_allow_html=True)
+
+    # remove Wildcards from list
+    player_salaries2 = {k: v for k, v in player_salaries.items() if 'WILD' not in k}
+
+    player_salaries_df = pd.DataFrame.from_dict(player_salaries2, orient='index', columns=['Salary'])
+    player_salaries_df = player_salaries_df.sort_values(by='Salary', ascending=False)
+    st.table(player_salaries_df)
 
 
 
@@ -401,6 +418,8 @@ def algo_page():
         # Display info
         with st.expander("Pre Trade Info"):
             show_starting_info(original_team_costs, protected_players_dict, starting_rosters, player_bids)
+        with st.expander("Player Salaries"):
+            show_player_salaries(new_player_salaries)
         with st.expander("Trades"):
             show_trades(trades, new_player_salaries)
         with st.expander("Post Trade Info"):
