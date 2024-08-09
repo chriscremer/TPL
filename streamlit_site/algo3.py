@@ -54,6 +54,9 @@ def run_algo(rosters, player_bids, player_genders, captains, player_salaries):
     debug = 1
     random.seed(0)
 
+    # compute salary of each team
+    team_costs = get_team_costs(rosters, player_salaries)
+
     # for each team, find the top n players that they value most relative to the league
     # value: player_bid - avg_bid
     n_players_to_protect = 2
@@ -72,9 +75,9 @@ def run_algo(rosters, player_bids, player_genders, captains, player_salaries):
         for player in list(player_diffs.keys())[:n_players_to_protect]:
             protected_players_dict[team].append({'player_name': player, 'value': player_diffs[player]})
 
+    # sort protected players by team_costs
+    protected_players_dict = {k: v for k, v in sorted(protected_players_dict.items(), key=lambda item: team_costs[item[0]], reverse=True)}
 
-    # compute salary of each team
-    team_costs = get_team_costs(rosters, player_salaries)
 
     max_trades = 3 # max trades per team
     min_std_diff = 1 # minimum change in standard deviation of team salaries
@@ -184,13 +187,20 @@ def run_algo(rosters, player_bids, player_genders, captains, player_salaries):
 
         trades_to_consider = []
 
-        # find trades where sum of happiness is positive
+        # find trades where both teams are happy
         for trade1 in possible_trades:
-            if trade1["team1_happiness_change"] + trade1["team2_happiness_change"] > 0:
+            if trade1["team1_happiness_change"] > 0 and trade1["team2_happiness_change"] > 0:
                 trades_to_consider.append(trade1)
-                trade_type = "somewhat happy"
+                trade_type = "happy"
 
-        # if no happy trades, consider all trades
+        # if no happy, find trades where sum of happiness is positive
+        if len(trades_to_consider) == 0:
+            for trade1 in possible_trades:
+                if trade1["team1_happiness_change"] + trade1["team2_happiness_change"] > 0:
+                    trades_to_consider.append(trade1)
+                    trade_type = "somewhat happy"
+
+        # if no somewaht happy trades, consider all trades
         if len(trades_to_consider) == 0:
             trades_to_consider = possible_trades
             trade_type = "all"

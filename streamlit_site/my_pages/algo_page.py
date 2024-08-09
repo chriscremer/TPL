@@ -58,6 +58,10 @@ def accumulate_data(rosters, team_names, df_players, salary_col_name, player_nam
 
 
 def show_trades(trades, new_player_salaries): #df_players, salary_col_name):
+
+    # st.markdown("<br><br><br><h2>Trades</h2> <hr>", unsafe_allow_html=True)
+    st.markdown("<h2>Trades</h2> <hr>", unsafe_allow_html=True)
+
     # show trades
     for i, trade in enumerate(trades):
         # player1_salary = df_players[df_players['Full Name'] == trade['player_1']][salary_col_name].values[0]
@@ -88,7 +92,125 @@ def show_trades(trades, new_player_salaries): #df_players, salary_col_name):
         st.markdown('<hr>', unsafe_allow_html=True)
 
 
-def show_starting_info(team_costs, protected_players_dict):
+
+def make_likeness_matrix(team_costs, player_bids, rosters, avg_team_cost, starting_rosters=None):
+
+    
+
+    # sort team_costs into same order as starting_rosters
+    if starting_rosters is not None:
+        new_team_costs = {}
+        for team_name in starting_rosters.keys():
+            new_team_costs[team_name] = team_costs[team_name]
+        team_costs = new_team_costs
+
+
+    # make a matrix of how much each team likes another team
+    # so for each team, sum the bids of the players on the other teams
+    likeness_matrix = {}
+    for team_name in team_costs.keys():
+        likeness_matrix[team_name] = {}
+        for other_team in team_costs.keys():
+            likeness_matrix[team_name][other_team] = 0
+            for player_name in rosters[other_team]:
+                likeness_matrix[team_name][other_team] += player_bids[player_name][team_name]
+
+    # shift matrix down by avg salary
+    for team_name in team_costs.keys():
+        for other_team in team_costs.keys():
+            likeness_matrix[team_name][other_team] -= avg_team_cost
+
+    st.markdown('Likeness Matrix', unsafe_allow_html=True)
+    likeness_matrix_df = pd.DataFrame.from_dict(likeness_matrix, orient='index')
+    # st.table(likeness_matrix_df)
+    import matplotlib.pyplot as plt
+    fig, ax = plt.subplots()
+    ax.matshow(likeness_matrix_df, cmap='coolwarm')
+    # add numbers to the matrix
+    for i in range(len(team_costs)):
+        for j in range(len(team_costs)):
+            ax.text(j, i, f"{likeness_matrix_df.iloc[i, j]:.0f}", ha='center', va='center', color='black', fontsize=4)
+    # add a border around the diagonal squares
+    for i in range(len(team_costs)):
+        ax.add_patch(plt.Rectangle((i-0.5, i-0.5), 1, 1, fill=False, edgecolor='black', lw=1))
+
+    ax.set_xticks(range(len(team_costs)))
+    ax.set_yticks(range(len(team_costs)))
+    short_team_names = [team_name[:7] for team_name in team_costs.keys()]
+    ax.set_xticklabels(short_team_names)
+    ax.set_yticklabels(short_team_names)
+    plt.xticks(rotation=90)
+    # smaller font size
+    plt.xticks(fontsize=5)
+    plt.yticks(fontsize=5)
+    # chagne font style to not serif
+    plt.xticks(fontname='serif')
+    plt.yticks(fontname='serif')
+    # plt.show()
+    # st.pyplot(fig, use_container_width=False)
+    #make figure smaller
+    fig.set_size_inches(3, 3)
+    st.pyplot(fig, use_container_width=False)
+
+    if starting_rosters is not None:
+        # show change in likeness matrix from starting to ending roster
+        starting_likeness_matrix = {}
+        for team_name in team_costs.keys():
+            starting_likeness_matrix[team_name] = {}
+            for other_team in team_costs.keys():
+                starting_likeness_matrix[team_name][other_team] = 0
+                for player_name in starting_rosters[other_team]:
+                    starting_likeness_matrix[team_name][other_team] += player_bids[player_name][team_name]
+        # shift matrix down by avg salary
+        for team_name in team_costs.keys():
+            for other_team in team_costs.keys():
+                starting_likeness_matrix[team_name][other_team] -= avg_team_cost
+
+        st.markdown('Change in Likeness Matrix', unsafe_allow_html=True)
+        change_in_likeness_matrix = {}
+        for team_name in team_costs.keys():
+            change_in_likeness_matrix[team_name] = {}
+            for other_team in team_costs.keys():
+                change_in_likeness_matrix[team_name][other_team] = likeness_matrix[team_name][other_team] - starting_likeness_matrix[team_name][other_team]
+        
+        change_in_likeness_matrix_df = pd.DataFrame.from_dict(change_in_likeness_matrix, orient='index')
+        # st.table(change_in_likeness_matrix_df)
+        fig, ax = plt.subplots()
+        ax.matshow(change_in_likeness_matrix_df, cmap='coolwarm')
+        # add numbers to the matrix
+        for i in range(len(team_costs)):
+            for j in range(len(team_costs)):
+                ax.text(j, i, f"{change_in_likeness_matrix_df.iloc[i, j]:.0f}", ha='center', va='center', color='black', fontsize=4)
+        # add a border around the diagonal squares
+        for i in range(len(team_costs)):
+            ax.add_patch(plt.Rectangle((i-0.5, i-0.5), 1, 1, fill=False, edgecolor='black', lw=1))
+
+
+        ax.set_xticks(range(len(team_costs)))
+        ax.set_yticks(range(len(team_costs)))
+        short_team_names = [team_name[:7] for team_name in team_costs.keys()]
+        ax.set_xticklabels(short_team_names)
+        ax.set_yticklabels(short_team_names)
+        plt.xticks(rotation=90)
+        # smaller font size
+        plt.xticks(fontsize=5)
+        plt.yticks(fontsize=5)
+        # chagne font style to not serif
+        plt.xticks(fontname='serif')
+        plt.yticks(fontname='serif')
+        # plt.show()
+        # st.pyplot(fig, use_container_width=False)
+        #make figure smaller
+        fig.set_size_inches(3, 3)
+        st.pyplot(fig, use_container_width=False)
+
+
+
+
+
+
+
+def show_starting_info(team_costs, protected_players_dict, starting_rosters, player_bids):
 
     # show table of starting team costs
     st.markdown('Starting Team Salaries', unsafe_allow_html=True)
@@ -118,8 +240,8 @@ def show_starting_info(team_costs, protected_players_dict):
     protected_players_df = pd.DataFrame.from_dict(protected_players_dict_text, orient='index', columns=cols_names)
     st.table(protected_players_df)
 
-
-
+    # show matrix of how much each team likes each other team
+    make_likeness_matrix(team_costs, player_bids, starting_rosters, avg_team_cost)
 
 
 
@@ -136,12 +258,14 @@ def calc_teams_salaries(rosters, new_player_salaries):
         team_costs[team_name] = 0
         for player in rosters[team_name]:
             team_costs[team_name] += new_player_salaries[player]
+    # sort largest to smallest
+    team_costs = {k: v for k, v in sorted(team_costs.items(), key=lambda item: item[1], reverse=True)}
     return team_costs
 
 
 
 
-def show_end_info(team_costs, count_team_trades, trades):
+def show_end_info(team_costs, count_team_trades, trades, player_bids, rosters, starting_rosters):
 
     st.markdown('New Team Salaries', unsafe_allow_html=True)
     team_costs_df = pd.DataFrame.from_dict(team_costs, orient='index', columns=['Salary'])
@@ -168,6 +292,9 @@ def show_end_info(team_costs, count_team_trades, trades):
     
     st.markdown(f'Average Team Salary: {avg_team_cost}', unsafe_allow_html=True)
 
+    total_trades = len(trades)
+    st.markdown(f'Number of Trades: {total_trades}', unsafe_allow_html=True)
+
     # Total happiness change
     total_happiness_change = 0
     for trade in trades:
@@ -182,6 +309,35 @@ def show_end_info(team_costs, count_team_trades, trades):
     else:
         st.markdown(f'Total Happiness Change: {total_happiness_change}', unsafe_allow_html=True)
 
+    # show matrix of how much each team likes each other team
+    make_likeness_matrix(team_costs, player_bids, rosters, avg_team_cost, starting_rosters)
+
+
+
+
+
+
+
+
+def normalize(player_bids, player_salaries, rosters):
+
+    # NORMALIZATION
+    # Avg player salary
+    avg_player_salary = np.mean(list(player_salaries.values()))
+    print (f"\nAvg player salary: {avg_player_salary}")
+    # Make the avg salary of the league be max_salary / 2, so scale all salaries by this factor
+    max_salary = 500
+    scale = max_salary / 2 / avg_player_salary
+    print (f"Scaling salaries by {scale:.2f}")
+    # round to nearest integer
+    player_salaries = {k: round(v * scale) for k, v in player_salaries.items()}
+    # scale bids as well
+    player_bids = {k: {team: round(v * scale) for team, v in bids.items()} for k, bids in player_bids.items()}
+    # Cap salaries at max_salary
+    new_player_salaries = {k: min(v, max_salary) for k, v in player_salaries.items()}
+    print (f"new avg player salary: {np.mean(list(new_player_salaries.values()))}\n")
+    original_team_costs = calc_teams_salaries(rosters, new_player_salaries)
+    return player_bids, new_player_salaries, original_team_costs
 
 
 
@@ -223,7 +379,7 @@ def algo_page():
 
         all_player_bids = get_all_bids_from_sheet(conn, stss, bids_sheet_name, worksheets, player_salaries)
         player_bids, team_costs, rosters_team_list, player_genders = accumulate_data(rosters, team_names, df_players, salary_col_name, player_names, all_player_bids)
-        # original_team_costs = team_costs.copy()
+
 
         if 'captains' not in stss:
             captains_sheet = [worksheet for worksheet in worksheets if worksheet.title == 'Captains'][0]
@@ -237,24 +393,12 @@ def algo_page():
 
         # compute player salaries by taking the average of the bids
         player_salaries = {player: round(np.mean(list(bids.values()))) for player, bids in player_bids.items()}
-
-
-        # NORMALIZATION
-        # Avg player salary
-        avg_player_salary = np.mean(list(player_salaries.values()))
-        print (f"\nAvg player salary: {avg_player_salary}")
-        # Make the avg salary of the league be max_salary / 2, so scale all salaries by this factor
-        max_salary = 500
-        scale = max_salary / 2 / avg_player_salary
-        print (f"Scaling salaries by {scale:.2f}")
-        # round to nearest integer
-        player_salaries = {k: round(v * scale) for k, v in player_salaries.items()}
-        # scale bids as well
-        player_bids = {k: {team: round(v * scale) for team, v in bids.items()} for k, bids in player_bids.items()}
-        # Cap salaries at max_salary
-        new_player_salaries = {k: min(v, max_salary) for k, v in player_salaries.items()}
-        print (f"new avg player salary: {np.mean(list(new_player_salaries.values()))}\n")
-        original_team_costs = calc_teams_salaries(rosters, new_player_salaries)
+        # normalize salaries and bids
+        player_bids, new_player_salaries, original_team_costs = normalize(player_bids, player_salaries, rosters)
+        # sort roster into the same order as original_team_costs, so highest to lowest salary
+        rosters = {k: v for k, v in sorted(rosters.items(), key=lambda item: original_team_costs[item[0]], reverse=True)}
+        # print (rosters.keys())
+        starting_rosters = rosters.copy()
 
 
         # RUN TRADING ALORITHM
@@ -263,9 +407,12 @@ def algo_page():
 
 
         # Display info
-        show_starting_info(original_team_costs, protected_players_dict)
-        show_trades(trades, new_player_salaries) #df_players, salary_col_name)
-        show_end_info(new_team_costs, count_team_trades, trades)
+        with st.expander("Pre Trade Info"):
+            show_starting_info(original_team_costs, protected_players_dict, starting_rosters, player_bids)
+        with st.expander("Trades"):
+            show_trades(trades, new_player_salaries)
+        with st.expander("Post Trade Info"):
+            show_end_info(new_team_costs, count_team_trades, trades, player_bids, rosters, starting_rosters)
 
 
 

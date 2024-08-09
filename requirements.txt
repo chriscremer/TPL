@@ -9,8 +9,11 @@ certifi==2024.6.2
 cffi==1.16.0
 charset-normalizer==2.0.4
 click==8.1.7
+contourpy==1.2.1
 cryptography==42.0.5
+cycler==0.12.1
 distro==1.9.0
+fonttools==4.53.1
 frozendict==2.4.2
 gitdb==4.0.11
 GitPython==3.1.43
@@ -26,8 +29,10 @@ jsonpatch==1.33
 jsonpointer==2.1
 jsonschema==4.23.0
 jsonschema-specifications==2023.12.1
+kiwisolver==1.4.5
 markdown-it-py==3.0.0
 MarkupSafe==2.1.5
+matplotlib==3.9.1.post1
 mdurl==0.1.2
 numpy==2.0.1
 oauth2client==4.1.3
