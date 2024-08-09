@@ -120,7 +120,9 @@ def make_likeness_matrix(team_costs, player_bids, rosters, avg_team_cost, starti
         for other_team in team_costs.keys():
             likeness_matrix[team_name][other_team] -= avg_team_cost
 
-    st.markdown('Likeness Matrix', unsafe_allow_html=True)
+    st.markdown("<hr>", unsafe_allow_html=True)
+    # st.markdown('Likeness Matrix', unsafe_allow_html=True)
+    st.markdown("This matrix shows how much each team likes each other team.<br>The number is how much the team on the row is bidding for players from the team in the column, minus the average salary.<br>Positive numbers mean the team likes the other team, negative numbers mean the team isn't interested in the players on the other team.", unsafe_allow_html=True)
     likeness_matrix_df = pd.DataFrame.from_dict(likeness_matrix, orient='index')
     # st.table(likeness_matrix_df)
     import matplotlib.pyplot as plt
@@ -166,7 +168,8 @@ def make_likeness_matrix(team_costs, player_bids, rosters, avg_team_cost, starti
             for other_team in team_costs.keys():
                 starting_likeness_matrix[team_name][other_team] -= avg_team_cost
 
-        st.markdown('Change in Likeness Matrix', unsafe_allow_html=True)
+        # st.markdown('Change in Likeness Matrix', unsafe_allow_html=True)
+        st.markdown("This matrix shows how much each team's interest in each other team has changed from the starting rosters to the ending rosters.<br>The diagonal squares show how much each team thinks it has improved or worsened.", unsafe_allow_html=True)
         change_in_likeness_matrix = {}
         for team_name in team_costs.keys():
             change_in_likeness_matrix[team_name] = {}
@@ -236,7 +239,7 @@ def show_starting_info(team_costs, protected_players_dict, starting_rosters, pla
     st.markdown('Protected Players', unsafe_allow_html=True)
     protected_players_dict_text = {team: [f"{player['player_name']} ({player['value']})" for player in protected_players_dict[team]] for team in protected_players_dict}
     n_protected_players_per_team = sum([len(protected_players_dict[team]) for team in protected_players_dict]) / len(protected_players_dict)
-    cols_names = [f"Player {i+1}" for i in range(int(n_protected_players_per_team))]
+    cols_names = [f"Player {i+1} (bid - avg bid)" for i in range(int(n_protected_players_per_team))]
     protected_players_df = pd.DataFrame.from_dict(protected_players_dict_text, orient='index', columns=cols_names)
     st.table(protected_players_df)
 
@@ -265,7 +268,7 @@ def calc_teams_salaries(rosters, new_player_salaries):
 
 
 
-def show_end_info(team_costs, count_team_trades, trades, player_bids, rosters, starting_rosters):
+def show_end_info(team_costs, count_team_trades, trades, player_bids, rosters, starting_rosters, original_team_costs):
 
     st.markdown('New Team Salaries', unsafe_allow_html=True)
     team_costs_df = pd.DataFrame.from_dict(team_costs, orient='index', columns=['Salary'])
@@ -282,8 +285,11 @@ def show_end_info(team_costs, count_team_trades, trades, player_bids, rosters, s
     avg_team_cost = int(sum(team_costs.values()) / len(team_costs))
     team_costs_df['Diff from Avg'] = team_costs_df['Salary'] - avg_team_cost
 
+    # add column of salary dif from original
+    team_costs_df['Change in Salary'] = [team_costs[team] - original_team_costs[team] for team in team_costs.keys()]
+
     # reorder columns, salary, diff from avg, trade count
-    team_costs_df = team_costs_df[['Salary', 'Diff from Avg', 'Trade Count']]
+    team_costs_df = team_costs_df[['Salary', 'Diff from Avg', 'Change in Salary', 'Trade Count']]
 
 
     cols = st.columns(2)
@@ -412,7 +418,7 @@ def algo_page():
         with st.expander("Trades"):
             show_trades(trades, new_player_salaries)
         with st.expander("Post Trade Info"):
-            show_end_info(new_team_costs, count_team_trades, trades, player_bids, rosters, starting_rosters)
+            show_end_info(new_team_costs, count_team_trades, trades, player_bids, rosters, starting_rosters, original_team_costs)
 
 
 
