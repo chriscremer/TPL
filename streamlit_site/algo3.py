@@ -49,11 +49,7 @@ def trade(rosters, team_1, player_1, team_2, player_2, team_names):
 
 
 
-def run_algo(team_costs, rosters, player_salaries, player_bids, player_genders, captains):
-    """
-    team_costs: dict of team-name: team-cost
-    rosters: dict of team-name: list of players
-    """
+def run_algo(rosters, player_bids, player_genders, captains, player_salaries):
 
     debug = 1
     random.seed(0)
@@ -62,6 +58,7 @@ def run_algo(team_costs, rosters, player_salaries, player_bids, player_genders, 
     # value: player_bid - avg_bid
     n_players_to_protect = 2
     protected_players = []
+    protected_players_dict = {}
     for team, roster in rosters.items():
         player_diffs = {player: player_bids[player][team] - player_salaries[player] for player in roster}
         player_diffs = {k: v for k, v in sorted(player_diffs.items(), key=lambda item: item[1], reverse=True)}
@@ -71,11 +68,18 @@ def run_algo(team_costs, rosters, player_salaries, player_bids, player_genders, 
         player_diffs = {k: v for k, v in player_diffs.items() if 'WILD' not in k}
         # add top n players to protected players
         protected_players += list(player_diffs.keys())[:n_players_to_protect]
+        protected_players_dict[team] = []
+        for player in list(player_diffs.keys())[:n_players_to_protect]:
+            protected_players_dict[team].append({'player_name': player, 'value': player_diffs[player]})
+
+
+    # compute salary of each team
+    team_costs = get_team_costs(rosters, player_salaries)
 
     max_trades = 3 # max trades per team
     min_std_diff = 1 # minimum change in standard deviation of team salaries
 
-    team_names = list(team_costs.keys())
+    team_names = list(rosters.keys())
     n_teams = len(team_names)
     count_team_trades = {team: 0 for team in team_names} # keep track of number of trades per team
     prev_team_costs_std = np.std(list(team_costs.values()))
@@ -242,7 +246,7 @@ def run_algo(team_costs, rosters, player_salaries, player_bids, player_genders, 
         })
         traded_players.append(player_1)
         traded_players.append(player_2)
-    return rosters, count_team_trades, trades
+    return rosters, count_team_trades, trades, protected_players_dict
 
 
 
