@@ -28,19 +28,8 @@ def accumulate_data(rosters, team_names, df_players, salary_col_name, player_nam
         for player_name in rosters[team_name]:
             rosters_team_list[team_name].append(player_name)
 
-    # team_costs is dict of team_name: sum of team salaries
-    team_costs = {}
-    for team_name in team_names:
-        # team_costs[team_name] = rosters[team_name]['Salary'].sum()
-        team_costs[team_name] = 0
-        for player in rosters_team_list[team_name]:
-            salary = df_players[df_players['Full Name'] == player][salary_col_name].values[0]
-            team_costs[team_name] += salary
-
-    # player_bids is dict of player_name: dict of team_name: bid
-    player_bids = {player: {} for player in player_names}
-
     # convert all_player_bids df to player_bids where for each player there is a dict of team: bid
+    player_bids = {player: {} for player in player_names}
     for i, row in all_player_bids.iterrows():
         player_name = row['Player']
         for team_name in team_names:
@@ -54,7 +43,7 @@ def accumulate_data(rosters, team_names, df_players, salary_col_name, player_nam
         player_genders[player_name] = gender
 
 
-    return player_bids, team_costs, rosters_team_list, player_genders
+    return player_bids, rosters_team_list, player_genders
 
 
 def show_trades(trades, new_player_salaries): #df_players, salary_col_name):
@@ -384,8 +373,7 @@ def algo_page():
         bids_sheet_name = f'Week {latest_week} - Bids'
 
         all_player_bids = get_all_bids_from_sheet(conn, stss, bids_sheet_name, worksheets, player_salaries)
-        player_bids, team_costs, rosters_team_list, player_genders = accumulate_data(rosters, team_names, df_players, salary_col_name, player_names, all_player_bids)
-
+        player_bids, rosters_team_list, player_genders = accumulate_data(rosters, team_names, df_players, salary_col_name, player_names, all_player_bids)
 
         if 'captains' not in stss:
             captains_sheet = [worksheet for worksheet in worksheets if worksheet.title == 'Captains'][0]
@@ -393,8 +381,6 @@ def algo_page():
             # convert to list
             stss['captains'] = df_captains['Captain'].tolist()
         captains = stss['captains']
-
-
 
 
         # compute player salaries by taking the average of the bids
