@@ -57,7 +57,7 @@ def show_trades(trades, new_player_salaries): #df_players, salary_col_name):
         # player2_salary = df_players[df_players['Full Name'] == trade['player_2']][salary_col_name].values[0]
         player1_salary = new_player_salaries[trade['player_1']]
         player2_salary = new_player_salaries[trade['player_2']]
-        salary_diff = player1_salary - player2_salary
+        salary_diff = np.abs(player1_salary - player2_salary)
 
         st.markdown(f"<h4>Trade {i+1}</h4>", unsafe_allow_html=True)
         text = "<p>"
@@ -321,8 +321,11 @@ def normalize(player_bids, player_salaries, rosters):
     avg_player_salary = np.mean(list(player_salaries.values()))
     print (f"\nAvg player salary: {avg_player_salary}")
     # Make the avg salary of the league be max_salary / 2, so scale all salaries by this factor
+    
+    # scale = max_salary / 2 / avg_player_salary
     max_salary = 500
-    scale = max_salary / 2 / avg_player_salary
+    desired_avg_salary = 200
+    scale = desired_avg_salary / avg_player_salary
     print (f"Scaling salaries by {scale:.2f}")
     # round to nearest integer
     player_salaries = {k: round(v * scale) for k, v in player_salaries.items()}
@@ -344,7 +347,7 @@ def show_player_salaries(player_salaries):
     max_salary = np.max(salarylist)
     min_salary = np.min(salarylist)
     avg_salary = np.mean(salarylist)
-    st.markdown(f"Max Salary: {max_salary}<br>Avg Salary: {int(avg_salary)}<br>Min Salary: {min_salary}", unsafe_allow_html=True)
+    st.markdown(f"Max Salary: {max_salary}<br>Avg Salary: {round(avg_salary)}<br>Min Salary: {min_salary}", unsafe_allow_html=True)
 
     # remove Wildcards from list
     player_salaries2 = {k: v for k, v in player_salaries.items() if 'WILD' not in k}

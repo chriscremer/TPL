@@ -125,15 +125,32 @@ def get_rosters(df_players, team_names):
     return rosters
 
 
+def check_for_changes(stss, team_names, rosters):
+    changes = False
+    team0 = team_names[0]
+    player0 = rosters[team0][0]
+    # see if sliders have initialized
+    if f"{team0}-{player0}" in stss:
+        for team in team_names:
+            for player in rosters[team]:
+                current_bid = stss[f"{team}-{player}"]
+                original_bid = stss["player_bids"][player]
+                # original_bid = stss["original_bids"][player]
+                # if player_salaries[player] != stss[f"{team}-{player}"]:
+                if current_bid != original_bid:
+                    # print (f"{team}-{player} has changed")
+                    changes = True
+                    break
+            if changes:
+                break
+    # in case of reset
+    if 'Reset' in stss and stss['Reset'] == True:
+        changes = True
+    return changes
 
 
 
-
-
-
-def league_page():
-
-    stss = st.session_state
+def load_data(stss):
 
     if 'conn' not in st.session_state:
         conn = get_connection()
@@ -154,6 +171,54 @@ def league_page():
         stss['captains'] = df_captains['Captain'].tolist()
 
 
+
+def save_bids(conn, stss, your_team, player_bids, bids_sheet_name, team_names, df_players, rosters):
+    # Update col for this team with new bids
+    col_name = your_team
+    start_row_idx = 2
+    end_row_idx = len(player_bids) + 1
+    col_letter = chr(team_names.index(col_name) + 65 + 1) # +1 for the index column
+    values = []
+    for player_name in stss['player_names']:
+        player_team = df_players.loc[df_players['Full Name'] == player_name]['Team'].values[0]
+        bid = st.session_state[f"{player_team}-{player_name}"]
+        values.append([bid])
+    sheet = conn.worksheet(bids_sheet_name)
+    sheet.update(range_name=f'{col_letter}{start_row_idx}:{col_letter}{end_row_idx}', values=values)
+
+    # Update player_bids in session state
+    player_bids = {player: st.session_state[f"{team}-{player}"] for team in team_names for player in rosters[team]}
+    stss['player_bids'] = player_bids
+    st.rerun()
+
+
+def save_uploaded_bids(conn, stss, your_team, player_bids, bids_sheet_name, team_names):
+    values = []
+    for player_name in stss['player_names']:
+        bid = player_bids[player_name]
+        values.append([bid])
+    # Update col for this team with new bids
+    col_name = your_team
+    start_row_idx = 2
+    end_row_idx = len(player_bids) + 1
+    col_letter = chr(team_names.index(col_name) + 65 + 1) # +1 for the index column
+    sheet = conn.worksheet(bids_sheet_name)
+    sheet.update(range_name=f'{col_letter}{start_row_idx}:{col_letter}{end_row_idx}', values=values)
+
+
+
+
+
+
+
+
+
+
+def league_page():
+
+    stss = st.session_state
+    load_data(stss)
+
     conn = stss['conn']
     worksheets = stss['worksheets']
     df_players = stss['df_players']
@@ -166,138 +231,82 @@ def league_page():
     player_salaries, latest_week = get_salaries(df_players, player_names, max_salary)
     bids_sheet_name = f"Week {latest_week} - Bids"
 
-    
     if 'player_bids' not in stss:
         player_bids, bids_sheet_name = get_bids_from_sheet(conn, stss, bids_sheet_name, worksheets, your_team, player_salaries)
     else:
         player_bids = stss['player_bids']
 
-    st.markdown(f"Week {latest_week+1} Bids")
 
-    # if 'sliders_init' not in stss:
-    #     changes = False
-    # elif stss['sliders_init'] == False:
-    #     changes = False
-    # else:
-    # Figure out if changes have been made
-    # check if bids are part of session state yet
-
-    # if f"{team0}-{player0}" not in stss:
-    # if "original_bids" not in stss:
-        
-        # stss["original_bids"] = player_bids.copy()
-    # else:
-        # compare bids to player_salaries
-        # actually compare to saved bids
-        # changes = False
-
-        # print (len(list(stss.keys())))
-        # print (len(list(st.session_state.keys())))
-        # print (list(stss.keys()))
-
-    changes = False
-    # if 'sliders_init' in stss and stss['sliders_init'] == True:
-    team0 = team_names[0]
-    player0 = rosters[team0][0]
-    # see if sliders have initialized
-    if f"{team0}-{player0}" in stss:
-        # print ('Sliders have initialized')
-        # print ([x for x in list(stss.keys()) if '-' not in x])
-        # print ([x for x in list(stss.keys()) if 'Reset' in x])
-        for team in team_names:
-            for player in rosters[team]:
-                current_bid = stss[f"{team}-{player}"]
-                original_bid = stss["player_bids"][player]
-                # original_bid = stss["original_bids"][player]
-                # if player_salaries[player] != stss[f"{team}-{player}"]:
-                if current_bid != original_bid:
-                    # print (f"{team}-{player} has changed")
-                    changes = True
-                    break
-            if changes:
-                break
-    # in case of reset
-    if 'Reset' in stss and stss['Reset'] == True:
-        # print ('Resetting sliders')
-        changes = True
-        # stss['Reset'] = False
-
-    # # print (list(stss.keys()))
-    # if 'reset_button' in stss and stss['reset_button'] == True:
-    #     # # print ('Resetting sliders')
-    #     # for team in team_names:
-    #     #     for player in rosters[team]:
-    #     #         st.session_state[f"{team}-{player}"] = player_salaries[player]
-    #     stss['reset_button'] = False
-    #     changes = True
+    
+    
 
 
-    # Add save button
-    if changes:
-        save = st.button('Save Changes')
-    else:
-        save = st.button('No Changes', disabled=True)
+
+
+    st.markdown(f"<center><h3>Week {latest_week+1} Bids</h3></center>", unsafe_allow_html=True)
+    cols = st.columns([1, 2, 1])
+
+    # Save button
+    changes = check_for_changes(stss, team_names, rosters)
+    with cols[0]:
+        if changes:
+            save = st.button('Save Changes')
+        else:
+            save = st.button('No Changes', disabled=True)
     if save:
         print ('Save')
-
-        # Update col for this team with new bids
-        col_name = your_team
-        start_row_idx = 2
-        end_row_idx = len(player_bids) + 1
-        col_letter = chr(team_names.index(col_name) + 65 + 1) # +1 for the index column
-        values = []
-        # for player_name in player_bids.keys():
-        for player_name in stss['player_names']:
-            player_team = df_players.loc[df_players['Full Name'] == player_name]['Team'].values[0]
-            bid = st.session_state[f"{player_team}-{player_name}"]
-            values.append([bid])
-        sheet = conn.worksheet(bids_sheet_name)
-        sheet.update(range_name=f'{col_letter}{start_row_idx}:{col_letter}{end_row_idx}', values=values)
-
-        # Update player_bids in session state
-        player_bids = {player: st.session_state[f"{team}-{player}"] for team in team_names for player in rosters[team]}
-        stss['player_bids'] = player_bids
-        # stss['sliders_init'] = False
-        # stss['original_bids'] = player_bids.copy()
-        # reload
-        st.rerun()
+        save_bids(conn, stss, your_team, player_bids, bids_sheet_name, team_names, df_players, rosters)
 
 
     # Reset button
-    # # print (list(stss.keys()))
-    # print ('reset_button' in list(stss.keys()))
-    # if 'reset_button' in stss:
-    #     print (stss['reset_button'])
-    # if 'Reset' in list(stss.keys()):
-    #     print (stss['Reset'], 'Reset')
-    reset = st.button('Reset', key='Reset')
-    # print (list(stss.keys()))
-
-    # dafsd
+    with cols[0]:
+        reset = st.button('Reset', key='Reset')
     if reset:
         print ('Reset')
-        # Reset all sliders
-        # for team in team_names:
-        #     for player in rosters[team]:
-                # st.session_state[f"{team}-{player}"] = player_bids[player]
-                # player_bids[player] = player_salaries[player]
-        # stss['sliders_init'] = False
-        # 
-        # st.rerun()
-
-        # for team in team_names:
-        #     for player in rosters[team]:
-        #         st.session_state[f"{team}-{player}"] = player_salaries[player]
         stss['reset_button'] = True
-
-    # print (list(stss.keys()))
-    # fadsa
-
     else:
         stss['reset_button'] = False
 
-    # print (f'reset button: {stss["reset_button"]}')
 
+    # Download button
+    with cols[2]:
+        def convert_df():
+            # convert player bids to dataframe
+            player_bids_df = []
+            for player_name in stss['player_names']:
+                bid = player_bids[player_name]
+                player_bids_df.append({'Player': player_name, 'Bid': bid})
+            player_bids_df = pd.DataFrame(player_bids_df)
+            return player_bids_df.to_csv().encode("utf-8")
+        st.download_button(
+            label="Download file",
+            data=convert_df(),
+            file_name="player_bids.csv",
+            mime="text/csv",
+        )
+
+    # Upload
+    with cols[2]:
+        with st.expander("Upload File"):
+            uploaded_file = st.file_uploader("Upload")
+            if uploaded_file is not None:
+                dataframe = pd.read_csv(uploaded_file)
+                # convert df to player_bids dict
+                player_bids = {row['Player']: row['Bid'] for i, row in dataframe.iterrows()}
+                stss['player_bids'] = player_bids
+                
+                save_uploaded_bids(conn, stss, your_team, player_bids, bids_sheet_name, team_names)
+                print ('Uploaded')
+                # popup to confirm it worked
+                st.success('Uploaded') #, please refresh the page to see changes')
+
+
+
+
+
+
+
+    # Display all teams
     n_teams = len(team_names)
     teams_per_row = 3
     n_rows = n_teams // teams_per_row
@@ -308,9 +317,7 @@ def league_page():
     display_team_names = team_names.copy()
     display_team_names.remove(your_team)
     display_team_names = [your_team] + display_team_names
-    # Display all teams
     for i, team_name in enumerate(display_team_names):
-
         # Center your team
         if i == 0:
             row = 0
@@ -330,16 +337,3 @@ def league_page():
 
     if st.session_state['reset_button']:
         st.session_state['reset_button'] = False
-
-    # st.session_state['reset_button'] = False
-        # st.rerun()
-
-
-        # # print (list(st.session_state.keys()))
-        # print ('keys1 ----')
-        # for i, key in enumerate(st.session_state.keys()):
-        #     print (key, st.session_state[key])
-        #     if i > 10:
-        #         break
-        # print ('FaulklHore (Revenge of the Swift Version)-Maggie Chen' in list(st.session_state.keys()))
-        # print (' ----')
