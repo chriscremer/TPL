@@ -200,7 +200,14 @@ def run_algo(rosters, player_bids, player_genders, captains, player_salaries):
                     trades_to_consider.append(trade1)
                     trade_type = "somewhat happy"
 
-        # if no somewaht happy trades, consider all trades
+        # neutral trades
+        if len(trades_to_consider) == 0:
+            for trade1 in possible_trades:
+                if trade1["team1_happiness_change"] + trade1["team2_happiness_change"] == 0:
+                    trades_to_consider.append(trade1)
+                    trade_type = "neutral"
+
+        # all leftover trades
         if len(trades_to_consider) == 0:
             trades_to_consider = possible_trades
             trade_type = "all"

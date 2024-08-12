@@ -9,6 +9,7 @@ import pandas as pd
 import numpy as np
 import random
 
+from my_pages.bids import bids_page
 from my_pages.league import league_page
 from my_pages.algo_page import algo_page
 from my_pages.settings import settings_page
@@ -21,10 +22,6 @@ st.set_page_config(page_title="TPL", layout="wide", page_icon="🥏")
 st.markdown("<h1 style='text-align: center;'>TPL</h1>", unsafe_allow_html=True)
 
 stss = st.session_state
-# stay_logged_in = 0
-# if stay_logged_in:
-#     stss['login_status'] = True
-#     stss['team_name'] = 'Team A'
 
 if 'conn' not in st.session_state:
     conn = get_connection()
@@ -62,25 +59,18 @@ if ('login_status' not in stss or stss['login_status'] == False): # and not stay
     password = form.text_input('Password', type='password')
     submitted = form.form_submit_button('Submit')
     if submitted:
-        # stss['login_status'] = True
-        # stss['team_name'] = team_name
-
         # check to see if the team name and password are in the login sheet
         login_df = st.session_state['login_df']
         if team_name in login_df['Username'].values:
             password_correct = login_df[login_df['Username'] == team_name]['Password'].values[0] == password
             if password_correct:
                 stss['login_status'] = True
-                if team_name == 'a':
-                    team_name = "FaulklHore (Revenge of the Swift Version)"
                 stss['team_name'] = team_name
                 st.rerun()
             else:
                 st.error('Password is incorrect')
-                # print ('Password is incorrect')
         else:
             st.error('Team name not found')
-            # print ('Team name not found')
 
         
 
@@ -92,10 +82,14 @@ else:
             algo_page()
 
     else:
-        tabs_list = ['League', 'Settings']
+        tabs_list = ['League', 'Bids', 'Settings']
         tabs = st.tabs(tabs_list)
         with tabs[tabs_list.index('League')]:
             league_page()
+
+        with tabs[tabs_list.index('Bids')]:
+            bids_page()
+
 
     with tabs[tabs_list.index('Settings')]:
         settings_page()

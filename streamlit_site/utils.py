@@ -2,7 +2,8 @@ import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 import streamlit as st
 
-def get_connection(service_account_file = None, sheet_url=None):
+# def get_connection(service_account_file = None, sheet_url=None):
+def get_connection(sheet_url=None):
 
     # if service_account_file is None:
     #     service_account_file = "/Users/chriscremer/Downloads/SVA/SVA/SVA/g_TPL/data/sports-365003-a0354cb71377.json"

@@ -5,7 +5,7 @@ import random
 from gspread_dataframe import set_with_dataframe, get_as_dataframe
 from utils import get_connection
 
-from my_pages.league import get_rosters, get_salaries
+from my_pages.bids import get_rosters, get_salaries
 from algo3 import run_algo
 
 
