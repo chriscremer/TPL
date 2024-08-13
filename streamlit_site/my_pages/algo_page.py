@@ -1,7 +1,8 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
-import random
+from sklearn.linear_model import LinearRegression
+
 from gspread_dataframe import set_with_dataframe, get_as_dataframe
 from utils import get_connection
 
@@ -202,10 +203,10 @@ def make_likeness_matrix(team_costs, player_bids, rosters, avg_team_cost, starti
 
 
 
-def show_starting_info(team_costs, protected_players_dict, starting_rosters, player_bids):
+def show_starting_info(team_costs, protected_players_dict, starting_rosters, player_bids, captain_salaries):
 
     # show table of starting team costs
-    st.markdown('Starting Team Salaries', unsafe_allow_html=True)
+
     team_costs_df = pd.DataFrame.from_dict(team_costs, orient='index', columns=['Salary'])
     # make salary column an int
     team_costs_df['Salary'] = team_costs_df['Salary'].astype(int)
@@ -214,14 +215,23 @@ def show_starting_info(team_costs, protected_players_dict, starting_rosters, pla
 
     # show avg team cost
     avg_team_cost = int(sum(team_costs.values()) / len(team_costs))
-    st.markdown(f'Average Team Salary: {avg_team_cost}', unsafe_allow_html=True)
+
 
     # add column of dif from avg
     team_costs_df['Diff from Avg'] = team_costs_df['Salary'] - avg_team_cost
 
-    cols_0 = st.columns(2)
+    cols_0 = st.columns([5,1,2])
     with cols_0[0]:
+        st.markdown('Starting Team Salaries', unsafe_allow_html=True)
         st.table(team_costs_df)
+        st.markdown(f'Average Team Salary: {avg_team_cost}', unsafe_allow_html=True)
+   
+    with cols_0[2]:
+        # display the captain salaries
+        st.markdown('Captain Salaries', unsafe_allow_html=True)
+        captain_salaries_df = pd.DataFrame.from_dict(captain_salaries, orient='index', columns=['Salary'])
+        captain_salaries_df = captain_salaries_df.sort_values(by='Salary', ascending=False)
+        st.table(captain_salaries_df)
 
 
     # show protected players: dict of team_name: list of dicts of 'player_name' and 'value'
@@ -231,6 +241,7 @@ def show_starting_info(team_costs, protected_players_dict, starting_rosters, pla
     cols_names = [f"Player {i+1} (bid - avg bid)" for i in range(int(n_protected_players_per_team))]
     protected_players_df = pd.DataFrame.from_dict(protected_players_dict_text, orient='index', columns=cols_names)
     st.table(protected_players_df)
+
 
     # show matrix of how much each team likes each other team
     make_likeness_matrix(team_costs, player_bids, starting_rosters, avg_team_cost)
@@ -358,6 +369,129 @@ def show_player_salaries(player_salaries):
 
 
 
+
+def get_captain_salaries(stss, df_players, player_salaries, captains):
+    # print (stss['df_league'].columns)
+    # for each captain, we need to use linear regression to predict their salary given their stats
+    # then set everyones bid to that value
+    
+    # get stats + salary of all non-captain players
+    # get salary from new_player_salaries
+    # get stats from stss['df_league']
+
+    # get stats of all players, except captains
+    df_players_no_captains = df_players[~df_players['Full Name'].isin(captains)]
+    # remove wildcards
+    df_players_no_captains = df_players_no_captains[~df_players_no_captains['Full Name'].str.contains('WILD')]
+    # convert to dict
+    df_players_no_captains = df_players_no_captains.set_index('Full Name').T.to_dict()
+    
+    
+
+
+    # for i, row in stats_df.iterrows():
+    #     if 'Gary' in row['Name']:
+    #         print (row)
+    #         fasdf
+
+    # # confirm stats_df has all the players of df_players_no_captains
+    # for player in df_players_no_captains.keys():
+    #     if player not in stats_df['Name'].values:
+    #         raise Exception(f'{player} not in stats_df')
+        
+
+    stats_df = stss['df_league']
+    stats_keys = ['G', 'A', '2A', 'D', 'TA', 'RE']
+    new_df_players_no_captains = {}
+    for player_name, v in df_players_no_captains.items():
+        stats = stats_df[stats_df['Name'] == player_name]
+        # check for nan values
+        skip_person = False
+        for key in stats_keys:
+            # print (stats[key].values)
+            if np.isnan(float(stats[key].values[0])):
+                skip_person = True
+                break
+        if skip_person:
+            continue
+
+        # if 'Jenni' in k:
+        #     print (stats)
+        #     fasdf
+
+
+        new_df_players_no_captains[player_name] = {}
+        for stat_key in stats_keys:
+            # print (stats[key].values)
+            stat_value = stats[stat_key].values[0]
+            new_df_players_no_captains[player_name][stat_key] = float(stat_value)
+            new_df_players_no_captains[player_name]['Salary'] = player_salaries[player_name]
+        # print (new_df_players_no_captains[player_name])
+        # fasd
+    
+    # for k, v in df_players_no_captains.items():
+    #     print (k, v)
+    #     fasdfa
+
+    # print (len(new_df_players_no_captains))
+    # # find nans
+    # for k, v in df_players_no_captains.items():
+    #     print (k,v)
+    #     if np.isnan(v['G']):
+    #         print (k)
+
+
+    # make a matrix from df_players_no_captains
+    df_players_no_captains = pd.DataFrame.from_dict(new_df_players_no_captains, orient='index')
+    # print (len(df_players_no_captains))
+    X = df_players_no_captains[stats_keys]
+    # print (len(X))
+    y = df_players_no_captains['Salary']
+
+    X = X.values#.reshape(-1, 1) # reshape to 2d array
+    y = y.values.reshape(-1, 1) # reshape to 2d array
+    # print (X)
+    # print (y)
+
+    # print (X.shape, y.shape)
+    model = LinearRegression().fit(X, y) 
+
+    # print (f"Learned model: {model.coef_} {model.intercept_}")
+
+    # predict salary for each captain
+    captain_salaries = {}
+    for captain_name in captains:
+        stats = stats_df[stats_df['Name'] == captain_name]
+        stats = stats[stats_keys]
+        stats = stats.values.reshape(1, -1)
+        # print (stats.shape)
+        salary = model.predict(stats)
+        # print (f'{captain_name} predicted salary: {salary[0][0]}')
+        # round to nearest integer
+        captain_salaries[captain_name] = round(salary[0][0])
+
+    return captain_salaries
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 def algo_page():
 
     stss = st.session_state
@@ -382,7 +516,6 @@ def algo_page():
         worksheets = stss['worksheets']
         df_players = stss['df_players']
 
-        # your_team = stss['team_name']
         team_names = list(df_players['Team'].unique())
         player_names = df_players['Full Name'].tolist()
         rosters = get_rosters(df_players, team_names)
@@ -395,23 +528,27 @@ def algo_page():
         all_player_bids = get_all_bids_from_sheet(conn, stss, bids_sheet_name, worksheets, player_salaries)
         player_bids, rosters_team_list, player_genders = accumulate_data(rosters, team_names, df_players, salary_col_name, player_names, all_player_bids)
 
+        # compute player salaries by taking the average of the bids
+        player_salaries = {player: round(np.mean(list(bids.values()))) for player, bids in player_bids.items()}
+
+        # get list of captains
         if 'captains' not in stss:
             captains_sheet = [worksheet for worksheet in worksheets if worksheet.title == 'Captains'][0]
             df_captains = get_as_dataframe(captains_sheet)
-            # convert to list
             stss['captains'] = df_captains['Captain'].tolist()
         captains = stss['captains']
+        # get captain salaries
+        captain_salaries = get_captain_salaries(stss, df_players, player_salaries, captains)
+        # make all bids for the captains be their predicted salary
+        for captain in captains:
+            player_bids[captain] = {team: captain_salaries[captain] for team in team_names}
+            player_salaries[captain] = captain_salaries[captain]
 
-
-        # compute player salaries by taking the average of the bids
-        player_salaries = {player: round(np.mean(list(bids.values()))) for player, bids in player_bids.items()}
         # normalize salaries and bids
         player_bids, new_player_salaries, original_team_costs = normalize(player_bids, player_salaries, rosters)
         # sort roster into the same order as original_team_costs, so highest to lowest salary
         rosters = {k: v for k, v in sorted(rosters.items(), key=lambda item: original_team_costs[item[0]], reverse=True)}
-        # print (rosters.keys())
         starting_rosters = rosters.copy()
-
 
         # RUN TRADING ALORITHM
         rosters, count_team_trades, trades, protected_players_dict = run_algo(rosters_team_list, player_bids, player_genders, captains, new_player_salaries)
@@ -420,7 +557,7 @@ def algo_page():
 
         # Display info
         with st.expander("Pre Trade Info"):
-            show_starting_info(original_team_costs, protected_players_dict, starting_rosters, player_bids)
+            show_starting_info(original_team_costs, protected_players_dict, starting_rosters, player_bids, captain_salaries)
         with st.expander("Player Salaries"):
             show_player_salaries(new_player_salaries)
         with st.expander("Trades"):

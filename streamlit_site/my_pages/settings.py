@@ -60,7 +60,7 @@ def settings_page():
     with cols[2]:
         st.markdown(get_img_with_href(tuc_img, tuc_url, "TUC Site"), unsafe_allow_html=True)
     with cols[3]:
-        st.markdown(get_img_with_href(public_sheet_img, public_sheet_url, "Public Sheet"), unsafe_allow_html=True)
+        st.markdown(get_img_with_href(public_sheet_img, public_sheet_url, "Public Stats Sheet"), unsafe_allow_html=True)
     with cols[4]:
         st.markdown(get_img_with_href(gm_sheet_img, gm_sheet_url, "GM Sheet"), unsafe_allow_html=True)
     with cols[5]:

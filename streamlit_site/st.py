@@ -27,7 +27,6 @@ if 'conn' not in st.session_state:
     conn = get_connection()
     st.session_state['conn'] = conn
 
-    # conn = st.session_state['conn']
     worksheets = conn.worksheets()
     login_sheet = [worksheet for worksheet in worksheets if worksheet.title == 'Login'][0]
     login_df = get_as_dataframe(login_sheet)
@@ -76,8 +75,10 @@ if ('login_status' not in stss or stss['login_status'] == False): # and not stay
 
 else:
     if stss['team_name'] == "Convenor":
-        tabs_list = ['Algo', 'Settings']
+        tabs_list = ['League', 'Algo', 'Settings']
         tabs = st.tabs(tabs_list)
+        with tabs[tabs_list.index('League')]:
+            league_page()
         with tabs[tabs_list.index('Algo')]:
             algo_page()
 
@@ -86,7 +87,6 @@ else:
         tabs = st.tabs(tabs_list)
         with tabs[tabs_list.index('League')]:
             league_page()
-
         with tabs[tabs_list.index('Bids')]:
             bids_page()
 

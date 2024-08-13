@@ -55,6 +55,9 @@ def convert_salaries(df_league, max_salary):
     # sort by salary
     df_league = df_league.sort_values('Cap Impact', ascending=False)
 
+    # strip() the first and last names
+    df_league['First'] = df_league['First'].str.strip()
+    df_league['Last'] = df_league['Last'].str.strip()
     # combine First and Last names
     df_league['Name'] = df_league['First'] + ' ' + df_league['Last']
     # drop the First and Last columns
