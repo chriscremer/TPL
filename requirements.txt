@@ -10,7 +10,7 @@ cffi==1.16.0
 charset-normalizer==2.0.4
 click==8.1.7
 contourpy==1.2.1
-cryptography==42.0.5
+cryptography==43.0.1
 cycler==0.12.1
 distro==1.9.0
 fonttools==4.53.1
