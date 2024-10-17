@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>TPL</title>
+<link rel="icon" type="image/png" href="../frisbee.png">
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+
+<script
+src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
+</script>
+
+
+<style>
+    .table-container {
+        display: flex;
+        flex-direction: row;
+        margin: 20px;
+        justify-content: center;
+    }
+
+    .table-container2 {
+        display: flex;
+        flex-direction: column;
+        margin: 20px;
+    }
+
+    .table1, .table2 {
+        width: 100%; /* Tables will take the full width of their parent */
+        box-sizing: border-box;
+        /* border: 1px solid #ccc;  Add border for clarity */
+        margin-right: 30px;
+        border-collapse: collapse; /* this allows row lines to be shown for some reason */
+    }
+
+    .table1 tr, .table2 tr {
+        border-bottom: 1px solid #ccc; /* Add bottom border to table rows */
+    }
+
+    @media screen and (max-width: 850px) {
+        .table-container {
+            flex-direction: column;
+        }
+
+        iframe {
+            width: 90%; /* or any other percentage less than 100% */
+            margin: auto; /* to center the iframe */
+        }
+
+
+        /* change font color to blue */
+        body {
+            /* color: blue; */
+        }
+    }
+
+</style>
+
+</head>
+
+
+
+
+
+<body>
+
+<a href="../index.html" style="position: absolute; top: 10px; left: 10px;"><i class="fa fa-arrow-left"></i>Season</a> 
+<br>
+
+<center style="margin: 10px;">
+ 
+</center>
+
+
+<div class="table-container">
+
+    <div class="table-container2">
+        <h4>Dear John Look what you made Lysh do (15)</h4>
+        <table class="table1">
+            
+    <tr>
+        <th style="text-align: left;">Player</th>
+        <th style="text-align: left;">Goal</th>
+        <th style="text-align: left;">Assist</th>
+        <th style="text-align: left;">2A</th>
+        <th style="text-align: left;">Points</th>
+        <th style="text-align: left;">D</th>
+        <th style="text-align: left;">Pass</th>
+        <th style="text-align: left;">TA</th>
+        <th style="text-align: left;">Drop</th>
+    </tr>
+
+            <tr>
+                <td>Jonathan Steinberg</td>
+                <td>4</td>
+                <td>4</td>
+                <td>0</td>
+                <td>8</td>
+                <td>0</td>
+                <td>32</td>
+                <td>1</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Vanessa Mensink</td>
+                <td>5</td>
+                <td>1</td>
+                <td>1</td>
+                <td>7</td>
+                <td>0</td>
+                <td>4</td>
+                <td>5</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Chris Cremer</td>
+                <td>1</td>
+                <td>2</td>
+                <td>1</td>
+                <td>4</td>
+                <td>0</td>
+                <td>17</td>
+                <td>1</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Tyler Longo</td>
+                <td>0</td>
+                <td>2</td>
+                <td>1</td>
+                <td>3</td>
+                <td>1</td>
+                <td>35</td>
+                <td>3</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Tess King</td>
+                <td>0</td>
+                <td>2</td>
+                <td>1</td>
+                <td>3</td>
+                <td>0</td>
+                <td>19</td>
+                <td>0</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Evan Edgell</td>
+                <td>1</td>
+                <td>0</td>
+                <td>2</td>
+                <td>3</td>
+                <td>3</td>
+                <td>18</td>
+                <td>0</td>
+                <td>1</td>
+            </tr><tr>
+                <td>Michael Pham-Hung</td>
+                <td>1</td>
+                <td>1</td>
+                <td>1</td>
+                <td>3</td>
+                <td>3</td>
+                <td>7</td>
+                <td>5</td>
+                <td>0</td>
+            </tr><tr>
+                <td>James Shimoda</td>
+                <td>0</td>
+                <td>1</td>
+                <td>1</td>
+                <td>2</td>
+                <td>2</td>
+                <td>15</td>
+                <td>3</td>
+                <td>1</td>
+            </tr><tr>
+                <td>Alysha Fontaine</td>
+                <td>1</td>
+                <td>1</td>
+                <td>0</td>
+                <td>2</td>
+                <td>1</td>
+                <td>12</td>
+                <td>1</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Anna Wang</td>
+                <td>2</td>
+                <td>0</td>
+                <td>0</td>
+                <td>2</td>
+                <td>1</td>
+                <td>4</td>
+                <td>0</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Brendan Howarth</td>
+                <td>0</td>
+                <td>0</td>
+                <td>1</td>
+                <td>1</td>
+                <td>0</td>
+                <td>10</td>
+                <td>1</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Madeline Shimoda</td>
+                <td>0</td>
+                <td>0</td>
+                <td>1</td>
+                <td>1</td>
+                <td>1</td>
+                <td>9</td>
+                <td>0</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Wendy Li</td>
+                <td>0</td>
+                <td>1</td>
+                <td>0</td>
+                <td>1</td>
+                <td>0</td>
+                <td>4</td>
+                <td>1</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Christina Hua</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>1</td>
+                <td>5</td>
+                <td>0</td>
+                <td>0</td>
+            </tr><tr>
+                <td><b>Total</b></td>
+                <td><b>15</b></td>
+                <td><b>15</b></td>
+                <td><b>10</b></td>
+                <td><b>40</b></td>
+                <td><b>13</b></td>
+                <td><b>191</b></td>
+                <td><b>21</b></td>
+                <td><b>2</b></td>
+            </tr>
+        </table>
+    </div>
+    
+
+    <div class="table-container2">
+        <h4>I was cRyan on the staircase Meagging you "Please don't throw" (18)</h4>
+        <table class="table2">
+            
+    <tr>
+        <th style="text-align: left;">Player</th>
+        <th style="text-align: left;">Goal</th>
+        <th style="text-align: left;">Assist</th>
+        <th style="text-align: left;">2A</th>
+        <th style="text-align: left;">Points</th>
+        <th style="text-align: left;">D</th>
+        <th style="text-align: left;">Pass</th>
+        <th style="text-align: left;">TA</th>
+        <th style="text-align: left;">Drop</th>
+    </tr>
+
+            <tr>
+                <td>William Beveridge</td>
+                <td>3</td>
+                <td>4</td>
+                <td>1</td>
+                <td>8</td>
+                <td>0</td>
+                <td>15</td>
+                <td>4</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Ryan Sherriff</td>
+                <td>0</td>
+                <td>4</td>
+                <td>2</td>
+                <td>6</td>
+                <td>3</td>
+                <td>22</td>
+                <td>2</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Matthew Colphon</td>
+                <td>2</td>
+                <td>2</td>
+                <td>1</td>
+                <td>5</td>
+                <td>1</td>
+                <td>9</td>
+                <td>0</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Alec Zhao</td>
+                <td>5</td>
+                <td>0</td>
+                <td>0</td>
+                <td>5</td>
+                <td>1</td>
+                <td>6</td>
+                <td>1</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Shauna Yang</td>
+                <td>2</td>
+                <td>0</td>
+                <td>3</td>
+                <td>5</td>
+                <td>0</td>
+                <td>6</td>
+                <td>1</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Cat Pelletier</td>
+                <td>0</td>
+                <td>2</td>
+                <td>2</td>
+                <td>4</td>
+                <td>1</td>
+                <td>11</td>
+                <td>2</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Ricky Truong</td>
+                <td>3</td>
+                <td>0</td>
+                <td>1</td>
+                <td>4</td>
+                <td>1</td>
+                <td>11</td>
+                <td>0</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Nam Hoang</td>
+                <td>0</td>
+                <td>3</td>
+                <td>1</td>
+                <td>4</td>
+                <td>0</td>
+                <td>8</td>
+                <td>4</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Robert Botman</td>
+                <td>1</td>
+                <td>0</td>
+                <td>2</td>
+                <td>3</td>
+                <td>0</td>
+                <td>12</td>
+                <td>1</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Diane Pendlebury</td>
+                <td>1</td>
+                <td>1</td>
+                <td>0</td>
+                <td>2</td>
+                <td>0</td>
+                <td>8</td>
+                <td>0</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Thalia Huen</td>
+                <td>0</td>
+                <td>0</td>
+                <td>2</td>
+                <td>2</td>
+                <td>2</td>
+                <td>4</td>
+                <td>0</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Meagan Newman</td>
+                <td>0</td>
+                <td>1</td>
+                <td>0</td>
+                <td>1</td>
+                <td>1</td>
+                <td>6</td>
+                <td>3</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Vikki Shimoda</td>
+                <td>1</td>
+                <td>0</td>
+                <td>0</td>
+                <td>1</td>
+                <td>0</td>
+                <td>6</td>
+                <td>0</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Caterina Cazzetta</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>4</td>
+                <td>0</td>
+                <td>0</td>
+            </tr><tr>
+                <td><b>Total</b></td>
+                <td><b>18</b></td>
+                <td><b>17</b></td>
+                <td><b>15</b></td>
+                <td><b>50</b></td>
+                <td><b>10</b></td>
+                <td><b>128</b></td>
+                <td><b>18</b></td>
+                <td><b>0</b></td>
+            </tr>
+        </table>
+    </div>
+    
+</div>
+
+<center>
+    <canvas id="myChart" style="width:100%;max-width:800px"></canvas>
+</center>
+
+<br>
+<br>
+<br>
+
+</body>
+
+
+
+
+
+<script>
+  const dataPoints = [{'x': 0.97, 'y': 1, 'label': 'Up 1 for I was cRyan on the staircase Meagging you "Please don\'t throw"'}, {'x': 1.77, 'y': 1, 'label': 'Up 1 for Dear John Look what you made Lysh do'}, {'x': 1.78, 'y': 0, 'label': 'Tie'}, {'x': 2.69, 'y': 0, 'label': 'Tie'}, {'x': 2.7, 'y': 1, 'label': 'Up 1 for I was cRyan on the staircase Meagging you "Please don\'t throw"'}, {'x': 4.39, 'y': 1, 'label': 'Up 1 for Dear John Look what you made Lysh do'}, {'x': 4.4, 'y': 2, 'label': 'Up 2 for I was cRyan on the staircase Meagging you "Please don\'t throw"'}, {'x': 4.94, 'y': 2, 'label': 'Up 2 for Dear John Look what you made Lysh do'}, {'x': 4.95, 'y': 1, 'label': 'Up 1 for I was cRyan on the staircase Meagging you "Please don\'t throw"'}, {'x': 7.11, 'y': 1, 'label': 'Up 1 for Dear John Look what you made Lysh do'}, {'x': 7.12, 'y': 2, 'label': 'Up 2 for I was cRyan on the staircase Meagging you "Please don\'t throw"'}, {'x': 8.21, 'y': 2, 'label': 'Up 2 for Dear John Look what you made Lysh do'}, {'x': 8.22, 'y': 3, 'label': 'Up 3 for I was cRyan on the staircase Meagging you "Please don\'t throw"'}, {'x': 9.62, 'y': 3, 'label': 'Up 3 for Dear John Look what you made Lysh do'}, {'x': 9.63, 'y': 4, 'label': 'Up 4 for I was cRyan on the staircase Meagging you "Please don\'t throw"'}, {'x': 10.37, 'y': 4, 'label': 'Up 4 for Dear John Look what you made Lysh do'}, {'x': 10.38, 'y': 5, 'label': 'Up 5 for I was cRyan on the staircase Meagging you "Please don\'t throw"'}, {'x': 11.04, 'y': 5, 'label': 'Up 5 for Dear John Look what you made Lysh do'}, {'x': 11.05, 'y': 4, 'label': 'Up 4 for I was cRyan on the staircase Meagging you "Please don\'t throw"'}, {'x': 11.99, 'y': 4, 'label': 'Up 4 for Dear John Look what you made Lysh do'}, {'x': 12.0, 'y': 3, 'label': 'Up 3 for I was cRyan on the staircase Meagging you "Please don\'t throw"'}, {'x': 12.87, 'y': 3, 'label': 'Up 3 for Dear John Look what you made Lysh do'}, {'x': 12.88, 'y': 4, 'label': 'Up 4 for I was cRyan on the staircase Meagging you "Please don\'t throw"'}, {'x': 15.41, 'y': 4, 'label': 'Up 4 for Dear John Look what you made Lysh do'}, {'x': 15.42, 'y': 3, 'label': 'Up 3 for I was cRyan on the staircase Meagging you "Please don\'t throw"'}, {'x': 15.77, 'y': 3, 'label': 'Up 3 for Dear John Look what you made Lysh do'}, {'x': 15.78, 'y': 4, 'label': 'Up 4 for I was cRyan on the staircase Meagging you "Please don\'t throw"'}, {'x': 17.02, 'y': 4, 'label': 'Up 4 for Dear John Look what you made Lysh do'}, {'x': 17.03, 'y': 3, 'label': 'Up 3 for I was cRyan on the staircase Meagging you "Please don\'t throw"'}, {'x': 17.79, 'y': 3, 'label': 'Up 3 for Dear John Look what you made Lysh do'}, {'x': 17.8, 'y': 4, 'label': 'Up 4 for I was cRyan on the staircase Meagging you "Please don\'t throw"'}, {'x': 19.21, 'y': 4, 'label': 'Up 4 for Dear John Look what you made Lysh do'}, {'x': 19.22, 'y': 3, 'label': 'Up 3 for I was cRyan on the staircase Meagging you "Please don\'t throw"'}, {'x': 24.22, 'y': 3, 'label': 'Up 3 for Dear John Look what you made Lysh do'}, {'x': 24.23, 'y': 4, 'label': 'Up 4 for I was cRyan on the staircase Meagging you "Please don\'t throw"'}, {'x': 24.71, 'y': 4, 'label': 'Up 4 for Dear John Look what you made Lysh do'}, {'x': 24.72, 'y': 3, 'label': 'Up 3 for I was cRyan on the staircase Meagging you "Please don\'t throw"'}, {'x': 26.79, 'y': 3, 'label': 'Up 3 for Dear John Look what you made Lysh do'}, {'x': 26.8, 'y': 2, 'label': 'Up 2 for I was cRyan on the staircase Meagging you "Please don\'t throw"'}, {'x': 27.56, 'y': 2, 'label': 'Up 2 for Dear John Look what you made Lysh do'}, {'x': 27.57, 'y': 1, 'label': 'Up 1 for I was cRyan on the staircase Meagging you "Please don\'t throw"'}, {'x': 28.64, 'y': 1, 'label': 'Up 1 for Dear John Look what you made Lysh do'}, {'x': 28.65, 'y': 0, 'label': 'Tie'}, {'x': 31.44, 'y': 0, 'label': 'Tie'}, {'x': 31.45, 'y': 1, 'label': 'Up 1 for I was cRyan on the staircase Meagging you "Please don\'t throw"'}, {'x': 33.12, 'y': 1, 'label': 'Up 1 for Dear John Look what you made Lysh do'}, {'x': 33.13, 'y': 2, 'label': 'Up 2 for I was cRyan on the staircase Meagging you "Please don\'t throw"'}, {'x': 34.64, 'y': 2, 'label': 'Up 2 for Dear John Look what you made Lysh do'}, {'x': 34.65, 'y': 1, 'label': 'Up 1 for I was cRyan on the staircase Meagging you "Please don\'t throw"'}, {'x': 35.99, 'y': 1, 'label': 'Up 1 for Dear John Look what you made Lysh do'}, {'x': 36.0, 'y': 2, 'label': 'Up 2 for I was cRyan on the staircase Meagging you "Please don\'t throw"'}, {'x': 36.91, 'y': 2, 'label': 'Up 2 for Dear John Look what you made Lysh do'}, {'x': 36.92, 'y': 1, 'label': 'Up 1 for I was cRyan on the staircase Meagging you "Please don\'t throw"'}, {'x': 39.14, 'y': 1, 'label': 'Up 1 for Dear John Look what you made Lysh do'}, {'x': 39.15, 'y': 2, 'label': 'Up 2 for I was cRyan on the staircase Meagging you "Please don\'t throw"'}, {'x': 39.57, 'y': 2, 'label': 'Up 2 for Dear John Look what you made Lysh do'}, {'x': 39.58, 'y': 3, 'label': 'Up 3 for I was cRyan on the staircase Meagging you "Please don\'t throw"'}, {'x': 39.77, 'y': 3, 'label': 'Up 3 for Dear John Look what you made Lysh do'}, {'x': 39.78, 'y': 4, 'label': 'Up 4 for I was cRyan on the staircase Meagging you "Please don\'t throw"'}, {'x': 40.79, 'y': 4, 'label': 'Up 4 for Dear John Look what you made Lysh do'}, {'x': 40.8, 'y': 3, 'label': 'Up 3 for I was cRyan on the staircase Meagging you "Please don\'t throw"'}, {'x': 41.32, 'y': 3, 'label': 'Up 3 for Dear John Look what you made Lysh do'}, {'x': 41.33, 'y': 2, 'label': 'Up 2 for I was cRyan on the staircase Meagging you "Please don\'t throw"'}, {'x': 42.02, 'y': 2, 'label': 'Up 2 for Dear John Look what you made Lysh do'}, {'x': 42.03, 'y': 3, 'label': 'Up 3 for I was cRyan on the staircase Meagging you "Please don\'t throw"'}, {'x': 43, 'y': 3, 'label': 'Up 3 for I was cRyan on the staircase Meagging you "Please don\'t throw"'}];
+    const xValues = [0.97, 1.77, 1.78, 2.69, 2.7, 4.39, 4.4, 4.94, 4.95, 7.11, 7.12, 8.21, 8.22, 9.62, 9.63, 10.37, 10.38, 11.04, 11.05, 11.99, 12.0, 12.87, 12.88, 15.41, 15.42, 15.77, 15.78, 17.02, 17.03, 17.79, 17.8, 19.21, 19.22, 24.22, 24.23, 24.71, 24.72, 26.79, 26.8, 27.56, 27.57, 28.64, 28.65, 31.44, 31.45, 33.12, 33.13, 34.64, 34.65, 35.99, 36.0, 36.91, 36.92, 39.14, 39.15, 39.57, 39.58, 39.77, 39.78, 40.79, 40.8, 41.32, 41.33, 42.02, 42.03, 43];
+    const yValues = [1, 1, 0, 0, 1, 1, 2, 2, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 4, 4, 3, 3, 4, 4, 3, 3, 4, 4, 3, 3, 4, 4, 3, 3, 4, 4, 3, 3, 2, 2, 1, 1, 0, 0, 1, 1, 2, 2, 1, 1, 2, 2, 1, 1, 2, 2, 3, 3, 4, 4, 3, 3, 2, 2, 3, 3];
+
+  
+  new Chart("myChart", {
+    type: "line",
+    data: {
+
+    labels: yValues,
+    datasets: [{
+      data: dataPoints,
+      // Add this line to include the labels in the data
+      pointHoverBackgroundColor: "red",
+      pointHoverBorderColor: "red",
+      pointHoverBorderWidth: 2,
+      pointHoverRadius: 5,
+      tension: 0.05,
+    }]
+
+
+    },
+    options: {
+
+    tooltips: {
+      callbacks: {
+        label: function(tooltipItem, data) {
+          var label = data.labels[tooltipItem.index];
+          var value = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
+          return value.label;
+
+        }
+      }
+    },
+
+      legend: {display: false},
+      title: {
+        display: true,
+        text: ""
+      },
+      scales: {
+        yAxes: [{
+          scaleLabel: {
+            display: true,
+            labelString: 'Score Difference'
+          }
+        }],
+        xAxes: [{
+          type: 'linear', // this will ensure that the x-axis is based on numeric scale
+          scaleLabel: {
+            display: true,
+            labelString: 'Gametime'
+          }
+        }]
+      }
+    }
+  });
+  
+  </script>
+
+
+
+
+</html>

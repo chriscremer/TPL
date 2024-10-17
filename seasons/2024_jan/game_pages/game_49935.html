@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>TPL</title>
+<link rel="icon" type="image/png" href="../frisbee.png">
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+
+<script
+src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
+</script>
+
+
+<style>
+    .table-container {
+        display: flex;
+        flex-direction: row;
+        margin: 20px;
+        justify-content: center;
+    }
+
+    .table-container2 {
+        display: flex;
+        flex-direction: column;
+        margin: 20px;
+    }
+
+    .table1, .table2 {
+        width: 100%; /* Tables will take the full width of their parent */
+        box-sizing: border-box;
+        /* border: 1px solid #ccc;  Add border for clarity */
+        margin-right: 30px;
+        border-collapse: collapse; /* this allows row lines to be shown for some reason */
+    }
+
+    .table1 tr, .table2 tr {
+        border-bottom: 1px solid #ccc; /* Add bottom border to table rows */
+    }
+
+    @media screen and (max-width: 850px) {
+        .table-container {
+            flex-direction: column;
+        }
+
+        iframe {
+            width: 90%; /* or any other percentage less than 100% */
+            margin: auto; /* to center the iframe */
+        }
+
+
+        /* change font color to blue */
+        body {
+            /* color: blue; */
+        }
+    }
+
+</style>
+
+</head>
+
+
+
+
+
+<body>
+
+<a href="../index.html" style="position: absolute; top: 10px; left: 10px;"><i class="fa fa-arrow-left"></i>Season</a> 
+<br>
+
+<center style="margin: 10px;">
+ 
+</center>
+
+
+<div class="table-container">
+
+    <div class="table-container2">
+        <h4>DANti-Hero (13)</h4>
+        <table class="table1">
+            
+    <tr>
+        <th style="text-align: left;">Player</th>
+        <th style="text-align: left;">Goal</th>
+        <th style="text-align: left;">Assist</th>
+        <th style="text-align: left;">2A</th>
+        <th style="text-align: left;">Points</th>
+        <th style="text-align: left;">D</th>
+        <th style="text-align: left;">Pass</th>
+        <th style="text-align: left;">TA</th>
+        <th style="text-align: left;">Drop</th>
+    </tr>
+
+            <tr>
+                <td>Jono Yeong</td>
+                <td>4</td>
+                <td>2</td>
+                <td>2</td>
+                <td>8</td>
+                <td>2</td>
+                <td>16</td>
+                <td>1</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Nawid Mehrpoor</td>
+                <td>2</td>
+                <td>2</td>
+                <td>1</td>
+                <td>5</td>
+                <td>0</td>
+                <td>7</td>
+                <td>3</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Ricky Liu</td>
+                <td>1</td>
+                <td>1</td>
+                <td>2</td>
+                <td>4</td>
+                <td>1</td>
+                <td>12</td>
+                <td>3</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Daniel Quinto</td>
+                <td>2</td>
+                <td>1</td>
+                <td>0</td>
+                <td>3</td>
+                <td>4</td>
+                <td>12</td>
+                <td>1</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Marco Ly</td>
+                <td>1</td>
+                <td>2</td>
+                <td>0</td>
+                <td>3</td>
+                <td>1</td>
+                <td>12</td>
+                <td>5</td>
+                <td>1</td>
+            </tr><tr>
+                <td>Daivik Doshi</td>
+                <td>3</td>
+                <td>0</td>
+                <td>0</td>
+                <td>3</td>
+                <td>1</td>
+                <td>3</td>
+                <td>1</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Olivia Chung</td>
+                <td>0</td>
+                <td>2</td>
+                <td>0</td>
+                <td>2</td>
+                <td>0</td>
+                <td>6</td>
+                <td>1</td>
+                <td>1</td>
+            </tr><tr>
+                <td>Cat Pelletier</td>
+                <td>0</td>
+                <td>1</td>
+                <td>0</td>
+                <td>1</td>
+                <td>0</td>
+                <td>18</td>
+                <td>1</td>
+                <td>2</td>
+            </tr><tr>
+                <td>Wendy Li</td>
+                <td>0</td>
+                <td>0</td>
+                <td>1</td>
+                <td>1</td>
+                <td>0</td>
+                <td>9</td>
+                <td>0</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Adrian Muresan</td>
+                <td>0</td>
+                <td>1</td>
+                <td>0</td>
+                <td>1</td>
+                <td>0</td>
+                <td>9</td>
+                <td>1</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Eileen Lam</td>
+                <td>0</td>
+                <td>0</td>
+                <td>1</td>
+                <td>1</td>
+                <td>0</td>
+                <td>8</td>
+                <td>1</td>
+                <td>1</td>
+            </tr><tr>
+                <td>Laura Stanley</td>
+                <td>0</td>
+                <td>1</td>
+                <td>0</td>
+                <td>1</td>
+                <td>2</td>
+                <td>2</td>
+                <td>1</td>
+                <td>1</td>
+            </tr><tr>
+                <td>Mika Young</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>5</td>
+                <td>1</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Mikah Sosa</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>1</td>
+                <td>4</td>
+                <td>1</td>
+                <td>1</td>
+            </tr><tr>
+                <td><b>Total</b></td>
+                <td><b>13</b></td>
+                <td><b>13</b></td>
+                <td><b>7</b></td>
+                <td><b>33</b></td>
+                <td><b>12</b></td>
+                <td><b>123</b></td>
+                <td><b>21</b></td>
+                <td><b>7</b></td>
+            </tr>
+        </table>
+    </div>
+    
+
+    <div class="table-container2">
+        <h4>kyraless nam's careful daughter (13)</h4>
+        <table class="table2">
+            
+    <tr>
+        <th style="text-align: left;">Player</th>
+        <th style="text-align: left;">Goal</th>
+        <th style="text-align: left;">Assist</th>
+        <th style="text-align: left;">2A</th>
+        <th style="text-align: left;">Points</th>
+        <th style="text-align: left;">D</th>
+        <th style="text-align: left;">Pass</th>
+        <th style="text-align: left;">TA</th>
+        <th style="text-align: left;">Drop</th>
+    </tr>
+
+            <tr>
+                <td>Jonathan Steinberg</td>
+                <td>2</td>
+                <td>1</td>
+                <td>1</td>
+                <td>4</td>
+                <td>1</td>
+                <td>13</td>
+                <td>2</td>
+                <td>1</td>
+            </tr><tr>
+                <td>Larry Macdonald</td>
+                <td>0</td>
+                <td>3</td>
+                <td>1</td>
+                <td>4</td>
+                <td>0</td>
+                <td>11</td>
+                <td>0</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Neil Griffith</td>
+                <td>2</td>
+                <td>1</td>
+                <td>0</td>
+                <td>3</td>
+                <td>1</td>
+                <td>18</td>
+                <td>3</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Patrick Russell</td>
+                <td>0</td>
+                <td>3</td>
+                <td>0</td>
+                <td>3</td>
+                <td>1</td>
+                <td>10</td>
+                <td>1</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Kyra Healey</td>
+                <td>2</td>
+                <td>1</td>
+                <td>0</td>
+                <td>3</td>
+                <td>0</td>
+                <td>9</td>
+                <td>1</td>
+                <td>2</td>
+            </tr><tr>
+                <td>Dong-Ling Chen</td>
+                <td>2</td>
+                <td>1</td>
+                <td>0</td>
+                <td>3</td>
+                <td>1</td>
+                <td>7</td>
+                <td>4</td>
+                <td>1</td>
+            </tr><tr>
+                <td>Nadia Ho</td>
+                <td>1</td>
+                <td>0</td>
+                <td>2</td>
+                <td>3</td>
+                <td>0</td>
+                <td>5</td>
+                <td>0</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Helen O'Sullivan</td>
+                <td>3</td>
+                <td>0</td>
+                <td>0</td>
+                <td>3</td>
+                <td>0</td>
+                <td>3</td>
+                <td>1</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Michael Pham-Hung</td>
+                <td>0</td>
+                <td>1</td>
+                <td>1</td>
+                <td>2</td>
+                <td>1</td>
+                <td>15</td>
+                <td>3</td>
+                <td>1</td>
+            </tr><tr>
+                <td>Joe Castro</td>
+                <td>0</td>
+                <td>1</td>
+                <td>1</td>
+                <td>2</td>
+                <td>0</td>
+                <td>13</td>
+                <td>3</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Anna Wang</td>
+                <td>1</td>
+                <td>1</td>
+                <td>0</td>
+                <td>2</td>
+                <td>3</td>
+                <td>2</td>
+                <td>0</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Wendy Chong</td>
+                <td>0</td>
+                <td>0</td>
+                <td>1</td>
+                <td>1</td>
+                <td>0</td>
+                <td>20</td>
+                <td>2</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Max van der Weerd</td>
+                <td>0</td>
+                <td>0</td>
+                <td>1</td>
+                <td>1</td>
+                <td>1</td>
+                <td>13</td>
+                <td>2</td>
+                <td>1</td>
+            </tr><tr>
+                <td>Nancy Warren</td>
+                <td>0</td>
+                <td>0</td>
+                <td>1</td>
+                <td>1</td>
+                <td>0</td>
+                <td>4</td>
+                <td>0</td>
+                <td>1</td>
+            </tr><tr>
+                <td><b>Total</b></td>
+                <td><b>13</b></td>
+                <td><b>13</b></td>
+                <td><b>9</b></td>
+                <td><b>35</b></td>
+                <td><b>9</b></td>
+                <td><b>143</b></td>
+                <td><b>22</b></td>
+                <td><b>7</b></td>
+            </tr>
+        </table>
+    </div>
+    
+</div>
+
+<center>
+    <canvas id="myChart" style="width:100%;max-width:800px"></canvas>
+</center>
+
+<br>
+<br>
+<br>
+
+</body>
+
+
+
+
+
+<script>
+  const dataPoints = [{'x': 2.42, 'y': -1, 'label': "Up 1 for kyraless nam's careful daughter"}, {'x': 2.82, 'y': -1, 'label': "Up 1 for kyraless nam's careful daughter"}, {'x': 2.83, 'y': 0, 'label': 'Tie'}, {'x': 3.96, 'y': 0, 'label': 'Tie'}, {'x': 3.97, 'y': 1, 'label': 'Up 1 for DANti-Hero'}, {'x': 5.31, 'y': 1, 'label': 'Up 1 for DANti-Hero'}, {'x': 5.32, 'y': 0, 'label': 'Tie'}, {'x': 7.44, 'y': 0, 'label': 'Tie'}, {'x': 7.45, 'y': 1, 'label': 'Up 1 for DANti-Hero'}, {'x': 8.37, 'y': 1, 'label': 'Up 1 for DANti-Hero'}, {'x': 8.38, 'y': 2, 'label': 'Up 2 for DANti-Hero'}, {'x': 10.51, 'y': 2, 'label': 'Up 2 for DANti-Hero'}, {'x': 10.52, 'y': 1, 'label': 'Up 1 for DANti-Hero'}, {'x': 10.94, 'y': 1, 'label': 'Up 1 for DANti-Hero'}, {'x': 10.95, 'y': 2, 'label': 'Up 2 for DANti-Hero'}, {'x': 12.49, 'y': 2, 'label': 'Up 2 for DANti-Hero'}, {'x': 12.5, 'y': 3, 'label': 'Up 3 for DANti-Hero'}, {'x': 14.54, 'y': 3, 'label': 'Up 3 for DANti-Hero'}, {'x': 14.55, 'y': 2, 'label': 'Up 2 for DANti-Hero'}, {'x': 15.61, 'y': 2, 'label': 'Up 2 for DANti-Hero'}, {'x': 15.62, 'y': 3, 'label': 'Up 3 for DANti-Hero'}, {'x': 19.66, 'y': 3, 'label': 'Up 3 for DANti-Hero'}, {'x': 19.67, 'y': 2, 'label': 'Up 2 for DANti-Hero'}, {'x': 21.66, 'y': 2, 'label': 'Up 2 for DANti-Hero'}, {'x': 21.67, 'y': 1, 'label': 'Up 1 for DANti-Hero'}, {'x': 26.42, 'y': 1, 'label': 'Up 1 for DANti-Hero'}, {'x': 26.43, 'y': 2, 'label': 'Up 2 for DANti-Hero'}, {'x': 29.21, 'y': 2, 'label': 'Up 2 for DANti-Hero'}, {'x': 29.22, 'y': 1, 'label': 'Up 1 for DANti-Hero'}, {'x': 32.49, 'y': 1, 'label': 'Up 1 for DANti-Hero'}, {'x': 32.5, 'y': 2, 'label': 'Up 2 for DANti-Hero'}, {'x': 33.01, 'y': 2, 'label': 'Up 2 for DANti-Hero'}, {'x': 33.02, 'y': 3, 'label': 'Up 3 for DANti-Hero'}, {'x': 33.37, 'y': 3, 'label': 'Up 3 for DANti-Hero'}, {'x': 33.38, 'y': 4, 'label': 'Up 4 for DANti-Hero'}, {'x': 33.96, 'y': 4, 'label': 'Up 4 for DANti-Hero'}, {'x': 33.97, 'y': 3, 'label': 'Up 3 for DANti-Hero'}, {'x': 35.04, 'y': 3, 'label': 'Up 3 for DANti-Hero'}, {'x': 35.05, 'y': 2, 'label': 'Up 2 for DANti-Hero'}, {'x': 37.67, 'y': 2, 'label': 'Up 2 for DANti-Hero'}, {'x': 37.68, 'y': 3, 'label': 'Up 3 for DANti-Hero'}, {'x': 38.14, 'y': 3, 'label': 'Up 3 for DANti-Hero'}, {'x': 38.15, 'y': 2, 'label': 'Up 2 for DANti-Hero'}, {'x': 40.87, 'y': 2, 'label': 'Up 2 for DANti-Hero'}, {'x': 40.88, 'y': 1, 'label': 'Up 1 for DANti-Hero'}, {'x': 43.71, 'y': 1, 'label': 'Up 1 for DANti-Hero'}, {'x': 43.72, 'y': 0, 'label': 'Tie'}, {'x': 44.01, 'y': 0, 'label': 'Tie'}, {'x': 44.02, 'y': -1, 'label': "Up 1 for kyraless nam's careful daughter"}, {'x': 44.54, 'y': -1, 'label': "Up 1 for kyraless nam's careful daughter"}, {'x': 44.55, 'y': 0, 'label': 'Tie'}, {'x': 45, 'y': 0, 'label': 'Tie'}];
+    const xValues = [2.42, 2.82, 2.83, 3.96, 3.97, 5.31, 5.32, 7.44, 7.45, 8.37, 8.38, 10.51, 10.52, 10.94, 10.95, 12.49, 12.5, 14.54, 14.55, 15.61, 15.62, 19.66, 19.67, 21.66, 21.67, 26.42, 26.43, 29.21, 29.22, 32.49, 32.5, 33.01, 33.02, 33.37, 33.38, 33.96, 33.97, 35.04, 35.05, 37.67, 37.68, 38.14, 38.15, 40.87, 40.88, 43.71, 43.72, 44.01, 44.02, 44.54, 44.55, 45];
+    const yValues = [-1, -1, 0, 0, 1, 1, 0, 0, 1, 1, 2, 2, 1, 1, 2, 2, 3, 3, 2, 2, 3, 3, 2, 2, 1, 1, 2, 2, 1, 1, 2, 2, 3, 3, 4, 4, 3, 3, 2, 2, 3, 3, 2, 2, 1, 1, 0, 0, -1, -1, 0, 0];
+
+  
+  new Chart("myChart", {
+    type: "line",
+    data: {
+
+    labels: yValues,
+    datasets: [{
+      data: dataPoints,
+      // Add this line to include the labels in the data
+      pointHoverBackgroundColor: "red",
+      pointHoverBorderColor: "red",
+      pointHoverBorderWidth: 2,
+      pointHoverRadius: 5,
+      tension: 0.05,
+    }]
+
+
+    },
+    options: {
+
+    tooltips: {
+      callbacks: {
+        label: function(tooltipItem, data) {
+          var label = data.labels[tooltipItem.index];
+          var value = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
+          return value.label;
+
+        }
+      }
+    },
+
+      legend: {display: false},
+      title: {
+        display: true,
+        text: ""
+      },
+      scales: {
+        yAxes: [{
+          scaleLabel: {
+            display: true,
+            labelString: 'Score Difference'
+          }
+        }],
+        xAxes: [{
+          type: 'linear', // this will ensure that the x-axis is based on numeric scale
+          scaleLabel: {
+            display: true,
+            labelString: 'Gametime'
+          }
+        }]
+      }
+    }
+  });
+  
+  </script>
+
+
+
+
+</html>
