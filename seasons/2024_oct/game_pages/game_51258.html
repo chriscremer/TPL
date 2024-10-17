@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>TPL</title>
+<link rel="icon" type="image/png" href="../../../images/frisbee.png">
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+
+<script
+src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
+</script>
+
+
+<style>
+    .table-container {
+        display: flex;
+        flex-direction: row;
+        margin: 20px;
+        justify-content: center;
+    }
+
+    .table-container2 {
+        display: flex;
+        flex-direction: column;
+        margin: 20px;
+    }
+
+    .table1, .table2 {
+        width: 100%; /* Tables will take the full width of their parent */
+        box-sizing: border-box;
+        /* border: 1px solid #ccc;  Add border for clarity */
+        margin-right: 30px;
+        border-collapse: collapse; /* this allows row lines to be shown for some reason */
+    }
+
+    .table1 tr, .table2 tr {
+        border-bottom: 1px solid #ccc; /* Add bottom border to table rows */
+    }
+
+    @media screen and (max-width: 850px) {
+        .table-container {
+            flex-direction: column;
+        }
+
+        iframe {
+            width: 90%; /* or any other percentage less than 100% */
+            margin: auto; /* to center the iframe */
+        }
+
+
+        /* change font color to blue */
+        body {
+            /* color: blue; */
+        }
+    }
+
+</style>
+
+</head>
+
+
+
+
+
+<body>
+
+<a href="../index.html" style="position: absolute; top: 10px; left: 10px;"><i class="fa fa-arrow-left"></i>Season</a> 
+<br>
+
+<center style="margin: 10px;">
+ 
+</center>
+
+
+<div class="table-container">
+
+    <div class="table-container2">
+        <h4>Team Cielle Matt (16)</h4>
+        <table class="table1">
+            
+    <tr>
+        <th style="text-align: left;">Player</th>
+        <th style="text-align: left;">Goal</th>
+        <th style="text-align: left;">Assist</th>
+        <th style="text-align: left;">2A</th>
+        <th style="text-align: left;">Points</th>
+        <th style="text-align: left;">D</th>
+        <th style="text-align: left;">Pass</th>
+        <th style="text-align: left;">TA</th>
+        <th style="text-align: left;">Drop</th>
+    </tr>
+
+            <tr>
+                <td>Sean Yang</td>
+                <td>0</td>
+                <td>4</td>
+                <td>3</td>
+                <td>7</td>
+                <td>1</td>
+                <td>21</td>
+                <td>3</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Matthew Denton</td>
+                <td>1</td>
+                <td>3</td>
+                <td>2</td>
+                <td>6</td>
+                <td>2</td>
+                <td>12</td>
+                <td>0</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Vanessa Mensink</td>
+                <td>3</td>
+                <td>1</td>
+                <td>0</td>
+                <td>4</td>
+                <td>0</td>
+                <td>7</td>
+                <td>2</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Harrison Smith</td>
+                <td>3</td>
+                <td>1</td>
+                <td>0</td>
+                <td>4</td>
+                <td>1</td>
+                <td>6</td>
+                <td>3</td>
+                <td>3</td>
+            </tr><tr>
+                <td>Grace Uy</td>
+                <td>3</td>
+                <td>0</td>
+                <td>1</td>
+                <td>4</td>
+                <td>1</td>
+                <td>5</td>
+                <td>2</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Griffin Peddle</td>
+                <td>0</td>
+                <td>2</td>
+                <td>1</td>
+                <td>3</td>
+                <td>1</td>
+                <td>16</td>
+                <td>4</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Andy Gong</td>
+                <td>1</td>
+                <td>1</td>
+                <td>1</td>
+                <td>3</td>
+                <td>0</td>
+                <td>5</td>
+                <td>1</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Raymond Tang</td>
+                <td>2</td>
+                <td>1</td>
+                <td>0</td>
+                <td>3</td>
+                <td>1</td>
+                <td>4</td>
+                <td>1</td>
+                <td>1</td>
+            </tr><tr>
+                <td>Matthew Colphon</td>
+                <td>0</td>
+                <td>0</td>
+                <td>2</td>
+                <td>2</td>
+                <td>0</td>
+                <td>13</td>
+                <td>1</td>
+                <td>1</td>
+            </tr><tr>
+                <td>Allison Brown</td>
+                <td>0</td>
+                <td>1</td>
+                <td>1</td>
+                <td>2</td>
+                <td>4</td>
+                <td>9</td>
+                <td>0</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Madeline Chan</td>
+                <td>1</td>
+                <td>0</td>
+                <td>1</td>
+                <td>2</td>
+                <td>0</td>
+                <td>9</td>
+                <td>1</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Caterina Cazzetta</td>
+                <td>0</td>
+                <td>2</td>
+                <td>0</td>
+                <td>2</td>
+                <td>0</td>
+                <td>8</td>
+                <td>0</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Vera Hoang</td>
+                <td>1</td>
+                <td>0</td>
+                <td>0</td>
+                <td>1</td>
+                <td>0</td>
+                <td>3</td>
+                <td>0</td>
+                <td>1</td>
+            </tr><tr>
+                <td>Clara Liu</td>
+                <td>1</td>
+                <td>0</td>
+                <td>0</td>
+                <td>1</td>
+                <td>1</td>
+                <td>1</td>
+                <td>3</td>
+                <td>2</td>
+            </tr><tr>
+                <td><b>Total</b></td>
+                <td><b>16</b></td>
+                <td><b>16</b></td>
+                <td><b>12</b></td>
+                <td><b>44</b></td>
+                <td><b>12</b></td>
+                <td><b>119</b></td>
+                <td><b>21</b></td>
+                <td><b>8</b></td>
+            </tr>
+        </table>
+    </div>
+    
+
+    <div class="table-container2">
+        <h4>Sanic the Hailhog (17)</h4>
+        <table class="table2">
+            
+    <tr>
+        <th style="text-align: left;">Player</th>
+        <th style="text-align: left;">Goal</th>
+        <th style="text-align: left;">Assist</th>
+        <th style="text-align: left;">2A</th>
+        <th style="text-align: left;">Points</th>
+        <th style="text-align: left;">D</th>
+        <th style="text-align: left;">Pass</th>
+        <th style="text-align: left;">TA</th>
+        <th style="text-align: left;">Drop</th>
+    </tr>
+
+            <tr>
+                <td>Benjamin St.Louis</td>
+                <td>1</td>
+                <td>4</td>
+                <td>4</td>
+                <td>9</td>
+                <td>0</td>
+                <td>18</td>
+                <td>1</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Annie Beveridge</td>
+                <td>3</td>
+                <td>3</td>
+                <td>0</td>
+                <td>6</td>
+                <td>0</td>
+                <td>4</td>
+                <td>0</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Chen Chou</td>
+                <td>3</td>
+                <td>1</td>
+                <td>1</td>
+                <td>5</td>
+                <td>1</td>
+                <td>8</td>
+                <td>3</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Hailey McInnis</td>
+                <td>2</td>
+                <td>1</td>
+                <td>1</td>
+                <td>4</td>
+                <td>0</td>
+                <td>9</td>
+                <td>2</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Michael Danh</td>
+                <td>1</td>
+                <td>3</td>
+                <td>0</td>
+                <td>4</td>
+                <td>0</td>
+                <td>7</td>
+                <td>3</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Celine Lai</td>
+                <td>3</td>
+                <td>0</td>
+                <td>1</td>
+                <td>4</td>
+                <td>0</td>
+                <td>2</td>
+                <td>2</td>
+                <td>1</td>
+            </tr><tr>
+                <td>Sanjay Parker</td>
+                <td>1</td>
+                <td>0</td>
+                <td>1</td>
+                <td>2</td>
+                <td>2</td>
+                <td>20</td>
+                <td>3</td>
+                <td>1</td>
+            </tr><tr>
+                <td>Anthony Slater</td>
+                <td>1</td>
+                <td>1</td>
+                <td>0</td>
+                <td>2</td>
+                <td>5</td>
+                <td>18</td>
+                <td>6</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Daniel Eisner</td>
+                <td>0</td>
+                <td>2</td>
+                <td>0</td>
+                <td>2</td>
+                <td>1</td>
+                <td>9</td>
+                <td>3</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Fan Fan</td>
+                <td>0</td>
+                <td>1</td>
+                <td>1</td>
+                <td>2</td>
+                <td>0</td>
+                <td>8</td>
+                <td>2</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Thalia Huen</td>
+                <td>0</td>
+                <td>0</td>
+                <td>2</td>
+                <td>2</td>
+                <td>0</td>
+                <td>5</td>
+                <td>0</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Ashar Shaur</td>
+                <td>1</td>
+                <td>0</td>
+                <td>1</td>
+                <td>2</td>
+                <td>0</td>
+                <td>5</td>
+                <td>0</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Shauna Yang</td>
+                <td>0</td>
+                <td>0</td>
+                <td>1</td>
+                <td>1</td>
+                <td>1</td>
+                <td>10</td>
+                <td>2</td>
+                <td>1</td>
+            </tr><tr>
+                <td>Mika Young</td>
+                <td>1</td>
+                <td>0</td>
+                <td>0</td>
+                <td>1</td>
+                <td>0</td>
+                <td>1</td>
+                <td>0</td>
+                <td>0</td>
+            </tr><tr>
+                <td><b>Total</b></td>
+                <td><b>17</b></td>
+                <td><b>16</b></td>
+                <td><b>13</b></td>
+                <td><b>46</b></td>
+                <td><b>10</b></td>
+                <td><b>124</b></td>
+                <td><b>27</b></td>
+                <td><b>3</b></td>
+            </tr>
+        </table>
+    </div>
+    
+</div>
+
+<center>
+    <canvas id="myChart" style="width:100%;max-width:800px"></canvas>
+</center>
+
+<br>
+<br>
+<br>
+
+</body>
+
+
+
+
+
+<script>
+  const dataPoints = [{'x': 1.68, 'y': 1, 'label': 'Up 1 for Sanic the Hailhog'}, {'x': 2.57, 'y': 1, 'label': 'Up 1 for Team Cielle Matt'}, {'x': 2.58, 'y': 2, 'label': 'Up 2 for Sanic the Hailhog'}, {'x': 5.31, 'y': 2, 'label': 'Up 2 for Team Cielle Matt'}, {'x': 5.32, 'y': 1, 'label': 'Up 1 for Sanic the Hailhog'}, {'x': 6.47, 'y': 1, 'label': 'Up 1 for Team Cielle Matt'}, {'x': 6.48, 'y': 2, 'label': 'Up 2 for Sanic the Hailhog'}, {'x': 6.84, 'y': 2, 'label': 'Up 2 for Team Cielle Matt'}, {'x': 6.85, 'y': 1, 'label': 'Up 1 for Sanic the Hailhog'}, {'x': 7.61, 'y': 1, 'label': 'Up 1 for Team Cielle Matt'}, {'x': 7.62, 'y': 0, 'label': 'Tie'}, {'x': 8.17, 'y': 0, 'label': 'Tie'}, {'x': 8.18, 'y': 1, 'label': 'Up 1 for Sanic the Hailhog'}, {'x': 9.19, 'y': 1, 'label': 'Up 1 for Team Cielle Matt'}, {'x': 9.2, 'y': 2, 'label': 'Up 2 for Sanic the Hailhog'}, {'x': 9.97, 'y': 2, 'label': 'Up 2 for Team Cielle Matt'}, {'x': 9.98, 'y': 1, 'label': 'Up 1 for Sanic the Hailhog'}, {'x': 10.52, 'y': 1, 'label': 'Up 1 for Team Cielle Matt'}, {'x': 10.53, 'y': 2, 'label': 'Up 2 for Sanic the Hailhog'}, {'x': 10.89, 'y': 2, 'label': 'Up 2 for Team Cielle Matt'}, {'x': 10.9, 'y': 1, 'label': 'Up 1 for Sanic the Hailhog'}, {'x': 11.34, 'y': 1, 'label': 'Up 1 for Team Cielle Matt'}, {'x': 11.35, 'y': 2, 'label': 'Up 2 for Sanic the Hailhog'}, {'x': 12.19, 'y': 2, 'label': 'Up 2 for Team Cielle Matt'}, {'x': 12.2, 'y': 1, 'label': 'Up 1 for Sanic the Hailhog'}, {'x': 12.91, 'y': 1, 'label': 'Up 1 for Team Cielle Matt'}, {'x': 12.92, 'y': 2, 'label': 'Up 2 for Sanic the Hailhog'}, {'x': 13.59, 'y': 2, 'label': 'Up 2 for Team Cielle Matt'}, {'x': 13.6, 'y': 1, 'label': 'Up 1 for Sanic the Hailhog'}, {'x': 15.14, 'y': 1, 'label': 'Up 1 for Team Cielle Matt'}, {'x': 15.15, 'y': 2, 'label': 'Up 2 for Sanic the Hailhog'}, {'x': 15.59, 'y': 2, 'label': 'Up 2 for Team Cielle Matt'}, {'x': 15.6, 'y': 1, 'label': 'Up 1 for Sanic the Hailhog'}, {'x': 16.87, 'y': 1, 'label': 'Up 1 for Team Cielle Matt'}, {'x': 16.88, 'y': 0, 'label': 'Tie'}, {'x': 18.47, 'y': 0, 'label': 'Tie'}, {'x': 18.48, 'y': -1, 'label': 'Up 1 for Team Cielle Matt'}, {'x': 19.21, 'y': -1, 'label': 'Up 1 for Sanic the Hailhog'}, {'x': 19.22, 'y': -2, 'label': 'Up 2 for Team Cielle Matt'}, {'x': 21.21, 'y': -2, 'label': 'Up 2 for Sanic the Hailhog'}, {'x': 21.22, 'y': -1, 'label': 'Up 1 for Team Cielle Matt'}, {'x': 28.72, 'y': -1, 'label': 'Up 1 for Sanic the Hailhog'}, {'x': 28.73, 'y': 0, 'label': 'Tie'}, {'x': 29.17, 'y': 0, 'label': 'Tie'}, {'x': 29.18, 'y': -1, 'label': 'Up 1 for Team Cielle Matt'}, {'x': 30.74, 'y': -1, 'label': 'Up 1 for Sanic the Hailhog'}, {'x': 30.75, 'y': 0, 'label': 'Tie'}, {'x': 32.84, 'y': 0, 'label': 'Tie'}, {'x': 32.85, 'y': -1, 'label': 'Up 1 for Team Cielle Matt'}, {'x': 33.42, 'y': -1, 'label': 'Up 1 for Sanic the Hailhog'}, {'x': 33.43, 'y': 0, 'label': 'Tie'}, {'x': 36.11, 'y': 0, 'label': 'Tie'}, {'x': 36.12, 'y': -1, 'label': 'Up 1 for Team Cielle Matt'}, {'x': 36.77, 'y': -1, 'label': 'Up 1 for Sanic the Hailhog'}, {'x': 36.78, 'y': 0, 'label': 'Tie'}, {'x': 37.22, 'y': 0, 'label': 'Tie'}, {'x': 37.23, 'y': 1, 'label': 'Up 1 for Sanic the Hailhog'}, {'x': 38.86, 'y': 1, 'label': 'Up 1 for Team Cielle Matt'}, {'x': 38.87, 'y': 0, 'label': 'Tie'}, {'x': 40.52, 'y': 0, 'label': 'Tie'}, {'x': 40.53, 'y': 1, 'label': 'Up 1 for Sanic the Hailhog'}, {'x': 43.09, 'y': 1, 'label': 'Up 1 for Team Cielle Matt'}, {'x': 43.1, 'y': 0, 'label': 'Tie'}, {'x': 44.26, 'y': 0, 'label': 'Tie'}, {'x': 44.27, 'y': 1, 'label': 'Up 1 for Sanic the Hailhog'}, {'x': 45, 'y': 1, 'label': 'Up 1 for Sanic the Hailhog'}];
+    const xValues = [1.68, 2.57, 2.58, 5.31, 5.32, 6.47, 6.48, 6.84, 6.85, 7.61, 7.62, 8.17, 8.18, 9.19, 9.2, 9.97, 9.98, 10.52, 10.53, 10.89, 10.9, 11.34, 11.35, 12.19, 12.2, 12.91, 12.92, 13.59, 13.6, 15.14, 15.15, 15.59, 15.6, 16.87, 16.88, 18.47, 18.48, 19.21, 19.22, 21.21, 21.22, 28.72, 28.73, 29.17, 29.18, 30.74, 30.75, 32.84, 32.85, 33.42, 33.43, 36.11, 36.12, 36.77, 36.78, 37.22, 37.23, 38.86, 38.87, 40.52, 40.53, 43.09, 43.1, 44.26, 44.27, 45];
+    const yValues = [1, 1, 2, 2, 1, 1, 2, 2, 1, 1, 0, 0, 1, 1, 2, 2, 1, 1, 2, 2, 1, 1, 2, 2, 1, 1, 2, 2, 1, 1, 2, 2, 1, 1, 0, 0, -1, -1, -2, -2, -1, -1, 0, 0, -1, -1, 0, 0, -1, -1, 0, 0, -1, -1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1];
+
+  
+  new Chart("myChart", {
+    type: "line",
+    data: {
+
+    labels: yValues,
+    datasets: [{
+      data: dataPoints,
+      // Add this line to include the labels in the data
+      pointHoverBackgroundColor: "red",
+      pointHoverBorderColor: "red",
+      pointHoverBorderWidth: 2,
+      pointHoverRadius: 5,
+      tension: 0.05,
+    }]
+
+
+    },
+    options: {
+
+    tooltips: {
+      callbacks: {
+        label: function(tooltipItem, data) {
+          var label = data.labels[tooltipItem.index];
+          var value = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
+          return value.label;
+
+        }
+      }
+    },
+
+      legend: {display: false},
+      title: {
+        display: true,
+        text: ""
+      },
+      scales: {
+        yAxes: [{
+          scaleLabel: {
+            display: true,
+            labelString: 'Score Difference'
+          }
+        }],
+        xAxes: [{
+          type: 'linear', // this will ensure that the x-axis is based on numeric scale
+          scaleLabel: {
+            display: true,
+            labelString: 'Gametime'
+          }
+        }]
+      }
+    }
+  });
+  
+  </script>
+
+
+
+
+</html>
