@@ -7,9 +7,6 @@
 - Fine = Multiplier * Margin_Dif
 - Negative Margin_Dif is good. 
 
-How is it applied to the team?
-- Through the sub calc?
-
 <br>
 
 
@@ -22,10 +19,7 @@ How is it applied to the team?
 - Fine = Multiplier * Goals_Dif
 - Positive Goals_Dif is good. 
 
-How is it applied to the team?
-- Through the sub calc? 
-
-Bug: Average Score is divided by 10, but there's 8 teams for week 2. 
+Bug?: Average Score is divided by 10, but there's 8 teams for week 2. 
 
 <br>
 
@@ -35,7 +29,7 @@ Bug: Average Score is divided by 10, but there's 8 teams for week 2.
 
 ## Female Scoring Bonus
 
-Female Relief % = Player Rank / 168 * 60% 
+Female Relief = Player Rank / 168 * 60% 
 - top rank players get less relief
 
 <br>
@@ -43,14 +37,29 @@ Female Relief % = Player Rank / 168 * 60%
 
 
 
+## Salary Adjustment
 
-## Sub Salaries
+- Sub salary =  team_sub_spot * perc_allocation
+- Stats of subs get applied to players who miss games
+
+Putting it all together
+- Salary Adjustment = Sub salary  + loat/max tax + female relief - female relief
+
+So female relief has no effect?
 
 
 
-Sub salary =  team_sub_spot*perc_allocation + loat/max tax + female relief - female relief
+
+<br>
+<br>
 
 
+
+
+
+## Wildcard Salaries
+TODO
+<br>
 
 
 
