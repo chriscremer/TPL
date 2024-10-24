@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>TPL</title>
+<link rel="icon" type="image/png" href="../../../images/frisbee.png">
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+
+<script
+src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
+</script>
+
+
+<style>
+    .table-container {
+        display: flex;
+        flex-direction: row;
+        margin: 20px;
+        justify-content: center;
+    }
+
+    .table-container2 {
+        display: flex;
+        flex-direction: column;
+        margin: 20px;
+    }
+
+    .table1, .table2 {
+        width: 100%; /* Tables will take the full width of their parent */
+        box-sizing: border-box;
+        /* border: 1px solid #ccc;  Add border for clarity */
+        margin-right: 30px;
+        border-collapse: collapse; /* this allows row lines to be shown for some reason */
+    }
+
+    .table1 tr, .table2 tr {
+        border-bottom: 1px solid #ccc; /* Add bottom border to table rows */
+    }
+
+    @media screen and (max-width: 850px) {
+        .table-container {
+            flex-direction: column;
+        }
+
+        iframe {
+            width: 90%; /* or any other percentage less than 100% */
+            margin: auto; /* to center the iframe */
+        }
+
+
+        /* change font color to blue */
+        body {
+            /* color: blue; */
+        }
+    }
+
+</style>
+
+</head>
+
+
+
+
+
+<body>
+
+<a href="../index.html" style="position: absolute; top: 10px; left: 10px;"><i class="fa fa-arrow-left"></i>Season</a> 
+<br>
+
+<center style="margin: 10px;">
+ <iframe width="560" height="315" src="https://www.youtube.com/embed/JlfWtrYg_lw?si=aFyJeoWCMW_TXzg0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+</center>
+
+
+<div class="table-container">
+
+    <div class="table-container2">
+        <h4>How the Chong Stole Chris-mas (24)</h4>
+        <table class="table1">
+            
+    <tr>
+        <th style="text-align: left;">Player</th>
+        <th style="text-align: left;">Goal</th>
+        <th style="text-align: left;">Assist</th>
+        <th style="text-align: left;">2A</th>
+        <th style="text-align: left;">Points</th>
+        <th style="text-align: left;">D</th>
+        <th style="text-align: left;">Pass</th>
+        <th style="text-align: left;">TA</th>
+        <th style="text-align: left;">Drop</th>
+    </tr>
+
+            <tr>
+                <td>Sabrina Paez-Parent</td>
+                <td>8</td>
+                <td>3</td>
+                <td>0</td>
+                <td>11</td>
+                <td>1</td>
+                <td>8</td>
+                <td>1</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Peter Hawkings</td>
+                <td>2</td>
+                <td>4</td>
+                <td>3</td>
+                <td>9</td>
+                <td>0</td>
+                <td>26</td>
+                <td>1</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Rebecca Minielly</td>
+                <td>3</td>
+                <td>2</td>
+                <td>2</td>
+                <td>7</td>
+                <td>1</td>
+                <td>11</td>
+                <td>0</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Nathan Killoran</td>
+                <td>3</td>
+                <td>2</td>
+                <td>1</td>
+                <td>6</td>
+                <td>4</td>
+                <td>14</td>
+                <td>1</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Chris Cremer</td>
+                <td>2</td>
+                <td>2</td>
+                <td>1</td>
+                <td>5</td>
+                <td>4</td>
+                <td>23</td>
+                <td>5</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Michael Pham-Hung</td>
+                <td>1</td>
+                <td>2</td>
+                <td>2</td>
+                <td>5</td>
+                <td>3</td>
+                <td>17</td>
+                <td>2</td>
+                <td>1</td>
+            </tr><tr>
+                <td>Alec Zhao</td>
+                <td>1</td>
+                <td>1</td>
+                <td>3</td>
+                <td>5</td>
+                <td>1</td>
+                <td>12</td>
+                <td>1</td>
+                <td>1</td>
+            </tr><tr>
+                <td>Marco Chu</td>
+                <td>1</td>
+                <td>2</td>
+                <td>1</td>
+                <td>4</td>
+                <td>0</td>
+                <td>15</td>
+                <td>0</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Adrian Muresan</td>
+                <td>0</td>
+                <td>4</td>
+                <td>0</td>
+                <td>4</td>
+                <td>1</td>
+                <td>9</td>
+                <td>5</td>
+                <td>1</td>
+            </tr><tr>
+                <td>Wendy Chong</td>
+                <td>0</td>
+                <td>1</td>
+                <td>2</td>
+                <td>3</td>
+                <td>0</td>
+                <td>17</td>
+                <td>3</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Sarah Garbett</td>
+                <td>1</td>
+                <td>0</td>
+                <td>2</td>
+                <td>3</td>
+                <td>0</td>
+                <td>8</td>
+                <td>0</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Dawn Man</td>
+                <td>1</td>
+                <td>0</td>
+                <td>1</td>
+                <td>2</td>
+                <td>0</td>
+                <td>5</td>
+                <td>0</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Wendy Li</td>
+                <td>1</td>
+                <td>1</td>
+                <td>0</td>
+                <td>2</td>
+                <td>0</td>
+                <td>4</td>
+                <td>0</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Nadia Ho</td>
+                <td>0</td>
+                <td>0</td>
+                <td>1</td>
+                <td>1</td>
+                <td>0</td>
+                <td>8</td>
+                <td>1</td>
+                <td>0</td>
+            </tr><tr>
+                <td><b>Total</b></td>
+                <td><b>24</b></td>
+                <td><b>24</b></td>
+                <td><b>19</b></td>
+                <td><b>67</b></td>
+                <td><b>15</b></td>
+                <td><b>177</b></td>
+                <td><b>20</b></td>
+                <td><b>3</b></td>
+            </tr>
+        </table>
+    </div>
+    
+
+    <div class="table-container2">
+        <h4>Allison Ventura - Pet Sherriff (20)</h4>
+        <table class="table2">
+            
+    <tr>
+        <th style="text-align: left;">Player</th>
+        <th style="text-align: left;">Goal</th>
+        <th style="text-align: left;">Assist</th>
+        <th style="text-align: left;">2A</th>
+        <th style="text-align: left;">Points</th>
+        <th style="text-align: left;">D</th>
+        <th style="text-align: left;">Pass</th>
+        <th style="text-align: left;">TA</th>
+        <th style="text-align: left;">Drop</th>
+    </tr>
+
+            <tr>
+                <td>Ryan Sherriff</td>
+                <td>3</td>
+                <td>5</td>
+                <td>0</td>
+                <td>8</td>
+                <td>0</td>
+                <td>17</td>
+                <td>5</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Vanessa Mensink</td>
+                <td>3</td>
+                <td>1</td>
+                <td>3</td>
+                <td>7</td>
+                <td>1</td>
+                <td>12</td>
+                <td>1</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Ofer Shai</td>
+                <td>3</td>
+                <td>3</td>
+                <td>0</td>
+                <td>6</td>
+                <td>1</td>
+                <td>19</td>
+                <td>0</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Chris Faulkner</td>
+                <td>3</td>
+                <td>1</td>
+                <td>1</td>
+                <td>5</td>
+                <td>1</td>
+                <td>4</td>
+                <td>1</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Carolina Vargas</td>
+                <td>1</td>
+                <td>1</td>
+                <td>2</td>
+                <td>4</td>
+                <td>0</td>
+                <td>17</td>
+                <td>3</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Allison Brown</td>
+                <td>0</td>
+                <td>1</td>
+                <td>3</td>
+                <td>4</td>
+                <td>0</td>
+                <td>16</td>
+                <td>5</td>
+                <td>1</td>
+            </tr><tr>
+                <td>Vincent Poon</td>
+                <td>1</td>
+                <td>2</td>
+                <td>1</td>
+                <td>4</td>
+                <td>0</td>
+                <td>14</td>
+                <td>1</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Kevin Cho Wong</td>
+                <td>3</td>
+                <td>1</td>
+                <td>0</td>
+                <td>4</td>
+                <td>2</td>
+                <td>11</td>
+                <td>2</td>
+                <td>1</td>
+            </tr><tr>
+                <td>Gabriel Isaac</td>
+                <td>0</td>
+                <td>3</td>
+                <td>1</td>
+                <td>4</td>
+                <td>0</td>
+                <td>7</td>
+                <td>2</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Cristina Rubino</td>
+                <td>2</td>
+                <td>0</td>
+                <td>1</td>
+                <td>3</td>
+                <td>1</td>
+                <td>11</td>
+                <td>2</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Sam Esteves</td>
+                <td>0</td>
+                <td>2</td>
+                <td>1</td>
+                <td>3</td>
+                <td>0</td>
+                <td>11</td>
+                <td>1</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Nancy Warren</td>
+                <td>1</td>
+                <td>0</td>
+                <td>2</td>
+                <td>3</td>
+                <td>2</td>
+                <td>6</td>
+                <td>1</td>
+                <td>1</td>
+            </tr><tr>
+                <td>Ashar Shaur</td>
+                <td>0</td>
+                <td>0</td>
+                <td>1</td>
+                <td>1</td>
+                <td>0</td>
+                <td>3</td>
+                <td>0</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Mika Young</td>
+                <td>0</td>
+                <td>0</td>
+                <td>1</td>
+                <td>1</td>
+                <td>0</td>
+                <td>2</td>
+                <td>0</td>
+                <td>0</td>
+            </tr><tr>
+                <td><b>Total</b></td>
+                <td><b>20</b></td>
+                <td><b>20</b></td>
+                <td><b>17</b></td>
+                <td><b>57</b></td>
+                <td><b>8</b></td>
+                <td><b>150</b></td>
+                <td><b>24</b></td>
+                <td><b>3</b></td>
+            </tr>
+        </table>
+    </div>
+    
+</div>
+
+<center>
+    <canvas id="myChart" style="width:100%;max-width:800px"></canvas>
+</center>
+
+<br>
+<br>
+<br>
+
+</body>
+
+
+
+
+
+<script>
+  const dataPoints = [{'x': 0.65, 'y': -1, 'label': 'Up 1 for Allison Ventura - Pet Sherriff'}, {'x': 1.34, 'y': -1, 'label': 'Up 1 for Allison Ventura - Pet Sherriff'}, {'x': 1.35, 'y': -2, 'label': 'Up 2 for Allison Ventura - Pet Sherriff'}, {'x': 2.26, 'y': -2, 'label': 'Up 2 for Allison Ventura - Pet Sherriff'}, {'x': 2.27, 'y': -1, 'label': 'Up 1 for Allison Ventura - Pet Sherriff'}, {'x': 4.02, 'y': -1, 'label': 'Up 1 for Allison Ventura - Pet Sherriff'}, {'x': 4.03, 'y': -2, 'label': 'Up 2 for Allison Ventura - Pet Sherriff'}, {'x': 4.96, 'y': -2, 'label': 'Up 2 for Allison Ventura - Pet Sherriff'}, {'x': 4.97, 'y': -3, 'label': 'Up 3 for Allison Ventura - Pet Sherriff'}, {'x': 5.34, 'y': -3, 'label': 'Up 3 for Allison Ventura - Pet Sherriff'}, {'x': 5.35, 'y': -4, 'label': 'Up 4 for Allison Ventura - Pet Sherriff'}, {'x': 6.39, 'y': -4, 'label': 'Up 4 for Allison Ventura - Pet Sherriff'}, {'x': 6.4, 'y': -5, 'label': 'Up 5 for Allison Ventura - Pet Sherriff'}, {'x': 6.87, 'y': -5, 'label': 'Up 5 for Allison Ventura - Pet Sherriff'}, {'x': 6.88, 'y': -4, 'label': 'Up 4 for Allison Ventura - Pet Sherriff'}, {'x': 7.36, 'y': -4, 'label': 'Up 4 for Allison Ventura - Pet Sherriff'}, {'x': 7.37, 'y': -5, 'label': 'Up 5 for Allison Ventura - Pet Sherriff'}, {'x': 8.02, 'y': -5, 'label': 'Up 5 for Allison Ventura - Pet Sherriff'}, {'x': 8.03, 'y': -4, 'label': 'Up 4 for Allison Ventura - Pet Sherriff'}, {'x': 8.67, 'y': -4, 'label': 'Up 4 for Allison Ventura - Pet Sherriff'}, {'x': 8.68, 'y': -3, 'label': 'Up 3 for Allison Ventura - Pet Sherriff'}, {'x': 11.81, 'y': -3, 'label': 'Up 3 for Allison Ventura - Pet Sherriff'}, {'x': 11.82, 'y': -4, 'label': 'Up 4 for Allison Ventura - Pet Sherriff'}, {'x': 12.34, 'y': -4, 'label': 'Up 4 for Allison Ventura - Pet Sherriff'}, {'x': 12.35, 'y': -3, 'label': 'Up 3 for Allison Ventura - Pet Sherriff'}, {'x': 13.39, 'y': -3, 'label': 'Up 3 for Allison Ventura - Pet Sherriff'}, {'x': 13.4, 'y': -2, 'label': 'Up 2 for Allison Ventura - Pet Sherriff'}, {'x': 14.44, 'y': -2, 'label': 'Up 2 for Allison Ventura - Pet Sherriff'}, {'x': 14.45, 'y': -1, 'label': 'Up 1 for Allison Ventura - Pet Sherriff'}, {'x': 15.67, 'y': -1, 'label': 'Up 1 for Allison Ventura - Pet Sherriff'}, {'x': 15.68, 'y': 0, 'label': 'Tie'}, {'x': 16.72, 'y': 0, 'label': 'Tie'}, {'x': 16.73, 'y': 1, 'label': 'Up 1 for How the Chong Stole Chris-mas'}, {'x': 17.49, 'y': 1, 'label': 'Up 1 for How the Chong Stole Chris-mas'}, {'x': 17.5, 'y': 2, 'label': 'Up 2 for How the Chong Stole Chris-mas'}, {'x': 19.86, 'y': 2, 'label': 'Up 2 for How the Chong Stole Chris-mas'}, {'x': 19.87, 'y': 1, 'label': 'Up 1 for How the Chong Stole Chris-mas'}, {'x': 24.52, 'y': 1, 'label': 'Up 1 for How the Chong Stole Chris-mas'}, {'x': 24.53, 'y': 0, 'label': 'Tie'}, {'x': 24.79, 'y': 0, 'label': 'Tie'}, {'x': 24.8, 'y': -1, 'label': 'Up 1 for Allison Ventura - Pet Sherriff'}, {'x': 25.06, 'y': -1, 'label': 'Up 1 for Allison Ventura - Pet Sherriff'}, {'x': 25.07, 'y': 0, 'label': 'Tie'}, {'x': 25.46, 'y': 0, 'label': 'Tie'}, {'x': 25.47, 'y': 1, 'label': 'Up 1 for How the Chong Stole Chris-mas'}, {'x': 25.97, 'y': 1, 'label': 'Up 1 for How the Chong Stole Chris-mas'}, {'x': 25.98, 'y': 0, 'label': 'Tie'}, {'x': 26.54, 'y': 0, 'label': 'Tie'}, {'x': 26.55, 'y': 1, 'label': 'Up 1 for How the Chong Stole Chris-mas'}, {'x': 27.04, 'y': 1, 'label': 'Up 1 for How the Chong Stole Chris-mas'}, {'x': 27.05, 'y': 0, 'label': 'Tie'}, {'x': 27.67, 'y': 0, 'label': 'Tie'}, {'x': 27.68, 'y': -1, 'label': 'Up 1 for Allison Ventura - Pet Sherriff'}, {'x': 28.52, 'y': -1, 'label': 'Up 1 for Allison Ventura - Pet Sherriff'}, {'x': 28.53, 'y': 0, 'label': 'Tie'}, {'x': 30.56, 'y': 0, 'label': 'Tie'}, {'x': 30.57, 'y': 1, 'label': 'Up 1 for How the Chong Stole Chris-mas'}, {'x': 31.11, 'y': 1, 'label': 'Up 1 for How the Chong Stole Chris-mas'}, {'x': 31.12, 'y': 0, 'label': 'Tie'}, {'x': 31.86, 'y': 0, 'label': 'Tie'}, {'x': 31.87, 'y': -1, 'label': 'Up 1 for Allison Ventura - Pet Sherriff'}, {'x': 32.81, 'y': -1, 'label': 'Up 1 for Allison Ventura - Pet Sherriff'}, {'x': 32.82, 'y': -2, 'label': 'Up 2 for Allison Ventura - Pet Sherriff'}, {'x': 33.31, 'y': -2, 'label': 'Up 2 for Allison Ventura - Pet Sherriff'}, {'x': 33.32, 'y': -1, 'label': 'Up 1 for Allison Ventura - Pet Sherriff'}, {'x': 33.84, 'y': -1, 'label': 'Up 1 for Allison Ventura - Pet Sherriff'}, {'x': 33.85, 'y': -2, 'label': 'Up 2 for Allison Ventura - Pet Sherriff'}, {'x': 34.19, 'y': -2, 'label': 'Up 2 for Allison Ventura - Pet Sherriff'}, {'x': 34.2, 'y': -1, 'label': 'Up 1 for Allison Ventura - Pet Sherriff'}, {'x': 34.46, 'y': -1, 'label': 'Up 1 for Allison Ventura - Pet Sherriff'}, {'x': 34.47, 'y': 0, 'label': 'Tie'}, {'x': 35.04, 'y': 0, 'label': 'Tie'}, {'x': 35.05, 'y': -1, 'label': 'Up 1 for Allison Ventura - Pet Sherriff'}, {'x': 35.41, 'y': -1, 'label': 'Up 1 for Allison Ventura - Pet Sherriff'}, {'x': 35.42, 'y': 0, 'label': 'Tie'}, {'x': 36.36, 'y': 0, 'label': 'Tie'}, {'x': 36.37, 'y': 1, 'label': 'Up 1 for How the Chong Stole Chris-mas'}, {'x': 37.34, 'y': 1, 'label': 'Up 1 for How the Chong Stole Chris-mas'}, {'x': 37.35, 'y': 2, 'label': 'Up 2 for How the Chong Stole Chris-mas'}, {'x': 37.76, 'y': 2, 'label': 'Up 2 for How the Chong Stole Chris-mas'}, {'x': 37.77, 'y': 1, 'label': 'Up 1 for How the Chong Stole Chris-mas'}, {'x': 39.67, 'y': 1, 'label': 'Up 1 for How the Chong Stole Chris-mas'}, {'x': 39.68, 'y': 2, 'label': 'Up 2 for How the Chong Stole Chris-mas'}, {'x': 42.12, 'y': 2, 'label': 'Up 2 for How the Chong Stole Chris-mas'}, {'x': 42.13, 'y': 3, 'label': 'Up 3 for How the Chong Stole Chris-mas'}, {'x': 42.51, 'y': 3, 'label': 'Up 3 for How the Chong Stole Chris-mas'}, {'x': 42.52, 'y': 4, 'label': 'Up 4 for How the Chong Stole Chris-mas'}, {'x': 43, 'y': 4, 'label': 'Up 4 for How the Chong Stole Chris-mas'}];
+    const xValues = [0.65, 1.34, 1.35, 2.26, 2.27, 4.02, 4.03, 4.96, 4.97, 5.34, 5.35, 6.39, 6.4, 6.87, 6.88, 7.36, 7.37, 8.02, 8.03, 8.67, 8.68, 11.81, 11.82, 12.34, 12.35, 13.39, 13.4, 14.44, 14.45, 15.67, 15.68, 16.72, 16.73, 17.49, 17.5, 19.86, 19.87, 24.52, 24.53, 24.79, 24.8, 25.06, 25.07, 25.46, 25.47, 25.97, 25.98, 26.54, 26.55, 27.04, 27.05, 27.67, 27.68, 28.52, 28.53, 30.56, 30.57, 31.11, 31.12, 31.86, 31.87, 32.81, 32.82, 33.31, 33.32, 33.84, 33.85, 34.19, 34.2, 34.46, 34.47, 35.04, 35.05, 35.41, 35.42, 36.36, 36.37, 37.34, 37.35, 37.76, 37.77, 39.67, 39.68, 42.12, 42.13, 42.51, 42.52, 43];
+    const yValues = [-1, -1, -2, -2, -1, -1, -2, -2, -3, -3, -4, -4, -5, -5, -4, -4, -5, -5, -4, -4, -3, -3, -4, -4, -3, -3, -2, -2, -1, -1, 0, 0, 1, 1, 2, 2, 1, 1, 0, 0, -1, -1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, -1, -1, 0, 0, 1, 1, 0, 0, -1, -1, -2, -2, -1, -1, -2, -2, -1, -1, 0, 0, -1, -1, 0, 0, 1, 1, 2, 2, 1, 1, 2, 2, 3, 3, 4, 4];
+
+  
+  new Chart("myChart", {
+    type: "line",
+    data: {
+
+    labels: yValues,
+    datasets: [{
+      data: dataPoints,
+      // Add this line to include the labels in the data
+      pointHoverBackgroundColor: "red",
+      pointHoverBorderColor: "red",
+      pointHoverBorderWidth: 2,
+      pointHoverRadius: 5,
+      tension: 0.05,
+    }]
+
+
+    },
+    options: {
+
+    tooltips: {
+      callbacks: {
+        label: function(tooltipItem, data) {
+          var label = data.labels[tooltipItem.index];
+          var value = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
+          return value.label;
+
+        }
+      }
+    },
+
+      legend: {display: false},
+      title: {
+        display: true,
+        text: ""
+      },
+      scales: {
+        yAxes: [{
+          scaleLabel: {
+            display: true,
+            labelString: 'Score Difference'
+          }
+        }],
+        xAxes: [{
+          type: 'linear', // this will ensure that the x-axis is based on numeric scale
+          scaleLabel: {
+            display: true,
+            labelString: 'Gametime'
+          }
+        }]
+      }
+    }
+  });
+  
+  </script>
+
+
+
+
+</html>
