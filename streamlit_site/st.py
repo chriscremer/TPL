@@ -36,6 +36,9 @@ if 'conn' not in st.session_state:
     team_names = [team_name for team_name in team_names if team_name != 'Convenor']
     st.session_state['team_names'] = team_names
 
+    st.session_state['max_salary'] = 1000
+    
+
 
 if ('login_status' not in stss or stss['login_status'] == False): # and not stay_logged_in:
     stss['login_status'] = False

@@ -52,7 +52,7 @@ Once bids are in each week, we run the algorithm to balance the teams. So the jo
 
 So each week, once the bids are in:
 - Calculate the new salaries for each player: the average of the GM bids
-- Normalize the salaries so that the average salary is max_salary/2 (currently max_salary = 500, so the average salary will be 250)
+- Normalize the salaries so that the average salary is max_salary/2 (currently max_salary = 1000, so the average salary will be 250)
 - Run the algorithm to balance the teams
 - Update the rosters
 

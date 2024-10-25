@@ -4,10 +4,12 @@ import numpy as np
 from sklearn.linear_model import LinearRegression
 
 from gspread_dataframe import set_with_dataframe, get_as_dataframe
-from utils import get_connection
 
+
+from utils import get_connection
+from data_utils import get_league_data
 from my_pages.bids import get_rosters, get_salaries
-from my_pages.league import convert_salaries
+# from my_pages.league import convert_salaries
 
 from algo3 import run_algo
 
@@ -336,8 +338,8 @@ def normalize(player_bids, player_salaries, rosters):
     # Make the avg salary of the league be max_salary / 2, so scale all salaries by this factor
     
     # scale = max_salary / 2 / avg_player_salary
-    max_salary = 500
-    desired_avg_salary = 200
+    max_salary = st.session_state['max_salary']
+    desired_avg_salary = max_salary /2 #200
     scale = desired_avg_salary / avg_player_salary
     print (f"Scaling salaries by {scale:.2f}")
     # round to nearest integer
@@ -401,44 +403,8 @@ def get_captain_salaries(stss, df_players, player_salaries, captains):
     #     if player not in stats_df['Name'].values:
     #         raise Exception(f'{player} not in stats_df')
         
-    if 'df_league' not in st.session_state:
-
-        # sheets_url = 'https://docs.google.com/spreadsheets/d/1U4T-r7DsfWZI9VXsa7Ul38XDDLpE-7Sz1TFzd29EEVw/edit#gid=0'
-        sheets_url = "https://docs.google.com/spreadsheets/d/1l-7P9YuQ_2FCrWEYYUKhgiD1FBWFZ5wjW3B5RxtiYpM/edit?gid=9#gid=9"
-        league_conn = get_connection(sheet_url=sheets_url)
-        
-        worksheets = league_conn.worksheets()
-        league_sheet = [worksheet for worksheet in worksheets if worksheet.title == 'League'][0]
-        df_league = get_as_dataframe(league_sheet, evaluate_formulas=True)
-        # make the df start at row 9, and drop first column
-        df_league = df_league.iloc[8:, 1:]
-        # make the first row the column names
-        df_league.columns = df_league.iloc[0]
-        # drop the first row
-        df_league = df_league.iloc[1:]
-
-        cols_to_keep = [
-            "First",
-            "Last",
-            "Team",
-            "Cap Impact",
-            "GP",
-            "G",
-            "A",
-            "2A",
-            "D",
-            "TA",
-            "RE",
-        ]
-        df_league = df_league[cols_to_keep]
-
-        # convert to dict
-        df_league = df_league.to_dict(orient='records')
-        # convert to df
-        df_league = pd.DataFrame(df_league)
-
-        df_league = convert_salaries(df_league, 500)
-        st.session_state['df_league'] = df_league
+    if 'df_league' not in stss:
+        get_league_data(stss)
 
 
     stats_df = stss['df_league']
@@ -560,7 +526,7 @@ def algo_page():
         team_names = list(df_players['Team'].unique())
         player_names = df_players['Full Name'].tolist()
         rosters = get_rosters(df_players, team_names)
-        max_salary = 500
+        max_salary = st.session_state['max_salary']
 
         player_salaries, latest_week = get_salaries(df_players, player_names, max_salary)
         salary_col_name = f"Week {latest_week} - Salary"

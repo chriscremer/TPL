@@ -3,7 +3,10 @@ import pandas as pd
 import numpy as np
 import random
 from gspread_dataframe import set_with_dataframe, get_as_dataframe
+
+
 from utils import get_connection
+from data_utils import sliders_to_bids
 
 
 
@@ -28,6 +31,8 @@ def display_team2(team_name, rosters, player_salaries, max_salary, df_players, p
     # st.session_state['sliders_init'] = True
     for i, row in team_df.iterrows():
         player_name = row['Player']
+        # if 'WILD' in player_name:
+        #     continue
         salary = row['Salary']
         gender = row['Gender']
         cols = st.columns([1, 2, 1, 2, 1])
@@ -227,7 +232,7 @@ def bids_page():
     team_names = stss['team_names']
     player_names = df_players['Full Name'].tolist()
     rosters = get_rosters(df_players, team_names)
-    max_salary = 500
+    max_salary = stss['max_salary']
 
     player_salaries, latest_week = get_salaries(df_players, player_names, max_salary)
     bids_sheet_name = f"Week {latest_week} - Bids"
@@ -254,28 +259,33 @@ def bids_page():
             save = st.button('Save Changes')
         else:
             save = st.button('No Changes', disabled=True)
-    if save:
-        print ('Save')
-        save_bids(conn, stss, your_team, player_bids, bids_sheet_name, team_names, df_players, rosters)
+        if save:
+            print ('Save')
+            save_bids(conn, stss, your_team, player_bids, bids_sheet_name, team_names, df_players, rosters)
 
 
-    # Reset button
-    with cols[0]:
-        reset = st.button('Reset', key='Reset')
-    if reset:
-        print ('Reset')
-        stss['reset_button'] = True
-    else:
-        stss['reset_button'] = False
+        # Reset button
+        reset = st.button('Reset', key='Reset') 
+        if reset:
+            print ('Reset')
+            stss['reset_button'] = True
+        else:
+            stss['reset_button'] = False
 
 
-    # Download button
-    with cols[2]:
+        # Line break
+        st.markdown('<br>', unsafe_allow_html=True)
+
+        # Download button
         def convert_df():
             # convert player bids to dataframe
             player_bids_df = []
             for player_name in stss['player_names']:
-                bid = player_bids[player_name]
+                # doesnt matter what they bid on for wildcards
+                if 'WILD' in player_name:
+                    continue
+                # bid = player_bids[player_name]
+                bid = stss['player_bids'][player_name]
                 player_bids_df.append({'Player': player_name, 'Bid': bid})
             player_bids_df = pd.DataFrame(player_bids_df)
             return player_bids_df.to_csv().encode("utf-8")
@@ -286,8 +296,7 @@ def bids_page():
             mime="text/csv",
         )
 
-    # Upload
-    with cols[2]:
+        # Upload
         with st.expander("Upload File"):
             uploaded_file = st.file_uploader("Upload")
             if uploaded_file is not None:
@@ -300,6 +309,33 @@ def bids_page():
                 print ('Uploaded')
                 # popup to confirm it worked
                 st.success('Uploaded') #, please refresh the page to see changes')
+
+
+
+
+
+
+
+    with cols[2]:
+
+        # collapsable area
+        with st.expander("Stat Sliders"):
+
+            # Set salaries based on stats
+            goal_slider = st.slider("Goal", 0, 10, 5, key='goal_slider')
+            assist_slider = st.slider("Assist", 0, 10, 5, key='assist_slider')
+            second_assist_slider = st.slider("2nd Assist", 0, 10, 3, key='second_assist_slider')
+            d_slider = st.slider("D", 0, 10, 5, key='d_slider')
+            ta_slider = st.slider("Throwaway", 0, 10, 3, key='ta_slider')
+            drop_slider = st.slider("Drop", 0, 10, 3, key='drop_slider')
+            salart_spread_slider = st.slider("Salary Spread", 0, 10, 5, key='salary_spread_slider')
+
+            # Button to apply to bids
+            apply_stats = st.button('Apply to Bids')
+            if apply_stats:
+                sliders_to_bids(stss)
+                st.rerun()
+
 
 
 
