@@ -29,7 +29,8 @@ Bug?: Average Score is divided by 10, but there's 8 teams for week 2.
 
 ## Female Scoring Bonus
 
-Female Relief = Player Rank / 168 * 60% 
+- Female Relief % = Player Rank / 168 * 60% 
+- Female Relief = Something * Female Relief %
 - top rank players get less relief
 
 <br>
