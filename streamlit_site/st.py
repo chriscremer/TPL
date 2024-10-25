@@ -31,6 +31,10 @@ if 'conn' not in st.session_state:
     login_sheet = [worksheet for worksheet in worksheets if worksheet.title == 'Login'][0]
     login_df = get_as_dataframe(login_sheet)
     st.session_state['login_df'] = login_df
+    team_names = login_df['Username'].values
+    # remove Convenor
+    team_names = [team_name for team_name in team_names if team_name != 'Convenor']
+    st.session_state['team_names'] = team_names
 
 
 if ('login_status' not in stss or stss['login_status'] == False): # and not stay_logged_in:
@@ -41,18 +45,19 @@ if ('login_status' not in stss or stss['login_status'] == False): # and not stay
     # team_name = form.text_input('Team Name')
     team_name = form.radio(
         "Team Name",
-        ["FaulklHore (Revenge of the Swift Version)",
-         "You Belong Whist Me",
-            'I was cRyan on the staircase Meagging you "Please don\'t throw"',
-            "Huck the PATriarchy",
-            "DANti-Hero",
-            "Sam's Cheer Captain And Chris' On The Bleachers",
-            "Tam Mattgazine's Person of the Year",
-            "Dear John Look what you made Lysh do",
-            "Benny's Gonna Break Break Break Lexy's Gonna Fake Fake Fake",
-            "kyraless nam's careful daughter",
-            "Convenor",
-        ],
+        st.session_state['team_names'] + ['Convenor'],
+        # ["FaulklHore (Revenge of the Swift Version)",
+        #  "You Belong Whist Me",
+        #     'I was cRyan on the staircase Meagging you "Please don\'t throw"',
+        #     "Huck the PATriarchy",
+        #     "DANti-Hero",
+        #     "Sam's Cheer Captain And Chris' On The Bleachers",
+        #     "Tam Mattgazine's Person of the Year",
+        #     "Dear John Look what you made Lysh do",
+        #     "Benny's Gonna Break Break Break Lexy's Gonna Fake Fake Fake",
+        #     "kyraless nam's careful daughter",
+        #     "Convenor",
+        # ],
     )
 
     password = form.text_input('Password', type='password')
@@ -75,18 +80,20 @@ if ('login_status' not in stss or stss['login_status'] == False): # and not stay
 
 else:
     if stss['team_name'] == "Convenor":
-        tabs_list = ['League', 'Algo', 'Settings']
+        # tabs_list = ['League', 'Algo', 'Settings']
+        tabs_list = ['Algo', 'Settings']
         tabs = st.tabs(tabs_list)
-        with tabs[tabs_list.index('League')]:
-            league_page()
+        # with tabs[tabs_list.index('League')]:
+        #     league_page()
         with tabs[tabs_list.index('Algo')]:
             algo_page()
 
     else:
-        tabs_list = ['League', 'Bids', 'Settings']
+        # tabs_list = ['League', 'Bids', 'Settings']
+        tabs_list = ['Bids', 'Settings']
         tabs = st.tabs(tabs_list)
-        with tabs[tabs_list.index('League')]:
-            league_page()
+        # with tabs[tabs_list.index('League')]:
+        #     league_page()
         with tabs[tabs_list.index('Bids')]:
             bids_page()
 

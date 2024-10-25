@@ -223,7 +223,8 @@ def bids_page():
     worksheets = stss['worksheets']
     df_players = stss['df_players']
     your_team = stss['team_name']
-    team_names = list(df_players['Team'].unique())
+    # team_names = list(df_players['Team'].unique())
+    team_names = stss['team_names']
     player_names = df_players['Full Name'].tolist()
     rosters = get_rosters(df_players, team_names)
     max_salary = 500
@@ -309,7 +310,7 @@ def bids_page():
     # Display all teams
     n_teams = len(team_names)
     teams_per_row = 3
-    n_rows = n_teams // teams_per_row
+    n_rows = 1 + n_teams // teams_per_row
     container_list = [st.container() for _ in range(n_rows*2)]
     cols_list = [st.columns(teams_per_row) for _ in range(n_rows*2)]
 
