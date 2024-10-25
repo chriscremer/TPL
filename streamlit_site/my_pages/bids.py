@@ -151,7 +151,28 @@ def check_for_changes(stss, team_names, rosters):
     # in case of reset
     if 'Reset' in stss and stss['Reset'] == True:
         changes = True
+    # if 'stats_applied' in stss and stss['stats_applied'] == True:
+    #     changes = True
+    #     stss['stats_applied'] = False
+
     return changes
+
+
+
+def save_uploaded_bids(conn, stss, your_team, player_bids, bids_sheet_name, team_names):
+    values = []
+    for player_name in stss['player_names']:
+        bid = player_bids[player_name]
+        values.append([bid])
+    # Update col for this team with new bids
+    col_name = your_team
+    start_row_idx = 2
+    end_row_idx = len(player_bids) + 1
+    col_letter = chr(team_names.index(col_name) + 65 + 1) # +1 for the index column
+    sheet = conn.worksheet(bids_sheet_name)
+    sheet.update(range_name=f'{col_letter}{start_row_idx}:{col_letter}{end_row_idx}', values=values)
+
+
 
 
 
@@ -194,21 +215,8 @@ def save_bids(conn, stss, your_team, player_bids, bids_sheet_name, team_names, d
     # Update player_bids in session state
     player_bids = {player: st.session_state[f"{team}-{player}"] for team in team_names for player in rosters[team]}
     stss['player_bids'] = player_bids
+    print ('Saved')
     st.rerun()
-
-
-def save_uploaded_bids(conn, stss, your_team, player_bids, bids_sheet_name, team_names):
-    values = []
-    for player_name in stss['player_names']:
-        bid = player_bids[player_name]
-        values.append([bid])
-    # Update col for this team with new bids
-    col_name = your_team
-    start_row_idx = 2
-    end_row_idx = len(player_bids) + 1
-    col_letter = chr(team_names.index(col_name) + 65 + 1) # +1 for the index column
-    sheet = conn.worksheet(bids_sheet_name)
-    sheet.update(range_name=f'{col_letter}{start_row_idx}:{col_letter}{end_row_idx}', values=values)
 
 
 
@@ -246,8 +254,8 @@ def bids_page():
     
     
 
-
-
+    # print ([x for x in list(stss.keys()) if 'save' in x])
+    print ('oooo')
 
     st.markdown(f"<center><h3>Week {latest_week+1} Bids</h3></center>", unsafe_allow_html=True)
     cols = st.columns([1, 2, 1])
@@ -261,11 +269,11 @@ def bids_page():
             save = st.button('No Changes', disabled=True)
         if save:
             print ('Save')
-            save_bids(conn, stss, your_team, player_bids, bids_sheet_name, team_names, df_players, rosters)
+            save_bids(conn, stss, your_team, stss['player_bids'], bids_sheet_name, team_names, df_players, rosters)
 
 
         # Reset button
-        reset = st.button('Reset', key='Reset') 
+        reset = st.button('Reset to Previous Week', key='Reset') 
         if reset:
             print ('Reset')
             stss['reset_button'] = True
@@ -334,6 +342,7 @@ def bids_page():
             apply_stats = st.button('Apply to Bids')
             if apply_stats:
                 sliders_to_bids(stss)
+                save_uploaded_bids(conn, stss, your_team, stss['player_bids'], bids_sheet_name, team_names)
                 st.rerun()
 
 

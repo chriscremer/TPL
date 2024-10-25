@@ -151,7 +151,7 @@ def sliders_to_bids(stss):
     # print (np.mean(list(player_bids.values())))
     # set std to x% of max_salary
     all_bids = list(player_bids.values())
-    scale = np.std(all_bids) / (stss['max_salary'] * salary_spread)
+    scale = np.std(all_bids) / (stss['max_salary'] * salary_spread+.01)
     player_bids = {k: v / scale for k, v in player_bids.items()}
     # print (np.mean(list(player_bids.values())))
     # set mean to max_salary / 2
@@ -178,5 +178,6 @@ def sliders_to_bids(stss):
             player_bids[player] = stss['player_bids'][player]
 
     stss['player_bids'] = player_bids
+    stss['stats_applied'] = True
 
     
