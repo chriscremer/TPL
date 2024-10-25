@@ -36,7 +36,7 @@ def settings_page():
 
 
     st.markdown("<br>", unsafe_allow_html=True) 
-    st.markdown("## Links")
+    # st.markdown("## Links")
 
     games_url = "https://chriscremer.ca/TPL/index.html"
     frisbee_img = "images/frisbee.png"
@@ -54,17 +54,17 @@ def settings_page():
     stat_keeping_img = "images/stat_keeping.png"
 
 
-    cols = st.columns(7)
-    with cols[1]:
-        st.markdown(get_img_with_href(frisbee_img, games_url, "Games Page"), unsafe_allow_html=True)
-    with cols[2]:
-        st.markdown(get_img_with_href(tuc_img, tuc_url, "TUC Site"), unsafe_allow_html=True)
-    with cols[3]:
-        st.markdown(get_img_with_href(public_sheet_img, public_sheet_url, "Public Stats Sheet"), unsafe_allow_html=True)
-    with cols[4]:
-        st.markdown(get_img_with_href(gm_sheet_img, gm_sheet_url, "GM Sheet"), unsafe_allow_html=True)
-    with cols[5]:
-        st.markdown(get_img_with_href(stat_keeping_img, stat_keeping_url, "Stat Keeping"), unsafe_allow_html=True)
+    # cols = st.columns(7)
+    # with cols[1]:
+    #     st.markdown(get_img_with_href(frisbee_img, games_url, "Games Page"), unsafe_allow_html=True)
+    # with cols[2]:
+    #     st.markdown(get_img_with_href(tuc_img, tuc_url, "TUC Site"), unsafe_allow_html=True)
+    # with cols[3]:
+    #     st.markdown(get_img_with_href(public_sheet_img, public_sheet_url, "Public Stats Sheet"), unsafe_allow_html=True)
+    # with cols[4]:
+    #     st.markdown(get_img_with_href(gm_sheet_img, gm_sheet_url, "GM Sheet"), unsafe_allow_html=True)
+    # with cols[5]:
+    #     st.markdown(get_img_with_href(stat_keeping_img, stat_keeping_url, "Stat Keeping"), unsafe_allow_html=True)
 
 
 

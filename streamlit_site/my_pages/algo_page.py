@@ -7,6 +7,8 @@ from gspread_dataframe import set_with_dataframe, get_as_dataframe
 from utils import get_connection
 
 from my_pages.bids import get_rosters, get_salaries
+from my_pages.league import convert_salaries
+
 from algo3 import run_algo
 
 
@@ -399,6 +401,45 @@ def get_captain_salaries(stss, df_players, player_salaries, captains):
     #     if player not in stats_df['Name'].values:
     #         raise Exception(f'{player} not in stats_df')
         
+    if 'df_league' not in st.session_state:
+
+        # sheets_url = 'https://docs.google.com/spreadsheets/d/1U4T-r7DsfWZI9VXsa7Ul38XDDLpE-7Sz1TFzd29EEVw/edit#gid=0'
+        sheets_url = "https://docs.google.com/spreadsheets/d/1l-7P9YuQ_2FCrWEYYUKhgiD1FBWFZ5wjW3B5RxtiYpM/edit?gid=9#gid=9"
+        league_conn = get_connection(sheet_url=sheets_url)
+        
+        worksheets = league_conn.worksheets()
+        league_sheet = [worksheet for worksheet in worksheets if worksheet.title == 'League'][0]
+        df_league = get_as_dataframe(league_sheet, evaluate_formulas=True)
+        # make the df start at row 9, and drop first column
+        df_league = df_league.iloc[8:, 1:]
+        # make the first row the column names
+        df_league.columns = df_league.iloc[0]
+        # drop the first row
+        df_league = df_league.iloc[1:]
+
+        cols_to_keep = [
+            "First",
+            "Last",
+            "Team",
+            "Cap Impact",
+            "GP",
+            "G",
+            "A",
+            "2A",
+            "D",
+            "TA",
+            "RE",
+        ]
+        df_league = df_league[cols_to_keep]
+
+        # convert to dict
+        df_league = df_league.to_dict(orient='records')
+        # convert to df
+        df_league = pd.DataFrame(df_league)
+
+        df_league = convert_salaries(df_league, 500)
+        st.session_state['df_league'] = df_league
+
 
     stats_df = stss['df_league']
     stats_keys = ['G', 'A', '2A', 'D', 'TA', 'RE']
