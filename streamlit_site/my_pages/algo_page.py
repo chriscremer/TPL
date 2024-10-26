@@ -9,9 +9,7 @@ from gspread_dataframe import set_with_dataframe, get_as_dataframe
 from utils import get_connection
 from data_utils import get_league_data
 from my_pages.bids import get_rosters, get_salaries
-# from my_pages.league import convert_salaries
-
-from algo3 import run_algo
+from algo4 import run_algo
 
 
 def get_all_bids_from_sheet(conn, stss, bids_sheet_name, worksheets, player_salaries):
@@ -334,21 +332,21 @@ def normalize(player_bids, player_salaries, rosters):
     # NORMALIZATION
     # Avg player salary
     avg_player_salary = np.mean(list(player_salaries.values()))
-    print (f"\nAvg player salary: {avg_player_salary}")
+    # print (f"\nAvg player salary: {avg_player_salary}")
     # Make the avg salary of the league be max_salary / 2, so scale all salaries by this factor
     
     # scale = max_salary / 2 / avg_player_salary
     max_salary = st.session_state['max_salary']
     desired_avg_salary = max_salary /2 #200
     scale = desired_avg_salary / avg_player_salary
-    print (f"Scaling salaries by {scale:.2f}")
+    # print (f"Scaling salaries by {scale:.2f}")
     # round to nearest integer
     player_salaries = {k: round(v * scale) for k, v in player_salaries.items()}
     # scale bids as well
     player_bids = {k: {team: round(v * scale) for team, v in bids.items()} for k, bids in player_bids.items()}
     # Cap salaries at max_salary
     new_player_salaries = {k: min(v, max_salary) for k, v in player_salaries.items()}
-    print (f"new avg player salary: {np.mean(list(new_player_salaries.values()))}\n")
+    # print (f"new avg player salary: {np.mean(list(new_player_salaries.values()))}\n")
     # Cap bids at max_salary
     player_bids = {k: {team: min(v, max_salary) for team, v in bids.items()} for k, bids in player_bids.items()}
     original_team_costs = calc_teams_salaries(rosters, new_player_salaries)
