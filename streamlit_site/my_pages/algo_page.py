@@ -355,7 +355,7 @@ def normalize(player_bids, player_salaries, rosters):
 
 
 
-def show_player_salaries(player_salaries):
+def show_player_salaries(player_salaries, player_bids):
     salarylist = list(player_salaries.values())
     max_salary = np.max(salarylist)
     min_salary = np.min(salarylist)
@@ -367,6 +367,21 @@ def show_player_salaries(player_salaries):
 
     player_salaries_df = pd.DataFrame.from_dict(player_salaries2, orient='index', columns=['Salary'])
     player_salaries_df = player_salaries_df.sort_values(by='Salary', ascending=False)
+    # Make first column be called 'Player'
+    player_salaries_df = player_salaries_df.reset_index()
+    player_salaries_df = player_salaries_df.rename(columns={'index': 'Player'})
+
+    # add a column of the bids for each player
+    player_bids_2 = {}
+    for player, bids in player_bids.items():
+        player_bids_2[player] = [bid for bid in bids.values()]
+    # sort each list of bids
+    player_bids_2 = {k: sorted(v) for k, v in player_bids_2.items()}
+    player_salaries_df['Bids'] = player_salaries_df['Player'].apply(lambda x: player_bids_2[x])
+
+    # add column of the std of the bids
+    player_salaries_df['Standard Deviation'] = player_salaries_df['Bids'].apply(lambda x: round(np.std(x),1))
+
     st.table(player_salaries_df)
 
 
@@ -564,7 +579,7 @@ def algo_page():
         with st.expander("Pre Trade Info"):
             show_starting_info(original_team_costs, protected_players_dict, starting_rosters, player_bids, captain_salaries)
         with st.expander("Player Salaries"):
-            show_player_salaries(new_player_salaries)
+            show_player_salaries(new_player_salaries, player_bids)
         with st.expander("Trades"):
             show_trades(trades, new_player_salaries)
         with st.expander("Post Trade Info"):

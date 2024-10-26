@@ -253,10 +253,6 @@ def bids_page():
 
     
     
-
-    # print ([x for x in list(stss.keys()) if 'save' in x])
-    print ('oooo')
-
     st.markdown(f"<center><h3>Week {latest_week+1} Bids</h3></center>", unsafe_allow_html=True)
     cols = st.columns([1, 2, 1])
 
