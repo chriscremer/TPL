@@ -1,9 +1,8 @@
 """
 python -m streamlit_site.algo4
 
-everyone should have 1 trade before someone gets to 3
-hmm
 goal is to make minimum 1 trade per team
+so if 2 teams have made 0 trades, then the next trade must involve atleast one of those teams
 """
 
 import numpy as np
@@ -83,7 +82,7 @@ def run_algo(rosters, player_bids, player_genders, captains, player_salaries):
 
 
     max_trades = 3 # max trades per team
-    min_std_diff = 0 # 1 # minimum change in standard deviation of team salaries
+    min_std_diff = 1 # minimum change in standard deviation of team salaries
 
     team_names = list(rosters.keys())
     n_teams = len(team_names)
@@ -95,15 +94,11 @@ def run_algo(rosters, player_bids, player_genders, captains, player_salaries):
 
         already_considered_trades = [] # to avoid considering the same trade twice
         possible_trades = []
-        # current_min_trades = min([count_team_trades[team] for team in team_names])
         for team_1 in team_names:
 
             # skip if team has already made max_trades
             if count_team_trades[team_1] >= max_trades:
                 continue
-            # # skip if team has 2 more than min trades
-            # if count_team_trades[team_1] > current_min_trades: # + 1:
-            #     continue
             
             team_1_players_to_trade = rosters[team_1]
             # remove players that have 'WILD' in their name
@@ -128,9 +123,6 @@ def run_algo(rosters, player_bids, player_genders, captains, player_salaries):
                     # skip if team has already made max_trades
                     if count_team_trades[offering_team] >= max_trades:
                         continue
-                    # # skip if team has 2 more than min trades
-                    # if count_team_trades[offering_team] > current_min_trades: # + 1:
-                    #     continue
 
                     offering_team_roster = rosters[offering_team]
                     # remove players that have 'WILD' in their name
@@ -155,9 +147,9 @@ def run_algo(rosters, player_bids, player_genders, captains, player_salaries):
                         happiness_change_dict, happiness_change = get_happiness_change(rosters_before, temp_rosters, player_bids, team_names)
                         team1_happiness_change = happiness_change_dict[team_1]
                         team2_happiness_change = happiness_change_dict[offering_team]
-                        # # if both teams are worse off, skip
-                        # if team1_happiness_change <= 0 and team2_happiness_change <= 0:
-                        #     continue
+                        # if both teams are worse off, skip
+                        if team1_happiness_change <= 0 and team2_happiness_change <= 0:
+                            continue
 
                         # Calculate the standard deviation of team costs
                         team_costs = get_team_costs(temp_rosters, player_salaries)
@@ -197,11 +189,20 @@ def run_algo(rosters, player_bids, player_genders, captains, player_salaries):
 
         trades_to_consider = []
 
+        # check if two or fewer teams are at 0 trades and the rest have atleast 1
+        # then make sure the next trade involve atleast one of the teams with 0 trades
+        if sum([1 for team in team_names if count_team_trades[team] == 0]) <= 2:
+            for trade1 in possible_trades:
+                if count_team_trades[trade1["team_1"]] == 0 or count_team_trades[trade1["team_2"]] == 0:
+                    trades_to_consider.append(trade1)
+                    trade_type = "0 trades"
+
         # find trades where both teams are happy
-        for trade1 in possible_trades:
-            if trade1["team1_happiness_change"] > 0 and trade1["team2_happiness_change"] > 0:
-                trades_to_consider.append(trade1)
-                trade_type = "happy"
+        if len(trades_to_consider) == 0:
+            for trade1 in possible_trades:
+                if trade1["team1_happiness_change"] > 0 and trade1["team2_happiness_change"] > 0:
+                    trades_to_consider.append(trade1)
+                    trade_type = "happy"
 
         # if no happy, find trades where sum of happiness is positive
         if len(trades_to_consider) == 0:
