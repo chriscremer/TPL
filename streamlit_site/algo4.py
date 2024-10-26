@@ -81,7 +81,7 @@ def run_algo(rosters, player_bids, player_genders, captains, player_salaries):
     protected_players_dict = {k: v for k, v in sorted(protected_players_dict.items(), key=lambda item: team_costs[item[0]], reverse=True)}
 
 
-    max_trades = 3 # max trades per team
+    max_trades = 4 # 3 # max trades per team
     min_std_diff = 1 # minimum change in standard deviation of team salaries
 
     team_names = list(rosters.keys())
@@ -181,6 +181,15 @@ def run_algo(rosters, player_bids, player_genders, captains, player_salaries):
         
 
         
+
+
+        # check if two or fewer teams are at 0 trades and the rest have atleast 1
+        # then make sure the next trade involve atleast one of the teams with 0 trades
+        if sum([1 for team in team_names if count_team_trades[team] == 0]) in [1, 2]:
+            teams_that_must_trade = [team for team in team_names if count_team_trades[team] == 0]
+            possible_trades = [trade1 for trade1 in possible_trades if trade1["team_1"] in teams_that_must_trade or trade1["team_2"] in teams_that_must_trade]
+            print (f"Teams that must trade: {teams_that_must_trade}")
+
         # stop if no possible trades
         if len(possible_trades) == 0:
             if debug:
@@ -188,14 +197,6 @@ def run_algo(rosters, player_bids, player_genders, captains, player_salaries):
             break
 
         trades_to_consider = []
-
-        # check if two or fewer teams are at 0 trades and the rest have atleast 1
-        # then make sure the next trade involve atleast one of the teams with 0 trades
-        if sum([1 for team in team_names if count_team_trades[team] == 0]) <= 2:
-            for trade1 in possible_trades:
-                if count_team_trades[trade1["team_1"]] == 0 or count_team_trades[trade1["team_2"]] == 0:
-                    trades_to_consider.append(trade1)
-                    trade_type = "0 trades"
 
         # find trades where both teams are happy
         if len(trades_to_consider) == 0:
