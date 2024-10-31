@@ -18,7 +18,7 @@ Once bids are in each week, we run the algorithm to balance the teams. So the jo
 
 ### Notes:
 - You can protect two players, they will not be traded.
-- The total of all your overbids can't be above 10k, and the total of all your underbids can't be below -10k. 
+- The total of all your overbids can't be above 100k, and the total of all your underbids can't be below -100k. 
 - The algorithm is capped at max 4 trades per team per week. This is to prevent too much roster turnover.
 
 

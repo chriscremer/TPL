@@ -362,7 +362,7 @@ def bids_page():
     # sum_of_bids = get_sum_of_bids(stss, team_names, rosters)
     overbid, underbid = count_over_under_bids(stss, team_names, rosters)
     # diff = sum_of_bids - expected_sum_of_salaries
-    max_diff = 10000# 10 #5000
+    max_diff = 100000 # 10 #5000
     # print (f"Difference: {diff}")
     within_limit = overbid < max_diff and underbid < max_diff
 
