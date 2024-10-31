@@ -9,7 +9,7 @@ Website: https://tpltrader123.streamlit.app/
 ## How does the trading algorithm work?
 The goal of the algorithm is to balance the teams while taking into account the preferences of the GMs.
 
-Here's the [current implementation](https://github.com/chriscremer/TPL/blob/main/streamlit_site/algo3.py) for selecting a trade:
+At a high level, the algorithm works like this:
 1. Make a list of all possible trades (exclude team captains, wildcards, etc.)
 2. Pick the trade that best balances the teams (with a preference towards trades that make both teams happy)
 3. Repeat until teams are balanced or we've hit a limit on number of trades
@@ -18,29 +18,26 @@ Once bids are in each week, we run the algorithm to balance the teams. So the jo
 
 ### Notes:
 - You can protect two players, they will not be traded.
-- The total of all your overbids can't be above $10k, and the total of all your underbids can't be below $-10k. 
+- The total of all your overbids can't be above 10k, and the total of all your underbids can't be below -10k. 
 - The algorithm is capped at max 4 trades per team per week. This is to prevent too much roster turnover.
 
 
 
 <br>
-<br>
-<br>
-<br>
 
 
-## Tell Me More
+## More details on how the algorithm works
 
-The main thing the algo is doing is making a list of all possible trades, then picking the one that reduces the standard deviation of the team salaries (bring all team salaries closer to the average).
+### Acceptable Trades
 
-### What excludes a trade from being considered?
-- If a trade increases the standard deviation of the team salaries (reduces parity), it's excluded
-- If a player is protected, a team captain, or a wildcard
-- Trades must be of the same gender
+The first step is to make a list of all acceptable trades. A trade is not acceptable if:
+- A trade increases the standard deviation of the team salaries (reduces parity)
+- A player is protected, a team captain, or a wildcard
+- A trade is between difference genders
 
-### How do we take into consideration the preferences/bids of the GMs?
+### How does it take into consideration the preferences/bids of the GMs?
 
-After making a list of all acceptable trades, the algorithm will groups the trades into three categories:
+After making a list of all acceptable trades, the algorithm groups the trades into three categories:
 1. Happy trades
 2. Somewhat happy trades
 3. Neutral trades
