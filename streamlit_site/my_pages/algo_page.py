@@ -65,8 +65,9 @@ def show_trades(trades, new_player_salaries): #df_players, salary_col_name):
 
         st.markdown(f"<h4>Trade {i+1}</h4>", unsafe_allow_html=True)
         text = "<p>"
-        text += f"{trade['team_1']}: <b>{trade['player_1']}</b> ({player1_salary}) <br>"
-        text += f"{trade['team_2']}: <b>{trade['player_2']}</b> ({player2_salary})"
+        # text += f"{trade['team_1']}: <b>{trade['player_1']}</b> ({player1_salary}) <br>"
+        # text += f"{trade['team_2']}: <b>{trade['player_2']}</b> ({player2_salary})"
+        text += f"<b style='color:green'>{trade['team_1']}</b> trades <b style='color:orange'>{trade['player_1']}</b> ({player1_salary}) to <b style='color:green'>{trade['team_2']}</b> for <b style='color:orange'>{trade['player_2']}</b> ({player2_salary})"
         text += f"<br>Salary Diff: {salary_diff}"
         text += f"<br>Standard Deviation: {trade['team_costs_std']:.2f}"
         text += f"<br>Team 1 Happiness Change: {trade['team1_happiness_change']}"
