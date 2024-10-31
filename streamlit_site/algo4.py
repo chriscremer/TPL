@@ -152,6 +152,10 @@ def run_algo(rosters, player_bids, player_genders, captains, player_salaries, pr
                         # if both teams are worse off, skip
                         if team1_happiness_change <= 0 and team2_happiness_change <= 0:
                             continue
+                        # if player salary dif is less than 1000, skip
+                        if abs(player_salaries[player_1] - player_salaries[player_2]) < 1000:
+                            continue
+
 
                         # Calculate the standard deviation of team costs
                         team_costs = get_team_costs(temp_rosters, player_salaries)

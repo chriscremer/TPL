@@ -6,7 +6,7 @@ from gspread_dataframe import set_with_dataframe, get_as_dataframe
 
 
 from utils import get_connection
-from data_utils import sliders_to_bids
+from data_utils import sliders_to_bids, load_protected_players
 
 
 
@@ -213,6 +213,7 @@ def save_bids(conn, stss, your_team, player_bids, bids_sheet_name, team_names, d
     start_row_idx = 2
     end_row_idx = len(player_bids) + 1
     col_letter = chr(team_names.index(col_name) + 65 + 1) # +1 for the index column
+    print (f"team_names: {team_names}")
     values = []
     protect_values = []
     for player_name in stss['player_names']:
@@ -262,9 +263,13 @@ def bids_page():
 
     player_salaries, latest_week = get_salaries(df_players, player_names, max_salary)
     
-    latest_week = 4
-    bids_sheet_name = f"Week {latest_week} - Bids"
-    protect_sheet_name = f"Week {latest_week} - Protect"
+
+    # latest_week = 3
+    current_week = 4
+    bids_sheet_name = f"Week {current_week} - Bids"
+    protect_sheet_name = f"Week {current_week} - Protect"
+
+    protected_players_dict = load_protected_players(conn, protect_sheet_name)
 
     if 'player_bids' not in stss:
         player_bids, bids_sheet_name = get_bids_from_sheet(conn, stss, bids_sheet_name, worksheets, your_team, player_salaries)
@@ -274,7 +279,7 @@ def bids_page():
 
     
     
-    st.markdown(f"<center><h3>Week {latest_week+1} Bids</h3></center>", unsafe_allow_html=True)
+    st.markdown(f"<center><h3>Week {current_week} Bids</h3></center>", unsafe_allow_html=True)
     cols = st.columns([1, 2, 1])
 
     # Save button
@@ -336,31 +341,39 @@ def bids_page():
                 st.success('Uploaded') #, please refresh the page to see changes')
 
 
+    with cols[1]:
+        # show protected players
+        this_team_protected = protected_players_dict[your_team]
+        st.markdown(f"<br><center><h5>Protected Players:</h5></center>", unsafe_allow_html=True)
+        for player in this_team_protected:
+            player_name = player['player_name']
+            st.markdown(f"<center> - {player_name}</center>", unsafe_allow_html=True)
 
 
 
 
 
-    with cols[2]:
 
-        # collapsable area
-        with st.expander("Stat Sliders"):
+    # with cols[2]:
 
-            # Set salaries based on stats
-            goal_slider = st.slider("Goal", 0, 10, 5, key='goal_slider')
-            assist_slider = st.slider("Assist", 0, 10, 5, key='assist_slider')
-            second_assist_slider = st.slider("2nd Assist", 0, 10, 3, key='second_assist_slider')
-            d_slider = st.slider("D", 0, 10, 5, key='d_slider')
-            ta_slider = st.slider("Throwaway", 0, 10, 3, key='ta_slider')
-            drop_slider = st.slider("Drop", 0, 10, 3, key='drop_slider')
-            salart_spread_slider = st.slider("Salary Spread", 0, 10, 5, key='salary_spread_slider')
+    #     # collapsable area
+    #     with st.expander("Stat Sliders"):
 
-            # Button to apply to bids
-            apply_stats = st.button('Apply to Bids')
-            if apply_stats:
-                sliders_to_bids(stss)
-                save_uploaded_bids(conn, stss, your_team, stss['player_bids'], bids_sheet_name, team_names)
-                st.rerun()
+    #         # Set salaries based on stats
+    #         goal_slider = st.slider("Goal", 0, 10, 5, key='goal_slider')
+    #         assist_slider = st.slider("Assist", 0, 10, 5, key='assist_slider')
+    #         second_assist_slider = st.slider("2nd Assist", 0, 10, 3, key='second_assist_slider')
+    #         d_slider = st.slider("D", 0, 10, 5, key='d_slider')
+    #         ta_slider = st.slider("Throwaway", 0, 10, 3, key='ta_slider')
+    #         drop_slider = st.slider("Drop", 0, 10, 3, key='drop_slider')
+    #         salart_spread_slider = st.slider("Salary Spread", 0, 10, 5, key='salary_spread_slider')
+
+    #         # Button to apply to bids
+    #         apply_stats = st.button('Apply to Bids')
+    #         if apply_stats:
+    #             sliders_to_bids(stss)
+    #             save_uploaded_bids(conn, stss, your_team, stss['player_bids'], bids_sheet_name, team_names)
+    #             st.rerun()
 
 
 

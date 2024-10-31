@@ -32,11 +32,18 @@ if 'conn' not in st.session_state:
     login_df = get_as_dataframe(login_sheet)
     st.session_state['login_df'] = login_df
     team_names = login_df['Username'].values
-    # remove Convenor
-    team_names = [team_name for team_name in team_names if team_name != 'Convenor']
-    st.session_state['team_names'] = team_names
+    # # remove Convenor
+    # team_names = [team_name for team_name in team_names if team_name != 'Convenor']
+    # st.session_state['team_names'] = team_names
+    week_sheet = [worksheet for worksheet in worksheets if worksheet.title == "Week 4 - Bids"][0]
+    week_df = get_as_dataframe(week_sheet)
+    cols = week_df.columns
+    cols_list = list(cols)
+    # print (f"cols: {cols}")
+    teams = cols_list[1:]
+    st.session_state['team_names'] = teams
 
-    st.session_state['max_salary'] = 1000
+    st.session_state['max_salary'] = 350000 #1000
     
 
 

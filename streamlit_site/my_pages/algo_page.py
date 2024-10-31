@@ -7,7 +7,7 @@ from gspread_dataframe import set_with_dataframe, get_as_dataframe
 
 
 from utils import get_connection
-from data_utils import get_league_data
+from data_utils import get_league_data, load_protected_players
 from my_pages.bids import get_rosters, get_salaries
 from algo4 import run_algo
 
@@ -21,19 +21,6 @@ def get_all_bids_from_sheet(conn, stss, bids_sheet_name, worksheets):
     stss['all_player_bids'] = df_bids
     return df_bids
 
-
-def load_protected_players(conn, stss, protect_sheet_name):
-    sheet = conn.worksheet(protect_sheet_name)
-    df_protect = get_as_dataframe(sheet)
-    teams = df_protect.columns[1:]
-    protected_players_dict = {team : [] for team in teams}
-    for i, row in df_protect.iterrows():
-        player_name = row['Player']
-        for team in teams:
-            if row[team]:
-                protected_players_dict[team].append({'player_name': player_name, 'value': row[team]})
-                break
-    return protected_players_dict
 
 
 def accumulate_data(rosters, team_names, df_players, salary_col_name, player_names, all_player_bids):
@@ -219,7 +206,7 @@ def make_likeness_matrix(team_costs, player_bids, rosters, avg_team_cost, starti
 
 
 
-def show_starting_info(team_costs, protected_players_dict, starting_rosters, player_bids, captain_salaries):
+def show_starting_info(team_costs, protected_players_dict, starting_rosters, player_bids): #, captain_salaries):
 
     # show table of starting team costs
 
@@ -242,12 +229,12 @@ def show_starting_info(team_costs, protected_players_dict, starting_rosters, pla
         st.table(team_costs_df)
         st.markdown(f'Average Team Salary: {avg_team_cost}', unsafe_allow_html=True)
    
-    with cols_0[2]:
-        # display the captain salaries
-        st.markdown('Captain Salaries', unsafe_allow_html=True)
-        captain_salaries_df = pd.DataFrame.from_dict(captain_salaries, orient='index', columns=['Salary'])
-        captain_salaries_df = captain_salaries_df.sort_values(by='Salary', ascending=False)
-        st.table(captain_salaries_df)
+    # with cols_0[2]:
+    #     # display the captain salaries
+    #     st.markdown('Captain Salaries', unsafe_allow_html=True)
+    #     captain_salaries_df = pd.DataFrame.from_dict(captain_salaries, orient='index', columns=['Salary'])
+    #     captain_salaries_df = captain_salaries_df.sort_values(by='Salary', ascending=False)
+    #     st.table(captain_salaries_df)
 
 
     # show protected players: dict of team_name: list of dicts of 'player_name' and 'value'
@@ -351,30 +338,30 @@ def show_end_info(team_costs, count_team_trades, trades, player_bids, rosters, s
 
 
 
-def normalize(player_bids, player_salaries, rosters):
+# def normalize(player_bids, player_salaries, rosters):
 
-    # NORMALIZATION
-    # Avg player salary
-    avg_player_salary = np.mean(list(player_salaries.values()))
-    # print (f"\nAvg player salary: {avg_player_salary}")
-    # Make the avg salary of the league be max_salary / 2, so scale all salaries by this factor
+#     # NORMALIZATION
+#     # Avg player salary
+#     avg_player_salary = np.mean(list(player_salaries.values()))
+#     # print (f"\nAvg player salary: {avg_player_salary}")
+#     # Make the avg salary of the league be max_salary / 2, so scale all salaries by this factor
     
-    # scale = max_salary / 2 / avg_player_salary
-    max_salary = st.session_state['max_salary']
-    desired_avg_salary = max_salary /2 #200
-    scale = desired_avg_salary / avg_player_salary
-    # print (f"Scaling salaries by {scale:.2f}")
-    # round to nearest integer
-    player_salaries = {k: round(v * scale) for k, v in player_salaries.items()}
-    # scale bids as well
-    player_bids = {k: {team: round(v * scale) for team, v in bids.items()} for k, bids in player_bids.items()}
-    # Cap salaries at max_salary
-    new_player_salaries = {k: min(v, max_salary) for k, v in player_salaries.items()}
-    # print (f"new avg player salary: {np.mean(list(new_player_salaries.values()))}\n")
-    # Cap bids at max_salary
-    player_bids = {k: {team: min(v, max_salary) for team, v in bids.items()} for k, bids in player_bids.items()}
-    original_team_costs = calc_teams_salaries(rosters, new_player_salaries)
-    return player_bids, new_player_salaries, original_team_costs
+#     # scale = max_salary / 2 / avg_player_salary
+#     max_salary = st.session_state['max_salary']
+#     desired_avg_salary = max_salary /2 #200
+#     scale = desired_avg_salary / avg_player_salary
+#     # print (f"Scaling salaries by {scale:.2f}")
+#     # round to nearest integer
+#     player_salaries = {k: round(v * scale) for k, v in player_salaries.items()}
+#     # scale bids as well
+#     player_bids = {k: {team: round(v * scale) for team, v in bids.items()} for k, bids in player_bids.items()}
+#     # Cap salaries at max_salary
+#     new_player_salaries = {k: min(v, max_salary) for k, v in player_salaries.items()}
+#     # print (f"new avg player salary: {np.mean(list(new_player_salaries.values()))}\n")
+#     # Cap bids at max_salary
+#     player_bids = {k: {team: min(v, max_salary) for team, v in bids.items()} for k, bids in player_bids.items()}
+#     original_team_costs = calc_teams_salaries(rosters, new_player_salaries)
+#     return player_bids, new_player_salaries, original_team_costs
 
 
 
@@ -594,7 +581,7 @@ def algo_page():
         protect_sheet_name = f'Week {latest_week} - Protect'
         print (f"\n{bids_sheet_name}")
 
-        protected_players_dict = load_protected_players(conn, stss, protect_sheet_name)
+        protected_players_dict = load_protected_players(conn, protect_sheet_name)
 
         all_player_bids = get_all_bids_from_sheet(conn, stss, bids_sheet_name, worksheets)
         player_bids, rosters_team_list, player_genders = accumulate_data(rosters, team_names, df_players, salary_col_name, player_names, all_player_bids)
@@ -609,15 +596,18 @@ def algo_page():
             df_captains = get_as_dataframe(captains_sheet)
             stss['captains'] = df_captains['Captain'].tolist()
         captains = stss['captains']
-        # get captain salaries
-        captain_salaries = get_captain_salaries(stss, df_players, player_salaries, captains)
-        # make all bids for the captains be their predicted salary
-        for captain in captains:
-            player_bids[captain] = {team: captain_salaries[captain] for team in team_names}
-            player_salaries[captain] = captain_salaries[captain]
+
+        # # get captain salaries
+        # captain_salaries = get_captain_salaries(stss, df_players, player_salaries, captains)
+        # # make all bids for the captains be their predicted salary
+        # for captain in captains:
+        #     player_bids[captain] = {team: captain_salaries[captain] for team in team_names}
+        #     player_salaries[captain] = captain_salaries[captain]
 
         # normalize salaries and bids
-        player_bids, new_player_salaries, original_team_costs = normalize(player_bids, player_salaries, rosters)
+        # player_bids, new_player_salaries, original_team_costs = normalize(player_bids, player_salaries, rosters)
+        new_player_salaries = player_salaries
+        original_team_costs = calc_teams_salaries(rosters, new_player_salaries)
         # sort roster into the same order as original_team_costs, so highest to lowest salary
         rosters = {k: v for k, v in sorted(rosters.items(), key=lambda item: original_team_costs[item[0]], reverse=True)}
         starting_rosters = rosters.copy()
@@ -629,7 +619,7 @@ def algo_page():
 
         # Display info
         with st.expander("Pre Trade Info"):
-            show_starting_info(original_team_costs, protected_players_dict, starting_rosters, player_bids, captain_salaries)
+            show_starting_info(original_team_costs, protected_players_dict, starting_rosters, player_bids) #, captain_salaries)
         with st.expander("Player Salaries"):
             show_player_salaries(new_player_salaries, player_bids)
         with st.expander("Trades"):

@@ -10,6 +10,27 @@ from utils import get_connection
 
 
 
+
+
+def load_protected_players(conn, protect_sheet_name):
+    sheet = conn.worksheet(protect_sheet_name)
+    df_protect = get_as_dataframe(sheet)
+    teams = df_protect.columns[1:]
+    protected_players_dict = {team : [] for team in teams}
+    for i, row in df_protect.iterrows():
+        player_name = row['Player']
+        for team in teams:
+            if row[team]:
+                protected_players_dict[team].append({'player_name': player_name, 'value': row[team]})
+                print (f"{player_name} is protected by {team}")
+                break
+    return protected_players_dict
+
+
+
+
+
+
 def convert_salaries(df_league, max_salary):
     # convert to string
     df_league['Cap Impact'] = df_league['Cap Impact'].astype(str)
