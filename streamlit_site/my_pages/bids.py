@@ -37,15 +37,15 @@ def display_team2(team_name, rosters, player_salaries, max_salary, df_players, p
         player_name = row['Player']
         # if 'WILD' in player_name:
         #     continue
-        salary = row['Salary']
+        salary = int(row['Salary'])
         gender = row['Gender']
         cols = st.columns([1, 2, 1, 2, 2])
 
         if st.session_state['reset_button']:
             init_bid = salary
-            st.session_state[f"{team_name}-{player_name}"] = salary
+            st.session_state[f"{team_name}-{player_name}"] = int(salary)
         else:
-            init_bid = player_bids[player_name]
+            init_bid = int(player_bids[player_name])
 
         # init_bid = player_bids[player_name]
         # if 'Sab' in player_name:
@@ -63,9 +63,12 @@ def display_team2(team_name, rosters, player_salaries, max_salary, df_players, p
         with cols[3]:
             if player_name in st.session_state['captains']  or 'WILD' in player_name:
                 #disable slider
-                my_bid = st.slider("Your Bid", 0, max_salary, init_bid, key=f"{team_name}-{player_name}", label_visibility='collapsed', disabled=True)
+                # my_bid = st.slider("Your Bid", 0, max_salary, init_bid, key=f"{team_name}-{player_name}", label_visibility='collapsed', disabled=True)
+                my_bid = st.number_input("Insert a number", value=init_bid, key=f"{team_name}-{player_name}", label_visibility='collapsed', disabled=True)
             else:
-                my_bid = st.slider("Your Bid", 0, max_salary, init_bid, key=f"{team_name}-{player_name}", label_visibility='collapsed')
+                # my_bid = st.slider("Your Bid", 0, max_salary, init_bid, key=f"{team_name}-{player_name}", label_visibility='collapsed')
+                my_bid = st.number_input("Insert a number", value=init_bid, key=f"{team_name}-{player_name}", label_visibility='collapsed')
+
 
         if is_my_team:
             # Checkbox for protecting players
@@ -206,6 +209,37 @@ def get_sum_of_bids(stss, team_names, rosters):
     return sum_of_bids
 
 
+def count_over_under_bids(stss, team_names, rosters):
+    """
+    Compare bid to salary for each player. 
+    Sum the overbids and underbids
+    """
+
+    overbid = 0
+    underbid = 0
+    team0 = team_names[0]
+    player0 = rosters[team0][0]
+    if f"{team0}-{player0}" in stss:
+        for team in team_names:
+            for player in rosters[team]:
+                bid = stss[f"{team}-{player}"]
+                salary = stss['player_salaries'][player]
+                if bid > salary:
+                    overbid += bid - salary
+                elif bid < salary:
+                    underbid += salary - bid
+    else:
+        player_bids = stss['player_bids']
+        player_salaries = stss['player_salaries']
+        for player, bid in player_bids.items():
+            salary = player_salaries[player]
+            if bid > salary:
+                overbid += bid - salary
+            elif bid < salary:
+                underbid += salary - bid
+
+    return overbid, underbid
+
 
 def save_uploaded_bids(conn, stss, your_team, player_bids, bids_sheet_name, team_names):
     values = []
@@ -300,10 +334,11 @@ def bids_page():
     max_salary = stss['max_salary']
 
     player_salaries, latest_week = get_salaries(df_players, player_names, max_salary)
+    stss['player_salaries'] = player_salaries
     
     # sum_of_salaries = sum(player_salaries.values())
     # print (f"Sum of salaries: {sum_of_salaries}")
-    expected_sum_of_salaries = 18290460
+    # expected_sum_of_salaries = 18290460
 
     prev_week = 3
     current_week = 4
@@ -324,14 +359,17 @@ def bids_page():
     st.markdown(f"<center><h3>Week {current_week} Bids</h3></center>", unsafe_allow_html=True)
     cols = st.columns([1, 2, 1])
 
-    sum_of_bids = get_sum_of_bids(stss, team_names, rosters)
-    diff = sum_of_bids - expected_sum_of_salaries
-    max_diff = 5000
+    # sum_of_bids = get_sum_of_bids(stss, team_names, rosters)
+    overbid, underbid = count_over_under_bids(stss, team_names, rosters)
+    # diff = sum_of_bids - expected_sum_of_salaries
+    max_diff = 50000# 10 #5000
+    # print (f"Difference: {diff}")
+    within_limit = overbid < max_diff and underbid < max_diff
 
     # Save button
     changes = check_for_changes(stss, team_names, rosters, your_team)
     with cols[0]:
-        if changes and abs(diff) < max_diff:
+        if changes and within_limit:
             save = st.button('Save Changes')
         else:
             save = st.button('No Changes', disabled=True)
@@ -359,27 +397,27 @@ def bids_page():
 
 
         # Line break
-        st.markdown('<br>', unsafe_allow_html=True)
+        # st.markdown('<br>', unsafe_allow_html=True)
 
-        # Download button
-        def convert_df():
-            # convert player bids to dataframe
-            player_bids_df = []
-            for player_name in stss['player_names']:
-                # doesnt matter what they bid on for wildcards
-                if 'WILD' in player_name:
-                    continue
-                # bid = player_bids[player_name]
-                bid = stss['player_bids'][player_name]
-                player_bids_df.append({'Player': player_name, 'Bid': bid})
-            player_bids_df = pd.DataFrame(player_bids_df)
-            return player_bids_df.to_csv().encode("utf-8")
-        st.download_button(
-            label="Download file",
-            data=convert_df(),
-            file_name="player_bids.csv",
-            mime="text/csv",
-        )
+        # # Download button
+        # def convert_df():
+        #     # convert player bids to dataframe
+        #     player_bids_df = []
+        #     for player_name in stss['player_names']:
+        #         # doesnt matter what they bid on for wildcards
+        #         if 'WILD' in player_name:
+        #             continue
+        #         # bid = player_bids[player_name]
+        #         bid = stss['player_bids'][player_name]
+        #         player_bids_df.append({'Player': player_name, 'Bid': bid})
+        #     player_bids_df = pd.DataFrame(player_bids_df)
+        #     return player_bids_df.to_csv().encode("utf-8")
+        # st.download_button(
+        #     label="Download file",
+        #     data=convert_df(),
+        #     file_name="player_bids.csv",
+        #     mime="text/csv",
+        # )
         
         # # Download as excel sheet
         # def convert_df():
@@ -401,60 +439,68 @@ def bids_page():
         #     mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
         # )
 
-        # Upload
-        with st.expander("Upload File"):
-            uploaded_file = st.file_uploader("Upload")
-            if uploaded_file is not None:
-                dataframe = pd.read_csv(uploaded_file)
-                # convert df to player_bids dict
-                player_bids = {row['Player']: row['Bid'] for i, row in dataframe.iterrows()}
-                # if player_bids missing players, add them. for instance wildcards
-                for player in stss['player_names']:
-                    if player not in player_bids:
-                        player_bids[player] = player_salaries[player]
-                # make sure captains salaries are unchanged
-                for captain in stss['captains']:
-                    player_bids[captain] = player_salaries[captain]
+        # # Upload
+        # with st.expander("Upload File"):
+        #     uploaded_file = st.file_uploader("Upload")
+        #     if uploaded_file is not None:
+        #         dataframe = pd.read_csv(uploaded_file)
+        #         # convert df to player_bids dict
+        #         player_bids = {row['Player']: row['Bid'] for i, row in dataframe.iterrows()}
+        #         # if player_bids missing players, add them. for instance wildcards
+        #         for player in stss['player_names']:
+        #             if player not in player_bids:
+        #                 player_bids[player] = player_salaries[player]
+        #         # make sure captains salaries are unchanged
+        #         for captain in stss['captains']:
+        #             player_bids[captain] = player_salaries[captain]
                 
 
-                sum_of_bids = sum(player_bids.values())
-                diff = sum_of_bids - expected_sum_of_salaries
-                print (diff)
-                if abs(diff) < max_diff:
-                    save_uploaded_bids(conn, stss, your_team, player_bids, bids_sheet_name, team_names)
-                    stss['player_bids'] = player_bids
-                    print ('Uploaded')
-                    # popup to confirm it worked
-                    st.success('Uploaded') #, please refresh the page to see changes')
-                else:
-                    st.error(f"Total bids must be within 5k of {expected_sum_of_salaries:,}. Your total bids: {sum_of_bids:,} ({diff:+,})")
+        #         sum_of_bids = sum(player_bids.values())
+        #         diff = sum_of_bids - expected_sum_of_salaries
+        #         print (diff)
+        #         if abs(diff) < max_diff:
+        #             save_uploaded_bids(conn, stss, your_team, player_bids, bids_sheet_name, team_names)
+        #             stss['player_bids'] = player_bids
+        #             print ('Uploaded')
+        #             # popup to confirm it worked
+        #             st.success('Uploaded') #, please refresh the page to see changes')
+        #         else:
+        #             st.error(f"Total bids must be within {max_diff} of {expected_sum_of_salaries:,}. Your total bids: {sum_of_bids:,} ({diff:+,})")
                 
-
-
-    with cols[1]:
-        expected_sum_of_salaries_str = f"{expected_sum_of_salaries:,}"
-        diff_str = f"{diff:,}"
-        st.markdown(f"<br><center><p>Bid Allowance: ${expected_sum_of_salaries_str}</p></center>", unsafe_allow_html=True)
-        greencheck = '✅'
-        redx = '❌'
-        # if diff is less than 5000
-        if abs(diff) < max_diff:
-            st.markdown(f"<center>Over/Under: ${diff_str} {greencheck}</center>", unsafe_allow_html=True)
-        else:
-            st.markdown(f"<center><p>Over/Under: ${diff_str} {redx}</p>(must be within $5k of allowance)</center>", unsafe_allow_html=True)
-
-            
-
-
-
-
-
 
 
     with cols[2]:
+        # expected_sum_of_salaries_str = f"{expected_sum_of_salaries:,}"
+        # diff_str = f"{diff:,}"
+        # st.markdown(f"<br><center><p>Bid Allowance: ${expected_sum_of_salaries_str}</p></center>", unsafe_allow_html=True)
+        greencheck = '✅'
+        redx = '❌'
+        # if diff is less than 5000
+        # if within_limit:
+            # st.markdown(f"<center>Over/Under: ${diff_str} {greencheck}</center>", unsafe_allow_html=True)
+        # else:
+            # st.markdown(f"<center><p>Over/Under: ${diff_str} {redx}</p>(must be within {max_diff} of allowance)</center>", unsafe_allow_html=True)
+
+        st.markdown(f"<center>Max total over/under bid: ${max_diff:,}</center>", unsafe_allow_html=True)
+        if overbid < max_diff:
+            st.markdown(f"<center>Overbid: ${overbid:,} {greencheck}</center>", unsafe_allow_html=True)
+        else:
+            st.markdown(f"<center>Overbid: ${overbid:,} {redx}</center>", unsafe_allow_html=True)
+        if underbid < max_diff:
+            st.markdown(f"<center>Underbid: ${underbid:,} {greencheck}</center>", unsafe_allow_html=True)
+        else:
+            st.markdown(f"<center>Underbid: ${underbid:,} {redx}</center>", unsafe_allow_html=True)
+
+
+
+
+
+
+
+    # with cols[2]:
         # show protected players
         this_team_protected = protected_players_dict[your_team]
-        st.markdown(f"<br><center><h5>Protected Players:</h5></center>", unsafe_allow_html=True)
+        st.markdown(f"<br><center><b>Protected Players:</b></b>", unsafe_allow_html=True)
         for player in this_team_protected:
             player_name = player['player_name']
             st.markdown(f"<center> - {player_name}</center>", unsafe_allow_html=True)
