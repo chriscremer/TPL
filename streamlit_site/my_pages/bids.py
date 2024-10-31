@@ -25,7 +25,10 @@ def display_team2(team_name, rosters, player_salaries, max_salary, df_players, p
     team_df = team_df.sort_values(by=['Salary'], ascending=False)
     team_df = team_df.reset_index(drop=True)
 
-    # print (team_df.columns)
+    if is_my_team:
+        # Checkbox for protecting players
+        protected_players = st.session_state['protected_players_dict'][team_name]
+        protected_players = [player['player_name'] for player in protected_players]
 
     # display team
     # st.session_state['sliders_init'] = True
@@ -59,9 +62,10 @@ def display_team2(team_name, rosters, player_salaries, max_salary, df_players, p
             with cols[4]:
                 if player_name in st.session_state['captains']  or 'WILD' in player_name:
                     my_checkbox = st.checkbox("Protect", key=f"{team_name}-{player_name}-protect", disabled=True)
+                elif player_name in protected_players:
+                    my_checkbox = st.checkbox("Protect", value=True, key=f"{team_name}-{player_name}-protect")
                 else:
                     my_checkbox = st.checkbox("Protect", key=f"{team_name}-{player_name}-protect")
-
 
         with cols[2]:
             if my_bid > salary:
@@ -139,9 +143,9 @@ def get_rosters(df_players, team_names):
     return rosters
 
 
-def check_for_changes(stss, team_names, rosters):
+def check_for_changes(stss, team_names, rosters, your_team):
     changes = False
-    team0 = team_names[0]
+    team0 = your_team #team_names[0]
     player0 = rosters[team0][0]
     # see if sliders have initialized
     if f"{team0}-{player0}" in stss:
@@ -163,6 +167,18 @@ def check_for_changes(stss, team_names, rosters):
     # if 'stats_applied' in stss and stss['stats_applied'] == True:
     #     changes = True
     #     stss['stats_applied'] = False
+
+    # Check for changes in protected players
+    if f"{your_team}-{player0}-protect" in stss:
+        for player in rosters[team0]:
+            current_protect = stss[f"{team0}-{player}-protect"]
+            original_protected_players = stss['protected_players_dict'][team]
+            if current_protect and player not in original_protected_players:
+                changes = True
+                break
+            elif not current_protect and player in original_protected_players:
+                changes = True
+                break
 
     return changes
 
@@ -213,7 +229,6 @@ def save_bids(conn, stss, your_team, player_bids, bids_sheet_name, team_names, d
     start_row_idx = 2
     end_row_idx = len(player_bids) + 1
     col_letter = chr(team_names.index(col_name) + 65 + 1) # +1 for the index column
-    print (f"team_names: {team_names}")
     values = []
     protect_values = []
     for player_name in stss['player_names']:
@@ -270,6 +285,7 @@ def bids_page():
     protect_sheet_name = f"Week {current_week} - Protect"
 
     protected_players_dict = load_protected_players(conn, protect_sheet_name)
+    stss['protected_players_dict'] = protected_players_dict
 
     if 'player_bids' not in stss:
         player_bids, bids_sheet_name = get_bids_from_sheet(conn, stss, bids_sheet_name, worksheets, your_team, player_salaries)
@@ -283,7 +299,7 @@ def bids_page():
     cols = st.columns([1, 2, 1])
 
     # Save button
-    changes = check_for_changes(stss, team_names, rosters)
+    changes = check_for_changes(stss, team_names, rosters, your_team)
     with cols[0]:
         if changes:
             save = st.button('Save Changes')
@@ -341,7 +357,7 @@ def bids_page():
                 st.success('Uploaded') #, please refresh the page to see changes')
 
 
-    with cols[1]:
+    with cols[2]:
         # show protected players
         this_team_protected = protected_players_dict[your_team]
         st.markdown(f"<br><center><h5>Protected Players:</h5></center>", unsafe_allow_html=True)

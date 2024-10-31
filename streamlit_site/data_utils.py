@@ -22,7 +22,7 @@ def load_protected_players(conn, protect_sheet_name):
         for team in teams:
             if row[team]:
                 protected_players_dict[team].append({'player_name': player_name, 'value': row[team]})
-                print (f"{player_name} is protected by {team}")
+                # print (f"{player_name} is protected by {team}")
                 break
     return protected_players_dict
 
