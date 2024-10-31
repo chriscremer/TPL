@@ -98,14 +98,14 @@ def get_salaries(df_players, player_names, max_salary):
     salary_col = f"Week {latest_week} - Salary"
     player_salaries = df_players.set_index('Full Name')[salary_col].to_dict()
 
-    # if salary is above max, we'll need to scale it
-    max_cap = max([player_salaries[player] for player in player_names])
-    if max_cap > max_salary:
-        scale = max_salary / max_cap
-    else:
-        scale = 1
-    for player, salary in player_salaries.items():
-        player_salaries[player] = int(salary * scale)
+    # # if salary is above max, we'll need to scale it
+    # max_cap = max([player_salaries[player] for player in player_names])
+    # if max_cap > max_salary:
+    #     scale = max_salary / max_cap
+    # else:
+    #     scale = 1
+    # for player, salary in player_salaries.items():
+    #     player_salaries[player] = int(salary * scale)
 
     return player_salaries, latest_week
 
@@ -408,11 +408,13 @@ def bids_page():
                 dataframe = pd.read_csv(uploaded_file)
                 # convert df to player_bids dict
                 player_bids = {row['Player']: row['Bid'] for i, row in dataframe.iterrows()}
-                # if player_bids missing players, add them
+                # if player_bids missing players, add them. for instance wildcards
                 for player in stss['player_names']:
                     if player not in player_bids:
                         player_bids[player] = player_salaries[player]
-
+                # make sure captains salaries are unchanged
+                for captain in stss['captains']:
+                    player_bids[captain] = player_salaries[captain]
                 
 
                 sum_of_bids = sum(player_bids.values())

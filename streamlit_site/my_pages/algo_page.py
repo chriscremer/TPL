@@ -589,7 +589,12 @@ def algo_page():
 
         # compute player salaries by taking the average of the bids
         # player_salaries = {player: round(np.mean(list(bids.values()))) for player, bids in player_bids.items()}
-        player_salaries = compute_player_salaries(player_bids, protected_players_dict)
+        # player_salaries = compute_player_salaries(player_bids, protected_players_dict)
+        # for now keep salaries unchanged
+        # just salary to int
+        player_salaries = {k: int(v) for k, v in player_salaries.items()}
+
+
 
         # get list of captains
         if 'captains' not in stss:
