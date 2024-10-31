@@ -380,6 +380,26 @@ def bids_page():
             file_name="player_bids.csv",
             mime="text/csv",
         )
+        
+        # # Download as excel sheet
+        # def convert_df():
+        #     # convert player bids to dataframe
+        #     player_bids_df = []
+        #     for player_name in stss['player_names']:
+        #         # doesnt matter what they bid on for wildcards
+        #         if 'WILD' in player_name:
+        #             continue
+        #         # bid = player_bids[player_name]
+        #         bid = stss['player_bids'][player_name]
+        #         player_bids_df.append({'Player': player_name, 'Bid': bid})
+        #     player_bids_df = pd.DataFrame(player_bids_df)
+        #     return player_bids_df
+        # st.download_button(
+        #     label="Download file",
+        #     data=convert_df(),
+        #     file_name="player_bids.xlsx",
+        #     mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+        # )
 
         # Upload
         with st.expander("Upload File"):
