@@ -12,7 +12,7 @@ from my_pages.bids import get_rosters, get_salaries
 from algo4 import run_algo
 
 
-def get_all_bids_from_sheet(conn, stss, bids_sheet_name, worksheets, player_salaries):
+def get_all_bids_from_sheet(conn, stss, bids_sheet_name, worksheets):
     # If bids_sheet_name does not exist, make it
     if not bids_sheet_name in [worksheet.title for worksheet in worksheets]:
         raise Exception(f'No bids sheet found for {bids_sheet_name}')
@@ -20,6 +20,20 @@ def get_all_bids_from_sheet(conn, stss, bids_sheet_name, worksheets, player_sala
     df_bids = get_as_dataframe(sheet)
     stss['all_player_bids'] = df_bids
     return df_bids
+
+
+def load_protected_players(conn, stss, protect_sheet_name):
+    sheet = conn.worksheet(protect_sheet_name)
+    df_protect = get_as_dataframe(sheet)
+    teams = df_protect.columns[1:]
+    protected_players_dict = {team : [] for team in teams}
+    for i, row in df_protect.iterrows():
+        player_name = row['Player']
+        for team in teams:
+            if row[team]:
+                protected_players_dict[team].append({'player_name': player_name, 'value': row[team]})
+                break
+    return protected_players_dict
 
 
 def accumulate_data(rosters, team_names, df_players, salary_col_name, player_names, all_player_bids):
@@ -238,10 +252,20 @@ def show_starting_info(team_costs, protected_players_dict, starting_rosters, pla
 
     # show protected players: dict of team_name: list of dicts of 'player_name' and 'value'
     st.markdown('Protected Players', unsafe_allow_html=True)
-    protected_players_dict_text = {team: [f"{player['player_name']} ({player['value']})" for player in protected_players_dict[team]] for team in protected_players_dict}
-    n_protected_players_per_team = sum([len(protected_players_dict[team]) for team in protected_players_dict]) / len(protected_players_dict)
-    cols_names = [f"Player {i+1} (bid - avg bid)" for i in range(int(n_protected_players_per_team))]
-    protected_players_df = pd.DataFrame.from_dict(protected_players_dict_text, orient='index', columns=cols_names)
+    # protected_players_dict_text = {team: [f"{player['player_name']} ({player['value']})" for player in protected_players_dict[team]] for team in protected_players_dict}
+    # n_protected_players_per_team = sum([len(protected_players_dict[team]) for team in protected_players_dict]) / len(protected_players_dict)
+    # cols_names = [f"Player {i+1} (bid - avg bid)" for i in range(int(n_protected_players_per_team))]
+    cols_names = ["Player 1", "Player 2", "Player 3"]
+    n_protected_players_per_team = 3
+    # protected_players_dict_text = {team: [f"{player['player_name']}" for player in protected_players_dict[team]] for team in protected_players_dict}
+    protected_players_for_df = {}
+    for team in protected_players_dict:
+        protected_players_for_df[team] = [player['player_name'] for player in protected_players_dict[team]]
+        while len(protected_players_for_df[team]) < n_protected_players_per_team:
+            protected_players_for_df[team].append('')
+
+
+    protected_players_df = pd.DataFrame.from_dict(protected_players_for_df, orient='index', columns=cols_names)
     st.table(protected_players_df)
 
 
@@ -497,7 +521,28 @@ def get_captain_salaries(stss, df_players, player_salaries, captains):
 
 
 
+def compute_player_salaries(player_bids, protected_players_dict):
+    """
+    salary is mean of bids
+    BUT if the player is protected, remove the bid from their team
 
+    player_bids: player_name: {team: bid}
+    """
+
+    player_salaries = {}
+    # player_bids_copy = player_bids.copy()
+    for player_name, bids in player_bids.items():
+        player_bids = []
+        for team, bid in bids.items():
+            # if the player is protected, remove the bid
+            this_team_protected_players = [player['player_name'] for player in protected_players_dict[team]]
+            if player_name in this_team_protected_players:
+                # print (f"{player_name} is protected by {team}")
+                continue
+            player_bids.append(bid)
+        player_salaries[player_name] = round(np.mean(player_bids))
+
+    return player_salaries
 
 
 
@@ -542,14 +587,21 @@ def algo_page():
         max_salary = st.session_state['max_salary']
 
         player_salaries, latest_week = get_salaries(df_players, player_names, max_salary)
+        
+        latest_week = 4
         salary_col_name = f"Week {latest_week} - Salary"
         bids_sheet_name = f'Week {latest_week} - Bids'
+        protect_sheet_name = f'Week {latest_week} - Protect'
+        print (f"\n{bids_sheet_name}")
 
-        all_player_bids = get_all_bids_from_sheet(conn, stss, bids_sheet_name, worksheets, player_salaries)
+        protected_players_dict = load_protected_players(conn, stss, protect_sheet_name)
+
+        all_player_bids = get_all_bids_from_sheet(conn, stss, bids_sheet_name, worksheets)
         player_bids, rosters_team_list, player_genders = accumulate_data(rosters, team_names, df_players, salary_col_name, player_names, all_player_bids)
 
         # compute player salaries by taking the average of the bids
-        player_salaries = {player: round(np.mean(list(bids.values()))) for player, bids in player_bids.items()}
+        # player_salaries = {player: round(np.mean(list(bids.values()))) for player, bids in player_bids.items()}
+        player_salaries = compute_player_salaries(player_bids, protected_players_dict)
 
         # get list of captains
         if 'captains' not in stss:
@@ -571,7 +623,7 @@ def algo_page():
         starting_rosters = rosters.copy()
 
         # RUN TRADING ALORITHM
-        rosters, count_team_trades, trades, protected_players_dict = run_algo(rosters_team_list, player_bids, player_genders, captains, new_player_salaries)
+        rosters, count_team_trades, trades = run_algo(rosters_team_list, player_bids, player_genders, captains, new_player_salaries, protected_players_dict)
         new_team_costs = calc_teams_salaries(rosters, new_player_salaries)
 
 

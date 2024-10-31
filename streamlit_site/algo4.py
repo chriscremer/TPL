@@ -51,7 +51,7 @@ def trade(rosters, team_1, player_1, team_2, player_2, team_names):
 
 
 
-def run_algo(rosters, player_bids, player_genders, captains, player_salaries):
+def run_algo(rosters, player_bids, player_genders, captains, player_salaries, protected_players_dict):
 
     debug = 1
     random.seed(0)
@@ -59,27 +59,29 @@ def run_algo(rosters, player_bids, player_genders, captains, player_salaries):
     # compute salary of each team
     team_costs = get_team_costs(rosters, player_salaries)
 
-    # for each team, find the top n players that they value most relative to the league
-    # value: player_bid - avg_bid
-    n_players_to_protect = 2
+    # # for each team, find the top n players that they value most relative to the league
+    # # value: player_bid - avg_bid
+    # n_players_to_protect = 2
+    # protected_players = []
+    # protected_players_dict = {}
+    # for team, roster in rosters.items():
+    #     player_diffs = {player: player_bids[player][team] - player_salaries[player] for player in roster}
+    #     player_diffs = {k: v for k, v in sorted(player_diffs.items(), key=lambda item: item[1], reverse=True)}
+    #     # remove captains
+    #     player_diffs = {k: v for k, v in player_diffs.items() if k not in captains}
+    #     # remove players that have 'WILD' in their name
+    #     player_diffs = {k: v for k, v in player_diffs.items() if 'WILD' not in k}
+    #     # add top n players to protected players
+    #     protected_players += list(player_diffs.keys())[:n_players_to_protect]
+    #     protected_players_dict[team] = []
+    #     for player in list(player_diffs.keys())[:n_players_to_protect]:
+    #         protected_players_dict[team].append({'player_name': player, 'value': player_diffs[player]})
+
+    # # sort protected players by team_costs
+    # protected_players_dict = {k: v for k, v in sorted(protected_players_dict.items(), key=lambda item: team_costs[item[0]], reverse=True)}
     protected_players = []
-    protected_players_dict = {}
-    for team, roster in rosters.items():
-        player_diffs = {player: player_bids[player][team] - player_salaries[player] for player in roster}
-        player_diffs = {k: v for k, v in sorted(player_diffs.items(), key=lambda item: item[1], reverse=True)}
-        # remove captains
-        player_diffs = {k: v for k, v in player_diffs.items() if k not in captains}
-        # remove players that have 'WILD' in their name
-        player_diffs = {k: v for k, v in player_diffs.items() if 'WILD' not in k}
-        # add top n players to protected players
-        protected_players += list(player_diffs.keys())[:n_players_to_protect]
-        protected_players_dict[team] = []
-        for player in list(player_diffs.keys())[:n_players_to_protect]:
-            protected_players_dict[team].append({'player_name': player, 'value': player_diffs[player]})
-
-    # sort protected players by team_costs
-    protected_players_dict = {k: v for k, v in sorted(protected_players_dict.items(), key=lambda item: team_costs[item[0]], reverse=True)}
-
+    for team, players in protected_players_dict.items():
+        protected_players += [player['player_name'] for player in players]
 
     max_trades = 4 # 3 # max trades per team
     min_std_diff = 1 # minimum change in standard deviation of team salaries
@@ -275,7 +277,7 @@ def run_algo(rosters, player_bids, player_genders, captains, player_salaries):
         })
         traded_players.append(player_1)
         traded_players.append(player_2)
-    return rosters, count_team_trades, trades, protected_players_dict
+    return rosters, count_team_trades, trades #, protected_players_dict
 
 
 

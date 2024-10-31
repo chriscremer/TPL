@@ -10,7 +10,7 @@ from data_utils import sliders_to_bids
 
 
 
-def display_team2(team_name, rosters, player_salaries, max_salary, df_players, player_bids):
+def display_team2(team_name, rosters, player_salaries, max_salary, df_players, player_bids, is_my_team):
 
     # convert rosters to dataframe
     roster = rosters[team_name]
@@ -35,7 +35,7 @@ def display_team2(team_name, rosters, player_salaries, max_salary, df_players, p
         #     continue
         salary = row['Salary']
         gender = row['Gender']
-        cols = st.columns([1, 2, 1, 2, 1])
+        cols = st.columns([1, 2, 1, 2, 2])
 
         if st.session_state['reset_button']:
             init_bid = salary
@@ -53,6 +53,15 @@ def display_team2(team_name, rosters, player_salaries, max_salary, df_players, p
                 my_bid = st.slider("Your Bid", 0, max_salary, init_bid, key=f"{team_name}-{player_name}", label_visibility='collapsed', disabled=True)
             else:
                 my_bid = st.slider("Your Bid", 0, max_salary, init_bid, key=f"{team_name}-{player_name}", label_visibility='collapsed')
+
+        if is_my_team:
+            # Checkbox for protecting players
+            with cols[4]:
+                if player_name in st.session_state['captains']  or 'WILD' in player_name:
+                    my_checkbox = st.checkbox("Protect", key=f"{team_name}-{player_name}-protect", disabled=True)
+                else:
+                    my_checkbox = st.checkbox("Protect", key=f"{team_name}-{player_name}-protect")
+
 
         with cols[2]:
             if my_bid > salary:
@@ -198,19 +207,28 @@ def load_data(stss):
 
 
 
-def save_bids(conn, stss, your_team, player_bids, bids_sheet_name, team_names, df_players, rosters):
+def save_bids(conn, stss, your_team, player_bids, bids_sheet_name, team_names, df_players, rosters, protect_sheet_name):
     # Update col for this team with new bids
     col_name = your_team
     start_row_idx = 2
     end_row_idx = len(player_bids) + 1
     col_letter = chr(team_names.index(col_name) + 65 + 1) # +1 for the index column
     values = []
+    protect_values = []
     for player_name in stss['player_names']:
         player_team = df_players.loc[df_players['Full Name'] == player_name]['Team'].values[0]
         bid = st.session_state[f"{player_team}-{player_name}"]
         values.append([bid])
+        if f"{player_team}-{player_name}-protect" in st.session_state:
+            protect = st.session_state[f"{player_team}-{player_name}-protect"]
+        else:
+            protect = False
+        protect_values.append([protect])
     sheet = conn.worksheet(bids_sheet_name)
     sheet.update(range_name=f'{col_letter}{start_row_idx}:{col_letter}{end_row_idx}', values=values)
+
+    sheet_protect = conn.worksheet(protect_sheet_name)
+    sheet_protect.update(range_name=f'{col_letter}{start_row_idx}:{col_letter}{end_row_idx}', values=protect_values)
 
     # Update player_bids in session state
     player_bids = {player: st.session_state[f"{team}-{player}"] for team in team_names for player in rosters[team]}
@@ -243,7 +261,10 @@ def bids_page():
     max_salary = stss['max_salary']
 
     player_salaries, latest_week = get_salaries(df_players, player_names, max_salary)
+    
+    latest_week = 4
     bids_sheet_name = f"Week {latest_week} - Bids"
+    protect_sheet_name = f"Week {latest_week} - Protect"
 
     if 'player_bids' not in stss:
         player_bids, bids_sheet_name = get_bids_from_sheet(conn, stss, bids_sheet_name, worksheets, your_team, player_salaries)
@@ -265,7 +286,7 @@ def bids_page():
             save = st.button('No Changes', disabled=True)
         if save:
             print ('Save')
-            save_bids(conn, stss, your_team, stss['player_bids'], bids_sheet_name, team_names, df_players, rosters)
+            save_bids(conn, stss, your_team, stss['player_bids'], bids_sheet_name, team_names, df_players, rosters, protect_sheet_name)
 
 
         # Reset button
@@ -375,7 +396,8 @@ def bids_page():
 
         with container_list[row + 1]:
             with cols_list[row + 1][col]:
-                display_team2(team_name, rosters, player_salaries, max_salary, df_players, player_bids)
+                is_my_team = i == 0
+                display_team2(team_name, rosters, player_salaries, max_salary, df_players, player_bids, is_my_team)
 
     if st.session_state['reset_button']:
         st.session_state['reset_button'] = False
