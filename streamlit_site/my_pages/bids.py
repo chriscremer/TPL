@@ -408,12 +408,25 @@ def bids_page():
                 dataframe = pd.read_csv(uploaded_file)
                 # convert df to player_bids dict
                 player_bids = {row['Player']: row['Bid'] for i, row in dataframe.iterrows()}
-                stss['player_bids'] = player_bids
+                # if player_bids missing players, add them
+                for player in stss['player_names']:
+                    if player not in player_bids:
+                        player_bids[player] = player_salaries[player]
+
                 
-                save_uploaded_bids(conn, stss, your_team, player_bids, bids_sheet_name, team_names)
-                print ('Uploaded')
-                # popup to confirm it worked
-                st.success('Uploaded') #, please refresh the page to see changes')
+
+                sum_of_bids = sum(player_bids.values())
+                diff = sum_of_bids - expected_sum_of_salaries
+                print (diff)
+                if abs(diff) < max_diff:
+                    save_uploaded_bids(conn, stss, your_team, player_bids, bids_sheet_name, team_names)
+                    stss['player_bids'] = player_bids
+                    print ('Uploaded')
+                    # popup to confirm it worked
+                    st.success('Uploaded') #, please refresh the page to see changes')
+                else:
+                    st.error(f"Total bids must be within 5k of {expected_sum_of_salaries:,}. Your total bids: {sum_of_bids:,} ({diff:+,})")
+                
 
 
     with cols[1]:
