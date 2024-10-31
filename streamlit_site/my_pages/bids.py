@@ -32,6 +32,7 @@ def display_team2(team_name, rosters, player_salaries, max_salary, df_players, p
 
     # display team
     # st.session_state['sliders_init'] = True
+    # print ("st.session_state['reset_button']", st.session_state['reset_button'])
     for i, row in team_df.iterrows():
         player_name = row['Player']
         # if 'WILD' in player_name:
@@ -42,8 +43,17 @@ def display_team2(team_name, rosters, player_salaries, max_salary, df_players, p
 
         if st.session_state['reset_button']:
             init_bid = salary
+            st.session_state[f"{team_name}-{player_name}"] = salary
         else:
             init_bid = player_bids[player_name]
+
+        # init_bid = player_bids[player_name]
+        # if 'Sab' in player_name:
+        #     print (salary, player_bids[player_name])
+
+        # if f"{team_name}-{player_name}" not in st.session_state:
+        #     st.session_state[f"{team_name}-{player_name}"] = init_bid
+        
 
         with cols[1]:
             # st.markdown(f"Player: {player_name}<br>Salary: ${salary}", unsafe_allow_html=True)
@@ -183,6 +193,19 @@ def check_for_changes(stss, team_names, rosters, your_team):
     return changes
 
 
+def get_sum_of_bids(stss, team_names, rosters):
+    sum_of_bids = 0
+    team0 = team_names[0]
+    player0 = rosters[team0][0]
+    if f"{team0}-{player0}" in stss:
+        for team in team_names:
+            for player in rosters[team]:
+                sum_of_bids += stss[f"{team}-{player}"]
+    else:
+        sum_of_bids = sum(stss['player_bids'].values())
+    return sum_of_bids
+
+
 
 def save_uploaded_bids(conn, stss, your_team, player_bids, bids_sheet_name, team_names):
     values = []
@@ -278,8 +301,11 @@ def bids_page():
 
     player_salaries, latest_week = get_salaries(df_players, player_names, max_salary)
     
+    # sum_of_salaries = sum(player_salaries.values())
+    # print (f"Sum of salaries: {sum_of_salaries}")
+    expected_sum_of_salaries = 18290460
 
-    # latest_week = 3
+    prev_week = 3
     current_week = 4
     bids_sheet_name = f"Week {current_week} - Bids"
     protect_sheet_name = f"Week {current_week} - Protect"
@@ -298,10 +324,14 @@ def bids_page():
     st.markdown(f"<center><h3>Week {current_week} Bids</h3></center>", unsafe_allow_html=True)
     cols = st.columns([1, 2, 1])
 
+    sum_of_bids = get_sum_of_bids(stss, team_names, rosters)
+    diff = sum_of_bids - expected_sum_of_salaries
+    max_diff = 5000
+
     # Save button
     changes = check_for_changes(stss, team_names, rosters, your_team)
     with cols[0]:
-        if changes:
+        if changes and abs(diff) < max_diff:
             save = st.button('Save Changes')
         else:
             save = st.button('No Changes', disabled=True)
@@ -314,7 +344,16 @@ def bids_page():
         reset = st.button('Reset to Previous Week', key='Reset') 
         if reset:
             print ('Reset')
+
             stss['reset_button'] = True
+            
+            # prev_bids_sheet_name = f"Week {prev_week} - Bids"
+            # player_bids, bids_sheet_name = get_bids_from_sheet(conn, stss, prev_bids_sheet_name, worksheets, your_team, player_salaries)
+            # remove current bids from stss
+            # for team in team_names:
+            #     for player in rosters[team]:
+            #         del stss[f"{team}-{player}"]
+            # st.rerun()
         else:
             stss['reset_button'] = False
 
@@ -357,6 +396,26 @@ def bids_page():
                 st.success('Uploaded') #, please refresh the page to see changes')
 
 
+    with cols[1]:
+        expected_sum_of_salaries_str = f"{expected_sum_of_salaries:,}"
+        diff_str = f"{diff:,}"
+        st.markdown(f"<br><center><p>Bid Allowance: ${expected_sum_of_salaries_str}</p></center>", unsafe_allow_html=True)
+        greencheck = '✅'
+        redx = '❌'
+        # if diff is less than 5000
+        if abs(diff) < max_diff:
+            st.markdown(f"<center>Over/Under: ${diff_str} {greencheck}</center>", unsafe_allow_html=True)
+        else:
+            st.markdown(f"<center><p>Over/Under: ${diff_str} {redx}</p>(must be within $5k of allowance)</center>", unsafe_allow_html=True)
+
+            
+
+
+
+
+
+
+
     with cols[2]:
         # show protected players
         this_team_protected = protected_players_dict[your_team]
@@ -364,11 +423,6 @@ def bids_page():
         for player in this_team_protected:
             player_name = player['player_name']
             st.markdown(f"<center> - {player_name}</center>", unsafe_allow_html=True)
-
-
-
-
-
 
     # with cols[2]:
 
