@@ -55,35 +55,78 @@ def show_trades(trades, new_player_salaries): #df_players, salary_col_name):
     # st.markdown("<br><br><br><h2>Trades</h2> <hr>", unsafe_allow_html=True)
     st.markdown("<h2>Trades</h2> <hr>", unsafe_allow_html=True)
 
+    cols_list = [st.columns([3,1]) for i in range(len(trades))]
+
     # show trades
     for i, trade in enumerate(trades):
-        # player1_salary = df_players[df_players['Full Name'] == trade['player_1']][salary_col_name].values[0]
-        # player2_salary = df_players[df_players['Full Name'] == trade['player_2']][salary_col_name].values[0]
-        player1_salary = new_player_salaries[trade['player_1']]
-        player2_salary = new_player_salaries[trade['player_2']]
-        salary_diff = np.abs(player1_salary - player2_salary)
 
-        st.markdown(f"<h4>Trade {i+1}</h4>", unsafe_allow_html=True)
-        text = "<p>"
-        # text += f"{trade['team_1']}: <b>{trade['player_1']}</b> ({player1_salary}) <br>"
-        # text += f"{trade['team_2']}: <b>{trade['player_2']}</b> ({player2_salary})"
-        text += f"<b style='color:green'>{trade['team_1']}</b> trades <b style='color:orange'>{trade['player_1']}</b> ({player1_salary}) to <b style='color:green'>{trade['team_2']}</b> for <b style='color:orange'>{trade['player_2']}</b> ({player2_salary})"
-        text += f"<br>Salary Diff: {salary_diff}"
-        text += f"<br>Standard Deviation: {trade['team_costs_std']:.2f}"
-        text += f"<br>Team 1 Happiness Change: {trade['team1_happiness_change']}"
-        text += f"<br>Team 2 Happiness Change: {trade['team2_happiness_change']}"
-        # if its positive, make it green
-        if trade['happiness_change'] > 0:
-            text += f"<br>Total Happiness Change: <span style='color:green'>{trade['happiness_change']}</span>"
-        # if its negative, make it red
-        elif trade['happiness_change'] < 0:
-            text += f"<br>Total Happiness Change: <span style='color:red'>{trade['happiness_change']}</span>"
-        else:
-            text += f"<br>Total Happiness Change: {trade['happiness_change']}"
+        with cols_list[i][0]:
+            # player1_salary = df_players[df_players['Full Name'] == trade['player_1']][salary_col_name].values[0]
+            # player2_salary = df_players[df_players['Full Name'] == trade['player_2']][salary_col_name].values[0]
+            player1_salary = new_player_salaries[trade['player_1']]
+            player2_salary = new_player_salaries[trade['player_2']]
+            # salary_diff = np.abs(player1_salary - player2_salary)
 
-        text += f"</p>"
-        st.markdown(text, unsafe_allow_html=True)
-        st.markdown('<hr>', unsafe_allow_html=True)
+            st.markdown(f"<h4>Trade {i+1}</h4>", unsafe_allow_html=True)
+            text = "<p>"
+            # text += f"{trade['team_1']}: <b>{trade['player_1']}</b> ({player1_salary}) <br>"
+            # text += f"{trade['team_2']}: <b>{trade['player_2']}</b> ({player2_salary})"
+            text += f"<b style='color:green'>{trade['team_1']}</b> trades <b style='color:orange'>{trade['player_1']}</b> ({player1_salary}) to <b style='color:green'>{trade['team_2']}</b> for <b style='color:orange'>{trade['player_2']}</b> ({player2_salary})"
+            # text += f"<br>Salary Change: {salary_diff}"
+            t1_colour = 'green' if player1_salary - player2_salary > 0 else 'deeppink'
+            t2_colour = 'green' if player2_salary - player1_salary > 0 else 'deeppink'
+            text += f"<br>Salary Change:"
+            text += f"<br>&nbsp;&nbsp;&nbsp;&nbsp;{trade['team_1']}: <span style='color:{t1_colour}'>{player1_salary - player2_salary}</span>"
+            text += f"<br>&nbsp;&nbsp;&nbsp;&nbsp;{trade['team_2']}: <span style='color:{t2_colour}'>{player2_salary - player1_salary}</span>"
+            # text += f"<br>Standard Deviation: {trade['team_costs_std']:.2f}"
+            # text += f"<br>Team 1 Happiness Change: {trade['team1_happiness_change']}"
+            # text += f"<br>Team 2 Happiness Change: {trade['team2_happiness_change']}"
+
+            # text += f"<br>Team 1 Bid for Player Received - Bid for Player Traded Away: {trade['team1_happiness_change']}"
+            # text += f"<br>Team 2 Bid for Player Received - Bid for Player Traded Away: {trade['team2_happiness_change']}"
+            t1_colour = 'green' if trade['team1_happiness_change'] > 0 else 'red'
+            t2_colour = 'green' if trade['team2_happiness_change'] > 0 else 'red'
+            text += f"<br>Bid for Player Received minus Bid for Player Traded Away:"
+            text += f"<br>&nbsp;&nbsp;&nbsp;&nbsp;{trade['team_1']}: <span style='color:{t1_colour}'>{trade['team1_happiness_change']}</span>"
+            text += f"<br>&nbsp;&nbsp;&nbsp;&nbsp;{trade['team_2']}: <span style='color:{t2_colour}'>{trade['team2_happiness_change']}</span>"
+            
+            
+            # if its positive, make it green
+            if trade['happiness_change'] > 0:
+                text += f"<br>&nbsp;&nbsp;&nbsp;&nbsp;Total Change: <span style='color:green'>{trade['happiness_change']}</span>"
+            # if its negative, make it red
+            elif trade['happiness_change'] < 0:
+                text += f"<br>&nbsp;&nbsp;&nbsp;&nbsp;Total Change: <span style='color:red'>{trade['happiness_change']}</span>"
+            else:
+                text += f"<br>&nbsp;&nbsp;&nbsp;&nbsp;Total Change: {trade['happiness_change']}"
+
+            text += f"</p>"
+            st.markdown(text, unsafe_allow_html=True)
+            st.markdown('<hr>', unsafe_allow_html=True)
+
+        with cols_list[i][1]:
+            # show sum of salaries of all teams
+            st.markdown(f"<br>New Team Salaries Relative To Average:", unsafe_allow_html=True)
+            avg_team_cost = int(sum(trade['team_costs'].values()) / len(trade['team_costs']))
+            # sort team_costs from largest to smallest
+            team_costs = {k: v for k, v in sorted(trade['team_costs'].items(), key=lambda item: item[1], reverse=True)}
+            txt = ''
+            for team_name in team_costs.keys():
+                # team_colour = 'orange' if team_costs[team_name] - avg_team_cost > 0 else 'deeppink'
+                # team_colour = 'orange' if team_name == trade['team_1'] else 'black'
+                # team_colour = 'deeppink' if team_name == trade['team_2'] else 'black'
+                if team_name == trade['team_1']:
+                    team_colour = 'orange'
+                elif team_name == trade['team_2']:
+                    team_colour = 'deeppink'
+                else:
+                    team_colour = 'black'
+                # st.markdown(f"<b style='color:{team_colour}'>{team_name}</b>: {team_costs[team_name] - avg_team_cost}", unsafe_allow_html=True)
+                if team_colour!= 'black':
+                    txt += f"<b style='color:{team_colour}'>{team_name}</b>: {team_costs[team_name] - avg_team_cost}<br>"
+                else:
+                    txt += f"{team_name}: {team_costs[team_name] - avg_team_cost}<br>"
+            st.markdown(txt, unsafe_allow_html=True)
 
 
 

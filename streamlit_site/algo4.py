@@ -300,6 +300,7 @@ def run_algo(rosters, player_bids, player_genders, captains, player_salaries, pr
             'happiness_change': happiness_change,
             'team1_happiness_change': team1_happiness_change,
             'team2_happiness_change': team2_happiness_change,
+            'team_costs': team_costs.copy(),
         })
         traded_players.append(player_1)
         traded_players.append(player_2)
