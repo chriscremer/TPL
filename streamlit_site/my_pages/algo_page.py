@@ -73,8 +73,8 @@ def show_trades(trades, new_player_salaries): #df_players, salary_col_name):
             # text += f"{trade['team_2']}: <b>{trade['player_2']}</b> ({player2_salary})"
             text += f"<b style='color:green'>{trade['team_1']}</b> trades <b style='color:orange'>{trade['player_1']}</b> ({player1_salary}) to <b style='color:green'>{trade['team_2']}</b> for <b style='color:orange'>{trade['player_2']}</b> ({player2_salary})"
             # text += f"<br>Salary Change: {salary_diff}"
-            t1_colour = 'green' if player1_salary - player2_salary > 0 else 'deeppink'
-            t2_colour = 'green' if player2_salary - player1_salary > 0 else 'deeppink'
+            t1_colour = 'green' #if player1_salary - player2_salary > 0 else 'deeppink'
+            t2_colour = 'green' #if player2_salary - player1_salary > 0 else 'deeppink'
             text += f"<br>Salary Change:"
             text += f"<br>&nbsp;&nbsp;&nbsp;&nbsp;{trade['team_1']}: <span style='color:{t1_colour}'>{player2_salary - player1_salary}</span>"
             text += f"<br>&nbsp;&nbsp;&nbsp;&nbsp;{trade['team_2']}: <span style='color:{t2_colour}'>{player1_salary - player2_salary}</span>"
