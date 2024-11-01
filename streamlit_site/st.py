@@ -10,7 +10,8 @@ import numpy as np
 import random
 
 from my_pages.bids import bids_page
-from my_pages.league import league_page
+# from my_pages.league import league_page
+from my_pages.rankings_page import rankings_page_func
 from my_pages.algo_page import algo_page
 from my_pages.settings import settings_page
 
@@ -100,12 +101,14 @@ else:
 
     else:
         # tabs_list = ['League', 'Bids', 'Settings']
-        tabs_list = ['Bids', 'Settings']
+        tabs_list = ['Bids', 'Rankings', 'Settings', ]
         tabs = st.tabs(tabs_list)
         # with tabs[tabs_list.index('League')]:
         #     league_page()
         with tabs[tabs_list.index('Bids')]:
             bids_page()
+        with tabs[tabs_list.index('Rankings')]:
+            rankings_page_func()
 
 
     with tabs[tabs_list.index('Settings')]:
