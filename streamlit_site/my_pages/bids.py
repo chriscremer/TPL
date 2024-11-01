@@ -64,10 +64,12 @@ def display_team2(team_name, rosters, player_salaries, max_salary, df_players, p
             if player_name in st.session_state['captains']  or 'WILD' in player_name:
                 #disable slider
                 # my_bid = st.slider("Your Bid", 0, max_salary, init_bid, key=f"{team_name}-{player_name}", label_visibility='collapsed', disabled=True)
-                my_bid = st.number_input("Insert a number", value=init_bid, key=f"{team_name}-{player_name}", label_visibility='collapsed', disabled=True)
+                # my_bid = st.number_input("Insert a number", value=init_bid, key=f"{team_name}-{player_name}", label_visibility='collapsed', disabled=True)
+                my_bid = st.slider("Your Bid", 0, max_salary, init_bid, key=f"{team_name}-{player_name}", label_visibility='collapsed', disabled=True, step=500)
             else:
                 # my_bid = st.slider("Your Bid", 0, max_salary, init_bid, key=f"{team_name}-{player_name}", label_visibility='collapsed')
-                my_bid = st.number_input("Insert a number", value=init_bid, key=f"{team_name}-{player_name}", label_visibility='collapsed')
+                # my_bid = st.number_input("Insert a number", value=init_bid, key=f"{team_name}-{player_name}", label_visibility='collapsed')
+                my_bid = st.slider("Your Bid", 0, max_salary, init_bid, key=f"{team_name}-{player_name}", label_visibility='collapsed', step=500)
 
 
         if is_my_team:
