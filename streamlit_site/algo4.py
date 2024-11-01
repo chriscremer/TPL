@@ -83,7 +83,7 @@ def run_algo(rosters, player_bids, player_genders, captains, player_salaries, pr
     for team, players in protected_players_dict.items():
         protected_players += [player['player_name'] for player in players]
 
-    max_trades = 4 # 3 # max trades per team
+    max_trades = 3 #4 # 3 # max trades per team
     min_std_diff = 1 # minimum change in standard deviation of team salaries
 
     team_names = list(rosters.keys())
