@@ -234,6 +234,27 @@ def run_algo(rosters, player_bids, player_genders, captains, player_salaries, pr
         if debug:
             print (f"{trade_i+1} - {trade_type} trades: {len(trades_to_consider)}")
 
+
+
+        # find trades where both are overbidding on the player they are getting, AND underbidding on the player they are giving
+        both_overbid_underbid = []
+        # take trades where both teams are overbidding on the player
+        both_overbid = []
+        for trade1 in trades_to_consider:
+            team2_bid_diff_on_player1 = player_bids[trade1["player_1"]][trade1["team_2"]] - player_salaries[trade1["player_1"]]
+            team1_bid_diff_on_player2 = player_bids[trade1["player_2"]][trade1["team_1"]] - player_salaries[trade1["player_2"]]
+            team1_bid_diff_on_player1 = player_bids[trade1["player_1"]][trade1["team_1"]] - player_salaries[trade1["player_1"]]
+            team2_bid_diff_on_player2 = player_bids[trade1["player_2"]][trade1["team_2"]] - player_salaries[trade1["player_2"]]
+            if team2_bid_diff_on_player1 > 0 and team1_bid_diff_on_player2 > 0 and team1_bid_diff_on_player1 < 0 and team2_bid_diff_on_player2 < 0:
+                both_overbid_underbid.append(trade1)
+            elif team2_bid_diff_on_player1 > 0 and team1_bid_diff_on_player2 > 0:
+                both_overbid.append(trade1)
+        if len(both_overbid_underbid) > 0:
+            trades_to_consider = both_overbid_underbid
+        elif len(both_overbid) > 0:
+            trades_to_consider = both_overbid
+
+
         # sort by team costs std
         trades_to_consider = sorted(trades_to_consider, key=lambda x: x["team_costs_std"])
 
