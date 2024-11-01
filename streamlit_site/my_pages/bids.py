@@ -39,7 +39,7 @@ def display_team2(team_name, rosters, player_salaries, max_salary, df_players, p
         #     continue
         salary = int(row['Salary'])
         gender = row['Gender']
-        cols = st.columns([1, 2, 1, 2, 2])
+        cols = st.columns([1, 2, 1, 2, 2, 2])
 
         if st.session_state['reset_button']:
             init_bid = salary
@@ -54,12 +54,21 @@ def display_team2(team_name, rosters, player_salaries, max_salary, df_players, p
         # if f"{team_name}-{player_name}" not in st.session_state:
         #     st.session_state[f"{team_name}-{player_name}"] = init_bid
         
+        with cols[4]:
+            reset_button_player = st.button('Reset', key=f"{team_name}-{player_name}-reset")
+            if reset_button_player:
+                init_bid = salary
+                st.session_state[f"{team_name}-{player_name}"] = int(salary)
+            # else:
+            #     st.session_state[f"{team_name}-{player_name}"] = init_bid
 
         with cols[1]:
             # st.markdown(f"Player: {player_name}<br>Salary: ${salary}", unsafe_allow_html=True)
             # color = '#ADD8E6' if player_name % 2 == 1 else '#FF69B4'
             color = '#ADD8E6' if gender == 'Male' else '#FF69B4'
             st.markdown(f"<span style='color:{color}'>{player_name}<br>Salary: ${salary}</span>", unsafe_allow_html=True)
+        
+        
         with cols[3]:
             if player_name in st.session_state['captains']  or 'WILD' in player_name:
                 #disable slider
@@ -74,7 +83,7 @@ def display_team2(team_name, rosters, player_salaries, max_salary, df_players, p
 
         if is_my_team:
             # Checkbox for protecting players
-            with cols[4]:
+            with cols[5]:
                 if player_name in st.session_state['captains']  or 'WILD' in player_name:
                     my_checkbox = st.checkbox("Protect", key=f"{team_name}-{player_name}-protect", disabled=True)
                 elif player_name in protected_players:
