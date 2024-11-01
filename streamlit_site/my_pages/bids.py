@@ -401,25 +401,25 @@ def bids_page():
         # Line break
         # st.markdown('<br>', unsafe_allow_html=True)
 
-        # # Download button
-        # def convert_df():
-        #     # convert player bids to dataframe
-        #     player_bids_df = []
-        #     for player_name in stss['player_names']:
-        #         # doesnt matter what they bid on for wildcards
-        #         if 'WILD' in player_name:
-        #             continue
-        #         # bid = player_bids[player_name]
-        #         bid = stss['player_bids'][player_name]
-        #         player_bids_df.append({'Player': player_name, 'Bid': bid})
-        #     player_bids_df = pd.DataFrame(player_bids_df)
-        #     return player_bids_df.to_csv().encode("utf-8")
-        # st.download_button(
-        #     label="Download file",
-        #     data=convert_df(),
-        #     file_name="player_bids.csv",
-        #     mime="text/csv",
-        # )
+        # Download button
+        def convert_df():
+            # convert player bids to dataframe
+            player_bids_df = []
+            for player_name in stss['player_names']:
+                # doesnt matter what they bid on for wildcards
+                if 'WILD' in player_name:
+                    continue
+                # bid = player_bids[player_name]
+                bid = stss['player_bids'][player_name]
+                player_bids_df.append({'Player': player_name, 'Bid': bid})
+            player_bids_df = pd.DataFrame(player_bids_df)
+            return player_bids_df.to_csv().encode("utf-8")
+        st.download_button(
+            label="Download file",
+            data=convert_df(),
+            file_name="player_bids.csv",
+            mime="text/csv",
+        )
         
         # # Download as excel sheet
         # def convert_df():
@@ -441,33 +441,33 @@ def bids_page():
         #     mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
         # )
 
-        # # Upload
-        # with st.expander("Upload File"):
-        #     uploaded_file = st.file_uploader("Upload")
-        #     if uploaded_file is not None:
-        #         dataframe = pd.read_csv(uploaded_file)
-        #         # convert df to player_bids dict
-        #         player_bids = {row['Player']: row['Bid'] for i, row in dataframe.iterrows()}
-        #         # if player_bids missing players, add them. for instance wildcards
-        #         for player in stss['player_names']:
-        #             if player not in player_bids:
-        #                 player_bids[player] = player_salaries[player]
-        #         # make sure captains salaries are unchanged
-        #         for captain in stss['captains']:
-        #             player_bids[captain] = player_salaries[captain]
+        # Upload
+        with st.expander("Upload File"):
+            uploaded_file = st.file_uploader("Upload")
+            if uploaded_file is not None:
+                dataframe = pd.read_csv(uploaded_file)
+                # convert df to player_bids dict
+                player_bids = {row['Player']: row['Bid'] for i, row in dataframe.iterrows()}
+                # if player_bids missing players, add them. for instance wildcards
+                for player in stss['player_names']:
+                    if player not in player_bids:
+                        player_bids[player] = player_salaries[player]
+                # make sure captains salaries are unchanged
+                for captain in stss['captains']:
+                    player_bids[captain] = player_salaries[captain]
                 
 
-        #         sum_of_bids = sum(player_bids.values())
-        #         diff = sum_of_bids - expected_sum_of_salaries
-        #         print (diff)
-        #         if abs(diff) < max_diff:
-        #             save_uploaded_bids(conn, stss, your_team, player_bids, bids_sheet_name, team_names)
-        #             stss['player_bids'] = player_bids
-        #             print ('Uploaded')
-        #             # popup to confirm it worked
-        #             st.success('Uploaded') #, please refresh the page to see changes')
-        #         else:
-        #             st.error(f"Total bids must be within {max_diff} of {expected_sum_of_salaries:,}. Your total bids: {sum_of_bids:,} ({diff:+,})")
+                # sum_of_bids = sum(player_bids.values())
+                # diff = sum_of_bids - expected_sum_of_salaries
+                # print (diff)
+                # if abs(diff) < max_diff:
+                save_uploaded_bids(conn, stss, your_team, player_bids, bids_sheet_name, team_names)
+                stss['player_bids'] = player_bids
+                print ('Uploaded')
+                # popup to confirm it worked
+                st.success('Uploaded') #, please refresh the page to see changes')
+                # else:
+                #     st.error(f"Total bids must be within {max_diff} of {expected_sum_of_salaries:,}. Your total bids: {sum_of_bids:,} ({diff:+,})")
                 
 
 
