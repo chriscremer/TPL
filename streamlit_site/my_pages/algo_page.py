@@ -667,8 +667,8 @@ def algo_page():
         # Display info
         with st.expander("Pre Trade Info"):
             show_starting_info(original_team_costs, protected_players_dict, starting_rosters, player_bids) #, captain_salaries)
-        with st.expander("Player Salaries"):
-            show_player_salaries(new_player_salaries, player_bids)
+        # with st.expander("Player Salaries"):
+        #     show_player_salaries(new_player_salaries, player_bids)
         with st.expander("Trades"):
             show_trades(trades, new_player_salaries)
         with st.expander("Post Trade Info"):
