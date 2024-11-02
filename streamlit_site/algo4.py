@@ -98,8 +98,15 @@ def run_algo(rosters, player_bids, player_genders, captains, player_salaries, pr
         possible_trades = []
         for team_1 in team_names:
 
+            # compute team_cost - avg team_cost
+            team_cost_diff = np.abs(team_costs[team_1] - np.mean(list(team_costs.values())))
+            if team_cost_diff > 40000:
+                this_max_trades = max_trades + 1
+            else:
+                this_max_trades = max_trades
+
             # skip if team has already made max_trades
-            if count_team_trades[team_1] >= max_trades:
+            if count_team_trades[team_1] >= this_max_trades:
                 continue
             
             team_1_players_to_trade = rosters[team_1]
@@ -122,8 +129,15 @@ def run_algo(rosters, player_bids, player_genders, captains, player_salaries, pr
                 player_1_gender = player_genders[player_1]
                 for offering_team in teams_to_consider_trading_to:
 
+                    # compute team_cost - avg team_cost
+                    team_cost_diff = np.abs(team_costs[offering_team] - np.mean(list(team_costs.values())))
+                    if team_cost_diff > 40000:
+                        this_max_trades2 = max_trades + 1
+                    else:
+                        this_max_trades2 = max_trades
+
                     # skip if team has already made max_trades
-                    if count_team_trades[offering_team] >= max_trades:
+                    if count_team_trades[offering_team] >= this_max_trades2:
                         continue
 
                     offering_team_roster = rosters[offering_team]
