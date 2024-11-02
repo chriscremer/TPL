@@ -281,23 +281,21 @@ def show_starting_info(team_costs, protected_players_dict, starting_rosters, pla
     #     st.table(captain_salaries_df)
 
 
-    # # show protected players: dict of team_name: list of dicts of 'player_name' and 'value'
-    # st.markdown('Protected Players', unsafe_allow_html=True)
-    # # protected_players_dict_text = {team: [f"{player['player_name']} ({player['value']})" for player in protected_players_dict[team]] for team in protected_players_dict}
-    # # n_protected_players_per_team = sum([len(protected_players_dict[team]) for team in protected_players_dict]) / len(protected_players_dict)
-    # # cols_names = [f"Player {i+1} (bid - avg bid)" for i in range(int(n_protected_players_per_team))]
-    # cols_names = ["Player 1", "Player 2", "Player 3"]
-    # n_protected_players_per_team = 3
-    # # protected_players_dict_text = {team: [f"{player['player_name']}" for player in protected_players_dict[team]] for team in protected_players_dict}
-    # protected_players_for_df = {}
-    # for team in protected_players_dict:
-    #     protected_players_for_df[team] = [player['player_name'] for player in protected_players_dict[team]]
-    #     while len(protected_players_for_df[team]) < n_protected_players_per_team:
-    #         protected_players_for_df[team].append('')
-
-
-    # protected_players_df = pd.DataFrame.from_dict(protected_players_for_df, orient='index', columns=cols_names)
-    # st.table(protected_players_df)
+    # show protected players: dict of team_name: list of dicts of 'player_name' and 'value'
+    st.markdown('Protected Players', unsafe_allow_html=True)
+    # protected_players_dict_text = {team: [f"{player['player_name']} ({player['value']})" for player in protected_players_dict[team]] for team in protected_players_dict}
+    # n_protected_players_per_team = sum([len(protected_players_dict[team]) for team in protected_players_dict]) / len(protected_players_dict)
+    # cols_names = [f"Player {i+1} (bid - avg bid)" for i in range(int(n_protected_players_per_team))]
+    cols_names = ["Player 1", "Player 2", "Player 3"]
+    n_protected_players_per_team = 3
+    # protected_players_dict_text = {team: [f"{player['player_name']}" for player in protected_players_dict[team]] for team in protected_players_dict}
+    protected_players_for_df = {}
+    for team in protected_players_dict:
+        protected_players_for_df[team] = [player['player_name'] for player in protected_players_dict[team]]
+        while len(protected_players_for_df[team]) < n_protected_players_per_team:
+            protected_players_for_df[team].append('')
+    protected_players_df = pd.DataFrame.from_dict(protected_players_for_df, orient='index', columns=cols_names)
+    st.table(protected_players_df)
 
 
     # show matrix of how much each team likes each other team
@@ -669,8 +667,8 @@ def algo_page():
         # Display info
         with st.expander("Pre Trade Info"):
             show_starting_info(original_team_costs, protected_players_dict, starting_rosters, player_bids) #, captain_salaries)
-        # with st.expander("Player Salaries"):
-        #     show_player_salaries(new_player_salaries, player_bids)
+        with st.expander("Player Salaries"):
+            show_player_salaries(new_player_salaries, player_bids)
         with st.expander("Trades"):
             show_trades(trades, new_player_salaries)
         with st.expander("Post Trade Info"):

@@ -128,20 +128,20 @@ def get_salaries(df_players, player_names, max_salary):
 def get_bids_from_sheet(conn, stss, bids_sheet_name, worksheets, your_team, player_salaries):
 
     
-    # If bids_sheet_name does not exist, make it
-    if not bids_sheet_name in [worksheet.title for worksheet in worksheets]:
-        worksheet = conn.add_worksheet(title=bids_sheet_name, rows=200, cols=20)
+    # # If bids_sheet_name does not exist, make it
+    # if not bids_sheet_name in [worksheet.title for worksheet in worksheets]:
+    #     worksheet = conn.add_worksheet(title=bids_sheet_name, rows=200, cols=20)
         
-        # Populate sheet with player names as rows, team names as columns, and salary as values
-        # df = pd.DataFrame(player_bids).T
-        df = pd.DataFrame(player_salaries, index=[0]).T
-        df.index.name = 'Player'
-        set_with_dataframe(worksheet, df, include_index=True, include_column_header=True, resize=True)
-        print ('Created worksheet\n')
+    #     # Populate sheet with player names as rows, team names as columns, and salary as values
+    #     # df = pd.DataFrame(player_bids).T
+    #     df = pd.DataFrame(player_salaries, index=[0]).T
+    #     df.index.name = 'Player'
+    #     set_with_dataframe(worksheet, df, include_index=True, include_column_header=True, resize=True)
+    #     print ('Created worksheet\n')
 
     # Load the bids from the sheet
     if 'player_bids' not in stss:
-        print (f'Loading bids for {your_team}')
+        print (f'Loading bids for {your_team}. THIS IS CONNECTING TO SHEET')
         sheet = conn.worksheet(bids_sheet_name)
         df_bids = get_as_dataframe(sheet)
         # convert to dict
@@ -276,6 +276,7 @@ def load_data(stss):
         stss['conn'] = conn
 
     if 'df_players' not in stss:
+        print ('Loading data. THIS IS CONNECTING TO SHEET')
         conn = stss['conn']
         worksheets = conn.worksheets()
         players_sheet = [worksheet for worksheet in worksheets if worksheet.title == 'Players'][0]
@@ -356,8 +357,11 @@ def bids_page():
     bids_sheet_name = f"Week {current_week} - Bids"
     protect_sheet_name = f"Week {current_week} - Protect"
 
-    protected_players_dict = load_protected_players(conn, protect_sheet_name)
-    stss['protected_players_dict'] = protected_players_dict
+    if 'protected_players_dict' not in stss:
+        protected_players_dict = load_protected_players(conn, protect_sheet_name)
+        stss['protected_players_dict'] = protected_players_dict
+    else:
+        protected_players_dict = stss['protected_players_dict']
 
     if 'player_bids' not in stss:
         player_bids, bids_sheet_name = get_bids_from_sheet(conn, stss, bids_sheet_name, worksheets, your_team, player_salaries)

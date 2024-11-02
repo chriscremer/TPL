@@ -13,6 +13,7 @@ from utils import get_connection
 
 
 def load_protected_players(conn, protect_sheet_name):
+    print (f"Loading protected players, THIS IS CONNECTING TO SHEETS")
     sheet = conn.worksheet(protect_sheet_name)
     df_protect = get_as_dataframe(sheet)
     teams = df_protect.columns[1:]
