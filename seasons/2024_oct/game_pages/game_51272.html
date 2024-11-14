@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>TPL</title>
+<link rel="icon" type="image/png" href="../../../images/frisbee.png">
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+
+<script
+src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
+</script>
+
+
+<style>
+    .table-container {
+        display: flex;
+        flex-direction: row;
+        margin: 20px;
+        justify-content: center;
+    }
+
+    .table-container2 {
+        display: flex;
+        flex-direction: column;
+        margin: 20px;
+    }
+
+    .table1, .table2 {
+        width: 100%; /* Tables will take the full width of their parent */
+        box-sizing: border-box;
+        /* border: 1px solid #ccc;  Add border for clarity */
+        margin-right: 30px;
+        border-collapse: collapse; /* this allows row lines to be shown for some reason */
+    }
+
+    .table1 tr, .table2 tr {
+        border-bottom: 1px solid #ccc; /* Add bottom border to table rows */
+    }
+
+    @media screen and (max-width: 850px) {
+        .table-container {
+            flex-direction: column;
+        }
+
+        iframe {
+            width: 90%; /* or any other percentage less than 100% */
+            margin: auto; /* to center the iframe */
+        }
+
+
+        /* change font color to blue */
+        body {
+            /* color: blue; */
+        }
+    }
+
+</style>
+
+</head>
+
+
+
+
+
+<body>
+
+<a href="../index.html" style="position: absolute; top: 10px; left: 10px;"><i class="fa fa-arrow-left"></i>Season</a> 
+<br>
+
+<center style="margin: 10px;">
+ 
+</center>
+
+
+<div class="table-container">
+
+    <div class="table-container2">
+        <h4>Horton Hears A Ho! (14)</h4>
+        <table class="table1">
+            
+    <tr>
+        <th style="text-align: left;">Player</th>
+        <th style="text-align: left;">Goal</th>
+        <th style="text-align: left;">Assist</th>
+        <th style="text-align: left;">2A</th>
+        <th style="text-align: left;">Points</th>
+        <th style="text-align: left;">D</th>
+        <th style="text-align: left;">Pass</th>
+        <th style="text-align: left;">TA</th>
+        <th style="text-align: left;">Drop</th>
+    </tr>
+
+            <tr>
+                <td>Hayden Andrews</td>
+                <td>3</td>
+                <td>5</td>
+                <td>0</td>
+                <td>8</td>
+                <td>0</td>
+                <td>16</td>
+                <td>8</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Clara Liu</td>
+                <td>3</td>
+                <td>4</td>
+                <td>1</td>
+                <td>8</td>
+                <td>2</td>
+                <td>10</td>
+                <td>6</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Justin Wong</td>
+                <td>2</td>
+                <td>3</td>
+                <td>2</td>
+                <td>7</td>
+                <td>1</td>
+                <td>22</td>
+                <td>6</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Aaron Hooper</td>
+                <td>3</td>
+                <td>1</td>
+                <td>0</td>
+                <td>4</td>
+                <td>1</td>
+                <td>12</td>
+                <td>2</td>
+                <td>1</td>
+            </tr><tr>
+                <td>Tina Wang</td>
+                <td>1</td>
+                <td>0</td>
+                <td>2</td>
+                <td>3</td>
+                <td>0</td>
+                <td>16</td>
+                <td>1</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Nadia Ho</td>
+                <td>1</td>
+                <td>0</td>
+                <td>1</td>
+                <td>2</td>
+                <td>0</td>
+                <td>5</td>
+                <td>0</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Robyn Laing</td>
+                <td>0</td>
+                <td>0</td>
+                <td>2</td>
+                <td>2</td>
+                <td>1</td>
+                <td>4</td>
+                <td>4</td>
+                <td>1</td>
+            </tr><tr>
+                <td>Wendy Li</td>
+                <td>0</td>
+                <td>0</td>
+                <td>2</td>
+                <td>2</td>
+                <td>1</td>
+                <td>3</td>
+                <td>2</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Alec Zhao</td>
+                <td>0</td>
+                <td>1</td>
+                <td>0</td>
+                <td>1</td>
+                <td>1</td>
+                <td>11</td>
+                <td>0</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Ashar Shaur</td>
+                <td>1</td>
+                <td>0</td>
+                <td>0</td>
+                <td>1</td>
+                <td>0</td>
+                <td>3</td>
+                <td>2</td>
+                <td>1</td>
+            </tr><tr>
+                <td>Anders Whist</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>1</td>
+                <td>12</td>
+                <td>4</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Ed Kung</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>10</td>
+                <td>1</td>
+                <td>1</td>
+            </tr><tr>
+                <td>Clare MacDonald</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>2</td>
+                <td>0</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Nancy Warren</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>1</td>
+                <td>0</td>
+                <td>0</td>
+                <td>1</td>
+            </tr><tr>
+                <td><b>Total</b></td>
+                <td><b>14</b></td>
+                <td><b>14</b></td>
+                <td><b>10</b></td>
+                <td><b>38</b></td>
+                <td><b>9</b></td>
+                <td><b>126</b></td>
+                <td><b>36</b></td>
+                <td><b>5</b></td>
+            </tr>
+        </table>
+    </div>
+    
+
+    <div class="table-container2">
+        <h4>Denternal Cielleshine of the spotless mind (29)</h4>
+        <table class="table2">
+            
+    <tr>
+        <th style="text-align: left;">Player</th>
+        <th style="text-align: left;">Goal</th>
+        <th style="text-align: left;">Assist</th>
+        <th style="text-align: left;">2A</th>
+        <th style="text-align: left;">Points</th>
+        <th style="text-align: left;">D</th>
+        <th style="text-align: left;">Pass</th>
+        <th style="text-align: left;">TA</th>
+        <th style="text-align: left;">Drop</th>
+    </tr>
+
+            <tr>
+                <td>Griffin Peddle</td>
+                <td>4</td>
+                <td>8</td>
+                <td>2</td>
+                <td>14</td>
+                <td>5</td>
+                <td>24</td>
+                <td>4</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Gavin Ho</td>
+                <td>1</td>
+                <td>3</td>
+                <td>6</td>
+                <td>10</td>
+                <td>4</td>
+                <td>21</td>
+                <td>3</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Gareth Cawley</td>
+                <td>1</td>
+                <td>6</td>
+                <td>1</td>
+                <td>8</td>
+                <td>4</td>
+                <td>14</td>
+                <td>3</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Peter Song</td>
+                <td>4</td>
+                <td>1</td>
+                <td>2</td>
+                <td>7</td>
+                <td>0</td>
+                <td>15</td>
+                <td>2</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Diane Pendlebury</td>
+                <td>1</td>
+                <td>4</td>
+                <td>2</td>
+                <td>7</td>
+                <td>2</td>
+                <td>14</td>
+                <td>0</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Cielle Garbe</td>
+                <td>3</td>
+                <td>2</td>
+                <td>2</td>
+                <td>7</td>
+                <td>1</td>
+                <td>8</td>
+                <td>3</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Vera Hoang</td>
+                <td>4</td>
+                <td>0</td>
+                <td>2</td>
+                <td>6</td>
+                <td>2</td>
+                <td>13</td>
+                <td>0</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Matthew Colphon</td>
+                <td>3</td>
+                <td>1</td>
+                <td>1</td>
+                <td>5</td>
+                <td>1</td>
+                <td>10</td>
+                <td>2</td>
+                <td>1</td>
+            </tr><tr>
+                <td>Matthew Vienneau</td>
+                <td>1</td>
+                <td>2</td>
+                <td>2</td>
+                <td>5</td>
+                <td>0</td>
+                <td>5</td>
+                <td>0</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Grace Uy</td>
+                <td>2</td>
+                <td>0</td>
+                <td>1</td>
+                <td>3</td>
+                <td>1</td>
+                <td>11</td>
+                <td>1</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Alysha Fontaine</td>
+                <td>3</td>
+                <td>0</td>
+                <td>0</td>
+                <td>3</td>
+                <td>0</td>
+                <td>3</td>
+                <td>3</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Liao Liao</td>
+                <td>1</td>
+                <td>1</td>
+                <td>0</td>
+                <td>2</td>
+                <td>0</td>
+                <td>15</td>
+                <td>0</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Olivia Chung</td>
+                <td>1</td>
+                <td>0</td>
+                <td>1</td>
+                <td>2</td>
+                <td>1</td>
+                <td>2</td>
+                <td>1</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Daivik Doshi</td>
+                <td>0</td>
+                <td>1</td>
+                <td>0</td>
+                <td>1</td>
+                <td>0</td>
+                <td>7</td>
+                <td>3</td>
+                <td>1</td>
+            </tr><tr>
+                <td><b>Total</b></td>
+                <td><b>29</b></td>
+                <td><b>29</b></td>
+                <td><b>22</b></td>
+                <td><b>80</b></td>
+                <td><b>21</b></td>
+                <td><b>162</b></td>
+                <td><b>25</b></td>
+                <td><b>2</b></td>
+            </tr>
+        </table>
+    </div>
+    
+</div>
+
+<center>
+    <canvas id="myChart" style="width:100%;max-width:800px"></canvas>
+</center>
+
+<br>
+<br>
+<br>
+
+</body>
+
+
+
+
+
+<script>
+  const dataPoints = [{'x': 0.52, 'y': -1, 'label': 'Up 1 for Horton Hears A Ho!'}, {'x': 0.89, 'y': -1, 'label': 'Up 1 for Denternal Cielleshine of the spotless mind'}, {'x': 0.9, 'y': 0, 'label': 'Tie'}, {'x': 1.94, 'y': 0, 'label': 'Tie'}, {'x': 1.95, 'y': 1, 'label': 'Up 1 for Denternal Cielleshine of the spotless mind'}, {'x': 2.49, 'y': 1, 'label': 'Up 1 for Horton Hears A Ho!'}, {'x': 2.5, 'y': 2, 'label': 'Up 2 for Denternal Cielleshine of the spotless mind'}, {'x': 3.92, 'y': 2, 'label': 'Up 2 for Horton Hears A Ho!'}, {'x': 3.93, 'y': 3, 'label': 'Up 3 for Denternal Cielleshine of the spotless mind'}, {'x': 4.36, 'y': 3, 'label': 'Up 3 for Horton Hears A Ho!'}, {'x': 4.37, 'y': 4, 'label': 'Up 4 for Denternal Cielleshine of the spotless mind'}, {'x': 5.04, 'y': 4, 'label': 'Up 4 for Horton Hears A Ho!'}, {'x': 5.05, 'y': 5, 'label': 'Up 5 for Denternal Cielleshine of the spotless mind'}, {'x': 5.62, 'y': 5, 'label': 'Up 5 for Horton Hears A Ho!'}, {'x': 5.63, 'y': 6, 'label': 'Up 6 for Denternal Cielleshine of the spotless mind'}, {'x': 7.81, 'y': 6, 'label': 'Up 6 for Horton Hears A Ho!'}, {'x': 7.82, 'y': 5, 'label': 'Up 5 for Denternal Cielleshine of the spotless mind'}, {'x': 8.41, 'y': 5, 'label': 'Up 5 for Horton Hears A Ho!'}, {'x': 8.42, 'y': 4, 'label': 'Up 4 for Denternal Cielleshine of the spotless mind'}, {'x': 10.84, 'y': 4, 'label': 'Up 4 for Horton Hears A Ho!'}, {'x': 10.85, 'y': 5, 'label': 'Up 5 for Denternal Cielleshine of the spotless mind'}, {'x': 11.36, 'y': 5, 'label': 'Up 5 for Horton Hears A Ho!'}, {'x': 11.37, 'y': 6, 'label': 'Up 6 for Denternal Cielleshine of the spotless mind'}, {'x': 12.41, 'y': 6, 'label': 'Up 6 for Horton Hears A Ho!'}, {'x': 12.42, 'y': 7, 'label': 'Up 7 for Denternal Cielleshine of the spotless mind'}, {'x': 12.76, 'y': 7, 'label': 'Up 7 for Horton Hears A Ho!'}, {'x': 12.77, 'y': 6, 'label': 'Up 6 for Denternal Cielleshine of the spotless mind'}, {'x': 13.97, 'y': 6, 'label': 'Up 6 for Horton Hears A Ho!'}, {'x': 13.98, 'y': 7, 'label': 'Up 7 for Denternal Cielleshine of the spotless mind'}, {'x': 14.66, 'y': 7, 'label': 'Up 7 for Horton Hears A Ho!'}, {'x': 14.67, 'y': 8, 'label': 'Up 8 for Denternal Cielleshine of the spotless mind'}, {'x': 16.42, 'y': 8, 'label': 'Up 8 for Horton Hears A Ho!'}, {'x': 16.43, 'y': 9, 'label': 'Up 9 for Denternal Cielleshine of the spotless mind'}, {'x': 16.72, 'y': 9, 'label': 'Up 9 for Horton Hears A Ho!'}, {'x': 16.73, 'y': 8, 'label': 'Up 8 for Denternal Cielleshine of the spotless mind'}, {'x': 18.77, 'y': 8, 'label': 'Up 8 for Horton Hears A Ho!'}, {'x': 18.78, 'y': 9, 'label': 'Up 9 for Denternal Cielleshine of the spotless mind'}, {'x': 20.19, 'y': 9, 'label': 'Up 9 for Horton Hears A Ho!'}, {'x': 20.2, 'y': 10, 'label': 'Up 10 for Denternal Cielleshine of the spotless mind'}, {'x': 23.82, 'y': 10, 'label': 'Up 10 for Horton Hears A Ho!'}, {'x': 23.83, 'y': 11, 'label': 'Up 11 for Denternal Cielleshine of the spotless mind'}, {'x': 24.99, 'y': 11, 'label': 'Up 11 for Horton Hears A Ho!'}, {'x': 25.0, 'y': 12, 'label': 'Up 12 for Denternal Cielleshine of the spotless mind'}, {'x': 27.89, 'y': 12, 'label': 'Up 12 for Horton Hears A Ho!'}, {'x': 27.9, 'y': 13, 'label': 'Up 13 for Denternal Cielleshine of the spotless mind'}, {'x': 29.02, 'y': 13, 'label': 'Up 13 for Horton Hears A Ho!'}, {'x': 29.03, 'y': 14, 'label': 'Up 14 for Denternal Cielleshine of the spotless mind'}, {'x': 30.21, 'y': 14, 'label': 'Up 14 for Horton Hears A Ho!'}, {'x': 30.22, 'y': 13, 'label': 'Up 13 for Denternal Cielleshine of the spotless mind'}, {'x': 31.47, 'y': 13, 'label': 'Up 13 for Horton Hears A Ho!'}, {'x': 31.48, 'y': 14, 'label': 'Up 14 for Denternal Cielleshine of the spotless mind'}, {'x': 32.32, 'y': 14, 'label': 'Up 14 for Horton Hears A Ho!'}, {'x': 32.33, 'y': 15, 'label': 'Up 15 for Denternal Cielleshine of the spotless mind'}, {'x': 33.81, 'y': 15, 'label': 'Up 15 for Horton Hears A Ho!'}, {'x': 33.82, 'y': 14, 'label': 'Up 14 for Denternal Cielleshine of the spotless mind'}, {'x': 35.34, 'y': 14, 'label': 'Up 14 for Horton Hears A Ho!'}, {'x': 35.35, 'y': 13, 'label': 'Up 13 for Denternal Cielleshine of the spotless mind'}, {'x': 36.42, 'y': 13, 'label': 'Up 13 for Horton Hears A Ho!'}, {'x': 36.43, 'y': 12, 'label': 'Up 12 for Denternal Cielleshine of the spotless mind'}, {'x': 36.61, 'y': 12, 'label': 'Up 12 for Horton Hears A Ho!'}, {'x': 36.62, 'y': 13, 'label': 'Up 13 for Denternal Cielleshine of the spotless mind'}, {'x': 36.87, 'y': 13, 'label': 'Up 13 for Horton Hears A Ho!'}, {'x': 36.88, 'y': 14, 'label': 'Up 14 for Denternal Cielleshine of the spotless mind'}, {'x': 37.51, 'y': 14, 'label': 'Up 14 for Horton Hears A Ho!'}, {'x': 37.52, 'y': 15, 'label': 'Up 15 for Denternal Cielleshine of the spotless mind'}, {'x': 38.72, 'y': 15, 'label': 'Up 15 for Horton Hears A Ho!'}, {'x': 38.73, 'y': 16, 'label': 'Up 16 for Denternal Cielleshine of the spotless mind'}, {'x': 39.21, 'y': 16, 'label': 'Up 16 for Horton Hears A Ho!'}, {'x': 39.22, 'y': 15, 'label': 'Up 15 for Denternal Cielleshine of the spotless mind'}, {'x': 39.96, 'y': 15, 'label': 'Up 15 for Horton Hears A Ho!'}, {'x': 39.97, 'y': 16, 'label': 'Up 16 for Denternal Cielleshine of the spotless mind'}, {'x': 40.36, 'y': 16, 'label': 'Up 16 for Horton Hears A Ho!'}, {'x': 40.37, 'y': 15, 'label': 'Up 15 for Denternal Cielleshine of the spotless mind'}, {'x': 41.24, 'y': 15, 'label': 'Up 15 for Horton Hears A Ho!'}, {'x': 41.25, 'y': 16, 'label': 'Up 16 for Denternal Cielleshine of the spotless mind'}, {'x': 41.84, 'y': 16, 'label': 'Up 16 for Horton Hears A Ho!'}, {'x': 41.85, 'y': 17, 'label': 'Up 17 for Denternal Cielleshine of the spotless mind'}, {'x': 42.77, 'y': 17, 'label': 'Up 17 for Horton Hears A Ho!'}, {'x': 42.78, 'y': 16, 'label': 'Up 16 for Denternal Cielleshine of the spotless mind'}, {'x': 43.56, 'y': 16, 'label': 'Up 16 for Horton Hears A Ho!'}, {'x': 43.57, 'y': 15, 'label': 'Up 15 for Denternal Cielleshine of the spotless mind'}, {'x': 43.79, 'y': 15, 'label': 'Up 15 for Horton Hears A Ho!'}, {'x': 43.8, 'y': 16, 'label': 'Up 16 for Denternal Cielleshine of the spotless mind'}, {'x': 44.24, 'y': 16, 'label': 'Up 16 for Horton Hears A Ho!'}, {'x': 44.25, 'y': 15, 'label': 'Up 15 for Denternal Cielleshine of the spotless mind'}, {'x': 45, 'y': 15, 'label': 'Up 15 for Denternal Cielleshine of the spotless mind'}];
+    const xValues = [0.52, 0.89, 0.9, 1.94, 1.95, 2.49, 2.5, 3.92, 3.93, 4.36, 4.37, 5.04, 5.05, 5.62, 5.63, 7.81, 7.82, 8.41, 8.42, 10.84, 10.85, 11.36, 11.37, 12.41, 12.42, 12.76, 12.77, 13.97, 13.98, 14.66, 14.67, 16.42, 16.43, 16.72, 16.73, 18.77, 18.78, 20.19, 20.2, 23.82, 23.83, 24.99, 25.0, 27.89, 27.9, 29.02, 29.03, 30.21, 30.22, 31.47, 31.48, 32.32, 32.33, 33.81, 33.82, 35.34, 35.35, 36.42, 36.43, 36.61, 36.62, 36.87, 36.88, 37.51, 37.52, 38.72, 38.73, 39.21, 39.22, 39.96, 39.97, 40.36, 40.37, 41.24, 41.25, 41.84, 41.85, 42.77, 42.78, 43.56, 43.57, 43.79, 43.8, 44.24, 44.25, 45];
+    const yValues = [-1, -1, 0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 5, 5, 4, 4, 5, 5, 6, 6, 7, 7, 6, 6, 7, 7, 8, 8, 9, 9, 8, 8, 9, 9, 10, 10, 11, 11, 12, 12, 13, 13, 14, 14, 13, 13, 14, 14, 15, 15, 14, 14, 13, 13, 12, 12, 13, 13, 14, 14, 15, 15, 16, 16, 15, 15, 16, 16, 15, 15, 16, 16, 17, 17, 16, 16, 15, 15, 16, 16, 15, 15];
+
+  
+  new Chart("myChart", {
+    type: "line",
+    data: {
+
+    labels: yValues,
+    datasets: [{
+      data: dataPoints,
+      // Add this line to include the labels in the data
+      pointHoverBackgroundColor: "red",
+      pointHoverBorderColor: "red",
+      pointHoverBorderWidth: 2,
+      pointHoverRadius: 5,
+      tension: 0.05,
+    }]
+
+
+    },
+    options: {
+
+    tooltips: {
+      callbacks: {
+        label: function(tooltipItem, data) {
+          var label = data.labels[tooltipItem.index];
+          var value = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
+          return value.label;
+
+        }
+      }
+    },
+
+      legend: {display: false},
+      title: {
+        display: true,
+        text: ""
+      },
+      scales: {
+        yAxes: [{
+          scaleLabel: {
+            display: true,
+            labelString: 'Score Difference'
+          }
+        }],
+        xAxes: [{
+          type: 'linear', // this will ensure that the x-axis is based on numeric scale
+          scaleLabel: {
+            display: true,
+            labelString: 'Gametime'
+          }
+        }]
+      }
+    }
+  });
+  
+  </script>
+
+
+
+
+</html>
