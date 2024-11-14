@@ -30,13 +30,12 @@
 
 ## Salary Adjustment
 
-- Sub salary =  team_sub_spot * perc_allocation
+- Sub salary = team_sub_spot * perc_allocation
 - Stats of subs get applied to players who miss games
 
 Putting it all together
-- Salary Adjustment = Sub salary  + loat/max tax + female relief - female relief
+- Salary Adjustment = sub salary  + loat tax + max tax
 
-So female relief has no effect?
 
 
 
