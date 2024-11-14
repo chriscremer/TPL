@@ -19,21 +19,11 @@
 - Fine = Multiplier * Goals_Dif
 - Positive Goals_Dif is good. 
 
-Bug?: Average Score is divided by 10, but there's 8 teams for week 2. 
-
 <br>
 
 
 
 
-
-## Female Scoring Bonus
-
-- Female Relief % = Player Rank / 168 * 60% 
-- Female Relief = Something * Female Relief %
-- top rank players get less relief
-
-<br>
 
 
 
@@ -63,5 +53,13 @@ TODO
 <br>
 
 
+
+## Female Scoring Bonus (not used anymore)
+
+- Female Relief % = Player Rank / 168 * 60% 
+- Female Relief = Something * Female Relief %
+- top rank players get less relief
+
+<br>
 
 
