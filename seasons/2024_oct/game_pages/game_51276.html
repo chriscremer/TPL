@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>TPL</title>
+<link rel="icon" type="image/png" href="../../../images/frisbee.png">
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+
+<script
+src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
+</script>
+
+
+<style>
+    .table-container {
+        display: flex;
+        flex-direction: row;
+        margin: 20px;
+        justify-content: center;
+    }
+
+    .table-container2 {
+        display: flex;
+        flex-direction: column;
+        margin: 20px;
+    }
+
+    .table1, .table2 {
+        width: 100%; /* Tables will take the full width of their parent */
+        box-sizing: border-box;
+        /* border: 1px solid #ccc;  Add border for clarity */
+        margin-right: 30px;
+        border-collapse: collapse; /* this allows row lines to be shown for some reason */
+    }
+
+    .table1 tr, .table2 tr {
+        border-bottom: 1px solid #ccc; /* Add bottom border to table rows */
+    }
+
+    @media screen and (max-width: 850px) {
+        .table-container {
+            flex-direction: column;
+        }
+
+        iframe {
+            width: 90%; /* or any other percentage less than 100% */
+            margin: auto; /* to center the iframe */
+        }
+
+
+        /* change font color to blue */
+        body {
+            /* color: blue; */
+        }
+    }
+
+</style>
+
+</head>
+
+
+
+
+
+<body>
+
+<a href="../index.html" style="position: absolute; top: 10px; left: 10px;"><i class="fa fa-arrow-left"></i>Season</a> 
+<br>
+
+<center style="margin: 10px;">
+ 
+</center>
+
+
+<div class="table-container">
+
+    <div class="table-container2">
+        <h4>Sanic the Hailhog (25)</h4>
+        <table class="table1">
+            
+    <tr>
+        <th style="text-align: left;">Player</th>
+        <th style="text-align: left;">Goal</th>
+        <th style="text-align: left;">Assist</th>
+        <th style="text-align: left;">2A</th>
+        <th style="text-align: left;">Points</th>
+        <th style="text-align: left;">D</th>
+        <th style="text-align: left;">Pass</th>
+        <th style="text-align: left;">TA</th>
+        <th style="text-align: left;">Drop</th>
+    </tr>
+
+            <tr>
+                <td>Sanjay Parker</td>
+                <td>0</td>
+                <td>7</td>
+                <td>3</td>
+                <td>10</td>
+                <td>0</td>
+                <td>31</td>
+                <td>2</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Hailey McInnis</td>
+                <td>1</td>
+                <td>3</td>
+                <td>4</td>
+                <td>8</td>
+                <td>2</td>
+                <td>24</td>
+                <td>3</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Hannah McKenna</td>
+                <td>4</td>
+                <td>4</td>
+                <td>0</td>
+                <td>8</td>
+                <td>1</td>
+                <td>13</td>
+                <td>1</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Aly Dharsee</td>
+                <td>0</td>
+                <td>3</td>
+                <td>3</td>
+                <td>6</td>
+                <td>0</td>
+                <td>21</td>
+                <td>3</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Anthony Slater</td>
+                <td>3</td>
+                <td>1</td>
+                <td>1</td>
+                <td>5</td>
+                <td>3</td>
+                <td>19</td>
+                <td>3</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Cora McLandress</td>
+                <td>1</td>
+                <td>1</td>
+                <td>3</td>
+                <td>5</td>
+                <td>0</td>
+                <td>11</td>
+                <td>0</td>
+                <td>1</td>
+            </tr><tr>
+                <td>Celine Lai</td>
+                <td>4</td>
+                <td>0</td>
+                <td>1</td>
+                <td>5</td>
+                <td>1</td>
+                <td>10</td>
+                <td>4</td>
+                <td>1</td>
+            </tr><tr>
+                <td>Marco Chu</td>
+                <td>2</td>
+                <td>0</td>
+                <td>3</td>
+                <td>5</td>
+                <td>0</td>
+                <td>9</td>
+                <td>3</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Raymond Tang</td>
+                <td>2</td>
+                <td>2</td>
+                <td>0</td>
+                <td>4</td>
+                <td>1</td>
+                <td>10</td>
+                <td>1</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Gary Zhou</td>
+                <td>2</td>
+                <td>1</td>
+                <td>1</td>
+                <td>4</td>
+                <td>0</td>
+                <td>9</td>
+                <td>1</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Helen O'Sullivan</td>
+                <td>2</td>
+                <td>1</td>
+                <td>0</td>
+                <td>3</td>
+                <td>0</td>
+                <td>7</td>
+                <td>0</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Fan Fan</td>
+                <td>2</td>
+                <td>1</td>
+                <td>0</td>
+                <td>3</td>
+                <td>0</td>
+                <td>7</td>
+                <td>2</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Vera Hoang</td>
+                <td>2</td>
+                <td>1</td>
+                <td>0</td>
+                <td>3</td>
+                <td>0</td>
+                <td>6</td>
+                <td>0</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Robert Botman</td>
+                <td>0</td>
+                <td>0</td>
+                <td>1</td>
+                <td>1</td>
+                <td>0</td>
+                <td>7</td>
+                <td>0</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Daniel Eisner</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>3</td>
+                <td>0</td>
+                <td>0</td>
+            </tr><tr>
+                <td><b>Total</b></td>
+                <td><b>25</b></td>
+                <td><b>25</b></td>
+                <td><b>20</b></td>
+                <td><b>70</b></td>
+                <td><b>8</b></td>
+                <td><b>187</b></td>
+                <td><b>23</b></td>
+                <td><b>2</b></td>
+            </tr>
+        </table>
+    </div>
+    
+
+    <div class="table-container2">
+        <h4>The Most Annoying Hodges in the World (16)</h4>
+        <table class="table2">
+            
+    <tr>
+        <th style="text-align: left;">Player</th>
+        <th style="text-align: left;">Goal</th>
+        <th style="text-align: left;">Assist</th>
+        <th style="text-align: left;">2A</th>
+        <th style="text-align: left;">Points</th>
+        <th style="text-align: left;">D</th>
+        <th style="text-align: left;">Pass</th>
+        <th style="text-align: left;">TA</th>
+        <th style="text-align: left;">Drop</th>
+    </tr>
+
+            <tr>
+                <td>Nathan Killoran</td>
+                <td>3</td>
+                <td>3</td>
+                <td>2</td>
+                <td>8</td>
+                <td>1</td>
+                <td>20</td>
+                <td>2</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Gareth Cawley</td>
+                <td>3</td>
+                <td>4</td>
+                <td>0</td>
+                <td>7</td>
+                <td>1</td>
+                <td>19</td>
+                <td>1</td>
+                <td>1</td>
+            </tr><tr>
+                <td>Marc Hodges</td>
+                <td>1</td>
+                <td>5</td>
+                <td>0</td>
+                <td>6</td>
+                <td>3</td>
+                <td>21</td>
+                <td>10</td>
+                <td>1</td>
+            </tr><tr>
+                <td>Alec Zhao</td>
+                <td>1</td>
+                <td>0</td>
+                <td>3</td>
+                <td>4</td>
+                <td>1</td>
+                <td>12</td>
+                <td>1</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Natalie Wong</td>
+                <td>0</td>
+                <td>2</td>
+                <td>2</td>
+                <td>4</td>
+                <td>0</td>
+                <td>9</td>
+                <td>1</td>
+                <td>1</td>
+            </tr><tr>
+                <td>Liao Liao</td>
+                <td>2</td>
+                <td>0</td>
+                <td>2</td>
+                <td>4</td>
+                <td>1</td>
+                <td>7</td>
+                <td>2</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Matthew Colphon</td>
+                <td>2</td>
+                <td>1</td>
+                <td>0</td>
+                <td>3</td>
+                <td>0</td>
+                <td>6</td>
+                <td>1</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Carolina Vargas</td>
+                <td>2</td>
+                <td>0</td>
+                <td>0</td>
+                <td>2</td>
+                <td>0</td>
+                <td>13</td>
+                <td>1</td>
+                <td>1</td>
+            </tr><tr>
+                <td>Dawn Man</td>
+                <td>0</td>
+                <td>1</td>
+                <td>0</td>
+                <td>1</td>
+                <td>0</td>
+                <td>6</td>
+                <td>0</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Michael Danh</td>
+                <td>1</td>
+                <td>0</td>
+                <td>0</td>
+                <td>1</td>
+                <td>1</td>
+                <td>4</td>
+                <td>3</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Nancy Warren</td>
+                <td>1</td>
+                <td>0</td>
+                <td>0</td>
+                <td>1</td>
+                <td>1</td>
+                <td>4</td>
+                <td>2</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Larisa Lam</td>
+                <td>0</td>
+                <td>0</td>
+                <td>1</td>
+                <td>1</td>
+                <td>1</td>
+                <td>2</td>
+                <td>2</td>
+                <td>1</td>
+            </tr><tr>
+                <td>Eileen Lam</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>2</td>
+                <td>7</td>
+                <td>1</td>
+                <td>0</td>
+            </tr><tr>
+                <td><b>Total</b></td>
+                <td><b>16</b></td>
+                <td><b>16</b></td>
+                <td><b>10</b></td>
+                <td><b>42</b></td>
+                <td><b>12</b></td>
+                <td><b>130</b></td>
+                <td><b>27</b></td>
+                <td><b>5</b></td>
+            </tr>
+        </table>
+    </div>
+    
+</div>
+
+<center>
+    <canvas id="myChart" style="width:100%;max-width:800px"></canvas>
+</center>
+
+<br>
+<br>
+<br>
+
+</body>
+
+
+
+
+
+<script>
+  const dataPoints = [{'x': 0.57, 'y': -1, 'label': 'Up 1 for The Most Annoying Hodges in the World'}, {'x': 1.09, 'y': -1, 'label': 'Up 1 for The Most Annoying Hodges in the World'}, {'x': 1.1, 'y': 0, 'label': 'Tie'}, {'x': 1.54, 'y': 0, 'label': 'Tie'}, {'x': 1.55, 'y': -1, 'label': 'Up 1 for The Most Annoying Hodges in the World'}, {'x': 2.04, 'y': -1, 'label': 'Up 1 for The Most Annoying Hodges in the World'}, {'x': 2.05, 'y': 0, 'label': 'Tie'}, {'x': 3.06, 'y': 0, 'label': 'Tie'}, {'x': 3.07, 'y': 1, 'label': 'Up 1 for Sanic the Hailhog'}, {'x': 3.82, 'y': 1, 'label': 'Up 1 for Sanic the Hailhog'}, {'x': 3.83, 'y': 2, 'label': 'Up 2 for Sanic the Hailhog'}, {'x': 5.17, 'y': 2, 'label': 'Up 2 for Sanic the Hailhog'}, {'x': 5.18, 'y': 1, 'label': 'Up 1 for Sanic the Hailhog'}, {'x': 5.87, 'y': 1, 'label': 'Up 1 for Sanic the Hailhog'}, {'x': 5.88, 'y': 0, 'label': 'Tie'}, {'x': 6.72, 'y': 0, 'label': 'Tie'}, {'x': 6.73, 'y': -1, 'label': 'Up 1 for The Most Annoying Hodges in the World'}, {'x': 8.84, 'y': -1, 'label': 'Up 1 for The Most Annoying Hodges in the World'}, {'x': 8.85, 'y': 0, 'label': 'Tie'}, {'x': 9.44, 'y': 0, 'label': 'Tie'}, {'x': 9.45, 'y': 1, 'label': 'Up 1 for Sanic the Hailhog'}, {'x': 10.21, 'y': 1, 'label': 'Up 1 for Sanic the Hailhog'}, {'x': 10.22, 'y': 0, 'label': 'Tie'}, {'x': 10.76, 'y': 0, 'label': 'Tie'}, {'x': 10.77, 'y': 1, 'label': 'Up 1 for Sanic the Hailhog'}, {'x': 14.47, 'y': 1, 'label': 'Up 1 for Sanic the Hailhog'}, {'x': 14.48, 'y': 0, 'label': 'Tie'}, {'x': 14.86, 'y': 0, 'label': 'Tie'}, {'x': 14.87, 'y': 1, 'label': 'Up 1 for Sanic the Hailhog'}, {'x': 15.39, 'y': 1, 'label': 'Up 1 for Sanic the Hailhog'}, {'x': 15.4, 'y': 0, 'label': 'Tie'}, {'x': 16.21, 'y': 0, 'label': 'Tie'}, {'x': 16.22, 'y': 1, 'label': 'Up 1 for Sanic the Hailhog'}, {'x': 19.61, 'y': 1, 'label': 'Up 1 for Sanic the Hailhog'}, {'x': 19.62, 'y': 2, 'label': 'Up 2 for Sanic the Hailhog'}, {'x': 19.97, 'y': 2, 'label': 'Up 2 for Sanic the Hailhog'}, {'x': 19.98, 'y': 1, 'label': 'Up 1 for Sanic the Hailhog'}, {'x': 21.11, 'y': 1, 'label': 'Up 1 for Sanic the Hailhog'}, {'x': 21.12, 'y': 2, 'label': 'Up 2 for Sanic the Hailhog'}, {'x': 25.59, 'y': 2, 'label': 'Up 2 for Sanic the Hailhog'}, {'x': 25.6, 'y': 3, 'label': 'Up 3 for Sanic the Hailhog'}, {'x': 27.21, 'y': 3, 'label': 'Up 3 for Sanic the Hailhog'}, {'x': 27.22, 'y': 4, 'label': 'Up 4 for Sanic the Hailhog'}, {'x': 27.76, 'y': 4, 'label': 'Up 4 for Sanic the Hailhog'}, {'x': 27.77, 'y': 3, 'label': 'Up 3 for Sanic the Hailhog'}, {'x': 28.32, 'y': 3, 'label': 'Up 3 for Sanic the Hailhog'}, {'x': 28.33, 'y': 2, 'label': 'Up 2 for Sanic the Hailhog'}, {'x': 29.16, 'y': 2, 'label': 'Up 2 for Sanic the Hailhog'}, {'x': 29.17, 'y': 3, 'label': 'Up 3 for Sanic the Hailhog'}, {'x': 29.97, 'y': 3, 'label': 'Up 3 for Sanic the Hailhog'}, {'x': 29.98, 'y': 2, 'label': 'Up 2 for Sanic the Hailhog'}, {'x': 30.44, 'y': 2, 'label': 'Up 2 for Sanic the Hailhog'}, {'x': 30.45, 'y': 3, 'label': 'Up 3 for Sanic the Hailhog'}, {'x': 33.27, 'y': 3, 'label': 'Up 3 for Sanic the Hailhog'}, {'x': 33.28, 'y': 4, 'label': 'Up 4 for Sanic the Hailhog'}, {'x': 34.71, 'y': 4, 'label': 'Up 4 for Sanic the Hailhog'}, {'x': 34.72, 'y': 3, 'label': 'Up 3 for Sanic the Hailhog'}, {'x': 35.04, 'y': 3, 'label': 'Up 3 for Sanic the Hailhog'}, {'x': 35.05, 'y': 4, 'label': 'Up 4 for Sanic the Hailhog'}, {'x': 36.09, 'y': 4, 'label': 'Up 4 for Sanic the Hailhog'}, {'x': 36.1, 'y': 3, 'label': 'Up 3 for Sanic the Hailhog'}, {'x': 36.22, 'y': 3, 'label': 'Up 3 for Sanic the Hailhog'}, {'x': 36.23, 'y': 2, 'label': 'Up 2 for Sanic the Hailhog'}, {'x': 36.81, 'y': 2, 'label': 'Up 2 for Sanic the Hailhog'}, {'x': 36.82, 'y': 3, 'label': 'Up 3 for Sanic the Hailhog'}, {'x': 37.11, 'y': 3, 'label': 'Up 3 for Sanic the Hailhog'}, {'x': 37.12, 'y': 4, 'label': 'Up 4 for Sanic the Hailhog'}, {'x': 38.17, 'y': 4, 'label': 'Up 4 for Sanic the Hailhog'}, {'x': 38.18, 'y': 5, 'label': 'Up 5 for Sanic the Hailhog'}, {'x': 39.81, 'y': 5, 'label': 'Up 5 for Sanic the Hailhog'}, {'x': 39.82, 'y': 6, 'label': 'Up 6 for Sanic the Hailhog'}, {'x': 41.56, 'y': 6, 'label': 'Up 6 for Sanic the Hailhog'}, {'x': 41.57, 'y': 7, 'label': 'Up 7 for Sanic the Hailhog'}, {'x': 42.96, 'y': 7, 'label': 'Up 7 for Sanic the Hailhog'}, {'x': 42.97, 'y': 6, 'label': 'Up 6 for Sanic the Hailhog'}, {'x': 43.86, 'y': 6, 'label': 'Up 6 for Sanic the Hailhog'}, {'x': 43.87, 'y': 7, 'label': 'Up 7 for Sanic the Hailhog'}, {'x': 44.81, 'y': 7, 'label': 'Up 7 for Sanic the Hailhog'}, {'x': 44.82, 'y': 8, 'label': 'Up 8 for Sanic the Hailhog'}, {'x': 45.77, 'y': 8, 'label': 'Up 8 for Sanic the Hailhog'}, {'x': 45.78, 'y': 9, 'label': 'Up 9 for Sanic the Hailhog'}, {'x': 46, 'y': 9, 'label': 'Up 9 for Sanic the Hailhog'}];
+    const xValues = [0.57, 1.09, 1.1, 1.54, 1.55, 2.04, 2.05, 3.06, 3.07, 3.82, 3.83, 5.17, 5.18, 5.87, 5.88, 6.72, 6.73, 8.84, 8.85, 9.44, 9.45, 10.21, 10.22, 10.76, 10.77, 14.47, 14.48, 14.86, 14.87, 15.39, 15.4, 16.21, 16.22, 19.61, 19.62, 19.97, 19.98, 21.11, 21.12, 25.59, 25.6, 27.21, 27.22, 27.76, 27.77, 28.32, 28.33, 29.16, 29.17, 29.97, 29.98, 30.44, 30.45, 33.27, 33.28, 34.71, 34.72, 35.04, 35.05, 36.09, 36.1, 36.22, 36.23, 36.81, 36.82, 37.11, 37.12, 38.17, 38.18, 39.81, 39.82, 41.56, 41.57, 42.96, 42.97, 43.86, 43.87, 44.81, 44.82, 45.77, 45.78, 46];
+    const yValues = [-1, -1, 0, 0, -1, -1, 0, 0, 1, 1, 2, 2, 1, 1, 0, 0, -1, -1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 2, 2, 1, 1, 2, 2, 3, 3, 4, 4, 3, 3, 2, 2, 3, 3, 2, 2, 3, 3, 4, 4, 3, 3, 4, 4, 3, 3, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 6, 6, 7, 7, 8, 8, 9, 9];
+
+  
+  new Chart("myChart", {
+    type: "line",
+    data: {
+
+    labels: yValues,
+    datasets: [{
+      data: dataPoints,
+      // Add this line to include the labels in the data
+      pointHoverBackgroundColor: "red",
+      pointHoverBorderColor: "red",
+      pointHoverBorderWidth: 2,
+      pointHoverRadius: 5,
+      tension: 0.05,
+    }]
+
+
+    },
+    options: {
+
+    tooltips: {
+      callbacks: {
+        label: function(tooltipItem, data) {
+          var label = data.labels[tooltipItem.index];
+          var value = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
+          return value.label;
+
+        }
+      }
+    },
+
+      legend: {display: false},
+      title: {
+        display: true,
+        text: ""
+      },
+      scales: {
+        yAxes: [{
+          scaleLabel: {
+            display: true,
+            labelString: 'Score Difference'
+          }
+        }],
+        xAxes: [{
+          type: 'linear', // this will ensure that the x-axis is based on numeric scale
+          scaleLabel: {
+            display: true,
+            labelString: 'Gametime'
+          }
+        }]
+      }
+    }
+  });
+  
+  </script>
+
+
+
+
+</html>
