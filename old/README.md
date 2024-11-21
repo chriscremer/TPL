@@ -19,34 +19,23 @@
 - Fine = Multiplier * Goals_Dif
 - Positive Goals_Dif is good. 
 
-Bug?: Average Score is divided by 10, but there's 8 teams for week 2. 
-
 <br>
 
 
 
 
-
-## Female Scoring Bonus
-
-- Female Relief % = Player Rank / 168 * 60% 
-- Female Relief = Something * Female Relief %
-- top rank players get less relief
-
-<br>
 
 
 
 
 ## Salary Adjustment
 
-- Sub salary =  team_sub_spot * perc_allocation
+- Sub salary = team_sub_spot * perc_allocation
 - Stats of subs get applied to players who miss games
 
 Putting it all together
-- Salary Adjustment = Sub salary  + loat/max tax + female relief - female relief
+- Salary Adjustment = sub salary  + loat tax + max tax
 
-So female relief has no effect?
 
 
 
@@ -63,5 +52,13 @@ TODO
 <br>
 
 
+
+## Female Scoring Bonus (not used anymore)
+
+- Female Relief % = Player Rank / 168 * 60% 
+- Female Relief = Something * Female Relief %
+- top rank players get less relief
+
+<br>
 
 
