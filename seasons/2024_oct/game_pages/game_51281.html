@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>TPL</title>
+<link rel="icon" type="image/png" href="../../../images/frisbee.png">
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+
+<script
+src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
+</script>
+
+
+<style>
+    .table-container {
+        display: flex;
+        flex-direction: row;
+        margin: 20px;
+        justify-content: center;
+    }
+
+    .table-container2 {
+        display: flex;
+        flex-direction: column;
+        margin: 20px;
+    }
+
+    .table1, .table2 {
+        width: 100%; /* Tables will take the full width of their parent */
+        box-sizing: border-box;
+        /* border: 1px solid #ccc;  Add border for clarity */
+        margin-right: 30px;
+        border-collapse: collapse; /* this allows row lines to be shown for some reason */
+    }
+
+    .table1 tr, .table2 tr {
+        border-bottom: 1px solid #ccc; /* Add bottom border to table rows */
+    }
+
+    @media screen and (max-width: 850px) {
+        .table-container {
+            flex-direction: column;
+        }
+
+        iframe {
+            width: 90%; /* or any other percentage less than 100% */
+            margin: auto; /* to center the iframe */
+        }
+
+
+        /* change font color to blue */
+        body {
+            /* color: blue; */
+        }
+    }
+
+</style>
+
+</head>
+
+
+
+
+
+<body>
+
+<a href="../index.html" style="position: absolute; top: 10px; left: 10px;"><i class="fa fa-arrow-left"></i>Season</a> 
+<br>
+
+<center style="margin: 10px;">
+ 
+</center>
+
+
+<div class="table-container">
+
+    <div class="table-container2">
+        <h4>BatmAnders Forever Riddle Me Lysh (19)</h4>
+        <table class="table1">
+            
+    <tr>
+        <th style="text-align: left;">Player</th>
+        <th style="text-align: left;">Goal</th>
+        <th style="text-align: left;">Assist</th>
+        <th style="text-align: left;">2A</th>
+        <th style="text-align: left;">Points</th>
+        <th style="text-align: left;">D</th>
+        <th style="text-align: left;">Pass</th>
+        <th style="text-align: left;">TA</th>
+        <th style="text-align: left;">Drop</th>
+    </tr>
+
+            <tr>
+                <td>Benjamin St.Louis</td>
+                <td>4</td>
+                <td>6</td>
+                <td>0</td>
+                <td>10</td>
+                <td>2</td>
+                <td>27</td>
+                <td>1</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Clara Liu</td>
+                <td>1</td>
+                <td>5</td>
+                <td>1</td>
+                <td>7</td>
+                <td>0</td>
+                <td>17</td>
+                <td>3</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Sam Esteves</td>
+                <td>0</td>
+                <td>1</td>
+                <td>5</td>
+                <td>6</td>
+                <td>0</td>
+                <td>14</td>
+                <td>1</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Peter Hawkings</td>
+                <td>2</td>
+                <td>0</td>
+                <td>3</td>
+                <td>5</td>
+                <td>2</td>
+                <td>23</td>
+                <td>4</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Gareth Cawley</td>
+                <td>4</td>
+                <td>0</td>
+                <td>0</td>
+                <td>4</td>
+                <td>0</td>
+                <td>7</td>
+                <td>4</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Anthony Nguyen</td>
+                <td>3</td>
+                <td>0</td>
+                <td>1</td>
+                <td>4</td>
+                <td>2</td>
+                <td>7</td>
+                <td>1</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Cat Pelletier</td>
+                <td>1</td>
+                <td>2</td>
+                <td>0</td>
+                <td>3</td>
+                <td>0</td>
+                <td>17</td>
+                <td>2</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Alysha Fontaine</td>
+                <td>1</td>
+                <td>1</td>
+                <td>1</td>
+                <td>3</td>
+                <td>2</td>
+                <td>14</td>
+                <td>0</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Liao Liao</td>
+                <td>2</td>
+                <td>0</td>
+                <td>1</td>
+                <td>3</td>
+                <td>2</td>
+                <td>14</td>
+                <td>1</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Anders Whist</td>
+                <td>0</td>
+                <td>2</td>
+                <td>0</td>
+                <td>2</td>
+                <td>0</td>
+                <td>18</td>
+                <td>2</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Wendy Li</td>
+                <td>1</td>
+                <td>1</td>
+                <td>0</td>
+                <td>2</td>
+                <td>0</td>
+                <td>3</td>
+                <td>0</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Dawn Man</td>
+                <td>0</td>
+                <td>1</td>
+                <td>0</td>
+                <td>1</td>
+                <td>0</td>
+                <td>5</td>
+                <td>2</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Gabriel Isaac</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>10</td>
+                <td>4</td>
+                <td>0</td>
+            </tr><tr>
+                <td>James Shimoda</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>6</td>
+                <td>1</td>
+                <td>0</td>
+            </tr><tr>
+                <td><b>Total</b></td>
+                <td><b>19</b></td>
+                <td><b>19</b></td>
+                <td><b>12</b></td>
+                <td><b>50</b></td>
+                <td><b>10</b></td>
+                <td><b>182</b></td>
+                <td><b>26</b></td>
+                <td><b>0</b></td>
+            </tr>
+        </table>
+    </div>
+    
+
+    <div class="table-container2">
+        <h4>Sanic the Hailhog (18)</h4>
+        <table class="table2">
+            
+    <tr>
+        <th style="text-align: left;">Player</th>
+        <th style="text-align: left;">Goal</th>
+        <th style="text-align: left;">Assist</th>
+        <th style="text-align: left;">2A</th>
+        <th style="text-align: left;">Points</th>
+        <th style="text-align: left;">D</th>
+        <th style="text-align: left;">Pass</th>
+        <th style="text-align: left;">TA</th>
+        <th style="text-align: left;">Drop</th>
+    </tr>
+
+            <tr>
+                <td>Anthony Slater</td>
+                <td>0</td>
+                <td>5</td>
+                <td>1</td>
+                <td>6</td>
+                <td>2</td>
+                <td>18</td>
+                <td>1</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Hannah McKenna</td>
+                <td>3</td>
+                <td>1</td>
+                <td>2</td>
+                <td>6</td>
+                <td>4</td>
+                <td>15</td>
+                <td>0</td>
+                <td>1</td>
+            </tr><tr>
+                <td>Hailey McInnis</td>
+                <td>4</td>
+                <td>2</td>
+                <td>0</td>
+                <td>6</td>
+                <td>0</td>
+                <td>13</td>
+                <td>6</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Sanjay Parker</td>
+                <td>0</td>
+                <td>2</td>
+                <td>3</td>
+                <td>5</td>
+                <td>2</td>
+                <td>25</td>
+                <td>1</td>
+                <td>1</td>
+            </tr><tr>
+                <td>Kenneth Hou</td>
+                <td>2</td>
+                <td>2</td>
+                <td>0</td>
+                <td>4</td>
+                <td>4</td>
+                <td>19</td>
+                <td>0</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Fan Fan</td>
+                <td>3</td>
+                <td>1</td>
+                <td>0</td>
+                <td>4</td>
+                <td>1</td>
+                <td>12</td>
+                <td>3</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Chris Faulkner</td>
+                <td>3</td>
+                <td>1</td>
+                <td>0</td>
+                <td>4</td>
+                <td>0</td>
+                <td>9</td>
+                <td>1</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Robert Botman</td>
+                <td>0</td>
+                <td>1</td>
+                <td>2</td>
+                <td>3</td>
+                <td>0</td>
+                <td>13</td>
+                <td>0</td>
+                <td>1</td>
+            </tr><tr>
+                <td>Raymond Tang</td>
+                <td>1</td>
+                <td>2</td>
+                <td>0</td>
+                <td>3</td>
+                <td>1</td>
+                <td>10</td>
+                <td>2</td>
+                <td>2</td>
+            </tr><tr>
+                <td>Diane Pendlebury</td>
+                <td>0</td>
+                <td>0</td>
+                <td>2</td>
+                <td>2</td>
+                <td>1</td>
+                <td>14</td>
+                <td>1</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Justin Wong</td>
+                <td>0</td>
+                <td>0</td>
+                <td>2</td>
+                <td>2</td>
+                <td>0</td>
+                <td>14</td>
+                <td>3</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Carolina Vargas</td>
+                <td>1</td>
+                <td>0</td>
+                <td>0</td>
+                <td>1</td>
+                <td>0</td>
+                <td>17</td>
+                <td>2</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Cora McLandress</td>
+                <td>1</td>
+                <td>0</td>
+                <td>0</td>
+                <td>1</td>
+                <td>0</td>
+                <td>4</td>
+                <td>1</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Erin Stevenson</td>
+                <td>0</td>
+                <td>0</td>
+                <td>1</td>
+                <td>1</td>
+                <td>0</td>
+                <td>2</td>
+                <td>1</td>
+                <td>1</td>
+            </tr><tr>
+                <td><b>Total</b></td>
+                <td><b>18</b></td>
+                <td><b>17</b></td>
+                <td><b>13</b></td>
+                <td><b>48</b></td>
+                <td><b>15</b></td>
+                <td><b>185</b></td>
+                <td><b>22</b></td>
+                <td><b>6</b></td>
+            </tr>
+        </table>
+    </div>
+    
+</div>
+
+<center>
+    <canvas id="myChart" style="width:100%;max-width:800px"></canvas>
+</center>
+
+<br>
+<br>
+<br>
+
+</body>
+
+
+
+
+
+<script>
+  const dataPoints = [{'x': 0.32, 'y': -1, 'label': 'Up 1 for Sanic the Hailhog'}, {'x': 1.02, 'y': -1, 'label': 'Up 1 for Sanic the Hailhog'}, {'x': 1.03, 'y': -2, 'label': 'Up 2 for Sanic the Hailhog'}, {'x': 1.62, 'y': -2, 'label': 'Up 2 for Sanic the Hailhog'}, {'x': 1.63, 'y': -1, 'label': 'Up 1 for Sanic the Hailhog'}, {'x': 3.46, 'y': -1, 'label': 'Up 1 for Sanic the Hailhog'}, {'x': 3.47, 'y': 0, 'label': 'Tie'}, {'x': 3.79, 'y': 0, 'label': 'Tie'}, {'x': 3.8, 'y': -1, 'label': 'Up 1 for Sanic the Hailhog'}, {'x': 6.04, 'y': -1, 'label': 'Up 1 for Sanic the Hailhog'}, {'x': 6.05, 'y': 0, 'label': 'Tie'}, {'x': 6.62, 'y': 0, 'label': 'Tie'}, {'x': 6.63, 'y': 1, 'label': 'Up 1 for BatmAnders Forever Riddle Me Lysh'}, {'x': 7.52, 'y': 1, 'label': 'Up 1 for BatmAnders Forever Riddle Me Lysh'}, {'x': 7.53, 'y': 2, 'label': 'Up 2 for BatmAnders Forever Riddle Me Lysh'}, {'x': 7.91, 'y': 2, 'label': 'Up 2 for BatmAnders Forever Riddle Me Lysh'}, {'x': 7.92, 'y': 1, 'label': 'Up 1 for BatmAnders Forever Riddle Me Lysh'}, {'x': 8.26, 'y': 1, 'label': 'Up 1 for BatmAnders Forever Riddle Me Lysh'}, {'x': 8.27, 'y': 2, 'label': 'Up 2 for BatmAnders Forever Riddle Me Lysh'}, {'x': 12.89, 'y': 2, 'label': 'Up 2 for BatmAnders Forever Riddle Me Lysh'}, {'x': 12.9, 'y': 3, 'label': 'Up 3 for BatmAnders Forever Riddle Me Lysh'}, {'x': 13.99, 'y': 3, 'label': 'Up 3 for BatmAnders Forever Riddle Me Lysh'}, {'x': 14.0, 'y': 2, 'label': 'Up 2 for BatmAnders Forever Riddle Me Lysh'}, {'x': 14.37, 'y': 2, 'label': 'Up 2 for BatmAnders Forever Riddle Me Lysh'}, {'x': 14.38, 'y': 1, 'label': 'Up 1 for BatmAnders Forever Riddle Me Lysh'}, {'x': 15.39, 'y': 1, 'label': 'Up 1 for BatmAnders Forever Riddle Me Lysh'}, {'x': 15.4, 'y': 2, 'label': 'Up 2 for BatmAnders Forever Riddle Me Lysh'}, {'x': 16.04, 'y': 2, 'label': 'Up 2 for BatmAnders Forever Riddle Me Lysh'}, {'x': 16.05, 'y': 3, 'label': 'Up 3 for BatmAnders Forever Riddle Me Lysh'}, {'x': 16.89, 'y': 3, 'label': 'Up 3 for BatmAnders Forever Riddle Me Lysh'}, {'x': 16.9, 'y': 4, 'label': 'Up 4 for BatmAnders Forever Riddle Me Lysh'}, {'x': 18.07, 'y': 4, 'label': 'Up 4 for BatmAnders Forever Riddle Me Lysh'}, {'x': 18.08, 'y': 5, 'label': 'Up 5 for BatmAnders Forever Riddle Me Lysh'}, {'x': 18.69, 'y': 5, 'label': 'Up 5 for BatmAnders Forever Riddle Me Lysh'}, {'x': 18.7, 'y': 4, 'label': 'Up 4 for BatmAnders Forever Riddle Me Lysh'}, {'x': 20.22, 'y': 4, 'label': 'Up 4 for BatmAnders Forever Riddle Me Lysh'}, {'x': 20.23, 'y': 3, 'label': 'Up 3 for BatmAnders Forever Riddle Me Lysh'}, {'x': 27.72, 'y': 3, 'label': 'Up 3 for BatmAnders Forever Riddle Me Lysh'}, {'x': 27.73, 'y': 4, 'label': 'Up 4 for BatmAnders Forever Riddle Me Lysh'}, {'x': 28.37, 'y': 4, 'label': 'Up 4 for BatmAnders Forever Riddle Me Lysh'}, {'x': 28.38, 'y': 3, 'label': 'Up 3 for BatmAnders Forever Riddle Me Lysh'}, {'x': 29.07, 'y': 3, 'label': 'Up 3 for BatmAnders Forever Riddle Me Lysh'}, {'x': 29.08, 'y': 4, 'label': 'Up 4 for BatmAnders Forever Riddle Me Lysh'}, {'x': 29.84, 'y': 4, 'label': 'Up 4 for BatmAnders Forever Riddle Me Lysh'}, {'x': 29.85, 'y': 3, 'label': 'Up 3 for BatmAnders Forever Riddle Me Lysh'}, {'x': 30.76, 'y': 3, 'label': 'Up 3 for BatmAnders Forever Riddle Me Lysh'}, {'x': 30.77, 'y': 2, 'label': 'Up 2 for BatmAnders Forever Riddle Me Lysh'}, {'x': 31.82, 'y': 2, 'label': 'Up 2 for BatmAnders Forever Riddle Me Lysh'}, {'x': 31.83, 'y': 3, 'label': 'Up 3 for BatmAnders Forever Riddle Me Lysh'}, {'x': 32.22, 'y': 3, 'label': 'Up 3 for BatmAnders Forever Riddle Me Lysh'}, {'x': 32.23, 'y': 2, 'label': 'Up 2 for BatmAnders Forever Riddle Me Lysh'}, {'x': 32.76, 'y': 2, 'label': 'Up 2 for BatmAnders Forever Riddle Me Lysh'}, {'x': 32.77, 'y': 1, 'label': 'Up 1 for BatmAnders Forever Riddle Me Lysh'}, {'x': 33.64, 'y': 1, 'label': 'Up 1 for BatmAnders Forever Riddle Me Lysh'}, {'x': 33.65, 'y': 0, 'label': 'Tie'}, {'x': 34.02, 'y': 0, 'label': 'Tie'}, {'x': 34.03, 'y': -1, 'label': 'Up 1 for Sanic the Hailhog'}, {'x': 34.86, 'y': -1, 'label': 'Up 1 for Sanic the Hailhog'}, {'x': 34.87, 'y': 0, 'label': 'Tie'}, {'x': 35.27, 'y': 0, 'label': 'Tie'}, {'x': 35.28, 'y': -1, 'label': 'Up 1 for Sanic the Hailhog'}, {'x': 36.39, 'y': -1, 'label': 'Up 1 for Sanic the Hailhog'}, {'x': 36.4, 'y': -2, 'label': 'Up 2 for Sanic the Hailhog'}, {'x': 37.62, 'y': -2, 'label': 'Up 2 for Sanic the Hailhog'}, {'x': 37.63, 'y': -3, 'label': 'Up 3 for Sanic the Hailhog'}, {'x': 38.64, 'y': -3, 'label': 'Up 3 for Sanic the Hailhog'}, {'x': 38.65, 'y': -2, 'label': 'Up 2 for Sanic the Hailhog'}, {'x': 40.96, 'y': -2, 'label': 'Up 2 for Sanic the Hailhog'}, {'x': 40.97, 'y': -1, 'label': 'Up 1 for Sanic the Hailhog'}, {'x': 41.66, 'y': -1, 'label': 'Up 1 for Sanic the Hailhog'}, {'x': 41.67, 'y': 0, 'label': 'Tie'}, {'x': 44.46, 'y': 0, 'label': 'Tie'}, {'x': 44.47, 'y': 1, 'label': 'Up 1 for BatmAnders Forever Riddle Me Lysh'}, {'x': 45, 'y': 1, 'label': 'Up 1 for BatmAnders Forever Riddle Me Lysh'}];
+    const xValues = [0.32, 1.02, 1.03, 1.62, 1.63, 3.46, 3.47, 3.79, 3.8, 6.04, 6.05, 6.62, 6.63, 7.52, 7.53, 7.91, 7.92, 8.26, 8.27, 12.89, 12.9, 13.99, 14.0, 14.37, 14.38, 15.39, 15.4, 16.04, 16.05, 16.89, 16.9, 18.07, 18.08, 18.69, 18.7, 20.22, 20.23, 27.72, 27.73, 28.37, 28.38, 29.07, 29.08, 29.84, 29.85, 30.76, 30.77, 31.82, 31.83, 32.22, 32.23, 32.76, 32.77, 33.64, 33.65, 34.02, 34.03, 34.86, 34.87, 35.27, 35.28, 36.39, 36.4, 37.62, 37.63, 38.64, 38.65, 40.96, 40.97, 41.66, 41.67, 44.46, 44.47, 45];
+    const yValues = [-1, -1, -2, -2, -1, -1, 0, 0, -1, -1, 0, 0, 1, 1, 2, 2, 1, 1, 2, 2, 3, 3, 2, 2, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 4, 4, 3, 3, 4, 4, 3, 3, 4, 4, 3, 3, 2, 2, 3, 3, 2, 2, 1, 1, 0, 0, -1, -1, 0, 0, -1, -1, -2, -2, -3, -3, -2, -2, -1, -1, 0, 0, 1, 1];
+
+  
+  new Chart("myChart", {
+    type: "line",
+    data: {
+
+    labels: yValues,
+    datasets: [{
+      data: dataPoints,
+      // Add this line to include the labels in the data
+      pointHoverBackgroundColor: "red",
+      pointHoverBorderColor: "red",
+      pointHoverBorderWidth: 2,
+      pointHoverRadius: 5,
+      tension: 0.05,
+    }]
+
+
+    },
+    options: {
+
+    tooltips: {
+      callbacks: {
+        label: function(tooltipItem, data) {
+          var label = data.labels[tooltipItem.index];
+          var value = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
+          return value.label;
+
+        }
+      }
+    },
+
+      legend: {display: false},
+      title: {
+        display: true,
+        text: ""
+      },
+      scales: {
+        yAxes: [{
+          scaleLabel: {
+            display: true,
+            labelString: 'Score Difference'
+          }
+        }],
+        xAxes: [{
+          type: 'linear', // this will ensure that the x-axis is based on numeric scale
+          scaleLabel: {
+            display: true,
+            labelString: 'Gametime'
+          }
+        }]
+      }
+    }
+  });
+  
+  </script>
+
+
+
+
+</html>

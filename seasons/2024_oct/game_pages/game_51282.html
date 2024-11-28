@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>TPL</title>
+<link rel="icon" type="image/png" href="../../../images/frisbee.png">
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+
+<script
+src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
+</script>
+
+
+<style>
+    .table-container {
+        display: flex;
+        flex-direction: row;
+        margin: 20px;
+        justify-content: center;
+    }
+
+    .table-container2 {
+        display: flex;
+        flex-direction: column;
+        margin: 20px;
+    }
+
+    .table1, .table2 {
+        width: 100%; /* Tables will take the full width of their parent */
+        box-sizing: border-box;
+        /* border: 1px solid #ccc;  Add border for clarity */
+        margin-right: 30px;
+        border-collapse: collapse; /* this allows row lines to be shown for some reason */
+    }
+
+    .table1 tr, .table2 tr {
+        border-bottom: 1px solid #ccc; /* Add bottom border to table rows */
+    }
+
+    @media screen and (max-width: 850px) {
+        .table-container {
+            flex-direction: column;
+        }
+
+        iframe {
+            width: 90%; /* or any other percentage less than 100% */
+            margin: auto; /* to center the iframe */
+        }
+
+
+        /* change font color to blue */
+        body {
+            /* color: blue; */
+        }
+    }
+
+</style>
+
+</head>
+
+
+
+
+
+<body>
+
+<a href="../index.html" style="position: absolute; top: 10px; left: 10px;"><i class="fa fa-arrow-left"></i>Season</a> 
+<br>
+
+<center style="margin: 10px;">
+ 
+</center>
+
+
+<div class="table-container">
+
+    <div class="table-container2">
+        <h4>How the Chong Stole Chris-mas (20)</h4>
+        <table class="table1">
+            
+    <tr>
+        <th style="text-align: left;">Player</th>
+        <th style="text-align: left;">Goal</th>
+        <th style="text-align: left;">Assist</th>
+        <th style="text-align: left;">2A</th>
+        <th style="text-align: left;">Points</th>
+        <th style="text-align: left;">D</th>
+        <th style="text-align: left;">Pass</th>
+        <th style="text-align: left;">TA</th>
+        <th style="text-align: left;">Drop</th>
+    </tr>
+
+            <tr>
+                <td>Gareth Cawley</td>
+                <td>3</td>
+                <td>3</td>
+                <td>3</td>
+                <td>9</td>
+                <td>0</td>
+                <td>20</td>
+                <td>4</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Larry Macdonald</td>
+                <td>1</td>
+                <td>4</td>
+                <td>4</td>
+                <td>9</td>
+                <td>1</td>
+                <td>16</td>
+                <td>0</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Vincent Poon</td>
+                <td>3</td>
+                <td>3</td>
+                <td>2</td>
+                <td>8</td>
+                <td>1</td>
+                <td>21</td>
+                <td>0</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Alan Liu</td>
+                <td>2</td>
+                <td>1</td>
+                <td>3</td>
+                <td>6</td>
+                <td>3</td>
+                <td>18</td>
+                <td>0</td>
+                <td>2</td>
+            </tr><tr>
+                <td>Chris Cremer</td>
+                <td>1</td>
+                <td>3</td>
+                <td>1</td>
+                <td>5</td>
+                <td>1</td>
+                <td>16</td>
+                <td>1</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Gary Zhou</td>
+                <td>4</td>
+                <td>1</td>
+                <td>0</td>
+                <td>5</td>
+                <td>0</td>
+                <td>12</td>
+                <td>4</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Wendy Chong</td>
+                <td>0</td>
+                <td>2</td>
+                <td>2</td>
+                <td>4</td>
+                <td>0</td>
+                <td>14</td>
+                <td>0</td>
+                <td>1</td>
+            </tr><tr>
+                <td>Allison Brown</td>
+                <td>2</td>
+                <td>2</td>
+                <td>0</td>
+                <td>4</td>
+                <td>2</td>
+                <td>14</td>
+                <td>0</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Rebecca Minielly</td>
+                <td>3</td>
+                <td>0</td>
+                <td>0</td>
+                <td>3</td>
+                <td>0</td>
+                <td>7</td>
+                <td>0</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Clara Liu</td>
+                <td>1</td>
+                <td>0</td>
+                <td>1</td>
+                <td>2</td>
+                <td>0</td>
+                <td>3</td>
+                <td>2</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Sarah Garbett</td>
+                <td>0</td>
+                <td>1</td>
+                <td>0</td>
+                <td>1</td>
+                <td>0</td>
+                <td>3</td>
+                <td>2</td>
+                <td>1</td>
+            </tr><tr>
+                <td>Mika Young</td>
+                <td>0</td>
+                <td>0</td>
+                <td>1</td>
+                <td>1</td>
+                <td>0</td>
+                <td>1</td>
+                <td>0</td>
+                <td>1</td>
+            </tr><tr>
+                <td>Nadia Ho</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>1</td>
+                <td>0</td>
+                <td>1</td>
+                <td>0</td>
+            </tr><tr>
+                <td><b>Total</b></td>
+                <td><b>20</b></td>
+                <td><b>20</b></td>
+                <td><b>17</b></td>
+                <td><b>57</b></td>
+                <td><b>9</b></td>
+                <td><b>145</b></td>
+                <td><b>14</b></td>
+                <td><b>5</b></td>
+            </tr>
+        </table>
+    </div>
+    
+
+    <div class="table-container2">
+        <h4>Denternal Cielleshine of the spotless mind (17)</h4>
+        <table class="table2">
+            
+    <tr>
+        <th style="text-align: left;">Player</th>
+        <th style="text-align: left;">Goal</th>
+        <th style="text-align: left;">Assist</th>
+        <th style="text-align: left;">2A</th>
+        <th style="text-align: left;">Points</th>
+        <th style="text-align: left;">D</th>
+        <th style="text-align: left;">Pass</th>
+        <th style="text-align: left;">TA</th>
+        <th style="text-align: left;">Drop</th>
+    </tr>
+
+            <tr>
+                <td>Cielle Garbe</td>
+                <td>4</td>
+                <td>2</td>
+                <td>1</td>
+                <td>7</td>
+                <td>0</td>
+                <td>6</td>
+                <td>1</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Michael Danh</td>
+                <td>1</td>
+                <td>2</td>
+                <td>2</td>
+                <td>5</td>
+                <td>0</td>
+                <td>6</td>
+                <td>1</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Sean Yang</td>
+                <td>1</td>
+                <td>2</td>
+                <td>1</td>
+                <td>4</td>
+                <td>1</td>
+                <td>19</td>
+                <td>4</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Aly Dharsee</td>
+                <td>0</td>
+                <td>2</td>
+                <td>2</td>
+                <td>4</td>
+                <td>1</td>
+                <td>16</td>
+                <td>2</td>
+                <td>1</td>
+            </tr><tr>
+                <td>Aaron Hooper</td>
+                <td>3</td>
+                <td>1</td>
+                <td>0</td>
+                <td>4</td>
+                <td>1</td>
+                <td>11</td>
+                <td>1</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Annie Beveridge</td>
+                <td>1</td>
+                <td>1</td>
+                <td>2</td>
+                <td>4</td>
+                <td>0</td>
+                <td>8</td>
+                <td>0</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Olivia Chung</td>
+                <td>1</td>
+                <td>1</td>
+                <td>2</td>
+                <td>4</td>
+                <td>0</td>
+                <td>5</td>
+                <td>0</td>
+                <td>1</td>
+            </tr><tr>
+                <td>Matthew Denton</td>
+                <td>0</td>
+                <td>3</td>
+                <td>0</td>
+                <td>3</td>
+                <td>0</td>
+                <td>19</td>
+                <td>2</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Diane Pendlebury</td>
+                <td>1</td>
+                <td>0</td>
+                <td>2</td>
+                <td>3</td>
+                <td>0</td>
+                <td>16</td>
+                <td>0</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Peter Ferderber</td>
+                <td>3</td>
+                <td>0</td>
+                <td>0</td>
+                <td>3</td>
+                <td>1</td>
+                <td>12</td>
+                <td>2</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Grace Uy</td>
+                <td>0</td>
+                <td>1</td>
+                <td>2</td>
+                <td>3</td>
+                <td>1</td>
+                <td>10</td>
+                <td>1</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Vera Hoang</td>
+                <td>1</td>
+                <td>1</td>
+                <td>1</td>
+                <td>3</td>
+                <td>0</td>
+                <td>3</td>
+                <td>1</td>
+                <td>1</td>
+            </tr><tr>
+                <td>Liao Liao</td>
+                <td>0</td>
+                <td>1</td>
+                <td>0</td>
+                <td>1</td>
+                <td>1</td>
+                <td>12</td>
+                <td>1</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Adrian Muresan</td>
+                <td>1</td>
+                <td>0</td>
+                <td>0</td>
+                <td>1</td>
+                <td>0</td>
+                <td>5</td>
+                <td>2</td>
+                <td>0</td>
+            </tr><tr>
+                <td><b>Total</b></td>
+                <td><b>17</b></td>
+                <td><b>17</b></td>
+                <td><b>15</b></td>
+                <td><b>49</b></td>
+                <td><b>6</b></td>
+                <td><b>148</b></td>
+                <td><b>18</b></td>
+                <td><b>3</b></td>
+            </tr>
+        </table>
+    </div>
+    
+</div>
+
+<center>
+    <canvas id="myChart" style="width:100%;max-width:800px"></canvas>
+</center>
+
+<br>
+<br>
+<br>
+
+</body>
+
+
+
+
+
+<script>
+  const dataPoints = [{'x': 0.32, 'y': 1, 'label': 'Up 1 for How the Chong Stole Chris-mas'}, {'x': 0.72, 'y': 1, 'label': 'Up 1 for How the Chong Stole Chris-mas'}, {'x': 0.73, 'y': 0, 'label': 'Tie'}, {'x': 1.21, 'y': 0, 'label': 'Tie'}, {'x': 1.22, 'y': -1, 'label': 'Up 1 for Denternal Cielleshine of the spotless mind'}, {'x': 1.69, 'y': -1, 'label': 'Up 1 for Denternal Cielleshine of the spotless mind'}, {'x': 1.7, 'y': 0, 'label': 'Tie'}, {'x': 3.37, 'y': 0, 'label': 'Tie'}, {'x': 3.38, 'y': 1, 'label': 'Up 1 for How the Chong Stole Chris-mas'}, {'x': 3.79, 'y': 1, 'label': 'Up 1 for How the Chong Stole Chris-mas'}, {'x': 3.8, 'y': 2, 'label': 'Up 2 for How the Chong Stole Chris-mas'}, {'x': 4.31, 'y': 2, 'label': 'Up 2 for How the Chong Stole Chris-mas'}, {'x': 4.32, 'y': 1, 'label': 'Up 1 for How the Chong Stole Chris-mas'}, {'x': 6.31, 'y': 1, 'label': 'Up 1 for How the Chong Stole Chris-mas'}, {'x': 6.32, 'y': 0, 'label': 'Tie'}, {'x': 6.74, 'y': 0, 'label': 'Tie'}, {'x': 6.75, 'y': 1, 'label': 'Up 1 for How the Chong Stole Chris-mas'}, {'x': 7.31, 'y': 1, 'label': 'Up 1 for How the Chong Stole Chris-mas'}, {'x': 7.32, 'y': 0, 'label': 'Tie'}, {'x': 8.51, 'y': 0, 'label': 'Tie'}, {'x': 8.52, 'y': 1, 'label': 'Up 1 for How the Chong Stole Chris-mas'}, {'x': 8.99, 'y': 1, 'label': 'Up 1 for How the Chong Stole Chris-mas'}, {'x': 9.0, 'y': 0, 'label': 'Tie'}, {'x': 9.41, 'y': 0, 'label': 'Tie'}, {'x': 9.42, 'y': 1, 'label': 'Up 1 for How the Chong Stole Chris-mas'}, {'x': 10.31, 'y': 1, 'label': 'Up 1 for How the Chong Stole Chris-mas'}, {'x': 10.32, 'y': 0, 'label': 'Tie'}, {'x': 10.87, 'y': 0, 'label': 'Tie'}, {'x': 10.88, 'y': -1, 'label': 'Up 1 for Denternal Cielleshine of the spotless mind'}, {'x': 11.52, 'y': -1, 'label': 'Up 1 for Denternal Cielleshine of the spotless mind'}, {'x': 11.53, 'y': 0, 'label': 'Tie'}, {'x': 12.01, 'y': 0, 'label': 'Tie'}, {'x': 12.02, 'y': -1, 'label': 'Up 1 for Denternal Cielleshine of the spotless mind'}, {'x': 12.62, 'y': -1, 'label': 'Up 1 for Denternal Cielleshine of the spotless mind'}, {'x': 12.63, 'y': 0, 'label': 'Tie'}, {'x': 13.41, 'y': 0, 'label': 'Tie'}, {'x': 13.42, 'y': 1, 'label': 'Up 1 for How the Chong Stole Chris-mas'}, {'x': 15.26, 'y': 1, 'label': 'Up 1 for How the Chong Stole Chris-mas'}, {'x': 15.27, 'y': 0, 'label': 'Tie'}, {'x': 16.56, 'y': 0, 'label': 'Tie'}, {'x': 16.57, 'y': -1, 'label': 'Up 1 for Denternal Cielleshine of the spotless mind'}, {'x': 17.74, 'y': -1, 'label': 'Up 1 for Denternal Cielleshine of the spotless mind'}, {'x': 17.75, 'y': 0, 'label': 'Tie'}, {'x': 18.76, 'y': 0, 'label': 'Tie'}, {'x': 18.77, 'y': 1, 'label': 'Up 1 for How the Chong Stole Chris-mas'}, {'x': 23.97, 'y': 1, 'label': 'Up 1 for How the Chong Stole Chris-mas'}, {'x': 23.98, 'y': 0, 'label': 'Tie'}, {'x': 24.66, 'y': 0, 'label': 'Tie'}, {'x': 24.67, 'y': -1, 'label': 'Up 1 for Denternal Cielleshine of the spotless mind'}, {'x': 24.92, 'y': -1, 'label': 'Up 1 for Denternal Cielleshine of the spotless mind'}, {'x': 24.93, 'y': 0, 'label': 'Tie'}, {'x': 29.29, 'y': 0, 'label': 'Tie'}, {'x': 29.3, 'y': 1, 'label': 'Up 1 for How the Chong Stole Chris-mas'}, {'x': 29.96, 'y': 1, 'label': 'Up 1 for How the Chong Stole Chris-mas'}, {'x': 29.97, 'y': 2, 'label': 'Up 2 for How the Chong Stole Chris-mas'}, {'x': 30.27, 'y': 2, 'label': 'Up 2 for How the Chong Stole Chris-mas'}, {'x': 30.28, 'y': 1, 'label': 'Up 1 for How the Chong Stole Chris-mas'}, {'x': 31.26, 'y': 1, 'label': 'Up 1 for How the Chong Stole Chris-mas'}, {'x': 31.27, 'y': 2, 'label': 'Up 2 for How the Chong Stole Chris-mas'}, {'x': 31.64, 'y': 2, 'label': 'Up 2 for How the Chong Stole Chris-mas'}, {'x': 31.65, 'y': 1, 'label': 'Up 1 for How the Chong Stole Chris-mas'}, {'x': 36.12, 'y': 1, 'label': 'Up 1 for How the Chong Stole Chris-mas'}, {'x': 36.13, 'y': 0, 'label': 'Tie'}, {'x': 41.29, 'y': 0, 'label': 'Tie'}, {'x': 41.3, 'y': 1, 'label': 'Up 1 for How the Chong Stole Chris-mas'}, {'x': 41.87, 'y': 1, 'label': 'Up 1 for How the Chong Stole Chris-mas'}, {'x': 41.88, 'y': 2, 'label': 'Up 2 for How the Chong Stole Chris-mas'}, {'x': 42.41, 'y': 2, 'label': 'Up 2 for How the Chong Stole Chris-mas'}, {'x': 42.42, 'y': 3, 'label': 'Up 3 for How the Chong Stole Chris-mas'}, {'x': 42.72, 'y': 3, 'label': 'Up 3 for How the Chong Stole Chris-mas'}, {'x': 42.73, 'y': 2, 'label': 'Up 2 for How the Chong Stole Chris-mas'}, {'x': 43.81, 'y': 2, 'label': 'Up 2 for How the Chong Stole Chris-mas'}, {'x': 43.82, 'y': 3, 'label': 'Up 3 for How the Chong Stole Chris-mas'}, {'x': 44, 'y': 3, 'label': 'Up 3 for How the Chong Stole Chris-mas'}];
+    const xValues = [0.32, 0.72, 0.73, 1.21, 1.22, 1.69, 1.7, 3.37, 3.38, 3.79, 3.8, 4.31, 4.32, 6.31, 6.32, 6.74, 6.75, 7.31, 7.32, 8.51, 8.52, 8.99, 9.0, 9.41, 9.42, 10.31, 10.32, 10.87, 10.88, 11.52, 11.53, 12.01, 12.02, 12.62, 12.63, 13.41, 13.42, 15.26, 15.27, 16.56, 16.57, 17.74, 17.75, 18.76, 18.77, 23.97, 23.98, 24.66, 24.67, 24.92, 24.93, 29.29, 29.3, 29.96, 29.97, 30.27, 30.28, 31.26, 31.27, 31.64, 31.65, 36.12, 36.13, 41.29, 41.3, 41.87, 41.88, 42.41, 42.42, 42.72, 42.73, 43.81, 43.82, 44];
+    const yValues = [1, 1, 0, 0, -1, -1, 0, 0, 1, 1, 2, 2, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, -1, -1, 0, 0, -1, -1, 0, 0, 1, 1, 0, 0, -1, -1, 0, 0, 1, 1, 0, 0, -1, -1, 0, 0, 1, 1, 2, 2, 1, 1, 2, 2, 1, 1, 0, 0, 1, 1, 2, 2, 3, 3, 2, 2, 3, 3];
+
+  
+  new Chart("myChart", {
+    type: "line",
+    data: {
+
+    labels: yValues,
+    datasets: [{
+      data: dataPoints,
+      // Add this line to include the labels in the data
+      pointHoverBackgroundColor: "red",
+      pointHoverBorderColor: "red",
+      pointHoverBorderWidth: 2,
+      pointHoverRadius: 5,
+      tension: 0.05,
+    }]
+
+
+    },
+    options: {
+
+    tooltips: {
+      callbacks: {
+        label: function(tooltipItem, data) {
+          var label = data.labels[tooltipItem.index];
+          var value = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
+          return value.label;
+
+        }
+      }
+    },
+
+      legend: {display: false},
+      title: {
+        display: true,
+        text: ""
+      },
+      scales: {
+        yAxes: [{
+          scaleLabel: {
+            display: true,
+            labelString: 'Score Difference'
+          }
+        }],
+        xAxes: [{
+          type: 'linear', // this will ensure that the x-axis is based on numeric scale
+          scaleLabel: {
+            display: true,
+            labelString: 'Gametime'
+          }
+        }]
+      }
+    }
+  });
+  
+  </script>
+
+
+
+
+</html>
