@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>TPL</title>
+<link rel="icon" type="image/png" href="../../../images/frisbee.png">
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+
+<script
+src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
+</script>
+
+
+<style>
+    .table-container {
+        display: flex;
+        flex-direction: row;
+        margin: 20px;
+        justify-content: center;
+    }
+
+    .table-container2 {
+        display: flex;
+        flex-direction: column;
+        margin: 20px;
+    }
+
+    .table1, .table2 {
+        width: 100%; /* Tables will take the full width of their parent */
+        box-sizing: border-box;
+        /* border: 1px solid #ccc;  Add border for clarity */
+        margin-right: 30px;
+        border-collapse: collapse; /* this allows row lines to be shown for some reason */
+    }
+
+    .table1 tr, .table2 tr {
+        border-bottom: 1px solid #ccc; /* Add bottom border to table rows */
+    }
+
+    @media screen and (max-width: 850px) {
+        .table-container {
+            flex-direction: column;
+        }
+
+        iframe {
+            width: 90%; /* or any other percentage less than 100% */
+            margin: auto; /* to center the iframe */
+        }
+
+
+        /* change font color to blue */
+        body {
+            /* color: blue; */
+        }
+    }
+
+</style>
+
+</head>
+
+
+
+
+
+<body>
+
+<a href="../index.html" style="position: absolute; top: 10px; left: 10px;"><i class="fa fa-arrow-left"></i>Season</a> 
+<br>
+
+<center style="margin: 10px;">
+ 
+</center>
+
+
+<div class="table-container">
+
+    <div class="table-container2">
+        <h4>The Most Annoying Hodges in the World (19)</h4>
+        <table class="table1">
+            
+    <tr>
+        <th style="text-align: left;">Player</th>
+        <th style="text-align: left;">Goal</th>
+        <th style="text-align: left;">Assist</th>
+        <th style="text-align: left;">2A</th>
+        <th style="text-align: left;">Points</th>
+        <th style="text-align: left;">D</th>
+        <th style="text-align: left;">Pass</th>
+        <th style="text-align: left;">TA</th>
+        <th style="text-align: left;">Drop</th>
+    </tr>
+
+            <tr>
+                <td>Marc Hodges</td>
+                <td>2</td>
+                <td>6</td>
+                <td>3</td>
+                <td>11</td>
+                <td>0</td>
+                <td>28</td>
+                <td>2</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Eileen Lam</td>
+                <td>3</td>
+                <td>1</td>
+                <td>3</td>
+                <td>7</td>
+                <td>0</td>
+                <td>9</td>
+                <td>1</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Larisa Lam</td>
+                <td>2</td>
+                <td>4</td>
+                <td>1</td>
+                <td>7</td>
+                <td>2</td>
+                <td>7</td>
+                <td>1</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Yvertte Xie</td>
+                <td>3</td>
+                <td>2</td>
+                <td>1</td>
+                <td>6</td>
+                <td>0</td>
+                <td>9</td>
+                <td>0</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Alec Zhao</td>
+                <td>2</td>
+                <td>0</td>
+                <td>3</td>
+                <td>5</td>
+                <td>1</td>
+                <td>9</td>
+                <td>2</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Nathan Killoran</td>
+                <td>2</td>
+                <td>1</td>
+                <td>1</td>
+                <td>4</td>
+                <td>0</td>
+                <td>11</td>
+                <td>4</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Ofer Shai</td>
+                <td>2</td>
+                <td>1</td>
+                <td>0</td>
+                <td>3</td>
+                <td>0</td>
+                <td>9</td>
+                <td>4</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Daniel Eisner</td>
+                <td>1</td>
+                <td>2</td>
+                <td>0</td>
+                <td>3</td>
+                <td>0</td>
+                <td>8</td>
+                <td>1</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Wendy Li</td>
+                <td>1</td>
+                <td>0</td>
+                <td>2</td>
+                <td>3</td>
+                <td>1</td>
+                <td>4</td>
+                <td>1</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Natalie Wong</td>
+                <td>0</td>
+                <td>1</td>
+                <td>1</td>
+                <td>2</td>
+                <td>0</td>
+                <td>18</td>
+                <td>2</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Robert Stalker</td>
+                <td>0</td>
+                <td>1</td>
+                <td>1</td>
+                <td>2</td>
+                <td>0</td>
+                <td>7</td>
+                <td>1</td>
+                <td>1</td>
+            </tr><tr>
+                <td>Maria Fara-On</td>
+                <td>1</td>
+                <td>0</td>
+                <td>1</td>
+                <td>2</td>
+                <td>0</td>
+                <td>5</td>
+                <td>0</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Peter Song</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>8</td>
+                <td>2</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Caterina Cazzetta</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>4</td>
+                <td>0</td>
+                <td>0</td>
+            </tr><tr>
+                <td><b>Total</b></td>
+                <td><b>19</b></td>
+                <td><b>19</b></td>
+                <td><b>17</b></td>
+                <td><b>55</b></td>
+                <td><b>4</b></td>
+                <td><b>136</b></td>
+                <td><b>21</b></td>
+                <td><b>1</b></td>
+            </tr>
+        </table>
+    </div>
+    
+
+    <div class="table-container2">
+        <h4>Horton Hears A Ho! (20)</h4>
+        <table class="table2">
+            
+    <tr>
+        <th style="text-align: left;">Player</th>
+        <th style="text-align: left;">Goal</th>
+        <th style="text-align: left;">Assist</th>
+        <th style="text-align: left;">2A</th>
+        <th style="text-align: left;">Points</th>
+        <th style="text-align: left;">D</th>
+        <th style="text-align: left;">Pass</th>
+        <th style="text-align: left;">TA</th>
+        <th style="text-align: left;">Drop</th>
+    </tr>
+
+            <tr>
+                <td>Griffin Peddle</td>
+                <td>2</td>
+                <td>6</td>
+                <td>1</td>
+                <td>9</td>
+                <td>2</td>
+                <td>39</td>
+                <td>4</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Harrison Smith</td>
+                <td>3</td>
+                <td>2</td>
+                <td>4</td>
+                <td>9</td>
+                <td>0</td>
+                <td>17</td>
+                <td>2</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Vincent Poon</td>
+                <td>3</td>
+                <td>5</td>
+                <td>0</td>
+                <td>8</td>
+                <td>1</td>
+                <td>18</td>
+                <td>1</td>
+                <td>0</td>
+            </tr><tr>
+                <td>James Ho</td>
+                <td>3</td>
+                <td>2</td>
+                <td>1</td>
+                <td>6</td>
+                <td>2</td>
+                <td>24</td>
+                <td>2</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Thalia Huen</td>
+                <td>3</td>
+                <td>1</td>
+                <td>1</td>
+                <td>5</td>
+                <td>2</td>
+                <td>8</td>
+                <td>0</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Anthony Slater</td>
+                <td>1</td>
+                <td>1</td>
+                <td>2</td>
+                <td>4</td>
+                <td>2</td>
+                <td>21</td>
+                <td>2</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Vera Hoang</td>
+                <td>2</td>
+                <td>1</td>
+                <td>1</td>
+                <td>4</td>
+                <td>1</td>
+                <td>15</td>
+                <td>0</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Diane Pendlebury</td>
+                <td>0</td>
+                <td>1</td>
+                <td>3</td>
+                <td>4</td>
+                <td>1</td>
+                <td>14</td>
+                <td>0</td>
+                <td>1</td>
+            </tr><tr>
+                <td>Tina Wang</td>
+                <td>0</td>
+                <td>0</td>
+                <td>3</td>
+                <td>3</td>
+                <td>1</td>
+                <td>21</td>
+                <td>3</td>
+                <td>1</td>
+            </tr><tr>
+                <td>Nancy Warren</td>
+                <td>2</td>
+                <td>1</td>
+                <td>0</td>
+                <td>3</td>
+                <td>0</td>
+                <td>4</td>
+                <td>0</td>
+                <td>1</td>
+            </tr><tr>
+                <td>Erin Stevenson</td>
+                <td>1</td>
+                <td>0</td>
+                <td>0</td>
+                <td>1</td>
+                <td>0</td>
+                <td>7</td>
+                <td>2</td>
+                <td>2</td>
+            </tr><tr>
+                <td>Ed Kung</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>6</td>
+                <td>0</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Nadia Ho</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>2</td>
+                <td>0</td>
+                <td>0</td>
+            </tr><tr>
+                <td>Ashar Shaur</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>2</td>
+                <td>0</td>
+                <td>0</td>
+            </tr><tr>
+                <td><b>Total</b></td>
+                <td><b>20</b></td>
+                <td><b>20</b></td>
+                <td><b>16</b></td>
+                <td><b>56</b></td>
+                <td><b>12</b></td>
+                <td><b>198</b></td>
+                <td><b>16</b></td>
+                <td><b>5</b></td>
+            </tr>
+        </table>
+    </div>
+    
+</div>
+
+<center>
+    <canvas id="myChart" style="width:100%;max-width:800px"></canvas>
+</center>
+
+<br>
+<br>
+<br>
+
+</body>
+
+
+
+
+
+<script>
+  const dataPoints = [{'x': 0.53, 'y': 1, 'label': 'Up 1 for Horton Hears A Ho!'}, {'x': 1.36, 'y': 1, 'label': 'Up 1 for The Most Annoying Hodges in the World'}, {'x': 1.37, 'y': 0, 'label': 'Tie'}, {'x': 1.41, 'y': 0, 'label': 'Tie'}, {'x': 1.42, 'y': 1, 'label': 'Up 1 for Horton Hears A Ho!'}, {'x': 2.64, 'y': 1, 'label': 'Up 1 for The Most Annoying Hodges in the World'}, {'x': 2.65, 'y': 0, 'label': 'Tie'}, {'x': 3.24, 'y': 0, 'label': 'Tie'}, {'x': 3.25, 'y': -1, 'label': 'Up 1 for The Most Annoying Hodges in the World'}, {'x': 3.99, 'y': -1, 'label': 'Up 1 for Horton Hears A Ho!'}, {'x': 4.0, 'y': -2, 'label': 'Up 2 for The Most Annoying Hodges in the World'}, {'x': 4.37, 'y': -2, 'label': 'Up 2 for Horton Hears A Ho!'}, {'x': 4.38, 'y': -3, 'label': 'Up 3 for The Most Annoying Hodges in the World'}, {'x': 4.72, 'y': -3, 'label': 'Up 3 for Horton Hears A Ho!'}, {'x': 4.73, 'y': -2, 'label': 'Up 2 for The Most Annoying Hodges in the World'}, {'x': 5.09, 'y': -2, 'label': 'Up 2 for Horton Hears A Ho!'}, {'x': 5.1, 'y': -3, 'label': 'Up 3 for The Most Annoying Hodges in the World'}, {'x': 5.52, 'y': -3, 'label': 'Up 3 for Horton Hears A Ho!'}, {'x': 5.53, 'y': -2, 'label': 'Up 2 for The Most Annoying Hodges in the World'}, {'x': 6.12, 'y': -2, 'label': 'Up 2 for Horton Hears A Ho!'}, {'x': 6.13, 'y': -1, 'label': 'Up 1 for The Most Annoying Hodges in the World'}, {'x': 7.54, 'y': -1, 'label': 'Up 1 for Horton Hears A Ho!'}, {'x': 7.55, 'y': 0, 'label': 'Tie'}, {'x': 7.91, 'y': 0, 'label': 'Tie'}, {'x': 7.92, 'y': -1, 'label': 'Up 1 for The Most Annoying Hodges in the World'}, {'x': 8.74, 'y': -1, 'label': 'Up 1 for Horton Hears A Ho!'}, {'x': 8.75, 'y': 0, 'label': 'Tie'}, {'x': 10.27, 'y': 0, 'label': 'Tie'}, {'x': 10.28, 'y': 1, 'label': 'Up 1 for Horton Hears A Ho!'}, {'x': 12.07, 'y': 1, 'label': 'Up 1 for The Most Annoying Hodges in the World'}, {'x': 12.08, 'y': 0, 'label': 'Tie'}, {'x': 12.66, 'y': 0, 'label': 'Tie'}, {'x': 12.67, 'y': 1, 'label': 'Up 1 for Horton Hears A Ho!'}, {'x': 13.32, 'y': 1, 'label': 'Up 1 for The Most Annoying Hodges in the World'}, {'x': 13.33, 'y': 0, 'label': 'Tie'}, {'x': 13.59, 'y': 0, 'label': 'Tie'}, {'x': 13.6, 'y': 1, 'label': 'Up 1 for Horton Hears A Ho!'}, {'x': 15.59, 'y': 1, 'label': 'Up 1 for The Most Annoying Hodges in the World'}, {'x': 15.6, 'y': 0, 'label': 'Tie'}, {'x': 15.81, 'y': 0, 'label': 'Tie'}, {'x': 15.82, 'y': 1, 'label': 'Up 1 for Horton Hears A Ho!'}, {'x': 16.79, 'y': 1, 'label': 'Up 1 for The Most Annoying Hodges in the World'}, {'x': 16.8, 'y': 2, 'label': 'Up 2 for Horton Hears A Ho!'}, {'x': 20.32, 'y': 2, 'label': 'Up 2 for The Most Annoying Hodges in the World'}, {'x': 20.33, 'y': 3, 'label': 'Up 3 for Horton Hears A Ho!'}, {'x': 21.86, 'y': 3, 'label': 'Up 3 for The Most Annoying Hodges in the World'}, {'x': 21.87, 'y': 2, 'label': 'Up 2 for Horton Hears A Ho!'}, {'x': 27.86, 'y': 2, 'label': 'Up 2 for The Most Annoying Hodges in the World'}, {'x': 27.87, 'y': 1, 'label': 'Up 1 for Horton Hears A Ho!'}, {'x': 29.01, 'y': 1, 'label': 'Up 1 for The Most Annoying Hodges in the World'}, {'x': 29.02, 'y': 0, 'label': 'Tie'}, {'x': 31.14, 'y': 0, 'label': 'Tie'}, {'x': 31.15, 'y': 1, 'label': 'Up 1 for Horton Hears A Ho!'}, {'x': 32.06, 'y': 1, 'label': 'Up 1 for The Most Annoying Hodges in the World'}, {'x': 32.07, 'y': 0, 'label': 'Tie'}, {'x': 32.94, 'y': 0, 'label': 'Tie'}, {'x': 32.95, 'y': 1, 'label': 'Up 1 for Horton Hears A Ho!'}, {'x': 33.61, 'y': 1, 'label': 'Up 1 for The Most Annoying Hodges in the World'}, {'x': 33.62, 'y': 0, 'label': 'Tie'}, {'x': 34.61, 'y': 0, 'label': 'Tie'}, {'x': 34.62, 'y': 1, 'label': 'Up 1 for Horton Hears A Ho!'}, {'x': 35.29, 'y': 1, 'label': 'Up 1 for The Most Annoying Hodges in the World'}, {'x': 35.3, 'y': 0, 'label': 'Tie'}, {'x': 37.22, 'y': 0, 'label': 'Tie'}, {'x': 37.23, 'y': 1, 'label': 'Up 1 for Horton Hears A Ho!'}, {'x': 37.76, 'y': 1, 'label': 'Up 1 for The Most Annoying Hodges in the World'}, {'x': 37.77, 'y': 2, 'label': 'Up 2 for Horton Hears A Ho!'}, {'x': 38.97, 'y': 2, 'label': 'Up 2 for The Most Annoying Hodges in the World'}, {'x': 38.98, 'y': 1, 'label': 'Up 1 for Horton Hears A Ho!'}, {'x': 42.79, 'y': 1, 'label': 'Up 1 for The Most Annoying Hodges in the World'}, {'x': 42.8, 'y': 2, 'label': 'Up 2 for Horton Hears A Ho!'}, {'x': 44.84, 'y': 2, 'label': 'Up 2 for The Most Annoying Hodges in the World'}, {'x': 44.85, 'y': 1, 'label': 'Up 1 for Horton Hears A Ho!'}, {'x': 45.31, 'y': 1, 'label': 'Up 1 for The Most Annoying Hodges in the World'}, {'x': 45.32, 'y': 2, 'label': 'Up 2 for Horton Hears A Ho!'}, {'x': 45.51, 'y': 2, 'label': 'Up 2 for The Most Annoying Hodges in the World'}, {'x': 45.52, 'y': 1, 'label': 'Up 1 for Horton Hears A Ho!'}, {'x': 46, 'y': 1, 'label': 'Up 1 for Horton Hears A Ho!'}];
+    const xValues = [0.53, 1.36, 1.37, 1.41, 1.42, 2.64, 2.65, 3.24, 3.25, 3.99, 4.0, 4.37, 4.38, 4.72, 4.73, 5.09, 5.1, 5.52, 5.53, 6.12, 6.13, 7.54, 7.55, 7.91, 7.92, 8.74, 8.75, 10.27, 10.28, 12.07, 12.08, 12.66, 12.67, 13.32, 13.33, 13.59, 13.6, 15.59, 15.6, 15.81, 15.82, 16.79, 16.8, 20.32, 20.33, 21.86, 21.87, 27.86, 27.87, 29.01, 29.02, 31.14, 31.15, 32.06, 32.07, 32.94, 32.95, 33.61, 33.62, 34.61, 34.62, 35.29, 35.3, 37.22, 37.23, 37.76, 37.77, 38.97, 38.98, 42.79, 42.8, 44.84, 44.85, 45.31, 45.32, 45.51, 45.52, 46];
+    const yValues = [1, 1, 0, 0, 1, 1, 0, 0, -1, -1, -2, -2, -3, -3, -2, -2, -3, -3, -2, -2, -1, -1, 0, 0, -1, -1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 2, 2, 3, 3, 2, 2, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 2, 2, 1, 1, 2, 2, 1, 1, 2, 2, 1, 1];
+
+  
+  new Chart("myChart", {
+    type: "line",
+    data: {
+
+    labels: yValues,
+    datasets: [{
+      data: dataPoints,
+      // Add this line to include the labels in the data
+      pointHoverBackgroundColor: "red",
+      pointHoverBorderColor: "red",
+      pointHoverBorderWidth: 2,
+      pointHoverRadius: 5,
+      tension: 0.05,
+    }]
+
+
+    },
+    options: {
+
+    tooltips: {
+      callbacks: {
+        label: function(tooltipItem, data) {
+          var label = data.labels[tooltipItem.index];
+          var value = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
+          return value.label;
+
+        }
+      }
+    },
+
+      legend: {display: false},
+      title: {
+        display: true,
+        text: ""
+      },
+      scales: {
+        yAxes: [{
+          scaleLabel: {
+            display: true,
+            labelString: 'Score Difference'
+          }
+        }],
+        xAxes: [{
+          type: 'linear', // this will ensure that the x-axis is based on numeric scale
+          scaleLabel: {
+            display: true,
+            labelString: 'Gametime'
+          }
+        }]
+      }
+    }
+  });
+  
+  </script>
+
+
+
+
+</html>
