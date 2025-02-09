@@ -1,6 +1,6 @@
 import streamlit as st
 import pandas as pd
-# import numpy as np
+import numpy as np
 # import time
 # from sklearn.linear_model import LinearRegression
 # from gspread_dataframe import set_with_dataframe, get_as_dataframe
@@ -78,9 +78,11 @@ def show_trades(trades, new_player_salaries): #df_players, salary_col_name):
             # text += f"<br>Salary Change: {salary_diff}"
             t1_colour = 'green' #if player1_salary - player2_salary > 0 else 'deeppink'
             t2_colour = 'green' #if player2_salary - player1_salary > 0 else 'deeppink'
-            text += f"<br>Salary Change:"
-            text += f"<br>&nbsp;&nbsp;&nbsp;&nbsp;{trade['team_1']}: <span style='color:{t1_colour}'>{player2_salary - player1_salary}</span>"
-            text += f"<br>&nbsp;&nbsp;&nbsp;&nbsp;{trade['team_2']}: <span style='color:{t2_colour}'>{player1_salary - player2_salary}</span>"
+            # text += f"<br>Salary Change: {np.abs(player1_salary - player2_salary)}"
+            # make the number orange
+            text += f"<br>Salary Change: <span style='color:orange'>{np.abs(player2_salary - player1_salary)}</span>"
+            # text += f"<br>&nbsp;&nbsp;&nbsp;&nbsp;{trade['team_1']}: <span style='color:{t1_colour}'>{player2_salary - player1_salary}</span>"
+            # text += f"<br>&nbsp;&nbsp;&nbsp;&nbsp;{trade['team_2']}: <span style='color:{t2_colour}'>{player1_salary - player2_salary}</span>"
             # text += f"<br>Standard Deviation: {trade['team_costs_std']:.2f}"
             # text += f"<br>Team 1 Happiness Change: {trade['team1_happiness_change']}"
             # text += f"<br>Team 2 Happiness Change: {trade['team2_happiness_change']}"
