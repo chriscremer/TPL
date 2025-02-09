@@ -1,7 +1,6 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
-import time
 from sklearn.linear_model import LinearRegression
 
 from gspread_dataframe import set_with_dataframe, get_as_dataframe
@@ -13,42 +12,42 @@ from my_pages.bids import get_rosters, get_salaries
 from algo4 import run_algo
 
 
-# def get_all_bids_from_sheet(conn, stss, bids_sheet_name, worksheets):
-#     # If bids_sheet_name does not exist, make it
-#     if not bids_sheet_name in [worksheet.title for worksheet in worksheets]:
-#         raise Exception(f'No bids sheet found for {bids_sheet_name}')
-#     sheet = conn.worksheet(bids_sheet_name)
-#     df_bids = get_as_dataframe(sheet)
-#     stss['all_player_bids'] = df_bids
-#     return df_bids
+def get_all_bids_from_sheet(conn, stss, bids_sheet_name, worksheets):
+    # If bids_sheet_name does not exist, make it
+    if not bids_sheet_name in [worksheet.title for worksheet in worksheets]:
+        raise Exception(f'No bids sheet found for {bids_sheet_name}')
+    sheet = conn.worksheet(bids_sheet_name)
+    df_bids = get_as_dataframe(sheet)
+    stss['all_player_bids'] = df_bids
+    return df_bids
 
 
 
-# def accumulate_data(rosters, team_names, df_players, salary_col_name, player_names, all_player_bids):
+def accumulate_data(rosters, team_names, df_players, salary_col_name, player_names, all_player_bids):
         
-#     # rosters_team_list is dict of team_name: list of player names
-#     rosters_team_list = {}
-#     for team_name in team_names:
-#         rosters_team_list[team_name] = []
-#         for player_name in rosters[team_name]:
-#             rosters_team_list[team_name].append(player_name)
+    # rosters_team_list is dict of team_name: list of player names
+    rosters_team_list = {}
+    for team_name in team_names:
+        rosters_team_list[team_name] = []
+        for player_name in rosters[team_name]:
+            rosters_team_list[team_name].append(player_name)
 
-#     # convert all_player_bids df to player_bids where for each player there is a dict of team: bid
-#     player_bids = {player: {} for player in player_names}
-#     for i, row in all_player_bids.iterrows():
-#         player_name = row['Player']
-#         for team_name in team_names:
-#             player_bids[player_name][team_name] = row[team_name]
-#     # print (player_bids)
+    # convert all_player_bids df to player_bids where for each player there is a dict of team: bid
+    player_bids = {player: {} for player in player_names}
+    for i, row in all_player_bids.iterrows():
+        player_name = row['Player']
+        for team_name in team_names:
+            player_bids[player_name][team_name] = row[team_name]
+    # print (player_bids)
 
-#     # make dict of player_name: gender
-#     player_genders = {}
-#     for player_name in player_names:
-#         gender = df_players[df_players['Full Name'] == player_name]['Gender'].values[0]
-#         player_genders[player_name] = gender
+    # make dict of player_name: gender
+    player_genders = {}
+    for player_name in player_names:
+        gender = df_players[df_players['Full Name'] == player_name]['Gender'].values[0]
+        player_genders[player_name] = gender
 
 
-#     return player_bids, rosters_team_list, player_genders
+    return player_bids, rosters_team_list, player_genders
 
 
 def show_trades(trades, new_player_salaries): #df_players, salary_col_name):
@@ -292,8 +291,7 @@ def show_starting_info(team_costs, protected_players_dict, starting_rosters, pla
     # protected_players_dict_text = {team: [f"{player['player_name']}" for player in protected_players_dict[team]] for team in protected_players_dict}
     protected_players_for_df = {}
     for team in protected_players_dict:
-        # protected_players_for_df[team] = [player['player_name'] for player in protected_players_dict[team]]
-        protected_players_for_df[team] = [player_name for player_name in protected_players_dict[team]]
+        protected_players_for_df[team] = [player['player_name'] for player in protected_players_dict[team]]
         while len(protected_players_for_df[team]) < n_protected_players_per_team:
             protected_players_for_df[team].append('')
     protected_players_df = pd.DataFrame.from_dict(protected_players_for_df, orient='index', columns=cols_names)
@@ -314,11 +312,10 @@ def calc_teams_salaries(rosters, new_player_salaries):
     #         salary = df_players[df_players['Full Name'] == player][salary_col_name].values[0]
     #         team_costs[team_name] += salary
     team_costs = {}
-    for team_name, roster in rosters.items():
+    for team_name in rosters:
         team_costs[team_name] = 0
-        for player_name in roster:
-            # print (player_name)
-            team_costs[team_name] += new_player_salaries[player_name]
+        for player in rosters[team_name]:
+            team_costs[team_name] += new_player_salaries[player]
     # sort largest to smallest
     team_costs = {k: v for k, v in sorted(team_costs.items(), key=lambda item: item[1], reverse=True)}
     return team_costs
@@ -443,258 +440,138 @@ def show_player_salaries(player_salaries, player_bids):
 
 
 
-# def get_captain_salaries(stss, df_players, player_salaries, captains):
-#     # print (stss['df_league'].columns)
-#     # for each captain, we need to use linear regression to predict their salary given their stats
-#     # then set everyones bid to that value
+def get_captain_salaries(stss, df_players, player_salaries, captains):
+    # print (stss['df_league'].columns)
+    # for each captain, we need to use linear regression to predict their salary given their stats
+    # then set everyones bid to that value
     
-#     # get stats + salary of all non-captain players
-#     # get salary from new_player_salaries
-#     # get stats from stss['df_league']
+    # get stats + salary of all non-captain players
+    # get salary from new_player_salaries
+    # get stats from stss['df_league']
 
-#     # get stats of all players, except captains
-#     df_players_no_captains = df_players[~df_players['Full Name'].isin(captains)]
-#     # remove wildcards
-#     df_players_no_captains = df_players_no_captains[~df_players_no_captains['Full Name'].str.contains('WILD')]
-#     # convert to dict
-#     df_players_no_captains = df_players_no_captains.set_index('Full Name').T.to_dict()
+    # get stats of all players, except captains
+    df_players_no_captains = df_players[~df_players['Full Name'].isin(captains)]
+    # remove wildcards
+    df_players_no_captains = df_players_no_captains[~df_players_no_captains['Full Name'].str.contains('WILD')]
+    # convert to dict
+    df_players_no_captains = df_players_no_captains.set_index('Full Name').T.to_dict()
     
     
 
 
-#     # for i, row in stats_df.iterrows():
-#     #     if 'Gary' in row['Name']:
-#     #         print (row)
-#     #         fasdf
+    # for i, row in stats_df.iterrows():
+    #     if 'Gary' in row['Name']:
+    #         print (row)
+    #         fasdf
 
-#     # # confirm stats_df has all the players of df_players_no_captains
-#     # for player in df_players_no_captains.keys():
-#     #     if player not in stats_df['Name'].values:
-#     #         raise Exception(f'{player} not in stats_df')
+    # # confirm stats_df has all the players of df_players_no_captains
+    # for player in df_players_no_captains.keys():
+    #     if player not in stats_df['Name'].values:
+    #         raise Exception(f'{player} not in stats_df')
         
-#     if 'df_league' not in stss:
-#         get_league_data(stss)
+    if 'df_league' not in stss:
+        get_league_data(stss)
 
 
-#     stats_df = stss['df_league']
-#     stats_keys = ['G', 'A', '2A', 'D', 'TA', 'RE']
-#     new_df_players_no_captains = {}
-#     for player_name, v in df_players_no_captains.items():
-#         stats = stats_df[stats_df['Name'] == player_name]
-#         # check for nan values
-#         skip_person = False
-#         for key in stats_keys:
-#             # print (stats[key].values)
-#             if np.isnan(float(stats[key].values[0])):
-#                 skip_person = True
-#                 break
-#         if skip_person:
-#             continue
+    stats_df = stss['df_league']
+    stats_keys = ['G', 'A', '2A', 'D', 'TA', 'RE']
+    new_df_players_no_captains = {}
+    for player_name, v in df_players_no_captains.items():
+        stats = stats_df[stats_df['Name'] == player_name]
+        # check for nan values
+        skip_person = False
+        for key in stats_keys:
+            # print (stats[key].values)
+            if np.isnan(float(stats[key].values[0])):
+                skip_person = True
+                break
+        if skip_person:
+            continue
 
-#         # if 'Jenni' in k:
-#         #     print (stats)
-#         #     fasdf
+        # if 'Jenni' in k:
+        #     print (stats)
+        #     fasdf
 
 
-#         new_df_players_no_captains[player_name] = {}
-#         for stat_key in stats_keys:
-#             # print (stats[key].values)
-#             stat_value = stats[stat_key].values[0]
-#             new_df_players_no_captains[player_name][stat_key] = float(stat_value)
-#             new_df_players_no_captains[player_name]['Salary'] = player_salaries[player_name]
-#         # print (new_df_players_no_captains[player_name])
-#         # fasd
+        new_df_players_no_captains[player_name] = {}
+        for stat_key in stats_keys:
+            # print (stats[key].values)
+            stat_value = stats[stat_key].values[0]
+            new_df_players_no_captains[player_name][stat_key] = float(stat_value)
+            new_df_players_no_captains[player_name]['Salary'] = player_salaries[player_name]
+        # print (new_df_players_no_captains[player_name])
+        # fasd
     
-#     # for k, v in df_players_no_captains.items():
-#     #     print (k, v)
-#     #     fasdfa
+    # for k, v in df_players_no_captains.items():
+    #     print (k, v)
+    #     fasdfa
 
-#     # print (len(new_df_players_no_captains))
-#     # # find nans
-#     # for k, v in df_players_no_captains.items():
-#     #     print (k,v)
-#     #     if np.isnan(v['G']):
-#     #         print (k)
-
-
-#     # make a matrix from df_players_no_captains
-#     df_players_no_captains = pd.DataFrame.from_dict(new_df_players_no_captains, orient='index')
-#     # print (len(df_players_no_captains))
-#     X = df_players_no_captains[stats_keys]
-#     # print (len(X))
-#     y = df_players_no_captains['Salary']
-
-#     X = X.values#.reshape(-1, 1) # reshape to 2d array
-#     y = y.values.reshape(-1, 1) # reshape to 2d array
-#     # print (X)
-#     # print (y)
-
-#     # print (X.shape, y.shape)
-#     model = LinearRegression().fit(X, y) 
-
-#     # print (f"Learned model: {model.coef_} {model.intercept_}")
-
-#     # predict salary for each captain
-#     captain_salaries = {}
-#     for captain_name in captains:
-#         stats = stats_df[stats_df['Name'] == captain_name]
-#         stats = stats[stats_keys]
-#         stats = stats.values.reshape(1, -1)
-#         # print (stats.shape)
-#         salary = model.predict(stats)
-#         # print (f'{captain_name} predicted salary: {salary[0][0]}')
-#         # round to nearest integer
-#         captain_salaries[captain_name] = round(salary[0][0])
-
-#     return captain_salaries
+    # print (len(new_df_players_no_captains))
+    # # find nans
+    # for k, v in df_players_no_captains.items():
+    #     print (k,v)
+    #     if np.isnan(v['G']):
+    #         print (k)
 
 
+    # make a matrix from df_players_no_captains
+    df_players_no_captains = pd.DataFrame.from_dict(new_df_players_no_captains, orient='index')
+    # print (len(df_players_no_captains))
+    X = df_players_no_captains[stats_keys]
+    # print (len(X))
+    y = df_players_no_captains['Salary']
 
+    X = X.values#.reshape(-1, 1) # reshape to 2d array
+    y = y.values.reshape(-1, 1) # reshape to 2d array
+    # print (X)
+    # print (y)
 
+    # print (X.shape, y.shape)
+    model = LinearRegression().fit(X, y) 
 
+    # print (f"Learned model: {model.coef_} {model.intercept_}")
 
-# def compute_player_salaries(player_bids, protected_players_dict):
-#     """
-#     salary is mean of bids
-#     BUT if the player is protected, remove the bid from their team
+    # predict salary for each captain
+    captain_salaries = {}
+    for captain_name in captains:
+        stats = stats_df[stats_df['Name'] == captain_name]
+        stats = stats[stats_keys]
+        stats = stats.values.reshape(1, -1)
+        # print (stats.shape)
+        salary = model.predict(stats)
+        # print (f'{captain_name} predicted salary: {salary[0][0]}')
+        # round to nearest integer
+        captain_salaries[captain_name] = round(salary[0][0])
 
-#     player_bids: player_name: {team: bid}
-#     """
-
-#     player_salaries = {}
-#     # player_bids_copy = player_bids.copy()
-#     for player_name, bids in player_bids.items():
-#         player_bids = []
-#         for team, bid in bids.items():
-#             # if the player is protected, remove the bid
-#             this_team_protected_players = [player['player_name'] for player in protected_players_dict[team]]
-#             if player_name in this_team_protected_players:
-#                 # print (f"{player_name} is protected by {team}")
-#                 continue
-#             player_bids.append(bid)
-#         player_salaries[player_name] = round(np.mean(player_bids))
-
-#     return player_salaries
+    return captain_salaries
 
 
 
 
 
 
+def compute_player_salaries(player_bids, protected_players_dict):
+    """
+    salary is mean of bids
+    BUT if the player is protected, remove the bid from their team
 
+    player_bids: player_name: {team: bid}
+    """
 
+    player_salaries = {}
+    # player_bids_copy = player_bids.copy()
+    for player_name, bids in player_bids.items():
+        player_bids = []
+        for team, bid in bids.items():
+            # if the player is protected, remove the bid
+            this_team_protected_players = [player['player_name'] for player in protected_players_dict[team]]
+            if player_name in this_team_protected_players:
+                # print (f"{player_name} is protected by {team}")
+                continue
+            player_bids.append(bid)
+        player_salaries[player_name] = round(np.mean(player_bids))
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-def convert_col_to_int(df, col):
-    df[col] = df[col].str.replace('$', '', regex=False)
-    df[col] = df[col].str.replace(',', '')
-    df[col] = df[col].astype(int)
-    return df
-
-def no_emoji(text):
-    new = ''
-    for c in text:
-        if c.isalpha() or c in [' ', '-', "'", '"', "(", ")", "!", "&"]:
-           new+=c 
-    return new.strip().replace('  ', ' ')
-
-
-
-def load_league_data(client, tpl_url):
-    worksheet = 'League'
-    skiprows = 8    
-    spreadsheet = client.open_by_url(tpl_url)
-    sheet = spreadsheet.worksheet(worksheet)
-    values = sheet.get_all_values()
-    values = values[skiprows:]
-    df = pd.DataFrame(values[2:], columns=values[1])
-    df = convert_col_to_int(df, 'Cap Impact')
-    df['First'] = df['First'].str.strip()
-    df['Last'] = df['Last'].str.strip()
-    df['Full Name'] = df['First'] + ' ' + df['Last']
-    df = df[['Full Name', 'Team', 'Cap Impact', 'Gender']]
-    return df
-
-
-
-def load_standings_data(client, tpl_url):
-    worksheet = 'Standings'
-    # skiprows = 0
-    spreadsheet = client.open_by_url(tpl_url)
-    sheet = spreadsheet.worksheet(worksheet)
-    values = sheet.get_all_values()
-    df_Standings = pd.DataFrame(values[2:], columns=values[1])
-    # cap_floor = df.iloc[20]['Cap Status']
-    # cap_floor = cap_floor.replace('$', '').replace(',', '')
-    # cap_floor = cap_floor.split('.')[0]
-    # cap_floor = int(cap_floor)
-    # df_Standings['Cap Floor'] = cap_floor
-    # df_Standings = df_Standings.iloc[:8] # only keep the rows of the standings
-    # df_Standings = convert_col_to_int(df_Standings, 'Over/under')
-    # df_Standings = convert_col_to_int(df_Standings, 'Salary')
-    df_Standings['Team'] = df_Standings['Team'].apply(no_emoji)
-    # only keep the columns we need: Team, Salary, Cap Status
-    df_Standings = df_Standings[['Team', 'Salary', 'Cap Status']]
-    return df_Standings
-
-
-def get_gsheets_in_folder(drive_service, folder_id):
-    """ Search for Google Sheets files in the given folder """
-    query = f"'{folder_id}' in parents and mimeType='application/vnd.google-apps.spreadsheet' and trashed=false"
-    results = drive_service.files().list(q=query, fields="files(id, name)").execute()
-    files = results.get('files', [])
-    return files
-
-
-def extract_bid_info(data):
-    # total_bid_cell = [1,2]
-    # within_range_cell = [1,3]
-    # total_bid = data[total_bid_cell[0]][total_bid_cell[1]]
-    # within_range = data[within_range_cell[0]][within_range_cell[1]]
-    # print (f"\nTotal bid: {total_bid}")
-    # print (f"Within range: {within_range}\n")
-
-    player_rows = [6,19]
-    name_col = 0
-    first_bid_col = 2
-    bid_col_interval = 6
-    n_teams = 8
-    bids = {} # player_name: bid
-    for team_i in range(n_teams):
-        for player_row in range(player_rows[0], player_rows[1]+1):
-            cur_name_col = name_col + team_i*bid_col_interval
-            player_name = data[player_row][cur_name_col]
-            player_bid = data[player_row][first_bid_col + bid_col_interval*team_i]
-            bids[player_name] = player_bid
-            # print (team_i, player_name, player_bid)
-    # print (f"Number of players: {len(bids)}")
-
-    protected_players_col = 4
-    protected_players = []
-    for player_row in range(player_rows[0], player_rows[1]+1):
-        player_name = data[player_row][name_col]
-        if data[player_row][protected_players_col] == 'y':
-            protected_players.append(player_name)
-    # print (f"Protected players: {protected_players}\n")
-    return bids, protected_players
-
-
-
+    return player_salaries
 
 
 
@@ -716,119 +593,75 @@ def algo_page():
     run_algo_button = st.button('Run Algo')
     if run_algo_button:
 
-        if 'team_bids' not in stss:
-            with st.spinner("Loading Data"): #, show_time=True):
-                print ("Loading data...")
-                client = stss['client']
-                drive_service = stss['drive_service']
+        if 'conn' not in st.session_state:
+            conn = get_connection()
+            stss['conn'] = conn
 
-                # Load each team's bids
-                folder_id = '1ffiWqtVDvlZ8i6GHmtdU0UeKdQG--crp'
-                existing_sheets = get_gsheets_in_folder(drive_service, folder_id)
-                # print ("Sheets in folder:")
-                # for file_name in existing_sheets:
-                #     print (file_name)
-                # existing_sheet_names = [file['name'] for file in existing_sheets]
-                team_bids = {}
-                for sheet_dict in existing_sheets:
-                    sheet_name = sheet_dict['name']
-                    print (f" - {sheet_name}")
-                    sheet_id = sheet_dict['id']
-                    conn = client.open_by_key(sheet_id)
-                    sheet = conn.get_worksheet(0)
-                    data = sheet.get_all_values()
-                    bids, protected_players = extract_bid_info(data)
-                    team_bids[sheet_name] = {'bids': bids, 'protected_players': protected_players}
+        if 'df_players' not in stss:
+            conn = stss['conn']
+            worksheets = conn.worksheets()
+            players_sheet = [worksheet for worksheet in worksheets if worksheet.title == 'Players'][0]
+            df_players = get_as_dataframe(players_sheet)
+            stss['worksheets'] = worksheets
+            stss['df_players'] = df_players
+            stss['player_names'] = df_players['Full Name'].tolist()
 
-                # Load league data
-                tpl_url = "https://docs.google.com/spreadsheets/d/18I5ljv7eL6E8atN7Z6w9wmm6CBwOGsStmW5UJNB0rrg/edit?gid=9#gid=9"
-                df_League = load_league_data(client, tpl_url)
-                # print (len(df_League))
-                # print (df_League.columns)
-                # Load standings data
-                df_Standings = load_standings_data(client, tpl_url)
-                # print (len(df_Standings))
-                # print (df_Standings.columns)
+        conn = stss['conn']
+        worksheets = stss['worksheets']
+        df_players = stss['df_players']
 
-                stss["team_bids"] = team_bids
-                stss["df_League"] = df_League
-                stss["df_Standings"] = df_Standings
+        team_names = list(df_players['Team'].unique())
+        player_names = df_players['Full Name'].tolist()
+        rosters = get_rosters(df_players, team_names)
+        max_salary = st.session_state['max_salary']
 
-        team_bids = stss['team_bids']
-        df_League = stss['df_League']
-        df_Standings = stss['df_Standings']
+        player_salaries, latest_week = get_salaries(df_players, player_names, max_salary)
+        
+        latest_week = 4
+        salary_col_name = f"Week {latest_week} - Salary"
+        bids_sheet_name = f'Week {latest_week} - Bids'
+        protect_sheet_name = f'Week {latest_week} - Protect'
+        print (f"\n{bids_sheet_name}")
 
-        # for i, (k, v) in enumerate(team_bids.items()):
-        #     print (f"\n{k}")
-        #     bids = v['bids']
-        #     for player, bid in bids.items():
-        #         print (player, bid)
-        #     fdsa
+        protected_players_dict = load_protected_players(conn, protect_sheet_name)
 
-        print ('ready')
+        all_player_bids = get_all_bids_from_sheet(conn, stss, bids_sheet_name, worksheets)
+        player_bids, rosters_team_list, player_genders = accumulate_data(rosters, team_names, df_players, salary_col_name, player_names, all_player_bids)
 
-        captains = [
-            "Vincent Poon",
-            "Cat Pelletier",
-            "Marc Hodges",
-            "Jamie Hoo-fatt",
-            "James Ho",
-            "Vanessa Mensink",
-            "Ryan Sherriff",
-            "Alexa Skinner",
-            "Benjamin St.Louis",
-            "Sam Esteves",
-            "Robert Stalker",
-            "Brendan Howarth",
-            "Caterina Cazzetta",
-            "Yubai Liu",
-        ]
+        # compute player salaries by taking the average of the bids
+        # player_salaries = {player: round(np.mean(list(bids.values()))) for player, bids in player_bids.items()}
+        # player_salaries = compute_player_salaries(player_bids, protected_players_dict)
+        # for now keep salaries unchanged
+        # just salary to int
+        player_salaries = {k: int(v) for k, v in player_salaries.items()}
 
 
-        # Make roster dict
-        data_league = df_League.to_dict(orient='records')
-        print (f"number of players data_league: {len(data_league)}")
-        team_rosters = {}
-        for player_dict in data_league:
-            team = player_dict['Team']
-            player_name = player_dict['Full Name']
-            if team not in team_rosters:
-                team_rosters[team] = []
-            team_rosters[team].append(player_name)
-        # # Sort each player by Cap Impact
-        # for team in team_rosters:
-        #     team_rosters[team] = sorted(team_rosters[team], key=lambda x: x['Cap Impact'], reverse=True)
-        starting_rosters = team_rosters.copy()
-        team_names = list(team_rosters.keys())
-        # print (team_names)
 
-        # Player salaries: dict of player_name: salary
-        player_salaries = {player['Full Name']: player['Cap Impact'] for player in data_league}
-        # Player genders: dict of player_name: gender
-        player_genders = {player['Full Name']: player['Gender'] for player in data_league}
-        # original_team_costs is sum of all player salaries for each team
-        original_team_costs = calc_teams_salaries(team_rosters, player_salaries)
-        # protected_players_dict: dict of team_name: list of players that are protected
-        protected_players_dict = {team: [] for team in team_names}
-        for team in team_bids:
-            protected_players_dict[team] = team_bids[team]['protected_players']
-        # player bids: dict of player_name: {team: bid}
-        player_bids = {}
-        for team in team_bids:
-            for player, bid in team_bids[team]['bids'].items():
-                if player not in player_bids:
-                    player_bids[player] = {}
-                # # print the type of bid variable
-                # print (type(bid))
-                # fdas
-                player_bids[player][team] = int(bid)
-        print (f"number of players player_bids: {len(player_bids)}")
+        # get list of captains
+        if 'captains' not in stss:
+            captains_sheet = [worksheet for worksheet in worksheets if worksheet.title == 'Captains'][0]
+            df_captains = get_as_dataframe(captains_sheet)
+            stss['captains'] = df_captains['Captain'].tolist()
+        captains = stss['captains']
+
+        # # get captain salaries
+        # captain_salaries = get_captain_salaries(stss, df_players, player_salaries, captains)
+        # # make all bids for the captains be their predicted salary
+        # for captain in captains:
+        #     player_bids[captain] = {team: captain_salaries[captain] for team in team_names}
+        #     player_salaries[captain] = captain_salaries[captain]
+
+        # normalize salaries and bids
+        # player_bids, new_player_salaries, original_team_costs = normalize(player_bids, player_salaries, rosters)
+        new_player_salaries = player_salaries
+        original_team_costs = calc_teams_salaries(rosters, new_player_salaries)
+        # sort roster into the same order as original_team_costs, so highest to lowest salary
+        rosters = {k: v for k, v in sorted(rosters.items(), key=lambda item: original_team_costs[item[0]], reverse=True)}
+        starting_rosters = rosters.copy()
 
         # RUN TRADING ALORITHM
-        rosters, count_team_trades, trades = run_algo(team_rosters, player_bids, 
-                                                      player_genders, captains, 
-                                                      player_salaries, protected_players_dict)
-        new_team_costs = calc_teams_salaries(rosters, player_salaries)
+        rosters, count_team_trades, trades = run_algo(rosters_team_list, player_bids, player_genders, captains, new_player_salaries, protected_players_dict)
+        new_team_costs = calc_teams_salaries(rosters, new_player_salaries)
 
 
         # Display info
@@ -837,42 +670,9 @@ def algo_page():
         # with st.expander("Player Salaries"):
         #     show_player_salaries(new_player_salaries, player_bids)
         with st.expander("Trades"):
-            show_trades(trades, player_salaries)
+            show_trades(trades, new_player_salaries)
         with st.expander("Post Trade Info"):
             show_end_info(new_team_costs, count_team_trades, trades, player_bids, rosters, starting_rosters, original_team_costs)
-
-
-
-
-    
-
-        # player_salaries, latest_week = get_salaries(df_players, player_names, max_salary)
-        
-        # # latest_week = 4
-        # # salary_col_name = f"Week {latest_week} - Salary"
-        # # bids_sheet_name = f'Week {latest_week} - Bids'
-        # # protect_sheet_name = f'Week {latest_week} - Protect'
-        # # print (f"\n{bids_sheet_name}")
-
-        # protected_players_dict = load_protected_players(conn, protect_sheet_name)
-
-        # all_player_bids = get_all_bids_from_sheet(conn, stss, bids_sheet_name, worksheets)
-        # player_bids, rosters_team_list, player_genders = accumulate_data(rosters, team_names, df_players, salary_col_name, player_names, all_player_bids)
-
-        # # compute player salaries by taking the average of the bids
-        # # player_salaries = {player: round(np.mean(list(bids.values()))) for player, bids in player_bids.items()}
-        # # player_salaries = compute_player_salaries(player_bids, protected_players_dict)
-        # # for now keep salaries unchanged
-        # # just salary to int
-        # player_salaries = {k: int(v) for k, v in player_salaries.items()}
-
-
-        # new_player_salaries = player_salaries
-        # original_team_costs = calc_teams_salaries(rosters, new_player_salaries)
-        # # sort roster into the same order as original_team_costs, so highest to lowest salary
-        # rosters = {k: v for k, v in sorted(rosters.items(), key=lambda item: original_team_costs[item[0]], reverse=True)}
-        # starting_rosters = rosters.copy()
-
 
 
 

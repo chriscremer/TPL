@@ -31,27 +31,27 @@ def get_img_with_href(local_img_path, target_url, caption):
 
 
 def settings_page():
-    # st.write(f'Team: {st.session_state["team_name"]}')
+    st.write(f'Team: {st.session_state["team_name"]}')
     logout = st.button('Logout')
 
 
     st.markdown("<br>", unsafe_allow_html=True) 
     # st.markdown("## Links")
 
-    # games_url = "https://chriscremer.ca/TPL/index.html"
-    # frisbee_img = "images/frisbee.png"
+    games_url = "https://chriscremer.ca/TPL/index.html"
+    frisbee_img = "images/frisbee.png"
 
-    # tuc_url = "https://www.tuc.org/zuluru/divisions/standings?division=1041&team=9772"
-    # tuc_img = "images/tuc.jpeg"
+    tuc_url = "https://www.tuc.org/zuluru/divisions/standings?division=1041&team=9772"
+    tuc_img = "images/tuc.jpeg"
 
-    # public_sheet_url = "https://docs.google.com/spreadsheets/d/1GovSEPKC2ayC7YvGvKvZIXlOUi1eGjdr7yF9Aw_q964/edit?gid=1238198717#gid=1238198717"
-    # public_sheet_img = "images/gsheet.png"
+    public_sheet_url = "https://docs.google.com/spreadsheets/d/1GovSEPKC2ayC7YvGvKvZIXlOUi1eGjdr7yF9Aw_q964/edit?gid=1238198717#gid=1238198717"
+    public_sheet_img = "images/gsheet.png"
 
-    # gm_sheet_url = "https://docs.google.com/spreadsheets/d/1U4T-r7DsfWZI9VXsa7Ul38XDDLpE-7Sz1TFzd29EEVw/edit?gid=9#gid=9"
-    # gm_sheet_img = "images/gsheet.png"
+    gm_sheet_url = "https://docs.google.com/spreadsheets/d/1U4T-r7DsfWZI9VXsa7Ul38XDDLpE-7Sz1TFzd29EEVw/edit?gid=9#gid=9"
+    gm_sheet_img = "images/gsheet.png"
 
-    # stat_keeping_url = "https://tplstats.netlify.app/home"
-    # stat_keeping_img = "images/stat_keeping.png"
+    stat_keeping_url = "https://tplstats.netlify.app/home"
+    stat_keeping_img = "images/stat_keeping.png"
 
 
     # cols = st.columns(7)

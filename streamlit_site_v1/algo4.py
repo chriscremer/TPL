@@ -24,12 +24,9 @@ def get_team_self_values(rosters, player_bids):
     # Calculate how much each team thinks its own team is worth
     team_values = {}
     for team, roster in rosters.items():
-        team_values[team] = 0
         for player in roster:
             team_bid = player_bids[player][team]
-            # team_value = team_values.get(team, 0)
-            # print (team, player, team_bid, team_values[team])
-            team_values[team] += team_bid
+            team_values[team] = team_values.get(team, 0) + team_bid
     # Sort alphabetically
     team_values = {k: v for k, v in sorted(team_values.items(), key=lambda item: item[0])}
     return team_values
@@ -84,8 +81,7 @@ def run_algo(rosters, player_bids, player_genders, captains, player_salaries, pr
     # protected_players_dict = {k: v for k, v in sorted(protected_players_dict.items(), key=lambda item: team_costs[item[0]], reverse=True)}
     protected_players = []
     for team, players in protected_players_dict.items():
-        # protected_players += [player['player_name'] for player in players]
-        protected_players += [player_name for player_name in players]
+        protected_players += [player['player_name'] for player in players]
 
     max_trades = 3 #4 # 3 # max trades per team
     min_std_diff = 1 # minimum change in standard deviation of team salaries

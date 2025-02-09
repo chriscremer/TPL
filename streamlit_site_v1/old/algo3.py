@@ -1,8 +1,6 @@
 """
-python -m streamlit_site.algo4
-
-goal is to make minimum 1 trade per team
-so if 2 teams have made 0 trades, then the next trade must involve atleast one of those teams
+python -m streamlit_site.algo2
+python streamlit_site/algo2.py
 """
 
 import numpy as np
@@ -24,12 +22,9 @@ def get_team_self_values(rosters, player_bids):
     # Calculate how much each team thinks its own team is worth
     team_values = {}
     for team, roster in rosters.items():
-        team_values[team] = 0
         for player in roster:
             team_bid = player_bids[player][team]
-            # team_value = team_values.get(team, 0)
-            # print (team, player, team_bid, team_values[team])
-            team_values[team] += team_bid
+            team_values[team] = team_values.get(team, 0) + team_bid
     # Sort alphabetically
     team_values = {k: v for k, v in sorted(team_values.items(), key=lambda item: item[0])}
     return team_values
@@ -54,7 +49,7 @@ def trade(rosters, team_1, player_1, team_2, player_2, team_names):
 
 
 
-def run_algo(rosters, player_bids, player_genders, captains, player_salaries, protected_players_dict):
+def run_algo(rosters, player_bids, player_genders, captains, player_salaries):
 
     debug = 1
     random.seed(0)
@@ -62,32 +57,29 @@ def run_algo(rosters, player_bids, player_genders, captains, player_salaries, pr
     # compute salary of each team
     team_costs = get_team_costs(rosters, player_salaries)
 
-    # # for each team, find the top n players that they value most relative to the league
-    # # value: player_bid - avg_bid
-    # n_players_to_protect = 2
-    # protected_players = []
-    # protected_players_dict = {}
-    # for team, roster in rosters.items():
-    #     player_diffs = {player: player_bids[player][team] - player_salaries[player] for player in roster}
-    #     player_diffs = {k: v for k, v in sorted(player_diffs.items(), key=lambda item: item[1], reverse=True)}
-    #     # remove captains
-    #     player_diffs = {k: v for k, v in player_diffs.items() if k not in captains}
-    #     # remove players that have 'WILD' in their name
-    #     player_diffs = {k: v for k, v in player_diffs.items() if 'WILD' not in k}
-    #     # add top n players to protected players
-    #     protected_players += list(player_diffs.keys())[:n_players_to_protect]
-    #     protected_players_dict[team] = []
-    #     for player in list(player_diffs.keys())[:n_players_to_protect]:
-    #         protected_players_dict[team].append({'player_name': player, 'value': player_diffs[player]})
-
-    # # sort protected players by team_costs
-    # protected_players_dict = {k: v for k, v in sorted(protected_players_dict.items(), key=lambda item: team_costs[item[0]], reverse=True)}
+    # for each team, find the top n players that they value most relative to the league
+    # value: player_bid - avg_bid
+    n_players_to_protect = 2
     protected_players = []
-    for team, players in protected_players_dict.items():
-        # protected_players += [player['player_name'] for player in players]
-        protected_players += [player_name for player_name in players]
+    protected_players_dict = {}
+    for team, roster in rosters.items():
+        player_diffs = {player: player_bids[player][team] - player_salaries[player] for player in roster}
+        player_diffs = {k: v for k, v in sorted(player_diffs.items(), key=lambda item: item[1], reverse=True)}
+        # remove captains
+        player_diffs = {k: v for k, v in player_diffs.items() if k not in captains}
+        # remove players that have 'WILD' in their name
+        player_diffs = {k: v for k, v in player_diffs.items() if 'WILD' not in k}
+        # add top n players to protected players
+        protected_players += list(player_diffs.keys())[:n_players_to_protect]
+        protected_players_dict[team] = []
+        for player in list(player_diffs.keys())[:n_players_to_protect]:
+            protected_players_dict[team].append({'player_name': player, 'value': player_diffs[player]})
 
-    max_trades = 3 #4 # 3 # max trades per team
+    # sort protected players by team_costs
+    protected_players_dict = {k: v for k, v in sorted(protected_players_dict.items(), key=lambda item: team_costs[item[0]], reverse=True)}
+
+
+    max_trades = 3 # max trades per team
     min_std_diff = 1 # minimum change in standard deviation of team salaries
 
     team_names = list(rosters.keys())
@@ -102,15 +94,8 @@ def run_algo(rosters, player_bids, player_genders, captains, player_salaries, pr
         possible_trades = []
         for team_1 in team_names:
 
-            # compute team_cost - avg team_cost
-            team_cost_diff = np.abs(team_costs[team_1] - np.mean(list(team_costs.values())))
-            if team_cost_diff > 40000:
-                this_max_trades = max_trades + 1
-            else:
-                this_max_trades = max_trades
-
             # skip if team has already made max_trades
-            if count_team_trades[team_1] >= this_max_trades:
+            if count_team_trades[team_1] >= max_trades:
                 continue
             
             team_1_players_to_trade = rosters[team_1]
@@ -133,15 +118,8 @@ def run_algo(rosters, player_bids, player_genders, captains, player_salaries, pr
                 player_1_gender = player_genders[player_1]
                 for offering_team in teams_to_consider_trading_to:
 
-                    # compute team_cost - avg team_cost
-                    team_cost_diff = np.abs(team_costs[offering_team] - np.mean(list(team_costs.values())))
-                    if team_cost_diff > 40000:
-                        this_max_trades2 = max_trades + 1
-                    else:
-                        this_max_trades2 = max_trades
-
                     # skip if team has already made max_trades
-                    if count_team_trades[offering_team] >= this_max_trades2:
+                    if count_team_trades[offering_team] >= max_trades:
                         continue
 
                     offering_team_roster = rosters[offering_team]
@@ -170,11 +148,6 @@ def run_algo(rosters, player_bids, player_genders, captains, player_salaries, pr
                         # if both teams are worse off, skip
                         if team1_happiness_change <= 0 and team2_happiness_change <= 0:
                             continue
-                        # if player salary dif is less than 1000, skip
-                        minimum_salary_change = 7000
-                        if abs(player_salaries[player_1] - player_salaries[player_2]) < minimum_salary_change:
-                            continue
-
 
                         # Calculate the standard deviation of team costs
                         team_costs = get_team_costs(temp_rosters, player_salaries)
@@ -206,15 +179,6 @@ def run_algo(rosters, player_bids, player_genders, captains, player_salaries, pr
         
 
         
-
-
-        # check if two or fewer teams are at 0 trades and the rest have atleast 1
-        # then make sure the next trade involve atleast one of the teams with 0 trades
-        if sum([1 for team in team_names if count_team_trades[team] == 0]) in [1, 2]:
-            teams_that_must_trade = [team for team in team_names if count_team_trades[team] == 0]
-            possible_trades = [trade1 for trade1 in possible_trades if trade1["team_1"] in teams_that_must_trade or trade1["team_2"] in teams_that_must_trade]
-            print (f"Teams that must trade: {teams_that_must_trade}")
-
         # stop if no possible trades
         if len(possible_trades) == 0:
             if debug:
@@ -224,11 +188,10 @@ def run_algo(rosters, player_bids, player_genders, captains, player_salaries, pr
         trades_to_consider = []
 
         # find trades where both teams are happy
-        if len(trades_to_consider) == 0:
-            for trade1 in possible_trades:
-                if trade1["team1_happiness_change"] > 0 and trade1["team2_happiness_change"] > 0:
-                    trades_to_consider.append(trade1)
-                    trade_type = "happy"
+        for trade1 in possible_trades:
+            if trade1["team1_happiness_change"] > 0 and trade1["team2_happiness_change"] > 0:
+                trades_to_consider.append(trade1)
+                trade_type = "happy"
 
         # if no happy, find trades where sum of happiness is positive
         if len(trades_to_consider) == 0:
@@ -251,27 +214,6 @@ def run_algo(rosters, player_bids, player_genders, captains, player_salaries, pr
 
         if debug:
             print (f"{trade_i+1} - {trade_type} trades: {len(trades_to_consider)}")
-
-
-
-        # find trades where both are overbidding on the player they are getting, AND underbidding on the player they are giving
-        both_overbid_underbid = []
-        # take trades where both teams are overbidding on the player
-        both_overbid = []
-        for trade1 in trades_to_consider:
-            team2_bid_diff_on_player1 = player_bids[trade1["player_1"]][trade1["team_2"]] - player_salaries[trade1["player_1"]]
-            team1_bid_diff_on_player2 = player_bids[trade1["player_2"]][trade1["team_1"]] - player_salaries[trade1["player_2"]]
-            team1_bid_diff_on_player1 = player_bids[trade1["player_1"]][trade1["team_1"]] - player_salaries[trade1["player_1"]]
-            team2_bid_diff_on_player2 = player_bids[trade1["player_2"]][trade1["team_2"]] - player_salaries[trade1["player_2"]]
-            if team2_bid_diff_on_player1 > 0 and team1_bid_diff_on_player2 > 0 and team1_bid_diff_on_player1 < 0 and team2_bid_diff_on_player2 < 0:
-                both_overbid_underbid.append(trade1)
-            elif team2_bid_diff_on_player1 > 0 and team1_bid_diff_on_player2 > 0:
-                both_overbid.append(trade1)
-        if len(both_overbid_underbid) > 0:
-            trades_to_consider = both_overbid_underbid
-        elif len(both_overbid) > 0:
-            trades_to_consider = both_overbid
-
 
         # sort by team costs std
         trades_to_consider = sorted(trades_to_consider, key=lambda x: x["team_costs_std"])
@@ -318,11 +260,10 @@ def run_algo(rosters, player_bids, player_genders, captains, player_salaries, pr
             'happiness_change': happiness_change,
             'team1_happiness_change': team1_happiness_change,
             'team2_happiness_change': team2_happiness_change,
-            'team_costs': team_costs.copy(),
         })
         traded_players.append(player_1)
         traded_players.append(player_2)
-    return rosters, count_team_trades, trades #, protected_players_dict
+    return rosters, count_team_trades, trades, protected_players_dict
 
 
 
