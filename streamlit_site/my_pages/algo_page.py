@@ -1,15 +1,12 @@
 import streamlit as st
 import pandas as pd
-import numpy as np
-import time
-from sklearn.linear_model import LinearRegression
-
-from gspread_dataframe import set_with_dataframe, get_as_dataframe
-
-
-from utils import get_connection
-from data_utils import get_league_data, load_protected_players
-from my_pages.bids import get_rosters, get_salaries
+# import numpy as np
+# import time
+# from sklearn.linear_model import LinearRegression
+# from gspread_dataframe import set_with_dataframe, get_as_dataframe
+# from utils import get_connection
+# from data_utils import get_league_data, load_protected_players
+# from my_pages.bids import get_rosters, get_salaries
 from algo4 import run_algo
 
 
@@ -49,6 +46,11 @@ from algo4 import run_algo
 
 
 #     return player_bids, rosters_team_list, player_genders
+
+
+
+
+
 
 
 def show_trades(trades, new_player_salaries): #df_players, salary_col_name):
@@ -131,9 +133,15 @@ def show_trades(trades, new_player_salaries): #df_players, salary_col_name):
 
 
 
-def make_likeness_matrix(team_costs, player_bids, rosters, avg_team_cost, starting_rosters=None):
 
-    
+
+
+
+
+
+
+
+def make_likeness_matrix(team_costs, player_bids, rosters, avg_team_cost, starting_rosters=None):
 
     # sort team_costs into same order as starting_rosters
     if starting_rosters is not None:
@@ -141,7 +149,6 @@ def make_likeness_matrix(team_costs, player_bids, rosters, avg_team_cost, starti
         for team_name in starting_rosters.keys():
             new_team_costs[team_name] = team_costs[team_name]
         team_costs = new_team_costs
-
 
     # make a matrix of how much each team likes another team
     # so for each team, sum the bids of the players on the other teams
@@ -151,8 +158,11 @@ def make_likeness_matrix(team_costs, player_bids, rosters, avg_team_cost, starti
         for other_team in team_costs.keys():
             likeness_matrix[team_name][other_team] = 0
             for player_name in rosters[other_team]:
+                # print (player_name, team_name, player_bids[player_name][team_name])
                 likeness_matrix[team_name][other_team] += player_bids[player_name][team_name]
-
+    
+    # print (likeness_matrix)
+    # print (avg_team_cost)
     # shift matrix down by avg salary
     for team_name in team_costs.keys():
         for other_team in team_costs.keys():
@@ -192,6 +202,10 @@ def make_likeness_matrix(team_costs, player_bids, rosters, avg_team_cost, starti
     fig.set_size_inches(3, 3)
     st.pyplot(fig, use_container_width=False)
 
+
+
+
+    # second matrix
     if starting_rosters is not None:
         # show change in likeness matrix from starting to ending roster
         starting_likeness_matrix = {}
@@ -244,6 +258,11 @@ def make_likeness_matrix(team_costs, player_bids, rosters, avg_team_cost, starti
         #make figure smaller
         fig.set_size_inches(3, 3)
         st.pyplot(fig, use_container_width=False)
+
+
+
+
+
 
 
 
@@ -305,23 +324,14 @@ def show_starting_info(team_costs, protected_players_dict, starting_rosters, pla
 
 
 
-def calc_teams_salaries(rosters, new_player_salaries):
-    # calcutte new team costs
-    # team_costs = {}
-    # for team_name in team_names:
-    #     team_costs[team_name] = 0
-    #     for player in rosters[team_name]:
-    #         salary = df_players[df_players['Full Name'] == player][salary_col_name].values[0]
-    #         team_costs[team_name] += salary
-    team_costs = {}
-    for team_name, roster in rosters.items():
-        team_costs[team_name] = 0
-        for player_name in roster:
-            # print (player_name)
-            team_costs[team_name] += new_player_salaries[player_name]
-    # sort largest to smallest
-    team_costs = {k: v for k, v in sorted(team_costs.items(), key=lambda item: item[1], reverse=True)}
-    return team_costs
+
+
+
+
+
+
+
+
 
 
 
@@ -411,34 +421,34 @@ def show_end_info(team_costs, count_team_trades, trades, player_bids, rosters, s
 
 
 
-def show_player_salaries(player_salaries, player_bids):
-    salarylist = list(player_salaries.values())
-    max_salary = np.max(salarylist)
-    min_salary = np.min(salarylist)
-    avg_salary = np.mean(salarylist)
-    st.markdown(f"Max Salary: {max_salary}<br>Avg Salary: {round(avg_salary)}<br>Min Salary: {min_salary}", unsafe_allow_html=True)
+# def show_player_salaries(player_salaries, player_bids):
+#     salarylist = list(player_salaries.values())
+#     max_salary = np.max(salarylist)
+#     min_salary = np.min(salarylist)
+#     avg_salary = np.mean(salarylist)
+#     st.markdown(f"Max Salary: {max_salary}<br>Avg Salary: {round(avg_salary)}<br>Min Salary: {min_salary}", unsafe_allow_html=True)
 
-    # remove Wildcards from list
-    player_salaries2 = {k: v for k, v in player_salaries.items() if 'WILD' not in k}
+#     # remove Wildcards from list
+#     player_salaries2 = {k: v for k, v in player_salaries.items() if 'WILD' not in k}
 
-    player_salaries_df = pd.DataFrame.from_dict(player_salaries2, orient='index', columns=['Salary'])
-    player_salaries_df = player_salaries_df.sort_values(by='Salary', ascending=False)
-    # Make first column be called 'Player'
-    player_salaries_df = player_salaries_df.reset_index()
-    player_salaries_df = player_salaries_df.rename(columns={'index': 'Player'})
+#     player_salaries_df = pd.DataFrame.from_dict(player_salaries2, orient='index', columns=['Salary'])
+#     player_salaries_df = player_salaries_df.sort_values(by='Salary', ascending=False)
+#     # Make first column be called 'Player'
+#     player_salaries_df = player_salaries_df.reset_index()
+#     player_salaries_df = player_salaries_df.rename(columns={'index': 'Player'})
 
-    # add a column of the bids for each player
-    player_bids_2 = {}
-    for player, bids in player_bids.items():
-        player_bids_2[player] = [bid for bid in bids.values()]
-    # sort each list of bids
-    player_bids_2 = {k: sorted(v) for k, v in player_bids_2.items()}
-    player_salaries_df['Bids'] = player_salaries_df['Player'].apply(lambda x: player_bids_2[x])
+#     # add a column of the bids for each player
+#     player_bids_2 = {}
+#     for player, bids in player_bids.items():
+#         player_bids_2[player] = [bid for bid in bids.values()]
+#     # sort each list of bids
+#     player_bids_2 = {k: sorted(v) for k, v in player_bids_2.items()}
+#     player_salaries_df['Bids'] = player_salaries_df['Player'].apply(lambda x: player_bids_2[x])
 
-    # add column of the std of the bids
-    player_salaries_df['Standard Deviation'] = player_salaries_df['Bids'].apply(lambda x: round(np.std(x),1))
+#     # add column of the std of the bids
+#     player_salaries_df['Standard Deviation'] = player_salaries_df['Bids'].apply(lambda x: round(np.std(x),1))
 
-    st.table(player_salaries_df)
+#     st.table(player_salaries_df)
 
 
 
@@ -598,6 +608,25 @@ def show_player_salaries(player_salaries, player_bids):
 
 
 
+def calc_teams_salaries(rosters, new_player_salaries):
+    # calcutte new team costs
+    # team_costs = {}
+    # for team_name in team_names:
+    #     team_costs[team_name] = 0
+    #     for player in rosters[team_name]:
+    #         salary = df_players[df_players['Full Name'] == player][salary_col_name].values[0]
+    #         team_costs[team_name] += salary
+    team_costs = {}
+    for team_name, roster in rosters.items():
+        team_costs[team_name] = 0
+        for player_name in roster:
+            # print (player_name)
+            team_costs[team_name] += new_player_salaries[player_name]
+    # sort largest to smallest
+    team_costs = {k: v for k, v in sorted(team_costs.items(), key=lambda item: item[1], reverse=True)}
+    return team_costs
+
+
 
 
 def convert_col_to_int(df, col):
@@ -671,7 +700,7 @@ def extract_bid_info(data):
 
     player_rows = [6,19]
     name_col = 0
-    first_bid_col = 2
+    first_bid_col = 3
     bid_col_interval = 6
     n_teams = 8
     bids = {} # player_name: bid
@@ -711,12 +740,15 @@ def extract_bid_info(data):
 
 def algo_page():
 
+    debug = 1
+
     stss = st.session_state
 
     run_algo_button = st.button('Run Algo')
     if run_algo_button:
 
-        if 'team_bids' not in stss:
+        # only load previous data if in debug mode
+        if 'team_bids' not in stss or not debug:
             with st.spinner("Loading Data"): #, show_time=True):
                 print ("Loading data...")
                 client = stss['client']
@@ -742,10 +774,12 @@ def algo_page():
 
                 # Load league data
                 tpl_url = "https://docs.google.com/spreadsheets/d/18I5ljv7eL6E8atN7Z6w9wmm6CBwOGsStmW5UJNB0rrg/edit?gid=9#gid=9"
+                print (f"Loading league data")
                 df_League = load_league_data(client, tpl_url)
                 # print (len(df_League))
                 # print (df_League.columns)
                 # Load standings data
+                print (f"Loading standings data")
                 df_Standings = load_standings_data(client, tpl_url)
                 # print (len(df_Standings))
                 # print (df_Standings.columns)
@@ -787,7 +821,7 @@ def algo_page():
 
         # Make roster dict
         data_league = df_League.to_dict(orient='records')
-        print (f"number of players data_league: {len(data_league)}")
+        # print (f"number of players data_league: {len(data_league)}")
         team_rosters = {}
         for player_dict in data_league:
             team = player_dict['Team']
@@ -822,7 +856,7 @@ def algo_page():
                 # print (type(bid))
                 # fdas
                 player_bids[player][team] = int(bid)
-        print (f"number of players player_bids: {len(player_bids)}")
+        # print (f"number of players player_bids: {len(player_bids)}")
 
         # RUN TRADING ALORITHM
         rosters, count_team_trades, trades = run_algo(team_rosters, player_bids, 

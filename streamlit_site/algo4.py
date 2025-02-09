@@ -104,6 +104,7 @@ def run_algo(rosters, player_bids, player_genders, captains, player_salaries, pr
 
             # compute team_cost - avg team_cost
             team_cost_diff = np.abs(team_costs[team_1] - np.mean(list(team_costs.values())))
+            # added this to allow teams to make more trades if they are far from the average i think
             if team_cost_diff > 40000:
                 this_max_trades = max_trades + 1
             else:
@@ -159,6 +160,8 @@ def run_algo(rosters, player_bids, player_genders, captains, player_salaries, pr
                     # shuffle players in case of ties
                     random.shuffle(offering_team_roster)
 
+                    # print (f"Team 1: {team_1}, Player 1: {player_1}, Offering team: {offering_team}")
+
                     # consider trading this player with players on the offering team
                     for player_2 in offering_team_roster:
                         # trade player 1 from team 1 to team 2 for player 2
@@ -167,9 +170,12 @@ def run_algo(rosters, player_bids, player_genders, captains, player_salaries, pr
                         happiness_change_dict, happiness_change = get_happiness_change(rosters_before, temp_rosters, player_bids, team_names)
                         team1_happiness_change = happiness_change_dict[team_1]
                         team2_happiness_change = happiness_change_dict[offering_team]
+                        
                         # if both teams are worse off, skip
-                        if team1_happiness_change <= 0 and team2_happiness_change <= 0:
+                        # if team1_happiness_change <= 0 and team2_happiness_change <= 0:
+                        if team1_happiness_change < 0 and team2_happiness_change < 0:
                             continue
+
                         # if player salary dif is less than 1000, skip
                         minimum_salary_change = 7000
                         if abs(player_salaries[player_1] - player_salaries[player_2]) < minimum_salary_change:
