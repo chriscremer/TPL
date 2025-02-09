@@ -107,6 +107,7 @@ def show_trades(trades, new_player_salaries): #df_players, salary_col_name):
 
             text += f"</p>"
             st.markdown(text, unsafe_allow_html=True)
+            st.markdown('<br><br>', unsafe_allow_html=True)
             st.markdown('<hr>', unsafe_allow_html=True)
 
         with cols_list[i][1]:
