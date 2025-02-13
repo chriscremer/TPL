@@ -731,7 +731,16 @@ def extract_bid_info(data):
         for player_row in range(player_rows[0], player_rows[1]+1):
             cur_name_col = name_col + team_i*bid_col_interval
             player_name = data[player_row][cur_name_col]
+            # bid plus salary
             player_bid = data[player_row][first_bid_col + bid_col_interval*team_i]
+            try:
+                player_bid = int(player_bid)
+            except:
+                # print (f"Error with {player_name} - {player_bid}")
+                # take their salary, ignore the bid
+                player_bid = data[player_row][first_bid_col + bid_col_interval*team_i - 2]
+                player_bid = int(player_bid)
+                # print (f"Using salary: {player_bid}")
             bids[player_name] = player_bid
             # print (team_i, player_name, player_bid)
     # print (f"Number of players: {len(bids)}")
