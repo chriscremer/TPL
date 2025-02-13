@@ -775,28 +775,28 @@ def algo_page():
                 print ("Loading data...")
 
 
-                # # Load league data
-                # tpl_url = "https://docs.google.com/spreadsheets/d/18I5ljv7eL6E8atN7Z6w9wmm6CBwOGsStmW5UJNB0rrg/edit?gid=9#gid=9"
-                # print (f"Loading league data")
-                # df_League = load_league_data(client, tpl_url)
-                # # print (len(df_League))
-                # # print (df_League.columns)
-                # # Load standings data
-                # print (f"Loading standings data")
-                # df_Standings = load_standings_data(client, tpl_url)
-                # # print (len(df_Standings))
-                # # print (df_Standings.columns)
-
-                # Load from path instead
-                league_path = "/Users/chriscremer/code/TPL/streamlit_site/saved_data/League_page.csv"
-                standings_path = "/Users/chriscremer/code/TPL/streamlit_site/saved_data/Standings_page.csv"
-                df_League = load_league_data_from_path(league_path)
-                df_Standings = load_standings_data_from_path(standings_path)
-                # print (len(df_Standings))
-                # print (df_Standings.columns)
+                # Load league data
+                tpl_url = "https://docs.google.com/spreadsheets/d/18I5ljv7eL6E8atN7Z6w9wmm6CBwOGsStmW5UJNB0rrg/edit?gid=9#gid=9"
+                print (f"Loading league data")
+                df_League = load_league_data(client, tpl_url)
                 # print (len(df_League))
                 # print (df_League.columns)
-                # fasd
+                # Load standings data
+                print (f"Loading standings data")
+                df_Standings = load_standings_data(client, tpl_url)
+                # print (len(df_Standings))
+                # print (df_Standings.columns)
+
+                # # Load from path instead
+                # league_path = "/Users/chriscremer/code/TPL/streamlit_site/saved_data/League_page.csv"
+                # standings_path = "/Users/chriscremer/code/TPL/streamlit_site/saved_data/Standings_page.csv"
+                # df_League = load_league_data_from_path(league_path)
+                # df_Standings = load_standings_data_from_path(standings_path)
+                # # print (len(df_Standings))
+                # # print (df_Standings.columns)
+                # # print (len(df_League))
+                # # print (df_League.columns)
+                # # fasd
                 
                 
                 
