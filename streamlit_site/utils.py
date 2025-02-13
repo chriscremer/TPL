@@ -158,4 +158,13 @@ def make_colors():
     return colors, hex_colors
 
 
+def no_emoji(text):
+    new = ''
+    for c in text:
+        if c.isalpha() or c in [' ', '-', "'", '"', "(", ")", "!", "&", ":", ","]:
+           new+=c 
+    return new.strip().replace('  ', ' ')
+
+
+
 

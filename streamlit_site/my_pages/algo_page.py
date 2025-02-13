@@ -8,6 +8,7 @@ import numpy as np
 # from data_utils import get_league_data, load_protected_players
 # from my_pages.bids import get_rosters, get_salaries
 from algo4 import run_algo
+from utils import no_emoji
 
 
 # def get_all_bids_from_sheet(conn, stss, bids_sheet_name, worksheets):
@@ -638,13 +639,6 @@ def convert_col_to_int(df, col):
     df[col] = df[col].astype(int)
     return df
 
-def no_emoji(text):
-    new = ''
-    for c in text:
-        if c.isalpha() or c in [' ', '-', "'", '"', "(", ")", "!", "&"]:
-           new+=c 
-    return new.strip().replace('  ', ' ')
-
 
 
 def load_league_data(client, tpl_url):
@@ -662,6 +656,14 @@ def load_league_data(client, tpl_url):
     df = df[['Full Name', 'Team', 'Cap Impact', 'Gender']]
     return df
 
+def load_league_data_from_path(league_path):
+    df = pd.read_csv(league_path)
+    df = convert_col_to_int(df, 'Cap Impact')
+    df['First'] = df['First'].str.strip()
+    df['Last'] = df['Last'].str.strip()
+    df['Full Name'] = df['First'] + ' ' + df['Last']
+    df = df[['Full Name', 'Team', 'Cap Impact', 'Gender']]
+    return df
 
 
 def load_standings_data(client, tpl_url):
@@ -683,6 +685,23 @@ def load_standings_data(client, tpl_url):
     # only keep the columns we need: Team, Salary, Cap Status
     df_Standings = df_Standings[['Team', 'Salary', 'Cap Status']]
     return df_Standings
+
+
+
+def load_standings_data_from_path(standings_path):
+    df_Standings = pd.read_csv(standings_path)
+    df_Standings['Team'] = df_Standings['Team'].apply(no_emoji)
+    # only keep the columns we need: Team, Salary, Cap Status
+    df_Standings = df_Standings[['Team', 'Salary', 'Cap Status']]
+    return df_Standings
+
+
+
+
+
+
+
+
 
 
 def get_gsheets_in_folder(drive_service, folder_id):
@@ -754,6 +773,36 @@ def algo_page():
         if 'team_bids' not in stss or not debug:
             with st.spinner("Loading Data"): #, show_time=True):
                 print ("Loading data...")
+
+
+                # # Load league data
+                # tpl_url = "https://docs.google.com/spreadsheets/d/18I5ljv7eL6E8atN7Z6w9wmm6CBwOGsStmW5UJNB0rrg/edit?gid=9#gid=9"
+                # print (f"Loading league data")
+                # df_League = load_league_data(client, tpl_url)
+                # # print (len(df_League))
+                # # print (df_League.columns)
+                # # Load standings data
+                # print (f"Loading standings data")
+                # df_Standings = load_standings_data(client, tpl_url)
+                # # print (len(df_Standings))
+                # # print (df_Standings.columns)
+
+                # Load from path instead
+                league_path = "/Users/chriscremer/code/TPL/streamlit_site/saved_data/League_page.csv"
+                standings_path = "/Users/chriscremer/code/TPL/streamlit_site/saved_data/Standings_page.csv"
+                df_League = load_league_data_from_path(league_path)
+                df_Standings = load_standings_data_from_path(standings_path)
+                # print (len(df_Standings))
+                # print (df_Standings.columns)
+                # print (len(df_League))
+                # print (df_League.columns)
+                # fasd
+                
+                
+                
+                
+                
+                
                 client = stss['client']
                 drive_service = stss['drive_service']
 
@@ -775,17 +824,6 @@ def algo_page():
                     bids, protected_players = extract_bid_info(data)
                     team_bids[sheet_name] = {'bids': bids, 'protected_players': protected_players}
 
-                # Load league data
-                tpl_url = "https://docs.google.com/spreadsheets/d/18I5ljv7eL6E8atN7Z6w9wmm6CBwOGsStmW5UJNB0rrg/edit?gid=9#gid=9"
-                print (f"Loading league data")
-                df_League = load_league_data(client, tpl_url)
-                # print (len(df_League))
-                # print (df_League.columns)
-                # Load standings data
-                print (f"Loading standings data")
-                df_Standings = load_standings_data(client, tpl_url)
-                # print (len(df_Standings))
-                # print (df_Standings.columns)
 
                 stss["team_bids"] = team_bids
                 stss["df_League"] = df_League
@@ -827,7 +865,9 @@ def algo_page():
         # print (f"number of players data_league: {len(data_league)}")
         team_rosters = {}
         for player_dict in data_league:
-            team = player_dict['Team']
+            team = no_emoji(player_dict['Team'])
+            # team = team
+            # print (team)
             player_name = player_dict['Full Name']
             if team not in team_rosters:
                 team_rosters[team] = []

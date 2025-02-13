@@ -26,6 +26,7 @@ def get_team_self_values(rosters, player_bids):
     for team, roster in rosters.items():
         team_values[team] = 0
         for player in roster:
+            # print (player_bids[player].keys())
             team_bid = player_bids[player][team]
             # team_value = team_values.get(team, 0)
             # print (team, player, team_bid, team_values[team])
