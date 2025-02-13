@@ -775,6 +775,9 @@ def algo_page():
             with st.spinner("Loading Data"): #, show_time=True):
                 print ("Loading data...")
 
+                client = stss['client']
+                drive_service = stss['drive_service']
+
 
                 # Load league data
                 tpl_url = "https://docs.google.com/spreadsheets/d/18I5ljv7eL6E8atN7Z6w9wmm6CBwOGsStmW5UJNB0rrg/edit?gid=9#gid=9"
@@ -814,8 +817,6 @@ def algo_page():
                 
                 
                 
-                client = stss['client']
-                drive_service = stss['drive_service']
 
                 # Load each team's bids
                 folder_id = '1ffiWqtVDvlZ8i6GHmtdU0UeKdQG--crp'
