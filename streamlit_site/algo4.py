@@ -215,8 +215,11 @@ def run_algo(rosters, player_bids, player_genders, captains, player_salaries, pr
                         )
         
 
-        
-
+        # stop if no possible trades
+        if len(possible_trades) == 0:
+            if debug:
+                print ("No trades left")
+            break
 
         # check if two or fewer teams are at 0 trades
         # if so, try to have the next trade involve atleast one of these teams
@@ -238,11 +241,6 @@ def run_algo(rosters, player_bids, player_genders, captains, player_salaries, pr
                 possible_trades = new_possible_trades
                 print (f"Teams that must trade 1: {teams_that_must_trade}")
 
-        # stop if no possible trades
-        if len(possible_trades) == 0:
-            if debug:
-                print ("No trades left")
-            break
 
         trades_to_consider = []
 
@@ -271,6 +269,17 @@ def run_algo(rosters, player_bids, player_genders, captains, player_salaries, pr
         if len(trades_to_consider) == 0:
             trades_to_consider = possible_trades
             trade_type = "all"
+
+
+        # try to focus on most and least expensive teams
+        most_expensive_team = max(team_costs, key=team_costs.get)
+        least_expensive_team = min(team_costs, key=team_costs.get)
+        most_expensive_team_trades = [trade1 for trade1 in trades_to_consider if trade1["team_1"] == most_expensive_team or trade1["team_2"] == most_expensive_team]
+        least_expensive_team_trades = [trade1 for trade1 in trades_to_consider if trade1["team_1"] == least_expensive_team or trade1["team_2"] == least_expensive_team]
+        new_possible_trades = most_expensive_team_trades + least_expensive_team_trades
+        if len(new_possible_trades) > 0:
+            trades_to_consider = new_possible_trades
+            print (f"  - Focusing on most/least expensive teams")
 
 
 
