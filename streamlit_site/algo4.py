@@ -317,16 +317,21 @@ def run_algo(rosters, player_bids, player_genders, captains, player_salaries, pr
             # only resort to this if most/least expensive team is involved
             most_expensive_team = max(team_costs, key=team_costs.get)
             least_expensive_team = min(team_costs, key=team_costs.get)
+            most_expensive_team_cost = team_costs[most_expensive_team]
+            least_expensive_team_cost = team_costs[least_expensive_team]
             most_expensive_team_trades = [trade1 for trade1 in possible_trades if trade1["team_1"] == most_expensive_team or trade1["team_2"] == most_expensive_team]
             least_expensive_team_trades = [trade1 for trade1 in possible_trades if trade1["team_1"] == least_expensive_team or trade1["team_2"] == least_expensive_team]
             new_possible_trades = most_expensive_team_trades + least_expensive_team_trades
-            if len(new_possible_trades) > 0:
+            if most_expensive_team_cost - least_expensive_team_cost < 45000:
+                print (f"Teams are {most_expensive_team_cost - least_expensive_team_cost} apart, so stopping")
+                break
+            elif len(new_possible_trades) > 0:
                 trades_to_consider = new_possible_trades
                 trade_type = "all"
-            elif trade_i >= 10:
-                # close to the end so stop
-                print ("No good trades left and close to the end")
-                break
+            # elif trade_i >= 10:
+            #     # within range so stop
+            #     print ("No good trades left and close to the end")
+            #     break
             else:
                 trades_to_consider = possible_trades
                 trade_type = "all but not ideal"
