@@ -776,9 +776,9 @@ def algo_page():
 
     stss = st.session_state
 
-    # run_algo_button = st.button('Run Algo')
-    # if run_algo_button:
-    if 1:
+    run_algo_button = st.button('Run Algo')
+    if run_algo_button:
+    # if 1:
 
         # only load previous data if in debug mode
         if 'team_bids' not in stss or not debug:
