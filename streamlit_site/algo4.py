@@ -88,9 +88,9 @@ def run_algo(rosters, player_bids, player_genders, captains, player_salaries, pr
         # protected_players += [player['player_name'] for player in players]
         protected_players += [player_name for player_name in players]
 
-    min_std_diff = 1 # minimum change in standard deviation of team salaries
+    min_std_diff = 100 # minimum change in standard deviation of team salaries
     max_trades = 3 #4 # 3 # max trades per team
-    amount_above_avg_for_extra_trade = 32000
+    amount_above_avg_for_extra_trade = 28000
 
     team_names = list(rosters.keys())
     n_teams = len(team_names)
@@ -227,9 +227,9 @@ def run_algo(rosters, player_bids, player_genders, captains, player_salaries, pr
                 print ("No trades left")
             break
 
-        # check if two or fewer teams are at 0 trades
+        # check if N or fewer teams are at 0 trades
         # if so, try to have the next trade involve atleast one of these teams
-        if sum([1 for team in team_names if count_team_trades[team] == 0]) in [1, 2]:
+        if sum([1 for team in team_names if count_team_trades[team] == 0]) in [1, 2, 3]:
             teams_that_must_trade = [team for team in team_names if count_team_trades[team] == 0]
             new_possible_trades = [trade1 for trade1 in possible_trades if trade1["team_1"] in teams_that_must_trade or trade1["team_2"] in teams_that_must_trade]
             if len(new_possible_trades) > 0:
@@ -276,7 +276,7 @@ def run_algo(rosters, player_bids, player_genders, captains, player_salaries, pr
             print ("  - both overbid and underbid")
             possible_trades = both_overbid_underbid
         elif len(both_overbid) > 0:
-            print ("  - both overbid")
+            print ("  both overbid")
             possible_trades = both_overbid
         elif len(positive_bid_minus_salary_trades) > 0:
             # print ("  - both overbid or neutral")
@@ -368,7 +368,8 @@ def run_algo(rosters, player_bids, player_genders, captains, player_salaries, pr
 
         # Print how many trades are being considered
         if debug:
-            print (f"{trade_i+1} - {trade_type} trades: {len(trades_to_consider)}")
+            # print (f"{trade_i+1} - {trade_type} trades: {len(trades_to_consider)}")
+            print (f"  {trade_type} trades: {len(trades_to_consider)}")
 
         # sort by team costs std, ie sort trades by how much how they increase parity
         trades_to_consider = sorted(trades_to_consider, key=lambda x: x["team_costs_std"])
@@ -385,6 +386,8 @@ def run_algo(rosters, player_bids, player_genders, captains, player_salaries, pr
         team_costs_std_diff = trade1["team_costs_std_diff"]
         team1_happiness_change = trade1["team1_happiness_change"]
         team2_happiness_change = trade1["team2_happiness_change"]
+
+        print (f"{trade_i+1} - {team_costs_std_diff:.2f}")
 
         # update prev_team_costs_std
         prev_team_costs_std = team_costs_std
