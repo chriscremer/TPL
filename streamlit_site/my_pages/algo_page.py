@@ -935,6 +935,20 @@ def algo_page():
                 player_bids[player][team] = int(bid)
         # print (f"number of players player_bids: {len(player_bids)}")
 
+        # # limit bids to x above/below salary
+        # max_change = 40000
+        # for player in player_bids:
+        #     for team in player_bids[player]:
+        #         salary = player_salaries[player]
+        #         bid = player_bids[player][team]
+        #         if bid > salary + max_change:
+        #             player_bids[player][team] = salary + max_change
+        #             print (f"{team[:10]}: {player} bid too high: {bid} -> {salary + max_change}")
+        #         if bid < salary - max_change:
+        #             player_bids[player][team] = salary - max_change
+        #             print (f"{team[:10]}: {player} bid too low: {bid} -> {salary - max_change}")
+
+
         # RUN TRADING ALORITHM
         rosters, count_team_trades, trades = run_algo(team_rosters, player_bids, 
                                                       player_genders, captains, 
