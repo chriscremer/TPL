@@ -913,6 +913,8 @@ def algo_page():
             protected_players_list = team_bids[team]['protected_players']
             # remove captains
             protected_players_list = [player for player in protected_players_list if player not in captains]
+            # remove wildcards
+            protected_players_list = [player for player in protected_players_list if 'WILD' not in player]
             if len(protected_players_list) > 3:
                 protected_players_list = protected_players_list[:2]
             protected_players_dict[team] = protected_players_list
