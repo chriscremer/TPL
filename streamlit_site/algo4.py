@@ -105,7 +105,7 @@ def run_algo(rosters, player_bids, player_genders, captains, player_salaries, pr
 
             # compute team_cost - avg team_cost
             team_cost_diff = np.abs(team_costs[team_1] - np.mean(list(team_costs.values())))
-            # added this to allow teams to make more trades if they are far from the average i think
+            # added this to allow teams to make more trades if they are still far from the average
             if team_cost_diff > 40000:
                 this_max_trades = max_trades + 1
             else:
@@ -177,18 +177,22 @@ def run_algo(rosters, player_bids, player_genders, captains, player_salaries, pr
                         if team1_happiness_change < 0 and team2_happiness_change < 0:
                             continue
 
-                        # if player salary dif is less than 1000, skip
-                        minimum_salary_change = 7000
+                        # if player salary dif is less than x, skip
+                        if trade_i <= 4:
+                            # early trades should be big
+                            minimum_salary_change = 15000
+                        else:
+                            minimum_salary_change = 7000
                         if abs(player_salaries[player_1] - player_salaries[player_2]) < minimum_salary_change:
                             continue
 
 
                         # Calculate the standard deviation of team costs
-                        team_costs = get_team_costs(temp_rosters, player_salaries)
-                        team_costs_std = np.std(list(team_costs.values()))
+                        this_trade_team_costs = get_team_costs(temp_rosters, player_salaries)
+                        this_trade_costs_std = np.std(list(this_trade_team_costs.values()))
 
-                        # Make sure the standard deviation of team costs is decreasing
-                        team_costs_std_diff = prev_team_costs_std - team_costs_std
+                        # Make sure the standard deviation of team costs is decreasing, ie increasing parity
+                        team_costs_std_diff = prev_team_costs_std - this_trade_costs_std
                         if team_costs_std_diff < min_std_diff:
                             continue
 
@@ -203,24 +207,36 @@ def run_algo(rosters, player_bids, player_genders, captains, player_salaries, pr
                              "player_1": player_1, 
                              "team_2": offering_team, 
                              "player_2": player_2, 
-                             "team_costs_std": team_costs_std,
+                             "team_costs_std": this_trade_costs_std,
                             "team_costs_std_diff": team_costs_std_diff,
                             "team1_happiness_change": team1_happiness_change,
                             "team2_happiness_change": team2_happiness_change,
                             }
-                            
                         )
         
 
         
 
 
-        # check if two or fewer teams are at 0 trades and the rest have atleast 1
-        # then make sure the next trade involve atleast one of the teams with 0 trades
+        # check if two or fewer teams are at 0 trades
+        # if so, try to have the next trade involve atleast one of these teams
         if sum([1 for team in team_names if count_team_trades[team] == 0]) in [1, 2]:
             teams_that_must_trade = [team for team in team_names if count_team_trades[team] == 0]
-            possible_trades = [trade1 for trade1 in possible_trades if trade1["team_1"] in teams_that_must_trade or trade1["team_2"] in teams_that_must_trade]
-            print (f"Teams that must trade: {teams_that_must_trade}")
+            new_possible_trades = [trade1 for trade1 in possible_trades if trade1["team_1"] in teams_that_must_trade or trade1["team_2"] in teams_that_must_trade]
+            if len(new_possible_trades) > 0:
+                possible_trades = new_possible_trades
+                print (f"Teams that must trade 0: {teams_that_must_trade}")
+
+        # check if two or fewer teams are at 1 trade and the rest have atleast 2
+        # then try to have the next trade involve atleast one of the teams with 1 trade
+        n_teams_at_1_trade = sum([1 for team in team_names if count_team_trades[team] == 1])
+        n_teams_at_0_trade = sum([1 for team in team_names if count_team_trades[team] == 0])
+        if n_teams_at_1_trade in [1, 2] and n_teams_at_0_trade == 0:
+            teams_that_must_trade = [team for team in team_names if count_team_trades[team] == 1]
+            new_possible_trades = [trade1 for trade1 in possible_trades if trade1["team_1"] in teams_that_must_trade or trade1["team_2"] in teams_that_must_trade]
+            if len(new_possible_trades) > 0:
+                possible_trades = new_possible_trades
+                print (f"Teams that must trade 1: {teams_that_must_trade}")
 
         # stop if no possible trades
         if len(possible_trades) == 0:
@@ -256,14 +272,47 @@ def run_algo(rosters, player_bids, player_genders, captains, player_salaries, pr
             trades_to_consider = possible_trades
             trade_type = "all"
 
-        if debug:
-            print (f"{trade_i+1} - {trade_type} trades: {len(trades_to_consider)}")
+
+
+        # # if a team is 100k away from the average, then take whatever brings its cost closer to the average
+        # # so ignoring the standard deviation (its still moving in right direction though)
+        # dist_from_avg = {team: np.abs(team_costs[team] - np.mean(list(team_costs.values()))) for team in team_names}
+        # furthest_team = max(dist_from_avg, key=dist_from_avg.get)
+        # new_trades_to_consider = None
+        # very_far_diff = 100000
+        # if dist_from_avg[furthest_team] > very_far_diff:
+        #     # print (f"  - {very_far_diff} from the average: {furthest_team}")
+        #     # find trades that involve the furthest team
+        #     trades_with_this_team = [trade1 for trade1 in trades_to_consider if trade1["team_1"] == furthest_team or trade1["team_2"] == furthest_team]
+        #     # for each trade, see how much it brings the team closer to the average
+        #     best_trade = None
+        #     best_trade_diff = 0
+        #     for trade1 in trades_with_this_team:
+        #         player_traded_away = trade1["player_1"] if trade1["team_1"] == furthest_team else trade1["player_2"]
+        #         player_traded_for = trade1["player_2"] if trade1["team_1"] == furthest_team else trade1["player_1"]
+        #         away_salary = player_salaries[player_traded_away]
+        #         for_salary = player_salaries[player_traded_for]
+        #         salary_change = np.abs(away_salary - for_salary)
+        #         # print (player_traded_away, player_traded_for, salary_change)
+        #         # take the largest salary change
+        #         if salary_change > best_trade_diff:
+        #             best_trade_diff = salary_change
+        #             best_trade = trade1
+        #     if best_trade is not None:
+        #         new_trades_to_consider = [best_trade]
+        #         print (f"  - Bringing {furthest_team} closer to the average")
+        #     # else:
+        #     #     print (f"  - No trades including {furthest_team} atm")
+        # if new_trades_to_consider is not None:
+        #     trades_to_consider = new_trades_to_consider
 
 
 
+
+        # to make sure both teams are happy about the trade:
         # find trades where both are overbidding on the player they are getting, AND underbidding on the player they are giving
+        # if those dont exist then take trades where both teams are overbidding on the player
         both_overbid_underbid = []
-        # take trades where both teams are overbidding on the player
         both_overbid = []
         for trade1 in trades_to_consider:
             team2_bid_diff_on_player1 = player_bids[trade1["player_1"]][trade1["team_2"]] - player_salaries[trade1["player_1"]]
@@ -275,15 +324,22 @@ def run_algo(rosters, player_bids, player_genders, captains, player_salaries, pr
             elif team2_bid_diff_on_player1 > 0 and team1_bid_diff_on_player2 > 0:
                 both_overbid.append(trade1)
         if len(both_overbid_underbid) > 0:
+            print ("  - both overbid and underbid")
             trades_to_consider = both_overbid_underbid
         elif len(both_overbid) > 0:
+            print ("  - both overbid")
             trades_to_consider = both_overbid
 
+        # Print how many trades are being considered
+        if debug:
+            print (f"{trade_i+1} - {trade_type} trades: {len(trades_to_consider)}")
 
-        # sort by team costs std
+        # sort by team costs std, ie sort trades by how much how they increase parity
         trades_to_consider = sorted(trades_to_consider, key=lambda x: x["team_costs_std"])
+        # for trade1 in trades_to_consider:
+        #     print (f"Team costs std: {trade1['team_costs_std']}, diff: {trade1['team_costs_std_diff']}")
 
-        # pick the trade that minimizes the standard deviation of team costs
+        # pick the trade that minimizes the standard deviation of team costs, ie maximize parity
         trade1 = trades_to_consider[0]
         team_1 = trade1["team_1"]
         player_1 = trade1["player_1"]
@@ -329,7 +385,7 @@ def run_algo(rosters, player_bids, player_genders, captains, player_salaries, pr
         })
         traded_players.append(player_1)
         traded_players.append(player_2)
-    return rosters, count_team_trades, trades #, protected_players_dict
+    return rosters, count_team_trades, trades
 
 
 
