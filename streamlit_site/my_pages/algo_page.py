@@ -749,8 +749,13 @@ def extract_bid_info(data):
     protected_players = []
     for player_row in range(player_rows[0], player_rows[1]+1):
         player_name = data[player_row][name_col]
-        if data[player_row][protected_players_col] == 'y':
-            protected_players.append(player_name)
+        value = data[player_row][protected_players_col]
+        try:
+            lowercase_value = value.lower()
+            if lowercase_value == 'y':
+                protected_players.append(player_name)
+        except:
+            pass
     # print (f"Protected players: {protected_players}\n")
     return bids, protected_players
 
