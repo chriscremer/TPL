@@ -88,8 +88,9 @@ def run_algo(rosters, player_bids, player_genders, captains, player_salaries, pr
         # protected_players += [player['player_name'] for player in players]
         protected_players += [player_name for player_name in players]
 
-    max_trades = 3 #4 # 3 # max trades per team
     min_std_diff = 1 # minimum change in standard deviation of team salaries
+    max_trades = 3 #4 # 3 # max trades per team
+    amount_above_avg_for_extra_trade = 32000
 
     team_names = list(rosters.keys())
     n_teams = len(team_names)
@@ -106,7 +107,7 @@ def run_algo(rosters, player_bids, player_genders, captains, player_salaries, pr
             # compute team_cost - avg team_cost
             team_cost_diff = np.abs(team_costs[team_1] - np.mean(list(team_costs.values())))
             # added this to allow teams to make more trades if they are still far from the average
-            if team_cost_diff > 40000:
+            if team_cost_diff > amount_above_avg_for_extra_trade:
                 this_max_trades = max_trades + 1
             else:
                 this_max_trades = max_trades
@@ -137,7 +138,7 @@ def run_algo(rosters, player_bids, player_genders, captains, player_salaries, pr
 
                     # compute team_cost - avg team_cost
                     team_cost_diff = np.abs(team_costs[offering_team] - np.mean(list(team_costs.values())))
-                    if team_cost_diff > 40000:
+                    if team_cost_diff > amount_above_avg_for_extra_trade:
                         this_max_trades2 = max_trades + 1
                     else:
                         this_max_trades2 = max_trades
@@ -171,6 +172,9 @@ def run_algo(rosters, player_bids, player_genders, captains, player_salaries, pr
                         happiness_change_dict, happiness_change = get_happiness_change(rosters_before, temp_rosters, player_bids, team_names)
                         team1_happiness_change = happiness_change_dict[team_1]
                         team2_happiness_change = happiness_change_dict[offering_team]
+
+                        team_1_bid_minus_salary = player_bids[player_2][team_1] - player_salaries[player_2]
+                        team_2_bid_minus_salary = player_bids[player_1][offering_team] - player_salaries[player_1]
                         
                         # if both teams are worse off, skip
                         # if team1_happiness_change <= 0 and team2_happiness_change <= 0:
@@ -211,6 +215,8 @@ def run_algo(rosters, player_bids, player_genders, captains, player_salaries, pr
                             "team_costs_std_diff": team_costs_std_diff,
                             "team1_happiness_change": team1_happiness_change,
                             "team2_happiness_change": team2_happiness_change,
+                            "team_1_bid_minus_salary": team_1_bid_minus_salary,
+                            "team_2_bid_minus_salary": team_2_bid_minus_salary,
                             }
                         )
         
@@ -240,6 +246,47 @@ def run_algo(rosters, player_bids, player_genders, captains, player_salaries, pr
             if len(new_possible_trades) > 0:
                 possible_trades = new_possible_trades
                 print (f"Teams that must trade 1: {teams_that_must_trade}")
+
+
+
+
+        # to make sure both teams are happy about the trade:
+        # find trades where both are overbidding on the player they are getting, AND underbidding on the player they are giving
+        # if those dont exist then take trades where both teams are overbidding on the player they are receiving
+        both_overbid_underbid = []
+        both_overbid = []
+        for trade1 in possible_trades:
+            team2_bid_diff_on_player1 = player_bids[trade1["player_1"]][trade1["team_2"]] - player_salaries[trade1["player_1"]]
+            team1_bid_diff_on_player2 = player_bids[trade1["player_2"]][trade1["team_1"]] - player_salaries[trade1["player_2"]]
+            team1_bid_diff_on_player1 = player_bids[trade1["player_1"]][trade1["team_1"]] - player_salaries[trade1["player_1"]]
+            team2_bid_diff_on_player2 = player_bids[trade1["player_2"]][trade1["team_2"]] - player_salaries[trade1["player_2"]]
+            if team2_bid_diff_on_player1 > 0 and team1_bid_diff_on_player2 > 0 and team1_bid_diff_on_player1 < 0 and team2_bid_diff_on_player2 < 0:
+                both_overbid_underbid.append(trade1)
+            elif team2_bid_diff_on_player1 > 0 and team1_bid_diff_on_player2 > 0:
+                both_overbid.append(trade1)
+        # try only keeping trades where both teams are overbidding or neutal
+        # this is a better measure of how much a team values a player, rather than salary+/-bid
+        # if no trades left, then dont remove any trades
+        positive_bid_minus_salary_trades = []
+        for trade1 in possible_trades:
+            if trade1["team_1_bid_minus_salary"] >= 0 and trade1["team_2_bid_minus_salary"] >= 0:
+                positive_bid_minus_salary_trades.append(trade1)
+        # see if any are non empty
+        if len(both_overbid_underbid) > 0:
+            print ("  - both overbid and underbid")
+            possible_trades = both_overbid_underbid
+        elif len(both_overbid) > 0:
+            print ("  - both overbid")
+            possible_trades = both_overbid
+        elif len(positive_bid_minus_salary_trades) > 0:
+            # print ("  - both overbid or neutral")
+            possible_trades = positive_bid_minus_salary_trades
+            
+
+
+
+
+
 
 
         trades_to_consider = []
@@ -279,7 +326,7 @@ def run_algo(rosters, player_bids, player_genders, captains, player_salaries, pr
         new_possible_trades = most_expensive_team_trades + least_expensive_team_trades
         if len(new_possible_trades) > 0:
             trades_to_consider = new_possible_trades
-            print (f"  - Focusing on most/least expensive teams")
+            # print (f"  - Focusing on most/least expensive teams")
 
 
 
@@ -318,26 +365,6 @@ def run_algo(rosters, player_bids, player_genders, captains, player_salaries, pr
 
 
 
-        # to make sure both teams are happy about the trade:
-        # find trades where both are overbidding on the player they are getting, AND underbidding on the player they are giving
-        # if those dont exist then take trades where both teams are overbidding on the player
-        both_overbid_underbid = []
-        both_overbid = []
-        for trade1 in trades_to_consider:
-            team2_bid_diff_on_player1 = player_bids[trade1["player_1"]][trade1["team_2"]] - player_salaries[trade1["player_1"]]
-            team1_bid_diff_on_player2 = player_bids[trade1["player_2"]][trade1["team_1"]] - player_salaries[trade1["player_2"]]
-            team1_bid_diff_on_player1 = player_bids[trade1["player_1"]][trade1["team_1"]] - player_salaries[trade1["player_1"]]
-            team2_bid_diff_on_player2 = player_bids[trade1["player_2"]][trade1["team_2"]] - player_salaries[trade1["player_2"]]
-            if team2_bid_diff_on_player1 > 0 and team1_bid_diff_on_player2 > 0 and team1_bid_diff_on_player1 < 0 and team2_bid_diff_on_player2 < 0:
-                both_overbid_underbid.append(trade1)
-            elif team2_bid_diff_on_player1 > 0 and team1_bid_diff_on_player2 > 0:
-                both_overbid.append(trade1)
-        if len(both_overbid_underbid) > 0:
-            print ("  - both overbid and underbid")
-            trades_to_consider = both_overbid_underbid
-        elif len(both_overbid) > 0:
-            print ("  - both overbid")
-            trades_to_consider = both_overbid
 
         # Print how many trades are being considered
         if debug:
