@@ -834,7 +834,7 @@ def algo_page():
                 
 
                 # Load each team's bids
-                folder_id = '1ffiWqtVDvlZ8i6GHmtdU0UeKdQG--crp'
+                folder_id = '1LycfBlMWQNsCB9rmKEtZwqCvo1jXIJ6N'
                 existing_sheets = get_gsheets_in_folder(drive_service, folder_id)
                 # print ("Sheets in folder:")
                 # for file_name in existing_sheets:
@@ -929,9 +929,6 @@ def algo_page():
             for player, bid in team_bids[team]['bids'].items():
                 if player not in player_bids:
                     player_bids[player] = {}
-                # # print the type of bid variable
-                # print (type(bid))
-                # fdas
                 player_bids[player][team] = int(bid)
         # print (f"number of players player_bids: {len(player_bids)}")
 
