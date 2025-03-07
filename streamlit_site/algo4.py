@@ -65,7 +65,7 @@ def run_algo(rosters, player_bids, player_genders, captains, player_salaries, pr
     stop_if_within_x_of_avg = 33000
     early_minimum_salary_change = 15000
     late_minimum_salary_change = 7000
-    early_minimum_std_diff = 5000
+    early_minimum_std_diff = 7000
     late_minimum_std_diff = 500
     absolute_minimum_std_diff = 100
     early_trade_rounds = 6
@@ -270,12 +270,17 @@ def run_algo(rosters, player_bids, player_genders, captains, player_salaries, pr
 
 
 
-        # score each trade from 0-4
+        # score each trade from -4 to 4
         # 1 point for each of the following:
         #  - receiving team is overbidding on player they are receiving
         #  - receiving team is underbidding on player they are giving
         #  - sending team is underbidding on player they are giving
         #  - sending team is overbidding on player they are receiving
+        # -1 point for each of the following:
+        #  - receiving team is underbidding on player they are receiving
+        #  - receiving team is overbidding on player they are giving
+        #  - sending team is overbidding on player they are giving
+        #  - sending team is underbidding on player they are receiving
         # make a list of [score, trade]
         scored_trades = []
         for trade1 in possible_trades:
@@ -284,6 +289,7 @@ def run_algo(rosters, player_bids, player_genders, captains, player_salaries, pr
             team1_bid_diff_on_player1 = player_bids[trade1["player_1"]][trade1["team_1"]] - player_salaries[trade1["player_1"]]
             team2_bid_diff_on_player2 = player_bids[trade1["player_2"]][trade1["team_2"]] - player_salaries[trade1["player_2"]]
             score = 0
+            # positive points
             if team2_bid_diff_on_player1 > 0:
                 score += 1
             if team1_bid_diff_on_player2 > 0:
@@ -292,6 +298,15 @@ def run_algo(rosters, player_bids, player_genders, captains, player_salaries, pr
                 score += 1
             if team2_bid_diff_on_player2 < 0:
                 score += 1
+            # negative points
+            if team2_bid_diff_on_player1 < 0:
+                score -= 1
+            if team1_bid_diff_on_player2 < 0:
+                score -= 1
+            if team1_bid_diff_on_player1 > 0:
+                score -= 1
+            if team2_bid_diff_on_player2 > 0:
+                score -= 1
             scored_trades.append([score, trade1])
         # sort by score
         scored_trades = sorted(scored_trades, key=lambda x: x[0], reverse=True)
@@ -310,6 +325,18 @@ def run_algo(rosters, player_bids, player_genders, captains, player_salaries, pr
         # Now looking at bid for received and traded player to determine if trade is good
         trades_to_consider = []
 
+        # get list of trades involving the most and least expensive teams
+        most_expensive_team = max(team_costs, key=team_costs.get)
+        least_expensive_team = min(team_costs, key=team_costs.get)
+        most_expensive_team_cost = team_costs[most_expensive_team]
+        least_expensive_team_cost = team_costs[least_expensive_team]
+        # trades with most and least expensive teams
+        most_expensive_team_trades = [trade1 for trade1 in possible_trades if trade1["team_1"] == most_expensive_team or trade1["team_2"] == most_expensive_team]
+        least_expensive_team_trades = [trade1 for trade1 in possible_trades if trade1["team_1"] == least_expensive_team or trade1["team_2"] == least_expensive_team]
+        # remove duplicates
+        most_expensive_team_trades = [trade1 for trade1 in most_expensive_team_trades if trade1 not in least_expensive_team_trades]
+        trades_with_most_least_expansive_teams = most_expensive_team_trades + least_expensive_team_trades
+
         # find trades where both teams are happy
         if len(trades_to_consider) == 0:
             for trade1 in possible_trades:
@@ -326,11 +353,6 @@ def run_algo(rosters, player_bids, player_genders, captains, player_salaries, pr
 
         # neutral trades
         if len(trades_to_consider) == 0:
-            most_expensive_team = max(team_costs, key=team_costs.get)
-            least_expensive_team = min(team_costs, key=team_costs.get)
-            most_expensive_team_cost = team_costs[most_expensive_team]
-            least_expensive_team_cost = team_costs[least_expensive_team]
-
             # stop if teams are close to the average and only neutral trades left
             if most_expensive_team_cost - least_expensive_team_cost < stop_if_within_x_of_avg:
                 print (f"Teams are {most_expensive_team_cost - least_expensive_team_cost} apart, neutral trades only, so stopping")
@@ -343,27 +365,21 @@ def run_algo(rosters, player_bids, player_genders, captains, player_salaries, pr
                 trades_to_consider = new_trades_to_consider
                 trade_type = "neutral"
 
-        # all leftover trades
+        # all leftover trades, ie negative sum trades
         if len(trades_to_consider) == 0:
-            # only resort to this if most/least expensive team is involved
-            most_expensive_team = max(team_costs, key=team_costs.get)
-            least_expensive_team = min(team_costs, key=team_costs.get)
-            most_expensive_team_cost = team_costs[most_expensive_team]
-            least_expensive_team_cost = team_costs[least_expensive_team]
-            most_expensive_team_trades = [trade1 for trade1 in possible_trades if trade1["team_1"] == most_expensive_team or trade1["team_2"] == most_expensive_team]
-            least_expensive_team_trades = [trade1 for trade1 in possible_trades if trade1["team_1"] == least_expensive_team or trade1["team_2"] == least_expensive_team]
-            new_possible_trades = most_expensive_team_trades + least_expensive_team_trades
-            
             # stop if teams are close to the average and only negative trades left
             if most_expensive_team_cost - least_expensive_team_cost < stop_if_within_x_of_avg:
-                print (f"Teams are {most_expensive_team_cost - least_expensive_team_cost} apart, so stopping")
+                print (f"Teams are {most_expensive_team_cost - least_expensive_team_cost} apart, negative trades left, so stopping")
                 break
-            elif len(new_possible_trades) > 0:
-                trades_to_consider = new_possible_trades
+            # only resort to this if most/least expensive team is involved
+            elif len(trades_with_most_least_expansive_teams) > 0:
+                trades_to_consider = trades_with_most_least_expansive_teams
                 trade_type = "all"
             else:
-                trades_to_consider = possible_trades
-                trade_type = "all but not ideal"
+                # trades_to_consider = possible_trades
+                # trade_type = "all but not ideal"
+                print ("Stopping because no good trades left and dont involve most/least expensive teams")
+                break
 
         print (f"  {trade_type} trades: {len(trades_to_consider)}")
 
@@ -371,18 +387,11 @@ def run_algo(rosters, player_bids, player_genders, captains, player_salaries, pr
 
 
 
-
-        # try to focus on most and least expensive teams
-        most_expensive_team = max(team_costs, key=team_costs.get)
-        least_expensive_team = min(team_costs, key=team_costs.get)
-        most_expensive_team_trades = [trade1 for trade1 in trades_to_consider if trade1["team_1"] == most_expensive_team or trade1["team_2"] == most_expensive_team]
-        least_expensive_team_trades = [trade1 for trade1 in trades_to_consider if trade1["team_1"] == least_expensive_team or trade1["team_2"] == least_expensive_team]
-        # remove duplicates
-        most_expensive_team_trades = [trade1 for trade1 in most_expensive_team_trades if trade1 not in least_expensive_team_trades]
-        new_possible_trades = most_expensive_team_trades + least_expensive_team_trades
-        if len(new_possible_trades) > 0 and len(new_possible_trades) < len(trades_to_consider):
-            trades_to_consider = new_possible_trades
-            print (f"  Focusing on most/least expensive teams: {len(trades_to_consider)}")
+        # # TODO review this because list might not be right... 
+        # # # try to focus on most and least expensive teams
+        # if len(trades_with_most_least_expansive_teams) > 0 and len(trades_with_most_least_expansive_teams) < len(trades_to_consider):
+        #     trades_to_consider = trades_with_most_least_expansive_teams
+        #     print (f"  Focusing on most/least expensive teams: {len(trades_to_consider)}")
 
 
 
@@ -391,6 +400,11 @@ def run_algo(rosters, player_bids, player_genders, captains, player_salaries, pr
         trades_to_consider = sorted(trades_to_consider, key=lambda x: x["team_costs_std"])
         # pick the trade that minimizes the standard deviation of team costs, ie maximize parity
         trade1 = trades_to_consider[0]
+
+        if trade1 in trades_with_most_least_expansive_teams:
+            print ("  Trade with most/least expensive team")
+        
+        # extract trade info
         team_1 = trade1["team_1"]
         player_1 = trade1["player_1"]
         team_2 = trade1["team_2"]
