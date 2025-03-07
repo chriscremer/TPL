@@ -64,9 +64,9 @@ def run_algo(rosters, player_bids, player_genders, captains, player_salaries, pr
     amount_above_avg_for_extra_trade =  25000
     stop_if_within_x_of_avg = 33000
     early_minimum_salary_change = 15000
-    late_minimum_salary_change = 7000
+    late_minimum_salary_change = 7000 #5000
     early_minimum_std_diff = 7000
-    late_minimum_std_diff = 500
+    late_minimum_std_diff = 500 #700
     absolute_minimum_std_diff = 100
     early_trade_rounds = 6
 
