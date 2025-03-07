@@ -269,42 +269,39 @@ def run_algo(rosters, player_bids, player_genders, captains, player_salaries, pr
 
 
 
-        # to make sure both teams are happy about the trade:
-        # find trades where both are overbidding on the player they are getting, AND underbidding on the player they are giving
-        # if those dont exist then take trades where both teams are overbidding on the player they are receiving
-        both_overbid_underbid = []
-        both_overbid = []
+
+        # score each trade from 0-4
+        # 1 point for each of the following:
+        #  - receiving team is overbidding on player they are receiving
+        #  - receiving team is underbidding on player they are giving
+        #  - sending team is underbidding on player they are giving
+        #  - sending team is overbidding on player they are receiving
+        # make a list of [score, trade]
+        scored_trades = []
         for trade1 in possible_trades:
             team2_bid_diff_on_player1 = player_bids[trade1["player_1"]][trade1["team_2"]] - player_salaries[trade1["player_1"]]
             team1_bid_diff_on_player2 = player_bids[trade1["player_2"]][trade1["team_1"]] - player_salaries[trade1["player_2"]]
             team1_bid_diff_on_player1 = player_bids[trade1["player_1"]][trade1["team_1"]] - player_salaries[trade1["player_1"]]
             team2_bid_diff_on_player2 = player_bids[trade1["player_2"]][trade1["team_2"]] - player_salaries[trade1["player_2"]]
-            if team2_bid_diff_on_player1 > 0 and team1_bid_diff_on_player2 > 0 and team1_bid_diff_on_player1 < 0 and team2_bid_diff_on_player2 < 0:
-                both_overbid_underbid.append(trade1)
-            elif team2_bid_diff_on_player1 > 0 and team1_bid_diff_on_player2 > 0:
-                both_overbid.append(trade1)
-        # try only keeping trades where both teams are overbidding or neutal
-        # this is a better measure of how much a team values a player, rather than salary+/-bid
-        # if no trades left, then dont remove any trades
-        positive_bid_minus_salary_trades = []
-        for trade1 in possible_trades:
-            if trade1["team_1_bid_minus_salary"] >= 0 and trade1["team_2_bid_minus_salary"] >= 0:
-                positive_bid_minus_salary_trades.append(trade1)
-        # see if any are non empty
-        if len(both_overbid_underbid) > 0 and len(both_overbid_underbid) < len(possible_trades):
-            # print ("  - both overbid and underbid")
-            possible_trades = both_overbid_underbid
-            print (f"  Possible trades, both overbid and underbid: {len(possible_trades)}")
-        elif len(both_overbid) > 0 and len(both_overbid) < len(possible_trades):
-            # print ("  both overbid")
-            possible_trades = both_overbid
-            print (f"  Possible trades, both overbid: {len(possible_trades)}")
-        elif len(positive_bid_minus_salary_trades) > 0 and len(positive_bid_minus_salary_trades) < len(possible_trades):
-            # print ("  - both overbid or neutral")
-            possible_trades = positive_bid_minus_salary_trades
-            print (f"  Possible trades, both overbid or neutral: {len(possible_trades)}")
-            
-    
+            score = 0
+            if team2_bid_diff_on_player1 > 0:
+                score += 1
+            if team1_bid_diff_on_player2 > 0:
+                score += 1
+            if team1_bid_diff_on_player1 < 0:
+                score += 1
+            if team2_bid_diff_on_player2 < 0:
+                score += 1
+            scored_trades.append([score, trade1])
+        # sort by score
+        scored_trades = sorted(scored_trades, key=lambda x: x[0], reverse=True)
+        highest_score = scored_trades[0][0]
+        # only keep trades with the highest score
+        new_possible_trades = [trade1 for score, trade1 in scored_trades if score == highest_score]
+        if len(new_possible_trades) > 0 and len(new_possible_trades) < len(possible_trades):
+            possible_trades = new_possible_trades
+            print (f"  Possible trades, highest score {highest_score}: {len(possible_trades)}")
+
 
 
 
