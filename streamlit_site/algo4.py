@@ -90,13 +90,13 @@ def run_algo(rosters, player_bids, player_genders, captains, player_salaries, pr
 
     # min_std_diff = 100 # minimum change in standard deviation of team salaries
     max_trades = 3 #4 # 3 # max trades per team
-    amount_above_avg_for_extra_trade = 28000
-    stop_if_within_x_of_avg = 25000 #35000 #40000
+    amount_above_avg_for_extra_trade =  25000 #28000
+    stop_if_within_x_of_avg = 28000 #35000 #40000
     early_minimum_salary_change = 15000
     late_minimum_salary_change = 7000
     early_minimum_std_diff = 3000
     late_minimum_std_diff = 100
-    early_trade_rounds = 4
+    early_trade_rounds = 5
 
     team_names = list(rosters.keys())
     n_teams = len(team_names)
@@ -104,7 +104,7 @@ def run_algo(rosters, player_bids, player_genders, captains, player_salaries, pr
     prev_team_costs_std = np.std(list(team_costs.values()))
     trades = [] # list of trades
     traded_players = [] # avoid trading the same player twice
-    max_trade_rounds = n_teams * max_trades // 2
+    max_trade_rounds = (n_teams * max_trades // 2) +1
     for trade_i in range(1, max_trade_rounds):
 
         already_considered_trades = [] # to avoid considering the same trade twice
@@ -257,7 +257,7 @@ def run_algo(rosters, player_bids, player_genders, captains, player_salaries, pr
             new_possible_trades = [trade1 for trade1 in possible_trades if trade1["team_1"] in teams_that_must_trade or trade1["team_2"] in teams_that_must_trade]
             if len(new_possible_trades) > 0:
                 possible_trades = new_possible_trades
-                print (f"  Teams that must trade 0: {teams_that_must_trade}")
+                print (f"  Teams that must trade 0: {[x[:10] for x in teams_that_must_trade]}")
 
         # check if two or fewer teams are at 1 trade and the rest have atleast 2
         # then try to have the next trade involve atleast one of the teams with 1 trade
@@ -268,7 +268,7 @@ def run_algo(rosters, player_bids, player_genders, captains, player_salaries, pr
             new_possible_trades = [trade1 for trade1 in possible_trades if trade1["team_1"] in teams_that_must_trade or trade1["team_2"] in teams_that_must_trade]
             if len(new_possible_trades) > 0:
                 possible_trades = new_possible_trades
-                print (f"  Teams that must trade 1: {teams_that_must_trade}")
+                print (f"  Teams that must trade 1: {[x[:10] for x in teams_that_must_trade]}")
 
 
 
@@ -448,7 +448,13 @@ def run_algo(rosters, player_bids, player_genders, captains, player_salaries, pr
         team1_happiness_change = trade1["team1_happiness_change"]
         team2_happiness_change = trade1["team2_happiness_change"]
 
-        print (f"Trade {trade_i} - Std imprv: {team_costs_std_diff:.2f}")
+        most_expensive_team = max(team_costs, key=team_costs.get)
+        most_expensive_cost = team_costs[most_expensive_team]
+        least_expensive_team = min(team_costs, key=team_costs.get)
+        least_expensive_cost = team_costs[least_expensive_team]
+        top_bot_diff = most_expensive_cost - least_expensive_cost
+
+        print (f"Trade {trade_i} -   Std: {team_costs_std:.2f},  imprv: {team_costs_std_diff:.2f}, top_bot_diff: {top_bot_diff:.2f}")
 
         # update prev_team_costs_std
         prev_team_costs_std = team_costs_std
