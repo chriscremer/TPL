@@ -359,9 +359,12 @@ def show_starting_info(team_costs, protected_players_dict, starting_rosters, pla
 
 
 
-def show_end_info(team_costs, count_team_trades, trades, player_bids, rosters, starting_rosters, original_team_costs):
+def show_end_info(team_costs, count_team_trades, trades, player_bids, rosters, starting_rosters, original_team_costs, cap_ceiling, cap_floor):
 
-    st.markdown('New Team Salaries', unsafe_allow_html=True)
+
+
+
+    
     team_costs_df = pd.DataFrame.from_dict(team_costs, orient='index', columns=['Salary'])
 
     # add trade count to row
@@ -372,21 +375,45 @@ def show_end_info(team_costs, count_team_trades, trades, player_bids, rosters, s
     # sort by salary
     team_costs_df = team_costs_df.sort_values(by='Salary', ascending=False)
 
-    # add column of dif from avg
+    
     avg_team_cost = int(sum(team_costs.values()) / len(team_costs))
+
+    st.markdown(f'Cap Ceiling: {cap_ceiling:,}<br>Avg Team Salary: {avg_team_cost:,}<br>Cap Floor: {cap_floor:,}', unsafe_allow_html=True)
+
+
+    # add column of dif from avg
     team_costs_df['Diff from Avg'] = team_costs_df['Salary'] - avg_team_cost
 
     # add column of salary dif from original
     team_costs_df['Change in Salary'] = [team_costs[team] - original_team_costs[team] for team in team_costs.keys()]
 
+    # add column of dif from cap ceiling
+    team_costs_df['Diff from Cap Ceiling'] = team_costs_df['Salary'] - cap_ceiling
+
     # reorder columns, salary, diff from avg, trade count
-    team_costs_df = team_costs_df[['Salary', 'Diff from Avg', 'Change in Salary', 'Trade Count']]
+    team_costs_df = team_costs_df[['Salary', 'Diff from Avg', 'Diff from Cap Ceiling', 'Change in Salary', 'Trade Count']]
+
+    # add colour to the table
+    def add_colour(row):
+        if row['Salary'] > cap_ceiling:
+            return ['color: red' for _ in row]
+        elif row['Salary'] < cap_floor:
+            return ['color: yellow' for _ in row]
+        else:
+            return ['color: green' for _ in row]
+
+    team_costs_df = team_costs_df.style.apply(add_colour, axis=1)
 
 
-    cols = st.columns(2)
+    st.markdown('New Team Salaries', unsafe_allow_html=True)
+    cols = st.columns([5,1])
     with cols[0]:
-        st.table(team_costs_df)
+        # st.table(team_costs_df)
+        st.dataframe(team_costs_df)
     
+
+
+    st.markdown(f'<br>', unsafe_allow_html=True)
     st.markdown(f'Average Team Salary: {avg_team_cost}', unsafe_allow_html=True)
 
     total_trades = len(trades)
@@ -1035,7 +1062,7 @@ def algo_page():
         with st.expander("Trades"):
             show_trades(trades, player_salaries)
         with st.expander("Post Trade Info"):
-            show_end_info(new_team_costs, count_team_trades, trades, player_bids, rosters, starting_rosters, original_team_costs)
+            show_end_info(new_team_costs, count_team_trades, trades, player_bids, rosters, starting_rosters, original_team_costs, stss['cap_ceiling'], stss['cap_floor'])
 
 
 
