@@ -433,6 +433,17 @@ def show_end_info(team_costs, count_team_trades, trades, player_bids, rosters, s
     else:
         st.markdown(f'Total Happiness Change: {total_happiness_change}', unsafe_allow_html=True)
 
+
+    # Total score sum
+    total_score_sum = 0
+    for trade in trades:
+        total_score_sum += trade['highest_score']
+    st.markdown(f'Trade Score Sum: {total_score_sum}', unsafe_allow_html=True)
+
+
+
+
+
     # show matrix of how much each team likes each other team
     make_likeness_matrix(team_costs, player_bids, rosters, avg_team_cost, starting_rosters)
 

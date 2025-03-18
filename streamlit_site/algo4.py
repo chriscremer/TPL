@@ -288,25 +288,53 @@ def run_algo(rosters, player_bids, player_genders, captains, player_salaries, pr
             team1_bid_diff_on_player2 = player_bids[trade1["player_2"]][trade1["team_1"]] - player_salaries[trade1["player_2"]]
             team1_bid_diff_on_player1 = player_bids[trade1["player_1"]][trade1["team_1"]] - player_salaries[trade1["player_1"]]
             team2_bid_diff_on_player2 = player_bids[trade1["player_2"]][trade1["team_2"]] - player_salaries[trade1["player_2"]]
-            score = 0
-            # positive points
-            if team2_bid_diff_on_player1 > 0:
-                score += 1
+            
+            # score = 0
+            # # positive points
+            # if team2_bid_diff_on_player1 > 0:
+            #     score += 1
+            # if team1_bid_diff_on_player2 > 0:
+            #     score += 1
+            # if team1_bid_diff_on_player1 < 0:
+            #     score += 1
+            # if team2_bid_diff_on_player2 < 0:
+            #     score += 1
+            # # negative points
+            # if team2_bid_diff_on_player1 < 0:
+            #     score -= 1
+            # if team1_bid_diff_on_player2 < 0:
+            #     score -= 1
+            # if team1_bid_diff_on_player1 > 0:
+            #     score -= 1
+            # if team2_bid_diff_on_player2 > 0:
+            #     score -= 1
+
+            # compute for each team, cap at 1.5
+            team1_score = 0
+            team2_score = 0
+            # team 1
             if team1_bid_diff_on_player2 > 0:
-                score += 1
+                team1_score += 1
             if team1_bid_diff_on_player1 < 0:
-                score += 1
-            if team2_bid_diff_on_player2 < 0:
-                score += 1
-            # negative points
-            if team2_bid_diff_on_player1 < 0:
-                score -= 1
+                team1_score += 1
             if team1_bid_diff_on_player2 < 0:
-                score -= 1
+                team1_score -= 1
             if team1_bid_diff_on_player1 > 0:
-                score -= 1
+                team1_score -= 1
+            # team 2
+            if team2_bid_diff_on_player1 > 0:
+                team2_score += 1
+            if team2_bid_diff_on_player2 < 0:
+                team2_score += 1
+            if team2_bid_diff_on_player1 < 0:
+                team2_score -= 1
             if team2_bid_diff_on_player2 > 0:
-                score -= 1
+                team2_score -= 1
+            # cap at 1.5
+            team1_score = min(1.5, team1_score)
+            team2_score = min(1.5, team2_score)
+            score = team1_score + team2_score
+
             scored_trades.append([score, trade1])
         # sort by score
         scored_trades = sorted(scored_trades, key=lambda x: x[0], reverse=True)
@@ -450,6 +478,7 @@ def run_algo(rosters, player_bids, player_genders, captains, player_salaries, pr
             'team1_happiness_change': team1_happiness_change,
             'team2_happiness_change': team2_happiness_change,
             'team_costs': team_costs.copy(),
+            'highest_score': highest_score,
         })
         traded_players.append(player_1)
         traded_players.append(player_2)
