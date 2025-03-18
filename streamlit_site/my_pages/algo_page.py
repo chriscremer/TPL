@@ -275,7 +275,7 @@ def make_likeness_matrix(team_costs, player_bids, rosters, avg_team_cost, starti
 
 
 
-def show_starting_info(team_costs, protected_players_dict, starting_rosters, player_bids): #, captain_salaries):
+def show_starting_info(team_costs, protected_players_dict, starting_rosters, player_bids, cap_ceiling, cap_floor):
 
     # show table of starting team costs
 
@@ -291,37 +291,55 @@ def show_starting_info(team_costs, protected_players_dict, starting_rosters, pla
 
     # add column of dif from avg
     team_costs_df['Diff from Avg'] = team_costs_df['Salary'] - avg_team_cost
+    # add column of dif from cap ceiling
+    team_costs_df['Diff from Cap Ceiling'] = team_costs_df['Salary'] - cap_ceiling
 
-    cols_0 = st.columns([5,1,2])
+    def add_colour(row):
+        if row['Salary'] > cap_ceiling:
+            return ['color: red' for _ in row]
+        elif row['Salary'] < cap_floor:
+            return ['color: yellow' for _ in row]
+        else:
+            return ['color: green' for _ in row]
+
+    team_costs_df = team_costs_df.style.apply(add_colour, axis=1)
+
+
+    cols_0 = st.columns([5,3])
     with cols_0[0]:
+        st.markdown(f'Cap Ceiling: {cap_ceiling:,}<br>Avg Team Salary: {avg_team_cost:,}<br>Cap Floor: {cap_floor:,}', unsafe_allow_html=True)
+        st.markdown('<br>', unsafe_allow_html=True)
+
+
         st.markdown('Starting Team Salaries', unsafe_allow_html=True)
-        st.table(team_costs_df)
-        st.markdown(f'Average Team Salary: {avg_team_cost}', unsafe_allow_html=True)
+        # st.table(team_costs_df)
+        st.dataframe(team_costs_df)
    
-    # with cols_0[2]:
-    #     # display the captain salaries
-    #     st.markdown('Captain Salaries', unsafe_allow_html=True)
-    #     captain_salaries_df = pd.DataFrame.from_dict(captain_salaries, orient='index', columns=['Salary'])
-    #     captain_salaries_df = captain_salaries_df.sort_values(by='Salary', ascending=False)
-    #     st.table(captain_salaries_df)
+        # with cols_0[2]:
+        #     # display the captain salaries
+        #     st.markdown('Captain Salaries', unsafe_allow_html=True)
+        #     captain_salaries_df = pd.DataFrame.from_dict(captain_salaries, orient='index', columns=['Salary'])
+        #     captain_salaries_df = captain_salaries_df.sort_values(by='Salary', ascending=False)
+        #     st.table(captain_salaries_df)
 
 
-    # show protected players: dict of team_name: list of dicts of 'player_name' and 'value'
-    st.markdown('Protected Players', unsafe_allow_html=True)
-    # protected_players_dict_text = {team: [f"{player['player_name']} ({player['value']})" for player in protected_players_dict[team]] for team in protected_players_dict}
-    # n_protected_players_per_team = sum([len(protected_players_dict[team]) for team in protected_players_dict]) / len(protected_players_dict)
-    # cols_names = [f"Player {i+1} (bid - avg bid)" for i in range(int(n_protected_players_per_team))]
-    cols_names = ["Player 1", "Player 2", "Player 3"]
-    n_protected_players_per_team = 3
-    # protected_players_dict_text = {team: [f"{player['player_name']}" for player in protected_players_dict[team]] for team in protected_players_dict}
-    protected_players_for_df = {}
-    for team in protected_players_dict:
-        # protected_players_for_df[team] = [player['player_name'] for player in protected_players_dict[team]]
-        protected_players_for_df[team] = [player_name for player_name in protected_players_dict[team]]
-        while len(protected_players_for_df[team]) < n_protected_players_per_team:
-            protected_players_for_df[team].append('')
-    protected_players_df = pd.DataFrame.from_dict(protected_players_for_df, orient='index', columns=cols_names)
-    st.table(protected_players_df)
+        # show protected players: dict of team_name: list of dicts of 'player_name' and 'value'
+        st.markdown('<br>', unsafe_allow_html=True)
+        st.markdown('Protected Players', unsafe_allow_html=True)
+        # protected_players_dict_text = {team: [f"{player['player_name']} ({player['value']})" for player in protected_players_dict[team]] for team in protected_players_dict}
+        # n_protected_players_per_team = sum([len(protected_players_dict[team]) for team in protected_players_dict]) / len(protected_players_dict)
+        # cols_names = [f"Player {i+1} (bid - avg bid)" for i in range(int(n_protected_players_per_team))]
+        cols_names = ["Player 1", "Player 2", "Player 3"]
+        n_protected_players_per_team = 3
+        # protected_players_dict_text = {team: [f"{player['player_name']}" for player in protected_players_dict[team]] for team in protected_players_dict}
+        protected_players_for_df = {}
+        for team in protected_players_dict:
+            # protected_players_for_df[team] = [player['player_name'] for player in protected_players_dict[team]]
+            protected_players_for_df[team] = [player_name for player_name in protected_players_dict[team]]
+            while len(protected_players_for_df[team]) < n_protected_players_per_team:
+                protected_players_for_df[team].append('')
+        protected_players_df = pd.DataFrame.from_dict(protected_players_for_df, orient='index', columns=cols_names)
+        st.table(protected_players_df)
 
 
     # show matrix of how much each team likes each other team
@@ -692,9 +710,44 @@ def load_standings_data(client, tpl_url):
 def load_standings_data_from_path(standings_path):
     df_Standings = pd.read_csv(standings_path)
     df_Standings['Team'] = df_Standings['Team'].apply(no_emoji)
+
+    # print (df_Standings.columns)
+    # print (df_Standings['Salary'])
+    # print (df_Standings['Cap Floor'])
+    # print (df_Standings['Over/under'])
+    
+    # Get the cap floor and cap ceiling
+    for team_i in range(1):
+        # print (team_i)
+        # extract the cap floor and cap ceiling
+        # just need first row, take salary and compare to over/under
+        first_team_salary = df_Standings.iloc[team_i]['Salary']
+        # convert to int
+        first_team_salary = first_team_salary.replace('$', '').replace(',', '')
+        first_team_salary = int(first_team_salary)
+        # print (first_team_salary)
+        first_team_over_under = df_Standings.iloc[team_i]['Over/under']
+        # convert to int
+        first_team_over_under = first_team_over_under.replace('$', '').replace(',', '')
+        first_team_over_under = int(first_team_over_under)
+        # print (first_team_over_under)
+        cap_ceiling = first_team_salary - first_team_over_under
+        # print (cap_ceiling)
+        # extract the cap floor
+        first_team_cap_floor = df_Standings.iloc[team_i]['Cap Floor']
+        # convert to int
+        # first_team_cap_floor = first_team_cap_floor.replace('$', '').replace(',', '')
+        first_team_cap_floor = int(first_team_cap_floor)
+        # print (first_team_cap_floor)
+        cap_floor = cap_ceiling + first_team_cap_floor
+        # print (cap_floor)
+        break
+
+
+
     # only keep the columns we need: Team, Salary, Cap Status
-    df_Standings = df_Standings[['Team', 'Salary', 'Cap Status']]
-    return df_Standings
+    df_Standings = df_Standings[['Team', 'Salary']] #, 'Cap Status']]
+    return df_Standings, cap_ceiling, cap_floor
 
 
 
@@ -777,7 +830,7 @@ def extract_bid_info(data):
 
 def algo_page():
 
-    debug = 1
+    # debug = 1
 
     stss = st.session_state
 
@@ -786,7 +839,7 @@ def algo_page():
     # if 1:
 
         # only load previous data if in debug mode
-        if 'team_bids' not in stss or not debug:
+        if 'team_bids' not in stss: # or 1: # or not debug:
             with st.spinner("Loading Data"): #, show_time=True):
                 print ("Loading data...")
 
@@ -820,15 +873,9 @@ def algo_page():
                 league_path = os.path.join(next_dir, "saved_data/League_page.csv")
                 standings_path = os.path.join(next_dir, "saved_data/Standings_page.csv")
                 df_League = load_league_data_from_path(league_path)
-                df_Standings = load_standings_data_from_path(standings_path)
-                # print (len(df_Standings))
-                # print (df_Standings.columns)
-                # print (len(df_League))
-                # print (df_League.columns)
-                # fasd
-                
-                
-                
+                df_Standings, cap_ceiling, cap_floor = load_standings_data_from_path(standings_path)
+
+                                
                 
                 
                 
@@ -840,25 +887,65 @@ def algo_page():
                 # for file_name in existing_sheets:
                 #     print (file_name)
                 # existing_sheet_names = [file['name'] for file in existing_sheets]
-                team_bids = {}
-                for sheet_dict in existing_sheets:
+                
+                
+                
+                
+                
+
+
+                # import time
+                # team_bids = {}
+                # for sheet_dict in existing_sheets:
+                #     sheet_name = sheet_dict['name']
+                #     print (f" - {sheet_name}")
+                #     sheet_id = sheet_dict['id']
+                #     start_time = time.time()
+                #     conn = client.open_by_key(sheet_id)
+                #     print (f"Time to load sheet 1: {time.time() - start_time:.2f}")
+                #     start_time = time.time()
+                #     sheet = conn.get_worksheet(0)
+                #     print (f"Time to load sheet 2: {time.time() - start_time:.2f}")
+                #     start_time = time.time()
+                #     data = sheet.get_all_values()
+                #     print (f"Time to load sheet 3: {time.time() - start_time:.2f}")
+
+                #     bids, protected_players = extract_bid_info(data)
+                #     team_bids[sheet_name] = {'bids': bids, 'protected_players': protected_players}
+
+
+
+                # trying parallel
+                def fetch_sheet_data(sheet_dict):
                     sheet_name = sheet_dict['name']
-                    print (f" - {sheet_name}")
                     sheet_id = sheet_dict['id']
                     conn = client.open_by_key(sheet_id)
                     sheet = conn.get_worksheet(0)
                     data = sheet.get_all_values()
+                    # print (f" - {sheet_name}")
+                    # bids, protected_players = extract_bid_info(data)
+                    return [sheet_name, data]
+
+                import concurrent.futures
+                with concurrent.futures.ThreadPoolExecutor(max_workers=8) as executor:
+                    results = executor.map(fetch_sheet_data, existing_sheets)
+                results = list(results)
+
+                team_bids = {}
+                for result in results:
+                    sheet_name, data = result
                     bids, protected_players = extract_bid_info(data)
                     team_bids[sheet_name] = {'bids': bids, 'protected_players': protected_players}
 
-
                 stss["team_bids"] = team_bids
                 stss["df_League"] = df_League
-                stss["df_Standings"] = df_Standings
+                # stss["df_Standings"] = df_Standings
+                stss['cap_ceiling'] = cap_ceiling
+                stss['cap_floor'] = cap_floor
 
         team_bids = stss['team_bids']
         df_League = stss['df_League']
-        df_Standings = stss['df_Standings']
+        # df_Standings = stss['df_Standings']
 
         # for i, (k, v) in enumerate(team_bids.items()):
         #     print (f"\n{k}")
@@ -932,18 +1019,7 @@ def algo_page():
                 player_bids[player][team] = int(bid)
         # print (f"number of players player_bids: {len(player_bids)}")
 
-        # # limit bids to x above/below salary
-        # max_change = 40000
-        # for player in player_bids:
-        #     for team in player_bids[player]:
-        #         salary = player_salaries[player]
-        #         bid = player_bids[player][team]
-        #         if bid > salary + max_change:
-        #             player_bids[player][team] = salary + max_change
-        #             print (f"{team[:10]}: {player} bid too high: {bid} -> {salary + max_change}")
-        #         if bid < salary - max_change:
-        #             player_bids[player][team] = salary - max_change
-        #             print (f"{team[:10]}: {player} bid too low: {bid} -> {salary - max_change}")
+
 
 
         # RUN TRADING ALORITHM
@@ -955,46 +1031,11 @@ def algo_page():
 
         # Display info
         with st.expander("Pre Trade Info"):
-            show_starting_info(original_team_costs, protected_players_dict, starting_rosters, player_bids) #, captain_salaries)
-        # with st.expander("Player Salaries"):
-        #     show_player_salaries(new_player_salaries, player_bids)
+            show_starting_info(original_team_costs, protected_players_dict, starting_rosters, player_bids, stss['cap_ceiling'], stss['cap_floor'])
         with st.expander("Trades"):
             show_trades(trades, player_salaries)
         with st.expander("Post Trade Info"):
             show_end_info(new_team_costs, count_team_trades, trades, player_bids, rosters, starting_rosters, original_team_costs)
-
-
-
-
-    
-
-        # player_salaries, latest_week = get_salaries(df_players, player_names, max_salary)
-        
-        # # latest_week = 4
-        # # salary_col_name = f"Week {latest_week} - Salary"
-        # # bids_sheet_name = f'Week {latest_week} - Bids'
-        # # protect_sheet_name = f'Week {latest_week} - Protect'
-        # # print (f"\n{bids_sheet_name}")
-
-        # protected_players_dict = load_protected_players(conn, protect_sheet_name)
-
-        # all_player_bids = get_all_bids_from_sheet(conn, stss, bids_sheet_name, worksheets)
-        # player_bids, rosters_team_list, player_genders = accumulate_data(rosters, team_names, df_players, salary_col_name, player_names, all_player_bids)
-
-        # # compute player salaries by taking the average of the bids
-        # # player_salaries = {player: round(np.mean(list(bids.values()))) for player, bids in player_bids.items()}
-        # # player_salaries = compute_player_salaries(player_bids, protected_players_dict)
-        # # for now keep salaries unchanged
-        # # just salary to int
-        # player_salaries = {k: int(v) for k, v in player_salaries.items()}
-
-
-        # new_player_salaries = player_salaries
-        # original_team_costs = calc_teams_salaries(rosters, new_player_salaries)
-        # # sort roster into the same order as original_team_costs, so highest to lowest salary
-        # rosters = {k: v for k, v in sorted(rosters.items(), key=lambda item: original_team_costs[item[0]], reverse=True)}
-        # starting_rosters = rosters.copy()
-
 
 
 
