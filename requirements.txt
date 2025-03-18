@@ -10,7 +10,7 @@ cffi==1.16.0
 charset-normalizer==2.0.4
 click==8.1.7
 contourpy==1.2.1
-cryptography==43.0.1
+cryptography==44.0.1
 cycler==0.12.1
 distro==1.9.0
 fonttools==4.53.1
@@ -24,7 +24,7 @@ gspread-dataframe==4.0.0
 google-api-python-client==2.154.0
 httplib2==0.22.0
 idna==3.7
-Jinja2==3.1.5
+Jinja2==3.1.6
 joblib==1.4.2
 jsonpatch==1.33
 jsonpointer==2.1
