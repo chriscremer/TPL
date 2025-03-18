@@ -55,18 +55,20 @@ def trade(rosters, team_1, player_1, team_2, player_2, team_names):
 
 
 
+def run_algo(rosters, player_bids, player_genders, captains, player_salaries, protected_players_dict):
 
-
-
-
-
-
-
-def make_trades(rosters, player_salaries, max_trades, amount_above_avg_for_extra_trade, 
-                protected_players_dict, player_bids, player_genders, captains,
-                absolute_minimum_std_diff, top_trade_percent, stop_if_within_x_of_avg,
-                cap_ceiling, cap_floor):
-        
+    random.seed(0)
+    
+    # settings
+    max_trades = 3 #4 # 3 # max trades per team
+    amount_above_avg_for_extra_trade =  25000
+    stop_if_within_x_of_avg = 33000
+    early_minimum_salary_change = 15000
+    late_minimum_salary_change = 7000 #5000
+    early_minimum_std_diff = 7000
+    late_minimum_std_diff = 500 #700
+    absolute_minimum_std_diff = 100
+    early_trade_rounds = 6
 
     # compute salary of each team
     team_costs = get_team_costs(rosters, player_salaries)
@@ -204,55 +206,41 @@ def make_trades(rosters, player_salaries, max_trades, amount_above_avg_for_extra
             break
 
 
-        # Sort trades by team_costs_std
-        sorted_possible_trades = sorted(possible_trades, key=lambda x: x["team_costs_std"])
-        # keep top x percent of trades
-        n_top_trades = int(len(sorted_possible_trades) * top_trade_percent)
-        n_top_trades = max(1, n_top_trades)
-        possible_trades = sorted_possible_trades[:n_top_trades]
-        print (f"  Possible trades, top {top_trade_percent*100}%: {len(possible_trades)}")
-
-
-
-        # # if player salary dif is less than x, skip
-        # new_possible_trades = []
-        # if trade_i <= early_trade_rounds:
-        #     # early trades should be big
-        #     minimum_salary_change = early_minimum_salary_change
-        # else:
-        #     minimum_salary_change = late_minimum_salary_change
-        # for trade1 in possible_trades:
-        #     player_1 = trade1["player_1"]
-        #     player_2 = trade1["player_2"]
-        #     if abs(player_salaries[player_1] - player_salaries[player_2]) > minimum_salary_change:
-        #         new_possible_trades.append(trade1)
-        # if len(new_possible_trades) > 0 and len(new_possible_trades) < len(possible_trades):
-        #     possible_trades = new_possible_trades
-        #     print (f"  Possible trades, min salary change: {len(possible_trades)}")
+        # if player salary dif is less than x, skip
+        new_possible_trades = []
+        if trade_i <= early_trade_rounds:
+            # early trades should be big
+            minimum_salary_change = early_minimum_salary_change
+        else:
+            minimum_salary_change = late_minimum_salary_change
+        for trade1 in possible_trades:
+            player_1 = trade1["player_1"]
+            player_2 = trade1["player_2"]
+            if abs(player_salaries[player_1] - player_salaries[player_2]) > minimum_salary_change:
+                new_possible_trades.append(trade1)
+        if len(new_possible_trades) > 0 and len(new_possible_trades) < len(possible_trades):
+            possible_trades = new_possible_trades
+            print (f"  Possible trades, min salary change: {len(possible_trades)}")
                 
 
 
 
-        # # Make sure the standard deviation of team costs is decreasing, ie increasing parity
-        # new_possible_trades = []
-        # if trade_i <= early_trade_rounds:
-        #     # early trades should be big
-        #     minimum_std_diff = early_minimum_std_diff
-        # else:
-        #     minimum_std_diff = late_minimum_std_diff
-        # for trade1 in possible_trades:
-        #     this_trade_costs_std = trade1["team_costs_std"]
-        #     team_costs_std_diff = prev_team_costs_std - this_trade_costs_std
-        #     # if parity improvement is less than x, skip
-        #     if team_costs_std_diff > minimum_std_diff:
-        #         new_possible_trades.append(trade1)
-        # if len(new_possible_trades) > 0 and len(new_possible_trades) < len(possible_trades):
-        #     possible_trades = new_possible_trades
-        #     print (f"  Possible trades, min std diff: {len(possible_trades)}")
-
-
-
-
+        # Make sure the standard deviation of team costs is decreasing, ie increasing parity
+        new_possible_trades = []
+        if trade_i <= early_trade_rounds:
+            # early trades should be big
+            minimum_std_diff = early_minimum_std_diff
+        else:
+            minimum_std_diff = late_minimum_std_diff
+        for trade1 in possible_trades:
+            this_trade_costs_std = trade1["team_costs_std"]
+            team_costs_std_diff = prev_team_costs_std - this_trade_costs_std
+            # if parity improvement is less than x, skip
+            if team_costs_std_diff > minimum_std_diff:
+                new_possible_trades.append(trade1)
+        if len(new_possible_trades) > 0 and len(new_possible_trades) < len(possible_trades):
+            possible_trades = new_possible_trades
+            print (f"  Possible trades, min std diff: {len(possible_trades)}")
 
 
 
@@ -353,9 +341,9 @@ def make_trades(rosters, player_salaries, max_trades, amount_above_avg_for_extra
         highest_score = scored_trades[0][0]
         # only keep trades with the highest score
         new_possible_trades = [trade1 for score, trade1 in scored_trades if score == highest_score]
-        # if len(new_possible_trades) > 0 and len(new_possible_trades) < len(possible_trades):
-        possible_trades = new_possible_trades
-        print (f"  Possible trades, highest score {highest_score}: {len(possible_trades)}")
+        if len(new_possible_trades) > 0 and len(new_possible_trades) < len(possible_trades):
+            possible_trades = new_possible_trades
+            print (f"  Possible trades, highest score {highest_score}: {len(possible_trades)}")
 
 
 
@@ -494,83 +482,18 @@ def make_trades(rosters, player_salaries, max_trades, amount_above_avg_for_extra
         })
         traded_players.append(player_1)
         traded_players.append(player_2)
-
-    # Confirm all team salaries are below cap ceiling and above cap floor
-    fail = False
-    for team, cost in team_costs.items():
-        if cost > cap_ceiling:
-            print (f"Team {team} is over cap ceiling: {cost}")
-            fail = True
-        if cost < cap_floor:
-            print (f"Team {team} is below cap floor: {cost}")
-            fail = True
-    if not fail:
-        print ("--- All teams are within cap ceiling and floor ---")
-    # else:
-    #     print ("########## FAIL ##########")
-
-
-    return trades, count_team_trades, rosters, fail
-
-
-
-
-
-
-
-
-
-def run_algo(rosters, player_bids, player_genders, captains, player_salaries, 
-             protected_players_dict, cap_ceiling, cap_floor):
-
-    random.seed(0)
-    
-    # settings
-    max_trades = 3 #4 # 3 # max trades per team
-    amount_above_avg_for_extra_trade =  25000
-    stop_if_within_x_of_avg = 33000
-    absolute_minimum_std_diff = 100
-    
-    original_roster = rosters.copy()
-
-    # keep top x percent of trades
-    # top_trade_percent =  0.5
-    top_trade_percents = [.01, .25, .5, .75, .95]
-    results = []
-    for top_trade_percent in top_trade_percents:
-        print ('-------')
-        print (f"Top trade percent: {top_trade_percent}")
-
-        trades, count_team_trades, rosters, fail = make_trades(original_roster, player_salaries, max_trades, amount_above_avg_for_extra_trade, 
-                    protected_players_dict, player_bids, player_genders, captains,
-                    absolute_minimum_std_diff, top_trade_percent, stop_if_within_x_of_avg,
-                    cap_ceiling, cap_floor)
-        passes = not fail
-        score = np.sum([trade["highest_score"] for trade in trades])
-        results.append({"top_trade_percent": top_trade_percent, "score": score, "trades": trades, "count_team_trades": count_team_trades, "rosters": rosters, "passes": passes})
-
-    print ('--------------')
-    print ()
-    # print top_trade_percent, score, and fail
-    for i, result in enumerate(results):
-        n_trades = len(result["trades"])
-        print (f"{i} Top trade percent: {result['top_trade_percent']}, Score: {result['score']}, Passes: {result['passes']}, Trades: {n_trades}")
-    print ()
-
-    # Take one with highest score that passes
-    best_i = 0
-    best_score = None
-    for i, result in enumerate(results):
-        if result["passes"] and (best_score is None or result["score"] > best_score):
-            best_i = i
-            best_score = result["score"]
-    
-    print (f"Best: {best_i} -- {results[best_i]['top_trade_percent']}, Score: {results[best_i]['score']}, Passes: {results[best_i]['passes']}")
-    trades = results[best_i]["trades"]
-    count_team_trades = results[best_i]["count_team_trades"]
-    rosters = results[best_i]["rosters"]
-
     return rosters, count_team_trades, trades
+
+
+
+
+
+
+
+
+
+
+
 
 
 

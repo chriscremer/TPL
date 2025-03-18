@@ -1063,7 +1063,8 @@ def algo_page():
         # RUN TRADING ALORITHM
         rosters, count_team_trades, trades = run_algo(team_rosters, player_bids, 
                                                       player_genders, captains, 
-                                                      player_salaries, protected_players_dict)
+                                                      player_salaries, protected_players_dict,
+                                                      stss['cap_ceiling'], stss['cap_floor'])
         new_team_costs = calc_teams_salaries(rosters, player_salaries)
 
 
