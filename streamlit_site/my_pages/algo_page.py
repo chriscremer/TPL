@@ -1058,23 +1058,23 @@ def algo_page():
         # print (f"number of players player_bids: {len(player_bids)}")
 
 
+        with st.spinner("Running Algorithm"):
+
+            # RUN TRADING ALORITHM
+            rosters, count_team_trades, trades = run_algo(team_rosters, player_bids, 
+                                                        player_genders, captains, 
+                                                        player_salaries, protected_players_dict,
+                                                        stss['cap_ceiling'], stss['cap_floor'])
+            new_team_costs = calc_teams_salaries(rosters, player_salaries)
 
 
-        # RUN TRADING ALORITHM
-        rosters, count_team_trades, trades = run_algo(team_rosters, player_bids, 
-                                                      player_genders, captains, 
-                                                      player_salaries, protected_players_dict,
-                                                      stss['cap_ceiling'], stss['cap_floor'])
-        new_team_costs = calc_teams_salaries(rosters, player_salaries)
-
-
-        # Display info
-        with st.expander("Pre Trade Info"):
-            show_starting_info(original_team_costs, protected_players_dict, starting_rosters, player_bids, stss['cap_ceiling'], stss['cap_floor'])
-        with st.expander("Trades"):
-            show_trades(trades, player_salaries)
-        with st.expander("Post Trade Info"):
-            show_end_info(new_team_costs, count_team_trades, trades, player_bids, rosters, starting_rosters, original_team_costs, stss['cap_ceiling'], stss['cap_floor'])
+            # Display info
+            with st.expander("Pre Trade Info"):
+                show_starting_info(original_team_costs, protected_players_dict, starting_rosters, player_bids, stss['cap_ceiling'], stss['cap_floor'])
+            with st.expander("Trades"):
+                show_trades(trades, player_salaries)
+            with st.expander("Post Trade Info"):
+                show_end_info(new_team_costs, count_team_trades, trades, player_bids, rosters, starting_rosters, original_team_costs, stss['cap_ceiling'], stss['cap_floor'])
 
 
 
