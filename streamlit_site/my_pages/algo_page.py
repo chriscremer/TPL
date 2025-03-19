@@ -2,6 +2,10 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import os
+import matplotlib.pyplot as plt
+import concurrent.futures
+
+
 # import time
 # from sklearn.linear_model import LinearRegression
 # from gspread_dataframe import set_with_dataframe, get_as_dataframe
@@ -178,7 +182,7 @@ def make_likeness_matrix(team_costs, player_bids, rosters, avg_team_cost, starti
     st.markdown("This matrix shows how much each team likes each other team.<br>The number is how much the team on the row is bidding for players from the team in the column, minus the average salary.<br>Positive numbers mean the team likes the other team, negative numbers mean the team isn't interested in the players on the other team.", unsafe_allow_html=True)
     likeness_matrix_df = pd.DataFrame.from_dict(likeness_matrix, orient='index')
     # st.table(likeness_matrix_df)
-    import matplotlib.pyplot as plt
+    
     fig, ax = plt.subplots()
     ax.matshow(likeness_matrix_df, cmap='coolwarm')
     # add numbers to the matrix
@@ -964,7 +968,7 @@ def algo_page():
                     # bids, protected_players = extract_bid_info(data)
                     return [sheet_name, data]
 
-                import concurrent.futures
+                
                 with concurrent.futures.ThreadPoolExecutor(max_workers=8) as executor:
                     results = executor.map(fetch_sheet_data, existing_sheets)
                 results = list(results)
