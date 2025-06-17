@@ -44,7 +44,7 @@ pillow==10.4.0
 pip==24.0
 platformdirs==3.10.0
 pluggy==1.0.0
-protobuf==5.27.2
+protobuf==5.29.5
 pyarrow==17.0.0
 pyasn1==0.6.0
 pyasn1_modules==0.4.0
@@ -57,7 +57,7 @@ PySocks==1.7.1
 python-dateutil==2.9.0.post0
 pytz==2024.1
 referencing==0.35.1
-requests==2.32.2
+requests==2.32.4
 requests-oauthlib==2.0.0
 rich==13.7.1
 rpds-py==0.19.1
