@@ -41,7 +41,7 @@ oauthlib==3.2.2
 packaging==23.2
 pandas==2.2.2
 pillow==10.4.0
-pip==24.0
+pip
 platformdirs==3.10.0
 pluggy==1.0.0
 protobuf==5.29.5
