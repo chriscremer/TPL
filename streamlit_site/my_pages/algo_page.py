@@ -825,6 +825,10 @@ def extract_bid_info(data):
     for team_i in range(n_teams):
         for player_row in range(player_rows[0], player_rows[1]+1):
             cur_name_col = name_col + team_i*bid_col_interval
+            # print (team_i, player_row, cur_name_col)
+            # print (f"len(data) = {len(data)}")
+            # print (f"len(data[player_row]) = {len(data[player_row])}")
+
             player_name = data[player_row][cur_name_col]
             # bid plus salary
             player_bid = data[player_row][first_bid_col + bid_col_interval*team_i]
@@ -923,7 +927,8 @@ def algo_page():
                 
 
                 # Load each team's bids
-                folder_id = '1LycfBlMWQNsCB9rmKEtZwqCvo1jXIJ6N'
+                # folder_id = '1LycfBlMWQNsCB9rmKEtZwqCvo1jXIJ6N'
+                folder_id = "12XTqjwaAW_UsuXcpcE5AiY1nMQj4NhDF" # nov 2025, week 4
                 existing_sheets = get_gsheets_in_folder(drive_service, folder_id)
                 # print ("Sheets in folder:")
                 # for file_name in existing_sheets:
@@ -998,23 +1003,41 @@ def algo_page():
 
         print ('ready')
 
-        captains = [
-            "Vincent Poon",
-            "Cat Pelletier",
-            "Marc Hodges",
-            "Jamie Hoo-fatt",
-            "James Ho",
-            "Vanessa Mensink",
-            "Ryan Sherriff",
-            "Alexa Skinner",
-            "Benjamin St.Louis",
-            "Sam Esteves",
-            "Robert Stalker",
-            "Brendan Howarth",
-            "Caterina Cazzetta",
-            "Yubai Liu",
-        ]
+        # captains = [
+        #     "Vincent Poon",
+        #     "Cat Pelletier",
+        #     "Marc Hodges",
+        #     "Jamie Hoo-fatt",
+        #     "James Ho",
+        #     "Vanessa Mensink",
+        #     "Ryan Sherriff",
+        #     "Alexa Skinner",
+        #     "Benjamin St.Louis",
+        #     "Sam Esteves",
+        #     "Robert Stalker",
+        #     "Brendan Howarth",
+        #     "Caterina Cazzetta",
+        #     "Yubai Liu",
+        # ]
 
+        # nov 2025
+        captains = [
+            "Rebecca Minielly",
+            "Nathan Killoran",
+            "Robert Stalker",
+            "Wendy Chong",
+            "Brittany Heath",
+            "Patrick Russell",
+            "Daniel Quinto",
+            "Meagan Newman",
+            "Joanne Ukposidolo",
+            "Martin Sieniawski",
+            "Hailey Murl",
+            "Sanjay Parker",
+            "Amir Aschner",
+            "Daniel Eisner",
+            "Helen O'Sullivan",
+        ]
 
         # Make roster dict
         data_league = df_League.to_dict(orient='records')

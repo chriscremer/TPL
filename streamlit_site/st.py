@@ -78,7 +78,9 @@ if ('login_status' not in stss or stss['login_status'] == False): # and not stay
         st.session_state['sheets_service'] = sheets_service
 
         # password sheet
-        sheet_url = 'https://docs.google.com/spreadsheets/d/16NDz42ETaLIAroR2IwHsfZcjSeA2gm74da_Vf3ehrjI/edit?gid=0#gid=0'
+        # sheet_url = 'https://docs.google.com/spreadsheets/d/16NDz42ETaLIAroR2IwHsfZcjSeA2gm74da_Vf3ehrjI/edit?gid=0#gid=0'
+        sheet_url = "https://docs.google.com/spreadsheets/d/1M_85kjvshOxvBtI-jdp9WTSmPurdUrKOHuDYwA_10ZI/edit?gid=0#gid=0" # nov 2025
+
         conn = sheets_client.open_by_url(sheet_url)
         worksheets = conn.worksheets()
         login_sheet = worksheets[0]
