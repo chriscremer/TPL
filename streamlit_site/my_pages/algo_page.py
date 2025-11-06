@@ -95,21 +95,23 @@ def show_trades(trades, new_player_salaries): #df_players, salary_col_name):
 
             # text += f"<br>Team 1 Bid for Player Received - Bid for Player Traded Away: {trade['team1_happiness_change']}"
             # text += f"<br>Team 2 Bid for Player Received - Bid for Player Traded Away: {trade['team2_happiness_change']}"
-            t1_colour = 'green' if trade['team1_happiness_change'] > 0 else 'red'
-            t2_colour = 'green' if trade['team2_happiness_change'] > 0 else 'red'
-            text += f"<br>Bid for Player Received minus Bid for Player Traded Away:"
-            text += f"<br>&nbsp;&nbsp;&nbsp;&nbsp;{trade['team_1']}: <span style='color:{t1_colour}'>{trade['team1_happiness_change']}</span>"
-            text += f"<br>&nbsp;&nbsp;&nbsp;&nbsp;{trade['team_2']}: <span style='color:{t2_colour}'>{trade['team2_happiness_change']}</span>"
-            
-            
-            # if its positive, make it green
-            if trade['happiness_change'] > 0:
-                text += f"<br>&nbsp;&nbsp;&nbsp;&nbsp;Total Change: <span style='color:green'>{trade['happiness_change']}</span>"
-            # if its negative, make it red
-            elif trade['happiness_change'] < 0:
-                text += f"<br>&nbsp;&nbsp;&nbsp;&nbsp;Total Change: <span style='color:red'>{trade['happiness_change']}</span>"
-            else:
-                text += f"<br>&nbsp;&nbsp;&nbsp;&nbsp;Total Change: {trade['happiness_change']}"
+
+            show_trade_details = 0
+            if show_trade_details:
+                t1_colour = 'green' if trade['team1_happiness_change'] > 0 else 'red'
+                t2_colour = 'green' if trade['team2_happiness_change'] > 0 else 'red'
+                text += f"<br>Bid for Player Received minus Bid for Player Traded Away:"
+                text += f"<br>&nbsp;&nbsp;&nbsp;&nbsp;{trade['team_1']}: <span style='color:{t1_colour}'>{trade['team1_happiness_change']}</span>"
+                text += f"<br>&nbsp;&nbsp;&nbsp;&nbsp;{trade['team_2']}: <span style='color:{t2_colour}'>{trade['team2_happiness_change']}</span>"
+                
+                # if its positive, make it green
+                if trade['happiness_change'] > 0:
+                    text += f"<br>&nbsp;&nbsp;&nbsp;&nbsp;Total Change: <span style='color:green'>{trade['happiness_change']}</span>"
+                # if its negative, make it red
+                elif trade['happiness_change'] < 0:
+                    text += f"<br>&nbsp;&nbsp;&nbsp;&nbsp;Total Change: <span style='color:red'>{trade['happiness_change']}</span>"
+                else:
+                    text += f"<br>&nbsp;&nbsp;&nbsp;&nbsp;Total Change: {trade['happiness_change']}"
 
             text += f"</p>"
             st.markdown(text, unsafe_allow_html=True)
