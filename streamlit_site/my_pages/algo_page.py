@@ -1033,7 +1033,7 @@ def algo_page():
             "Meagan Newman",
             "Joanne Ukposidolo",
             "Martin Sieniawski",
-            "Hailey Murl",
+            "Hailey Wilson",
             "Sanjay Parker",
             "Amir Aschner",
             "Daniel Eisner",
