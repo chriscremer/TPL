@@ -112,6 +112,9 @@ def show_trades(trades, new_player_salaries): #df_players, salary_col_name):
                     text += f"<br>&nbsp;&nbsp;&nbsp;&nbsp;Total Change: <span style='color:red'>{trade['happiness_change']}</span>"
                 else:
                     text += f"<br>&nbsp;&nbsp;&nbsp;&nbsp;Total Change: {trade['happiness_change']}"
+            else:
+                text += "<br><br><br><br><br>"
+
 
             text += f"</p>"
             st.markdown(text, unsafe_allow_html=True)
