@@ -535,10 +535,14 @@ def run_algo(rosters, player_bids, player_genders, captains, player_salaries,
 
     # keep top x percent of trades
     # top_trade_percent =  0.5
-    top_trade_percents = [.01, .25, .5, .75, .95]
+    # top_trade_percents = [.01, .25, .5, .75, .95]
+    # top_trade_percents = [.95, .75, .5, .25, .01]
+    top_trade_percents = [.95, .85, .75, .65, .55, .45, .35, .25, .1, .01]
+
+
     results = []
     for top_trade_percent in top_trade_percents:
-        print ('-------')
+        print ('\n-------')
         print (f"Top trade percent: {top_trade_percent}")
 
         trades, count_team_trades, rosters, fail = make_trades(original_roster, player_salaries, max_trades, amount_above_avg_for_extra_trade, 
@@ -548,6 +552,9 @@ def run_algo(rosters, player_bids, player_genders, captains, player_salaries,
         passes = not fail
         score = np.sum([trade["highest_score"] for trade in trades])
         results.append({"top_trade_percent": top_trade_percent, "score": score, "trades": trades, "count_team_trades": count_team_trades, "rosters": rosters, "passes": passes})
+
+        if passes:
+            break
 
     print ('--------------')
     print ()
