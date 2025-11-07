@@ -54,7 +54,24 @@ from utils import no_emoji
 #     return player_bids, rosters_team_list, player_genders
 
 
-
+def parse_bid_value(raw_bid):
+    """Convert spreadsheet bid values (including scientific notation or currency strings) into ints."""
+    if raw_bid is None or (isinstance(raw_bid, str) and raw_bid.strip() == ""):
+        return 0
+    if isinstance(raw_bid, (int, float)):
+        return int(raw_bid)
+    if isinstance(raw_bid, str):
+        cleaned = raw_bid.strip().replace(",", "")
+        if cleaned.startswith("$"):
+            cleaned = cleaned[1:]
+        try:
+            print (f"Parsing bid value: {raw_bid} -> {cleaned}")
+            return int(float(cleaned))
+        except ValueError:
+            print(f"Warning: Unable to parse bid value '{raw_bid}', defaulting to 0")
+            return 0
+    print(f"Warning: Unsupported bid type '{type(raw_bid).__name__}', defaulting to 0")
+    return 0
 
 
 
@@ -1087,7 +1104,7 @@ def algo_page():
             for player, bid in team_bids[team]['bids'].items():
                 if player not in player_bids:
                     player_bids[player] = {}
-                player_bids[player][team] = int(bid)
+                player_bids[player][team] = parse_bid_value(bid)
         # print (f"number of players player_bids: {len(player_bids)}")
 
 
@@ -1108,9 +1125,6 @@ def algo_page():
                 show_trades(trades, player_salaries)
             with st.expander("Post Trade Info"):
                 show_end_info(new_team_costs, count_team_trades, trades, player_bids, rosters, starting_rosters, original_team_costs, stss['cap_ceiling'], stss['cap_floor'])
-
-
-
 
 
 
