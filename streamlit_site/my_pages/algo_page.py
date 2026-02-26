@@ -804,7 +804,8 @@ def load_standings_data_from_path(standings_path):
         # first_team_cap_floor = first_team_cap_floor.replace('$', '').replace(',', '')
         first_team_cap_floor = int(first_team_cap_floor)
         # print (first_team_cap_floor)
-        cap_floor = cap_ceiling + first_team_cap_floor
+        # "Cap Floor" in the sheet is the allowed amount below the cap ceiling.
+        cap_floor = cap_ceiling - first_team_cap_floor
         # print (cap_floor)
         break
 
@@ -843,7 +844,29 @@ def extract_bid_info(data):
     name_col = 0
     first_bid_col = 3
     bid_col_interval = 6
-    n_teams = 8
+    team_name_row = 4
+    n_teams = 0
+    # Team names are written at row 5 (index 4), every 6 columns.
+    while True:
+        cur_name_col = name_col + n_teams * bid_col_interval
+        if team_name_row >= len(data):
+            break
+        row_vals = data[team_name_row]
+        if cur_name_col >= len(row_vals):
+            break
+        team_name = str(row_vals[cur_name_col]).strip()
+        if team_name == "":
+            break
+        n_teams += 1
+
+    def safe_get(row_i, col_i):
+        if row_i >= len(data):
+            return ""
+        row = data[row_i]
+        if col_i >= len(row):
+            return ""
+        return row[col_i]
+
     bids = {} # player_name: bid
     for team_i in range(n_teams):
         for player_row in range(player_rows[0], player_rows[1]+1):
@@ -852,26 +875,27 @@ def extract_bid_info(data):
             # print (f"len(data) = {len(data)}")
             # print (f"len(data[player_row]) = {len(data[player_row])}")
 
-            player_name = data[player_row][cur_name_col]
+            player_name = safe_get(player_row, cur_name_col)
             # bid plus salary
-            player_bid = data[player_row][first_bid_col + bid_col_interval*team_i]
+            player_bid = safe_get(player_row, first_bid_col + bid_col_interval*team_i)
             try:
                 player_bid = int(player_bid)
             except:
                 # print (f"Error with {player_name} - {player_bid}")
                 # take their salary, ignore the bid
-                player_bid = data[player_row][first_bid_col + bid_col_interval*team_i - 2]
-                player_bid = int(player_bid)
+                player_bid = safe_get(player_row, first_bid_col + bid_col_interval*team_i - 2)
+                player_bid = parse_bid_value(player_bid)
                 # print (f"Using salary: {player_bid}")
-            bids[player_name] = player_bid
+            if str(player_name).strip() != "":
+                bids[player_name] = player_bid
             # print (team_i, player_name, player_bid)
     # print (f"Number of players: {len(bids)}")
 
     protected_players_col = 4
     protected_players = []
     for player_row in range(player_rows[0], player_rows[1]+1):
-        player_name = data[player_row][name_col]
-        value = data[player_row][protected_players_col]
+        player_name = safe_get(player_row, name_col)
+        value = safe_get(player_row, protected_players_col)
         try:
             lowercase_value = value.lower()
             if lowercase_value == 'y':
@@ -951,7 +975,8 @@ def algo_page():
 
                 # Load each team's bids
                 # folder_id = '1LycfBlMWQNsCB9rmKEtZwqCvo1jXIJ6N'
-                folder_id = "12XTqjwaAW_UsuXcpcE5AiY1nMQj4NhDF" # nov 2025, week 4
+                # folder_id = "12XTqjwaAW_UsuXcpcE5AiY1nMQj4NhDF" # nov 2025, week 4
+                folder_id = "1CUtQ61Dya1X37y3h6uhpIsGh2W43srah" # jan 2026
                 existing_sheets = get_gsheets_in_folder(drive_service, folder_id)
                 # print ("Sheets in folder:")
                 # for file_name in existing_sheets:
@@ -1005,7 +1030,8 @@ def algo_page():
                 for result in results:
                     sheet_name, data = result
                     bids, protected_players = extract_bid_info(data)
-                    team_bids[sheet_name] = {'bids': bids, 'protected_players': protected_players}
+                    normalized_team_name = no_emoji(sheet_name).strip()
+                    team_bids[normalized_team_name] = {'bids': bids, 'protected_players': protected_players}
 
                 stss["team_bids"] = team_bids
                 stss["df_League"] = df_League
@@ -1043,23 +1069,44 @@ def algo_page():
         #     "Yubai Liu",
         # ]
 
-        # nov 2025
+        # # nov 2025
+        # captains = [
+        #     "Rebecca Minielly",
+        #     "Nathan Killoran",
+        #     "Robert Stalker",
+        #     "Wendy Chong",
+        #     "Brittany Heath",
+        #     "Patrick Russell",
+        #     "Daniel Quinto",
+        #     "Meagan Newman",
+        #     "Joanne Ukposidolo",
+        #     "Martin Sieniawski",
+        #     "Hailey Wilson",
+        #     "Sanjay Parker",
+        #     "Amir Aschner",
+        #     "Daniel Eisner",
+        #     "Helen O'Sullivan",
+        # ]
+
+        # jan 2026
         captains = [
-            "Rebecca Minielly",
-            "Nathan Killoran",
-            "Robert Stalker",
-            "Wendy Chong",
-            "Brittany Heath",
-            "Patrick Russell",
-            "Daniel Quinto",
-            "Meagan Newman",
-            "Joanne Ukposidolo",
-            "Martin Sieniawski",
-            "Hailey Wilson",
-            "Sanjay Parker",
-            "Amir Aschner",
-            "Daniel Eisner",
+            'James Shimoda',
+            'Vikki Shimoda',
+            'Robert Stalker',
+            'Sam Esteves',
+            'Daniel Eisner',
             "Helen O'Sullivan",
+            "Anders Whist",
+            "Sabrina Paez-Parent",
+            "Yubai Liu",
+            "Michael Pham-Hung",
+            "Wendy Li",
+            "Dylan Cattanach",
+            "Daniel Quinto",
+            "Cat Pelletier",
+            "Marc Hodges",
+            "Nancy Warren",
+            "Ofer Shai",
         ]
 
         # Make roster dict
@@ -1105,6 +1152,13 @@ def algo_page():
                 if player not in player_bids:
                     player_bids[player] = {}
                 player_bids[player][team] = parse_bid_value(bid)
+        # Ensure every player has a bid value for every team key used by the algo.
+        for player in player_salaries:
+            if player not in player_bids:
+                player_bids[player] = {}
+            for team in team_names:
+                if team not in player_bids[player]:
+                    player_bids[player][team] = player_salaries[player]
         # print (f"number of players player_bids: {len(player_bids)}")
 
 
@@ -1125,6 +1179,3 @@ def algo_page():
                 show_trades(trades, player_salaries)
             with st.expander("Post Trade Info"):
                 show_end_info(new_team_costs, count_team_trades, trades, player_bids, rosters, starting_rosters, original_team_costs, stss['cap_ceiling'], stss['cap_floor'])
-
-
-
