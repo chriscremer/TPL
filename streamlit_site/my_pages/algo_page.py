@@ -1161,6 +1161,35 @@ def algo_page():
                     player_bids[player][team] = player_salaries[player]
         # print (f"number of players player_bids: {len(player_bids)}")
 
+        # Validate bid matrix shape before running algo so key errors are explicit.
+        missing_players = []
+        missing_player_team_pairs = []
+        for team, roster in team_rosters.items():
+            for player in roster:
+                if player not in player_bids:
+                    missing_players.append(player)
+                    continue
+                if team not in player_bids[player]:
+                    missing_player_team_pairs.append((player, team))
+        if missing_players or missing_player_team_pairs:
+            print(f"Missing player entries in player_bids: {sorted(set(missing_players))[:20]}")
+            print(f"Missing (player, team) bid keys: {missing_player_team_pairs[:20]}")
+            raise KeyError(
+                "player_bids is incomplete. "
+                f"missing_players={len(set(missing_players))}, "
+                f"missing_player_team_pairs={len(missing_player_team_pairs)}"
+            )
+
+        roster_players = sorted({p for roster in team_rosters.values() for p in roster})
+        bid_players = sorted(player_bids.keys())
+        only_in_roster = [p for p in roster_players if p not in player_bids]
+        only_in_bids = [p for p in bid_players if p not in roster_players]
+        print(f"[DEBUG] roster_players={len(roster_players)}, bid_players={len(bid_players)}")
+        if only_in_roster:
+            print(f"[DEBUG] Players only in roster (sample): {only_in_roster[:20]}")
+        if only_in_bids:
+            print(f"[DEBUG] Players only in bids (sample): {only_in_bids[:20]}")
+
 
         with st.spinner("Running Algorithm"):
 

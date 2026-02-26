@@ -26,7 +26,18 @@ def get_team_self_values(rosters, player_bids):
     for team, roster in rosters.items():
         team_values[team] = 0
         for player in roster:
-            # print (player_bids[player].keys())
+            if player not in player_bids:
+                sample_players = list(player_bids.keys())[:20]
+                print(f"[DEBUG] Missing player key in player_bids: {repr(player)}")
+                print(f"[DEBUG] Team being evaluated: {repr(team)}")
+                print(f"[DEBUG] player_bids size: {len(player_bids)}")
+                print(f"[DEBUG] Sample player_bids keys: {sample_players}")
+                raise KeyError(player)
+            if team not in player_bids[player]:
+                sample_teams = list(player_bids[player].keys())[:20]
+                print(f"[DEBUG] Missing team key for player in player_bids: player={repr(player)}, team={repr(team)}")
+                print(f"[DEBUG] Available teams for this player: {sample_teams}")
+                raise KeyError(team)
             team_bid = player_bids[player][team]
             # team_value = team_values.get(team, 0)
             # print (team, player, team_bid, team_values[team])
@@ -578,9 +589,6 @@ def run_algo(rosters, player_bids, player_genders, captains, player_salaries,
     rosters = results[best_i]["rosters"]
 
     return rosters, count_team_trades, trades
-
-
-
 
 
 
