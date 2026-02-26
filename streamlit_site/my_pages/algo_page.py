@@ -931,14 +931,13 @@ def algo_page():
     if run_algo_button:
     # if 1:
 
-        # only load previous data if in debug mode
-        if 'team_bids' not in stss: # or 1: # or not debug:
-            with st.spinner("Loading Data"): #, show_time=True):
-                print ("Loading data...")
+        client = stss['client']
+        drive_service = stss['drive_service']
 
-                client = stss['client']
-                drive_service = stss['drive_service']
-
+        # Load league/standings once per session.
+        if 'df_League' not in stss or 'cap_ceiling' not in stss or 'cap_floor' not in stss:
+            with st.spinner("Loading League and Standings"):
+                print ("Loading league and standings...")
 
                 # # Load league data
                 # tpl_url = "https://docs.google.com/spreadsheets/d/18I5ljv7eL6E8atN7Z6w9wmm6CBwOGsStmW5UJNB0rrg/edit?gid=9#gid=9"
@@ -973,71 +972,42 @@ def algo_page():
                 
                 
 
-                # Load each team's bids
-                # folder_id = '1LycfBlMWQNsCB9rmKEtZwqCvo1jXIJ6N'
-                # folder_id = "12XTqjwaAW_UsuXcpcE5AiY1nMQj4NhDF" # nov 2025, week 4
-                folder_id = "1CUtQ61Dya1X37y3h6uhpIsGh2W43srah" # jan 2026
-                existing_sheets = get_gsheets_in_folder(drive_service, folder_id)
-                # print ("Sheets in folder:")
-                # for file_name in existing_sheets:
-                #     print (file_name)
-                # existing_sheet_names = [file['name'] for file in existing_sheets]
-                
-                
-                
-                
-                
-
-
-                # import time
-                # team_bids = {}
-                # for sheet_dict in existing_sheets:
-                #     sheet_name = sheet_dict['name']
-                #     print (f" - {sheet_name}")
-                #     sheet_id = sheet_dict['id']
-                #     start_time = time.time()
-                #     conn = client.open_by_key(sheet_id)
-                #     print (f"Time to load sheet 1: {time.time() - start_time:.2f}")
-                #     start_time = time.time()
-                #     sheet = conn.get_worksheet(0)
-                #     print (f"Time to load sheet 2: {time.time() - start_time:.2f}")
-                #     start_time = time.time()
-                #     data = sheet.get_all_values()
-                #     print (f"Time to load sheet 3: {time.time() - start_time:.2f}")
-
-                #     bids, protected_players = extract_bid_info(data)
-                #     team_bids[sheet_name] = {'bids': bids, 'protected_players': protected_players}
-
-
-
-                # trying parallel
-                def fetch_sheet_data(sheet_dict):
-                    sheet_name = sheet_dict['name']
-                    sheet_id = sheet_dict['id']
-                    conn = client.open_by_key(sheet_id)
-                    sheet = conn.get_worksheet(0)
-                    data = sheet.get_all_values()
-                    # print (f" - {sheet_name}")
-                    # bids, protected_players = extract_bid_info(data)
-                    return [sheet_name, data]
-
-                
-                with concurrent.futures.ThreadPoolExecutor(max_workers=8) as executor:
-                    results = executor.map(fetch_sheet_data, existing_sheets)
-                results = list(results)
-
-                team_bids = {}
-                for result in results:
-                    sheet_name, data = result
-                    bids, protected_players = extract_bid_info(data)
-                    normalized_team_name = no_emoji(sheet_name).strip()
-                    team_bids[normalized_team_name] = {'bids': bids, 'protected_players': protected_players}
-
-                stss["team_bids"] = team_bids
                 stss["df_League"] = df_League
                 # stss["df_Standings"] = df_Standings
                 stss['cap_ceiling'] = cap_ceiling
                 stss['cap_floor'] = cap_floor
+
+        # Always reload bids when Run Algo is pressed.
+        with st.spinner("Loading Team Bids"):
+            print ("Loading team bids...")
+
+            # Load each team's bids
+            # folder_id = '1LycfBlMWQNsCB9rmKEtZwqCvo1jXIJ6N'
+            # folder_id = "12XTqjwaAW_UsuXcpcE5AiY1nMQj4NhDF" # nov 2025, week 4
+            folder_id = "1CUtQ61Dya1X37y3h6uhpIsGh2W43srah" # jan 2026
+            existing_sheets = get_gsheets_in_folder(drive_service, folder_id)
+
+            # trying parallel
+            def fetch_sheet_data(sheet_dict):
+                sheet_name = sheet_dict['name']
+                sheet_id = sheet_dict['id']
+                conn = client.open_by_key(sheet_id)
+                sheet = conn.get_worksheet(0)
+                data = sheet.get_all_values()
+                return [sheet_name, data]
+
+            with concurrent.futures.ThreadPoolExecutor(max_workers=8) as executor:
+                results = executor.map(fetch_sheet_data, existing_sheets)
+            results = list(results)
+
+            team_bids = {}
+            for result in results:
+                sheet_name, data = result
+                bids, protected_players = extract_bid_info(data)
+                normalized_team_name = no_emoji(sheet_name).strip()
+                team_bids[normalized_team_name] = {'bids': bids, 'protected_players': protected_players}
+
+            stss["team_bids"] = team_bids
 
         team_bids = stss['team_bids']
         df_League = stss['df_League']
