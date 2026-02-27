@@ -402,12 +402,17 @@ def make_trades(rosters, player_salaries, max_trades, amount_above_avg_for_extra
                     trades_to_consider.append(trade1)
                     trade_type = "somewhat happy"
 
+        all_teams_have_one_trade = all(count_team_trades[team] >= 1 for team in team_names)
+
         # neutral trades
         if len(trades_to_consider) == 0:
             # stop if teams are close to the average and only neutral trades left
             if most_expensive_team_cost - least_expensive_team_cost < stop_if_within_x_of_avg:
-                print (f"Teams are {most_expensive_team_cost - least_expensive_team_cost} apart, neutral trades only, so stopping")
-                break
+                if all_teams_have_one_trade:
+                    print (f"Teams are {most_expensive_team_cost - least_expensive_team_cost} apart, neutral trades only, and all have atleast one trade, so stopping")
+                    break
+                else:
+                    print (f"Teams are {most_expensive_team_cost - least_expensive_team_cost} apart and neutral trades only, but not all teams have a trade yet, so continuing")
             new_trades_to_consider = []
             for trade1 in possible_trades:
                 if trade1["team1_happiness_change"] + trade1["team2_happiness_change"] == 0:
@@ -420,8 +425,11 @@ def make_trades(rosters, player_salaries, max_trades, amount_above_avg_for_extra
         if len(trades_to_consider) == 0:
             # stop if teams are close to the average and only negative trades left
             if most_expensive_team_cost - least_expensive_team_cost < stop_if_within_x_of_avg:
-                print (f"Teams are {most_expensive_team_cost - least_expensive_team_cost} apart, negative trades left, so stopping")
-                break
+                if all_teams_have_one_trade:
+                    print (f"Teams are {most_expensive_team_cost - least_expensive_team_cost} apart, negative trades left, and all have atleast one trade, so stopping")
+                    break
+                else:
+                    print (f"Teams are {most_expensive_team_cost - least_expensive_team_cost} apart with negative trades left, but not all teams have a trade yet, so continuing")
             # only resort to this if most/least expensive team is involved
             elif len(trades_with_most_least_expansive_teams) > 0:
                 trades_to_consider = trades_with_most_least_expansive_teams
@@ -589,7 +597,6 @@ def run_algo(rosters, player_bids, player_genders, captains, player_salaries,
     rosters = results[best_i]["rosters"]
 
     return rosters, count_team_trades, trades
-
 
 
 
