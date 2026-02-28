@@ -205,7 +205,7 @@ def make_trades(rosters, player_salaries, max_trades, amount_above_avg_for_extra
                             }
                         )
         
-        print (f"Trade {trade_i}")
+        print (f"-----------\nTrade {trade_i}")
 
         print (f"  Possible trades: {len(possible_trades)}")
 
@@ -221,7 +221,7 @@ def make_trades(rosters, player_salaries, max_trades, amount_above_avg_for_extra
         n_top_trades = int(len(sorted_possible_trades) * top_trade_percent)
         n_top_trades = max(1, n_top_trades)
         possible_trades = sorted_possible_trades[:n_top_trades]
-        print (f"  Possible trades, top {top_trade_percent*100}%: {len(possible_trades)}")
+        print (f"  Possible trades, top {top_trade_percent*100:.2f}%: {len(possible_trades)}")
 
 
 
@@ -366,8 +366,17 @@ def make_trades(rosters, player_salaries, max_trades, amount_above_avg_for_extra
         new_possible_trades = [trade1 for score, trade1 in scored_trades if score == highest_score]
         # if len(new_possible_trades) > 0 and len(new_possible_trades) < len(possible_trades):
         possible_trades = new_possible_trades
-        blue_score = f"\033[94m{highest_score}\033[0m"
+        blue_score = f"\033[94m{highest_score:.2f}\033[0m"
         print (f"  Possible trades, highest score {blue_score}: {len(possible_trades)}")
+
+        # If all teams have traded at least once and cap constraints are already met,
+        # stop before taking non-positive-value trades.
+        current_n_above_cap = sum(1 for cost in team_costs.values() if cost > cap_ceiling)
+        current_n_below_floor = sum(1 for cost in team_costs.values() if cost < cap_floor)
+        all_teams_have_one_trade = all(count_team_trades[team] >= 1 for team in team_names)
+        if highest_score <= 0 and all_teams_have_one_trade and current_n_above_cap == 0 and current_n_below_floor == 0:
+            print(f"Stopping before Trade {trade_i}: highest score is {highest_score:.2f} and all teams have at least one trade with cap constraints satisfied")
+            break
 
 
 
@@ -405,17 +414,14 @@ def make_trades(rosters, player_salaries, max_trades, amount_above_avg_for_extra
 
         all_teams_have_one_trade = all(count_team_trades[team] >= 1 for team in team_names)
         total_trades_above_team_count = len(trades) > n_teams
-        can_stop_when_close = all_teams_have_one_trade or total_trades_above_team_count
+        can_stop_when_close = all_teams_have_one_trade and total_trades_above_team_count
 
         # neutral trades
         if len(trades_to_consider) == 0:
             # stop if teams are close to the average and only neutral trades left
             if most_expensive_team_cost - least_expensive_team_cost < stop_if_within_x_of_avg:
                 if can_stop_when_close:
-                    if all_teams_have_one_trade:
-                        reason = "all have atleast one trade"
-                    else:
-                        reason = f"total trades ({len(trades)}) is above number of teams ({n_teams})"
+                    reason = f"all have atleast one trade and total trades ({len(trades)}) is above number of teams ({n_teams})"
                     print (f"Teams are {most_expensive_team_cost - least_expensive_team_cost} apart, neutral trades only, and {reason}, so stopping")
                     break
                 else:
@@ -433,10 +439,7 @@ def make_trades(rosters, player_salaries, max_trades, amount_above_avg_for_extra
             # stop if teams are close to the average and only negative trades left
             if most_expensive_team_cost - least_expensive_team_cost < stop_if_within_x_of_avg:
                 if can_stop_when_close:
-                    if all_teams_have_one_trade:
-                        reason = "all have atleast one trade"
-                    else:
-                        reason = f"total trades ({len(trades)}) is above number of teams ({n_teams})"
+                    reason = f"all have atleast one trade and total trades ({len(trades)}) is above number of teams ({n_teams})"
                     print (f"Teams are {most_expensive_team_cost - least_expensive_team_cost} apart, negative trades left, and {reason}, so stopping")
                     break
                 else:
@@ -502,13 +505,23 @@ def make_trades(rosters, player_salaries, max_trades, amount_above_avg_for_extra
         least_expensive_team = min(team_costs, key=team_costs.get)
         least_expensive_cost = team_costs[least_expensive_team]
         top_bot_diff = most_expensive_cost - least_expensive_cost
+        n_above_cap = sum(1 for cost in team_costs.values() if cost > cap_ceiling)
+        n_below_floor = sum(1 for cost in team_costs.values() if cost < cap_floor)
 
-        print (f"Trade {trade_i} -   Std: {team_costs_std:.2f},  imprv: {team_costs_std_diff:.2f}, top_bot_diff: {top_bot_diff:.2f}")
+        green_trade_label = f"\033[92mTrade {trade_i} -\033[0m"
+        cap_counts_str = f"above_cap: {n_above_cap}, below_floor: {n_below_floor}"
+        if n_above_cap > 0 or n_below_floor > 0:
+            cap_counts_str = f"\033[91m{cap_counts_str}\033[0m"
+        else:
+            cap_counts_str = f"\033[92m{cap_counts_str}\033[0m"
+        print (f"{green_trade_label}   Std: {team_costs_std:.2f},  imprv: {team_costs_std_diff:.2f}\n    top_bot_diff: {top_bot_diff:.2f}, {cap_counts_str}")
 
 
 
         count_team_trades[team_1] += 1
         count_team_trades[team_2] += 1
+        least_trades = min(count_team_trades.values())
+        print(f"    least_trades: {least_trades}")
         trades.append({
             'team_1': team_1,
             'player_1': player_1,
@@ -558,7 +571,7 @@ def run_algo(rosters, player_bids, player_genders, captains, player_salaries,
     # settings
     max_trades = 3 #4 # 3 # max trades per team
     amount_above_avg_for_extra_trade =  25000
-    stop_if_within_x_of_avg = 33000
+    stop_if_within_x_of_avg = 35000
     absolute_minimum_std_diff = 100
     
     original_roster = rosters.copy()
@@ -591,7 +604,7 @@ def run_algo(rosters, player_bids, player_genders, captains, player_salaries,
     # print top_trade_percent, score, and fail
     for i, result in enumerate(results):
         n_trades = len(result["trades"])
-        print (f"{i} Top trade percent: {result['top_trade_percent']}, Score: {result['score']}, Passes: {result['passes']}, Trades: {n_trades}")
+        print (f"{i} Top trade percent: {result['top_trade_percent']:.2f}, Score: {result['score']:.2f}, Passes: {result['passes']}, Trades: {n_trades}")
     print ()
 
     # Take one with highest score that passes
@@ -602,13 +615,12 @@ def run_algo(rosters, player_bids, player_genders, captains, player_salaries,
             best_i = i
             best_score = result["score"]
     
-    print (f"Best: {best_i} -- {results[best_i]['top_trade_percent']}, Score: {results[best_i]['score']}, Passes: {results[best_i]['passes']}")
+    print (f"Best: {best_i} -- {results[best_i]['top_trade_percent']:.2f}, Score: {results[best_i]['score']:.2f}, Passes: {results[best_i]['passes']}")
     trades = results[best_i]["trades"]
     count_team_trades = results[best_i]["count_team_trades"]
     rosters = results[best_i]["rosters"]
+    print("Trades per team:")
+    for team in sorted(count_team_trades.keys()):
+        print(f"  {team}: {count_team_trades[team]}")
 
     return rosters, count_team_trades, trades
-
-
-
-
