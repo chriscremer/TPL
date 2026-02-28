@@ -351,18 +351,18 @@ def make_trades(rosters, player_salaries, max_trades, amount_above_avg_for_extra
             if team1_bid_diff_on_player1 < 0:
                 team1_score += 1
             if team1_bid_diff_on_player2 < 0:
-                team1_score -= 1.1
+                team1_score -= 1.6# 1.1
             if team1_bid_diff_on_player1 > 0:
-                team1_score -= 1.1
+                team1_score -= 1.6#1.1
             # team 2
             if team2_bid_diff_on_player1 > 0:
                 team2_score += 1
             if team2_bid_diff_on_player2 < 0:
                 team2_score += 1
             if team2_bid_diff_on_player1 < 0:
-                team2_score -= 1.1
+                team2_score -= 1.6#1.1
             if team2_bid_diff_on_player2 > 0:
-                team2_score -= 1.1
+                team2_score -= 1.6# 1.1
             # cap at 1.5
             team1_score = min(1.5, team1_score)
             team2_score = min(1.5, team2_score)
@@ -544,6 +544,7 @@ def run_algo(rosters, player_bids, player_genders, captains, player_salaries,
     for top_trade_percent in top_trade_percents:
         print ('\n-------')
         print (f"\033[95mTop trade percent: {top_trade_percent}\033[0m")
+        run_rng_state = random.getstate()
 
         trades, count_team_trades, rosters, fail = make_trades(original_roster, player_salaries, max_trades, amount_above_avg_for_extra_trade, 
                     protected_players_dict, player_bids, player_genders, captains,
@@ -551,11 +552,19 @@ def run_algo(rosters, player_bids, player_genders, captains, player_salaries,
                     cap_ceiling, cap_floor)
         passes = not fail
         score = np.sum([trade["highest_score"] for trade in trades])
-        results.append({"top_trade_percent": top_trade_percent, "score": score, "trades": trades, "count_team_trades": count_team_trades, "rosters": rosters, "passes": passes})
+        results.append({
+            "top_trade_percent": top_trade_percent,
+            "score": score,
+            "trades": trades,
+            "count_team_trades": count_team_trades,
+            "rosters": rosters,
+            "passes": passes,
+            "rng_state": run_rng_state,
+        })
 
         if passes:
             n_passes_found += 1
-            if n_passes_found >= 2:
+            if n_passes_found >= 4:
                 print(f"Found {n_passes_found} passing runs; stopping sweep early")
                 break
 
@@ -577,9 +586,31 @@ def run_algo(rosters, player_bids, player_genders, captains, player_salaries,
             best_score = result["score"]
     
     print (f"Best: {best_i} -- {results[best_i]['top_trade_percent']:.2f}, Score: {results[best_i]['score']:.2f}, Passes: {results[best_i]['passes']}")
-    trades = results[best_i]["trades"]
-    count_team_trades = results[best_i]["count_team_trades"]
-    rosters = results[best_i]["rosters"]
+
+    # Replay the selected best run so its full trace is shown at the end.
+    print("\n=== Replaying Best Run ===")
+    random.setstate(results[best_i]["rng_state"])
+    trades, count_team_trades, rosters, _ = make_trades(
+        original_roster,
+        player_salaries,
+        max_trades,
+        amount_above_avg_for_extra_trade,
+        protected_players_dict,
+        player_bids,
+        player_genders,
+        captains,
+        absolute_minimum_std_diff,
+        results[best_i]["top_trade_percent"],
+        stop_if_within_x_of_avg,
+        cap_ceiling,
+        cap_floor,
+    )
+    print("\n=== Summary (Final) ===")
+    for i, result in enumerate(results):
+        n_trades = len(result["trades"])
+        total_happiness_change = np.sum([trade["happiness_change"] for trade in result["trades"]]) if result["trades"] else 0
+        print (f"{i} Top trade percent: {result['top_trade_percent']:.2f}, Score: {result['score']:.2f}, Passes: {result['passes']}, Trades: {n_trades}, happy: {total_happiness_change:.2f}")
+    print (f"Best: {best_i} -- {results[best_i]['top_trade_percent']:.2f}, Score: {results[best_i]['score']:.2f}, Passes: {results[best_i]['passes']}")
     print("Trades per team:")
     for team in sorted(count_team_trades.keys()):
         trade_count = count_team_trades[team]
