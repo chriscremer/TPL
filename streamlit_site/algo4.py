@@ -366,7 +366,8 @@ def make_trades(rosters, player_salaries, max_trades, amount_above_avg_for_extra
         new_possible_trades = [trade1 for score, trade1 in scored_trades if score == highest_score]
         # if len(new_possible_trades) > 0 and len(new_possible_trades) < len(possible_trades):
         possible_trades = new_possible_trades
-        print (f"  Possible trades, highest score {highest_score}: {len(possible_trades)}")
+        blue_score = f"\033[94m{highest_score}\033[0m"
+        print (f"  Possible trades, highest score {blue_score}: {len(possible_trades)}")
 
 
 
@@ -403,13 +404,19 @@ def make_trades(rosters, player_salaries, max_trades, amount_above_avg_for_extra
                     trade_type = "somewhat happy"
 
         all_teams_have_one_trade = all(count_team_trades[team] >= 1 for team in team_names)
+        total_trades_above_team_count = len(trades) > n_teams
+        can_stop_when_close = all_teams_have_one_trade or total_trades_above_team_count
 
         # neutral trades
         if len(trades_to_consider) == 0:
             # stop if teams are close to the average and only neutral trades left
             if most_expensive_team_cost - least_expensive_team_cost < stop_if_within_x_of_avg:
-                if all_teams_have_one_trade:
-                    print (f"Teams are {most_expensive_team_cost - least_expensive_team_cost} apart, neutral trades only, and all have atleast one trade, so stopping")
+                if can_stop_when_close:
+                    if all_teams_have_one_trade:
+                        reason = "all have atleast one trade"
+                    else:
+                        reason = f"total trades ({len(trades)}) is above number of teams ({n_teams})"
+                    print (f"Teams are {most_expensive_team_cost - least_expensive_team_cost} apart, neutral trades only, and {reason}, so stopping")
                     break
                 else:
                     print (f"Teams are {most_expensive_team_cost - least_expensive_team_cost} apart and neutral trades only, but not all teams have a trade yet, so continuing")
@@ -425,8 +432,12 @@ def make_trades(rosters, player_salaries, max_trades, amount_above_avg_for_extra
         if len(trades_to_consider) == 0:
             # stop if teams are close to the average and only negative trades left
             if most_expensive_team_cost - least_expensive_team_cost < stop_if_within_x_of_avg:
-                if all_teams_have_one_trade:
-                    print (f"Teams are {most_expensive_team_cost - least_expensive_team_cost} apart, negative trades left, and all have atleast one trade, so stopping")
+                if can_stop_when_close:
+                    if all_teams_have_one_trade:
+                        reason = "all have atleast one trade"
+                    else:
+                        reason = f"total trades ({len(trades)}) is above number of teams ({n_teams})"
+                    print (f"Teams are {most_expensive_team_cost - least_expensive_team_cost} apart, negative trades left, and {reason}, so stopping")
                     break
                 else:
                     print (f"Teams are {most_expensive_team_cost - least_expensive_team_cost} apart with negative trades left, but not all teams have a trade yet, so continuing")
@@ -597,8 +608,6 @@ def run_algo(rosters, player_bids, player_genders, captains, player_salaries,
     rosters = results[best_i]["rosters"]
 
     return rosters, count_team_trades, trades
-
-
 
 
 
