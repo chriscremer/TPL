@@ -351,18 +351,18 @@ def make_trades(rosters, player_salaries, max_trades, amount_above_avg_for_extra
             if team1_bid_diff_on_player1 < 0:
                 team1_score += 1
             if team1_bid_diff_on_player2 < 0:
-                team1_score -= 1.6# 1.1
+                team1_score -= 1.6 # 1.1
             if team1_bid_diff_on_player1 > 0:
-                team1_score -= 1.6#1.1
+                team1_score -= 1.1
             # team 2
             if team2_bid_diff_on_player1 > 0:
                 team2_score += 1
             if team2_bid_diff_on_player2 < 0:
                 team2_score += 1
             if team2_bid_diff_on_player1 < 0:
-                team2_score -= 1.6#1.1
+                team2_score -= 1.6 #1.1
             if team2_bid_diff_on_player2 > 0:
-                team2_score -= 1.6# 1.1
+                team2_score -= 1.1
             # cap at 1.5
             team1_score = min(1.5, team1_score)
             team2_score = min(1.5, team2_score)
