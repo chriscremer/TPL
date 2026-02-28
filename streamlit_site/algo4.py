@@ -443,6 +443,8 @@ def make_trades(rosters, player_salaries, max_trades, amount_above_avg_for_extra
         team_costs_std_diff = trade1["team_costs_std_diff"]
         team1_happiness_change = trade1["team1_happiness_change"]
         team2_happiness_change = trade1["team2_happiness_change"]
+        team1_score = trade1["team1_score"]
+        team2_score = trade1["team2_score"]
 
         # update prev_team_costs_std
         prev_team_costs_std = team_costs_std
@@ -488,6 +490,8 @@ def make_trades(rosters, player_salaries, max_trades, amount_above_avg_for_extra
             'happiness_change': happiness_change,
             'team1_happiness_change': team1_happiness_change,
             'team2_happiness_change': team2_happiness_change,
+            'team1_score': team1_score,
+            'team2_score': team2_score,
             'team_costs': team_costs.copy(),
             'highest_score': highest_score,
         })
@@ -612,11 +616,32 @@ def run_algo(rosters, player_bids, player_genders, captains, player_salaries,
         print (f"{i} Top trade percent: {result['top_trade_percent']:.2f}, Score: {result['score']:.2f}, Passes: {result['passes']}, Trades: {n_trades}, happy: {total_happiness_change:.2f}")
     print (f"Best: {best_i} -- {results[best_i]['top_trade_percent']:.2f}, Score: {results[best_i]['score']:.2f}, Passes: {results[best_i]['passes']}")
     print("Trades per team:")
-    for team in sorted(count_team_trades.keys()):
+    team_summaries = []
+    for team in count_team_trades.keys():
         trade_count = count_team_trades[team]
-        trade_count_str = f"{trade_count}"
+        trade_count_str = f"\033[94m{trade_count}\033[0m"
         if trade_count == 1:
             trade_count_str = f"\033[91m{trade_count}\033[0m"
+        team_scores = []
+        for trade in trades:
+            if trade["team_1"] == team:
+                team_scores.append(trade["team1_score"])
+            elif trade["team_2"] == team:
+                team_scores.append(trade["team2_score"])
+        score_sum = np.sum(team_scores) if team_scores else 0
+        team_score_parts = []
+        for score in team_scores:
+            score_txt = f"{score:.2f}"
+            if score < 0:
+                score_txt = f"\033[91m{score_txt}\033[0m"
+            team_score_parts.append(score_txt)
+        team_scores_str = ", ".join(team_score_parts) if team_scores else "none"
+        score_sum_str = f"\033[94m{score_sum:.2f}\033[0m"
+        team_summaries.append((team, score_sum, trade_count_str, team_scores_str, score_sum_str))
+
+    for team, score_sum, trade_count_str, team_scores_str, score_sum_str in sorted(team_summaries, key=lambda x: x[1], reverse=True):
         print(f"  {team}: {trade_count_str}")
+        print(f"    scores: {team_scores_str}")
+        print(f"    score sum: {score_sum_str}")
 
     return rosters, count_team_trades, trades
