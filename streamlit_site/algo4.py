@@ -53,6 +53,21 @@ def get_happiness_change(rosters_before, rosters_after, player_bids, team_names)
     happiness_change = np.sum([value for team, value in happiness_change_dict.items()])
     return happiness_change_dict, happiness_change
 
+
+def get_trade_happiness_change(team_1, player_1, team_2, player_2, player_bids, player_salaries):
+    # Happiness is based on over/underbid deltas:
+    # team happiness = (incoming bid - incoming salary) - (outgoing bid - outgoing salary)
+    team1_incoming_diff = player_bids[player_2][team_1] - player_salaries[player_2]
+    team1_outgoing_diff = player_bids[player_1][team_1] - player_salaries[player_1]
+    team1_happiness_change = team1_incoming_diff - team1_outgoing_diff
+
+    team2_incoming_diff = player_bids[player_1][team_2] - player_salaries[player_1]
+    team2_outgoing_diff = player_bids[player_2][team_2] - player_salaries[player_2]
+    team2_happiness_change = team2_incoming_diff - team2_outgoing_diff
+
+    total_happiness_change = team1_happiness_change + team2_happiness_change
+    return team1_happiness_change, team2_happiness_change, total_happiness_change
+
 def trade(rosters, team_1, player_1, team_2, player_2, team_names):
     new_team_1_roster = [player_2 if player == player_1 else player for player in rosters[team_1]]
     new_team_2_roster = [player_1 if player == player_2 else player for player in rosters[team_2]]
@@ -163,11 +178,10 @@ def make_trades(rosters, player_salaries, max_trades, amount_above_avg_for_extra
                     # consider trading this player with players on the offering team
                     for player_2 in offering_team_roster:
                         # trade player 1 from team 1 to team 2 for player 2
-                        rosters_before = rosters.copy()
                         temp_rosters = trade(rosters, team_1, player_1, offering_team, player_2, team_names)
-                        happiness_change_dict, happiness_change = get_happiness_change(rosters_before, temp_rosters, player_bids, team_names)
-                        team1_happiness_change = happiness_change_dict[team_1]
-                        team2_happiness_change = happiness_change_dict[offering_team]
+                        team1_happiness_change, team2_happiness_change, happiness_change = get_trade_happiness_change(
+                            team_1, player_1, offering_team, player_2, player_bids, player_salaries
+                        )
 
                         team_1_bid_minus_salary = player_bids[player_2][team_1] - player_salaries[player_2]
                         team_2_bid_minus_salary = player_bids[player_1][offering_team] - player_salaries[player_1]
@@ -267,27 +281,23 @@ def make_trades(rosters, player_salaries, max_trades, amount_above_avg_for_extra
 
 
 
-        # check if 5 or fewer teams are at 0 trades
-        # if so, try to have the next trade involve atleast one of these teams
-        if sum([1 for team in team_names if count_team_trades[team] == 0]) <= 5:
+        # Prioritize low-trade teams:
+        # 1) if 1..5 teams are still at 0 trades, focus on them
+        # 2) else if no team is at 0 and <=5 teams are at 1 trade, focus on those
+        n_teams_at_0_trade = sum([1 for team in team_names if count_team_trades[team] == 0])
+        n_teams_at_1_trade = sum([1 for team in team_names if count_team_trades[team] == 1])
+        if 1 <= n_teams_at_0_trade <= 5:
             teams_that_must_trade = [team for team in team_names if count_team_trades[team] == 0]
             new_possible_trades = [trade1 for trade1 in possible_trades if trade1["team_1"] in teams_that_must_trade or trade1["team_2"] in teams_that_must_trade]
             if len(new_possible_trades) > 0:
                 possible_trades = new_possible_trades
-                # print (f"  Teams that must trade 0: {[x[:10] for x in teams_that_must_trade]}")
-                print (f"  Possible trades, low trade teams 0: {len(possible_trades)}")
-        else:
-            # check if five or fewer teams are at 1 trade and the rest have atleast 2
-            # then try to have the next trade involve atleast one of the teams with 1 trade
-            n_teams_at_1_trade = sum([1 for team in team_names if count_team_trades[team] == 1])
-            n_teams_at_0_trade = sum([1 for team in team_names if count_team_trades[team] == 0])
-            if n_teams_at_1_trade <= 5 and n_teams_at_0_trade == 0:
-                teams_that_must_trade = [team for team in team_names if count_team_trades[team] == 1]
-                new_possible_trades = [trade1 for trade1 in possible_trades if trade1["team_1"] in teams_that_must_trade or trade1["team_2"] in teams_that_must_trade]
-                if len(new_possible_trades) > 0:
-                    possible_trades = new_possible_trades
-                    # print (f"  Teams that must trade 1: {[x[:10] for x in teams_that_must_trade]}")
-                    print (f"  Possible trades, low trade teams 1: {len(possible_trades)}")
+                print (f"\033[95m  Possible trades, low trade teams 0: {len(possible_trades)}\033[0m")
+        elif n_teams_at_0_trade == 0 and n_teams_at_1_trade <= 5:
+            teams_that_must_trade = [team for team in team_names if count_team_trades[team] == 1]
+            new_possible_trades = [trade1 for trade1 in possible_trades if trade1["team_1"] in teams_that_must_trade or trade1["team_2"] in teams_that_must_trade]
+            if len(new_possible_trades) > 0:
+                possible_trades = new_possible_trades
+                print (f"\033[95m  Possible trades, low trade teams 1: {len(possible_trades)}\033[0m")
 
 
 
@@ -357,6 +367,8 @@ def make_trades(rosters, player_salaries, max_trades, amount_above_avg_for_extra
             team1_score = min(1.5, team1_score)
             team2_score = min(1.5, team2_score)
             score = team1_score + team2_score
+            trade1["team1_score"] = team1_score
+            trade1["team2_score"] = team2_score
 
             scored_trades.append([score, trade1])
         # sort by score
@@ -366,8 +378,17 @@ def make_trades(rosters, player_salaries, max_trades, amount_above_avg_for_extra
         new_possible_trades = [trade1 for score, trade1 in scored_trades if score == highest_score]
         # if len(new_possible_trades) > 0 and len(new_possible_trades) < len(possible_trades):
         possible_trades = new_possible_trades
-        blue_score = f"\033[94m{highest_score:.2f}\033[0m"
-        print (f"  Possible trades, highest score {blue_score}: {len(possible_trades)}")
+        if highest_score < 0:
+            score_str = f"\033[91m{highest_score:.2f}\033[0m"
+        elif abs(highest_score) < 1e-9:
+            score_str = f"\033[93m{highest_score:.2f}\033[0m"
+        else:
+            score_str = f"\033[94m{highest_score:.2f}\033[0m"
+        preview_trade = possible_trades[0]
+        print (
+            f"  Possible trades, highest score {score_str} "
+            f"({preview_trade['team1_score']:.2f}, {preview_trade['team2_score']:.2f}): {len(possible_trades)}"
+        )
 
         # If all teams have traded at least once and cap constraints are already met,
         # stop before taking non-positive-value trades.
@@ -427,11 +448,10 @@ def make_trades(rosters, player_salaries, max_trades, amount_above_avg_for_extra
         prev_team_costs_std = team_costs_std
         
         # trade player 1 from team 1 to team 2 for player 2
-        rosters_before = rosters.copy()
         rosters = trade(rosters, team_1, player_1, team_2, player_2, team_names)
-        happiness_change_dict, happiness_change = get_happiness_change(rosters_before, rosters, player_bids, team_names)
-        team1_happiness_change = happiness_change_dict[team_1]
-        team2_happiness_change = happiness_change_dict[team_2]
+        team1_happiness_change, team2_happiness_change, happiness_change = get_trade_happiness_change(
+            team_1, player_1, team_2, player_2, player_bids, player_salaries
+        )
 
         # new team salaries
         team_costs = get_team_costs(rosters, player_salaries)
@@ -447,7 +467,7 @@ def make_trades(rosters, player_salaries, max_trades, amount_above_avg_for_extra
         green_trade_label = f"\033[92mTrade {trade_i} -\033[0m"
         cap_counts_str = f"above_cap: {n_above_cap}, below_floor: {n_below_floor}"
         if n_above_cap > 0 or n_below_floor > 0:
-            cap_counts_str = f"\033[91m{cap_counts_str}\033[0m"
+            cap_counts_str = f"\033[93m{cap_counts_str}\033[0m"
         else:
             cap_counts_str = f"\033[92m{cap_counts_str}\033[0m"
         print (f"{green_trade_label}   Std: {team_costs_std:.2f},  imprv: {team_costs_std_diff:.2f}\n    top_bot_diff: {top_bot_diff:.2f}, {cap_counts_str}")
@@ -523,7 +543,7 @@ def run_algo(rosters, player_bids, player_genders, captains, player_salaries,
     n_passes_found = 0
     for top_trade_percent in top_trade_percents:
         print ('\n-------')
-        print (f"Top trade percent: {top_trade_percent}")
+        print (f"\033[95mTop trade percent: {top_trade_percent}\033[0m")
 
         trades, count_team_trades, rosters, fail = make_trades(original_roster, player_salaries, max_trades, amount_above_avg_for_extra_trade, 
                     protected_players_dict, player_bids, player_genders, captains,
