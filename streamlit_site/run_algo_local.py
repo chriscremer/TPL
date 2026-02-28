@@ -332,12 +332,6 @@ def main():
         cap_floor,
     )
 
-    print("\n=== Local Algo Summary ===")
-    print(f"Trades: {len(trades)}")
-    for team in sorted(count_team_trades):
-        print(f"  {team}: {count_team_trades[team]}")
-    print("Done.")
-
 
 if __name__ == "__main__":
     main()

@@ -267,9 +267,9 @@ def make_trades(rosters, player_salaries, max_trades, amount_above_avg_for_extra
 
 
 
-        # check if N or fewer teams are at 0 trades
+        # check if 5 or fewer teams are at 0 trades
         # if so, try to have the next trade involve atleast one of these teams
-        if sum([1 for team in team_names if count_team_trades[team] == 0]) in [1, 2, 3]:
+        if sum([1 for team in team_names if count_team_trades[team] == 0]) <= 5:
             teams_that_must_trade = [team for team in team_names if count_team_trades[team] == 0]
             new_possible_trades = [trade1 for trade1 in possible_trades if trade1["team_1"] in teams_that_must_trade or trade1["team_2"] in teams_that_must_trade]
             if len(new_possible_trades) > 0:
@@ -277,11 +277,11 @@ def make_trades(rosters, player_salaries, max_trades, amount_above_avg_for_extra
                 # print (f"  Teams that must trade 0: {[x[:10] for x in teams_that_must_trade]}")
                 print (f"  Possible trades, low trade teams 0: {len(possible_trades)}")
         else:
-            # check if two or fewer teams are at 1 trade and the rest have atleast 2
+            # check if five or fewer teams are at 1 trade and the rest have atleast 2
             # then try to have the next trade involve atleast one of the teams with 1 trade
             n_teams_at_1_trade = sum([1 for team in team_names if count_team_trades[team] == 1])
             n_teams_at_0_trade = sum([1 for team in team_names if count_team_trades[team] == 0])
-            if n_teams_at_1_trade in [1, 2] and n_teams_at_0_trade == 0:
+            if n_teams_at_1_trade <= 5 and n_teams_at_0_trade == 0:
                 teams_that_must_trade = [team for team in team_names if count_team_trades[team] == 1]
                 new_possible_trades = [trade1 for trade1 in possible_trades if trade1["team_1"] in teams_that_must_trade or trade1["team_2"] in teams_that_must_trade]
                 if len(new_possible_trades) > 0:
@@ -383,78 +383,19 @@ def make_trades(rosters, player_salaries, max_trades, amount_above_avg_for_extra
 
 
 
-        # Now looking at bid for received and traded player to determine if trade is good
-        trades_to_consider = []
-
-        # get list of trades involving the most and least expensive teams
-        most_expensive_team = max(team_costs, key=team_costs.get)
-        least_expensive_team = min(team_costs, key=team_costs.get)
-        most_expensive_team_cost = team_costs[most_expensive_team]
-        least_expensive_team_cost = team_costs[least_expensive_team]
-        # trades with most and least expensive teams
-        most_expensive_team_trades = [trade1 for trade1 in possible_trades if trade1["team_1"] == most_expensive_team or trade1["team_2"] == most_expensive_team]
-        least_expensive_team_trades = [trade1 for trade1 in possible_trades if trade1["team_1"] == least_expensive_team or trade1["team_2"] == least_expensive_team]
-        # remove duplicates
-        most_expensive_team_trades = [trade1 for trade1 in most_expensive_team_trades if trade1 not in least_expensive_team_trades]
-        trades_with_most_least_expansive_teams = most_expensive_team_trades + least_expensive_team_trades
-
-        # find trades where both teams are happy
-        if len(trades_to_consider) == 0:
-            for trade1 in possible_trades:
-                if trade1["team1_happiness_change"] > 0 and trade1["team2_happiness_change"] > 0:
-                    trades_to_consider.append(trade1)
-                    trade_type = "happy"
-
-        # if no happy, find trades where sum of happiness is positive
-        if len(trades_to_consider) == 0:
-            for trade1 in possible_trades:
-                if trade1["team1_happiness_change"] + trade1["team2_happiness_change"] > 0:
-                    trades_to_consider.append(trade1)
-                    trade_type = "somewhat happy"
-
-        all_teams_have_one_trade = all(count_team_trades[team] >= 1 for team in team_names)
-        total_trades_above_team_count = len(trades) > n_teams
-        can_stop_when_close = all_teams_have_one_trade and total_trades_above_team_count
-
-        # neutral trades
-        if len(trades_to_consider) == 0:
-            # stop if teams are close to the average and only neutral trades left
-            if most_expensive_team_cost - least_expensive_team_cost < stop_if_within_x_of_avg:
-                if can_stop_when_close:
-                    reason = f"all have atleast one trade and total trades ({len(trades)}) is above number of teams ({n_teams})"
-                    print (f"Teams are {most_expensive_team_cost - least_expensive_team_cost} apart, neutral trades only, and {reason}, so stopping")
-                    break
-                else:
-                    print (f"Teams are {most_expensive_team_cost - least_expensive_team_cost} apart and neutral trades only, but not all teams have a trade yet, so continuing")
-            new_trades_to_consider = []
-            for trade1 in possible_trades:
-                if trade1["team1_happiness_change"] + trade1["team2_happiness_change"] == 0:
-                    new_trades_to_consider.append(trade1)
-            if len(new_trades_to_consider) > 0:
-                trades_to_consider = new_trades_to_consider
-                trade_type = "neutral"
-
-        # all leftover trades, ie negative sum trades
-        if len(trades_to_consider) == 0:
-            # stop if teams are close to the average and only negative trades left
-            if most_expensive_team_cost - least_expensive_team_cost < stop_if_within_x_of_avg:
-                if can_stop_when_close:
-                    reason = f"all have atleast one trade and total trades ({len(trades)}) is above number of teams ({n_teams})"
-                    print (f"Teams are {most_expensive_team_cost - least_expensive_team_cost} apart, negative trades left, and {reason}, so stopping")
-                    break
-                else:
-                    print (f"Teams are {most_expensive_team_cost - least_expensive_team_cost} apart with negative trades left, but not all teams have a trade yet, so continuing")
-            # only resort to this if most/least expensive team is involved
-            elif len(trades_with_most_least_expansive_teams) > 0:
-                trades_to_consider = trades_with_most_least_expansive_teams
-                trade_type = "all"
-            else:
-                # trades_to_consider = possible_trades
-                # trade_type = "all but not ideal"
-                print ("Stopping because no good trades left and dont involve most/least expensive teams")
-                break
-
-        print (f"  {trade_type} trades: {len(trades_to_consider)}")
+        # Choose among highest-score trades by total happiness change.
+        for trade1 in possible_trades:
+            trade1["total_happiness_change"] = trade1["team1_happiness_change"] + trade1["team2_happiness_change"]
+        possible_trades = sorted(
+            possible_trades,
+            key=lambda x: (x["total_happiness_change"], -x["team_costs_std"]),
+            reverse=True,
+        )
+        trades_to_consider = possible_trades
+        print(
+            f"  top total happiness: {trades_to_consider[0]['total_happiness_change']:.2f} "
+            f"({trades_to_consider[0]['team1_happiness_change']:.2f}, {trades_to_consider[0]['team2_happiness_change']:.2f})"
+        )
 
 
 
@@ -469,13 +410,8 @@ def make_trades(rosters, player_salaries, max_trades, amount_above_avg_for_extra
 
 
 
-        # sort by team costs std, ie sort trades by how much how they increase parity
-        trades_to_consider = sorted(trades_to_consider, key=lambda x: x["team_costs_std"])
-        # pick the trade that minimizes the standard deviation of team costs, ie maximize parity
+        # take top trade by total happiness (tie-broken by lower team_costs_std)
         trade1 = trades_to_consider[0]
-
-        if trade1 in trades_with_most_least_expansive_teams:
-            print ("  Trade with most/least expensive team")
         
         # extract trade info
         team_1 = trade1["team_1"]
@@ -584,6 +520,7 @@ def run_algo(rosters, player_bids, player_genders, captains, player_salaries,
 
 
     results = []
+    n_passes_found = 0
     for top_trade_percent in top_trade_percents:
         print ('\n-------')
         print (f"Top trade percent: {top_trade_percent}")
@@ -597,14 +534,18 @@ def run_algo(rosters, player_bids, player_genders, captains, player_salaries,
         results.append({"top_trade_percent": top_trade_percent, "score": score, "trades": trades, "count_team_trades": count_team_trades, "rosters": rosters, "passes": passes})
 
         if passes:
-            break
+            n_passes_found += 1
+            if n_passes_found >= 2:
+                print(f"Found {n_passes_found} passing runs; stopping sweep early")
+                break
 
     print ('--------------')
     print ()
     # print top_trade_percent, score, and fail
     for i, result in enumerate(results):
         n_trades = len(result["trades"])
-        print (f"{i} Top trade percent: {result['top_trade_percent']:.2f}, Score: {result['score']:.2f}, Passes: {result['passes']}, Trades: {n_trades}")
+        total_happiness_change = np.sum([trade["happiness_change"] for trade in result["trades"]]) if result["trades"] else 0
+        print (f"{i} Top trade percent: {result['top_trade_percent']:.2f}, Score: {result['score']:.2f}, Passes: {result['passes']}, Trades: {n_trades}, happy: {total_happiness_change:.2f}")
     print ()
 
     # Take one with highest score that passes
@@ -621,6 +562,10 @@ def run_algo(rosters, player_bids, player_genders, captains, player_salaries,
     rosters = results[best_i]["rosters"]
     print("Trades per team:")
     for team in sorted(count_team_trades.keys()):
-        print(f"  {team}: {count_team_trades[team]}")
+        trade_count = count_team_trades[team]
+        trade_count_str = f"{trade_count}"
+        if trade_count == 1:
+            trade_count_str = f"\033[91m{trade_count}\033[0m"
+        print(f"  {team}: {trade_count_str}")
 
     return rosters, count_team_trades, trades
