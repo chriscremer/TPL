@@ -1,4 +1,64 @@
-
-
-<a href="seasons/2024_jan/index.html">2024 January Season</a> <br>
-<a href="seasons/2024_oct/index.html">2024 October Season</a>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="dark">
+  <meta name="description" content="Explore TPL seasons, teams, and results.">
+  <title>TPL · Seasons</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: radial-gradient(ellipse at top, #182326 0, #0c1013 65%);
+      color: #edf2f3;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    main { max-width: 860px; margin: 0 auto; padding: 100px 24px; }
+    .eyebrow { margin: 0 0 16px; color: #87c9ad; font-size: 12px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; }
+    h1 { margin: 0; font-size: clamp(40px, 8vw, 64px); letter-spacing: -.05em; line-height: 1.1; }
+    .intro { margin: 20px 0 48px; color: #a9b7bf; font-size: 17px; line-height: 1.6; }
+    nav { display: grid; gap: 16px; }
+    .season {
+      display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 20px;
+      min-height: 132px; padding: 28px;
+      color: inherit; text-decoration: none;
+      background: #151c21; border: 1px solid #2a343b; border-radius: 16px;
+      transition: background .18s, border-color .18s, transform .18s;
+    }
+    .season:hover { background: #1c292c; border-color: #87c9ad; transform: translateY(-3px); }
+    .season:focus-visible { outline: 3px solid #87c9ad; outline-offset: 4px; }
+    .date { display: block; margin-bottom: 10px; color: #a9b7bf; font-size: 14px; }
+    .name { display: block; font-size: 23px; font-weight: 600; letter-spacing: -.02em; }
+    .arrow { color: #87c9ad; font-size: 25px; }
+    footer { margin-top: 32px; color: #a9b7bf; font-size: 13px; }
+    @media (max-width: 560px) {
+      main { padding: 56px 20px; }
+      .intro { margin-bottom: 32px; }
+      .season { min-height: 110px; padding: 24px; }
+    }
+    @media (prefers-reduced-motion: reduce) { .season { transition: none; } .season:hover { transform: none; } }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <p class="eyebrow">Season archive</p>
+      <h1>TPL</h1>
+      <p class="intro">Every season has a story. Explore the teams and results.</p>
+    </header>
+    <nav aria-label="TPL seasons">
+      <a class="season" href="seasons/2024_oct/index.html">
+        <span><span class="date">October 2024</span><span class="name">Fall season</span></span>
+        <span class="arrow" aria-hidden="true">→</span>
+      </a>
+      <a class="season" href="seasons/2024_jan/index.html">
+        <span><span class="date">January 2024</span><span class="name">Winter season</span></span>
+        <span class="arrow" aria-hidden="true">→</span>
+      </a>
+    </nav>
+    <footer>2 seasons · 2024</footer>
+  </main>
+</body>
+</html>
